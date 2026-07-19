@@ -1,11 +1,26 @@
 {
 	"name": "sveltekit-medusa-ui",
 	"version": "0.0.1",
-	"description": "Ready-made SvelteKit components for the Medusa plugin suite",
+	"description": "Ready-made SvelteKit components for the Medusa storefronts",
 	"author": "Lacey Pevey",
 	"license": "MIT",
+	"keywords": [
+		"svelte",
+		"sveltekit",
+		"medusa",
+		"shadcn-svelte",
+		"storefront",
+		"cart",
+		"checkout",
+		"components",
+		"sdk"
+	],
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/pevey/sveltekit-medusa-ui.git"
+	},
+	"homepage": "https://pevey.com/sveltekit-medusa-ui",
 	"type": "module",
-	"private": true,
 	"scripts": {
 		"registry:build": "shadcn-svelte registry build",
 		"check": "svelte-check --tsconfig ./tsconfig.json"
