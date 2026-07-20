@@ -2,12 +2,12 @@
 	"$schema": "https://shadcn-svelte.com/schema/registry-item.json",
 	"name": "markdown",
 	"title": "Markdown",
-	"type": "registry:component",
+	"type": "registry:ui",
 	"description": "Renders sanitized content HTML (e.g. body_html from the Medusa content plugin) in a shadcn-themed prose container with Shiki code styling.",
 	"files": [
 		{
 			"content": "<script lang=\"ts\">\n\t// Renders backend-produced, already-sanitized content HTML (e.g. content_item.body_html\n\t// from the Medusa content plugin's ?render=html). Presentational only: it does NOT fetch\n\t// or transform — pass the HTML string in. Styling comes entirely from markdown.css, which\n\t// maps onto shadcn CSS variables, so it inherits the host project's theme (incl. dark mode).\n\timport './markdown.css'\n\n\tinterface Props {\n\t\t/** Sanitized HTML string (e.g. content_item.body_html). */\n\t\thtml: string\n\t\t/** Extra classes for the wrapper. */\n\t\tclass?: string\n\t}\n\n\tlet { html, class: className = '' }: Props = $props()\n</script>\n\n<div class={`markdown-prose ${className}`}>\n\t<!-- eslint-disable-next-line svelte/no-at-html-tags -->\n\t{@html html}\n</div>\n",
-			"type": "registry:component",
+			"type": "registry:ui",
 			"target": "markdown/markdown.svelte"
 		},
 		{

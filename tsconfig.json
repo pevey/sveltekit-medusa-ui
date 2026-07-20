@@ -6,7 +6,13 @@
 		"strict": true,
 		"skipLibCheck": true,
 		"verbatimModuleSyntax": true,
-		"isolatedModules": true
+		"isolatedModules": true,
+		"paths": {
+			"$lib/components/ui/image-zoom": ["./src/lib/registry/image-zoom"],
+			"$lib/components/ui/gallery": ["./src/lib/registry/gallery"],
+			"$lib": ["./src/lib"],
+			"$lib/*": ["./src/lib/*"]
+		}
 	},
-	"include": ["src/**/*.ts", "src/**/*.svelte", "src/**/*.d.ts"]
+	"include": ["src/**/*.ts", "src/**/*.svelte", "src/**/*.d.ts", "*.config.ts"]
 }

@@ -1,0 +1,24 @@
+import { defineConfig } from 'vite'
+import { svelte } from '@sveltejs/vite-plugin-svelte'
+import tailwindcss from '@tailwindcss/vite'
+import { fileURLToPath } from 'node:url'
+
+export default defineConfig({
+	plugins: [tailwindcss(), svelte()],
+	resolve: {
+		// Specific aliases MUST precede the broad `$lib` prefix (Vite matches first-to-last).
+		// The distributed registry files reference the consumer's `$lib/components/ui/*` aliases;
+		// locally those map to the source under registry/ for typecheck + tests.
+		alias: [
+			{
+				find: '$lib/components/ui/image-zoom',
+				replacement: fileURLToPath(new URL('./src/lib/registry/image-zoom', import.meta.url))
+			},
+			{
+				find: '$lib/components/ui/gallery',
+				replacement: fileURLToPath(new URL('./src/lib/registry/gallery', import.meta.url))
+			},
+			{ find: '$lib', replacement: fileURLToPath(new URL('./src/lib', import.meta.url)) }
+		]
+	}
+})

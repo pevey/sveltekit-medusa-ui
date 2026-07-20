@@ -5,7 +5,7 @@
 	"items": [
 		{
 			"name": "markdown",
-			"type": "registry:component",
+			"type": "registry:ui",
 			"title": "Markdown",
 			"description": "Renders sanitized content HTML (e.g. body_html from the Medusa content plugin) in a shadcn-themed prose container with Shiki code styling.",
 			"dependencies": [],
@@ -13,7 +13,7 @@
 			"files": [
 				{
 					"path": "src/lib/registry/markdown/markdown.svelte",
-					"type": "registry:component",
+					"type": "registry:ui",
 					"target": "markdown/markdown.svelte"
 				},
 				{
@@ -21,6 +21,128 @@
 					"type": "registry:file",
 					"target": "markdown/markdown.css"
 				}
+			]
+		},
+		{
+			"name": "image-zoom",
+			"type": "registry:ui",
+			"title": "Image Zoom",
+			"description": "Click-to-zoom full-screen image overlay with gallery navigation. Vendored from more-shadcn-svelte (MIT, © 2025 kevwpl).",
+			"dependencies": ["@lucide/svelte"],
+			"registryDependencies": ["button"],
+			"files": [
+				{
+					"path": "src/lib/registry/image-zoom/image-zoom.svelte",
+					"type": "registry:ui",
+					"target": "image-zoom/image-zoom.svelte"
+				},
+				{
+					"path": "src/lib/registry/image-zoom/image-zoom-trigger.svelte",
+					"type": "registry:ui",
+					"target": "image-zoom/image-zoom-trigger.svelte"
+				},
+				{
+					"path": "src/lib/registry/image-zoom/ctx.ts",
+					"type": "registry:file",
+					"target": "image-zoom/ctx.ts"
+				},
+				{
+					"path": "src/lib/registry/image-zoom/index.ts",
+					"type": "registry:file",
+					"target": "image-zoom/index.ts"
+				}
+			]
+		},
+		{
+			"name": "gallery",
+			"type": "registry:ui",
+			"title": "Gallery",
+			"description": "Compound product image gallery/lightbox primitives (Root, Carousel, Image, Thumbnails, ThumbnailImage, Dots) on embla, sharing a context. Compose them directly or use the gallery1/gallery2 presets.",
+			"dependencies": [],
+			"registryDependencies": ["carousel"],
+			"files": [
+				{ "path": "src/lib/registry/gallery/gallery.svelte", "type": "registry:ui", "target": "gallery/gallery.svelte" },
+				{ "path": "src/lib/registry/gallery/gallery-carousel.svelte", "type": "registry:ui", "target": "gallery/gallery-carousel.svelte" },
+				{ "path": "src/lib/registry/gallery/gallery-image.svelte", "type": "registry:ui", "target": "gallery/gallery-image.svelte" },
+				{ "path": "src/lib/registry/gallery/gallery-thumbnails.svelte", "type": "registry:ui", "target": "gallery/gallery-thumbnails.svelte" },
+				{ "path": "src/lib/registry/gallery/gallery-thumbnail-image.svelte", "type": "registry:ui", "target": "gallery/gallery-thumbnail-image.svelte" },
+				{ "path": "src/lib/registry/gallery/gallery-dots.svelte", "type": "registry:ui", "target": "gallery/gallery-dots.svelte" },
+				{ "path": "src/lib/registry/gallery/ctx.svelte.ts", "type": "registry:file", "target": "gallery/ctx.svelte.ts" },
+				{ "path": "src/lib/registry/gallery/index.ts", "type": "registry:file", "target": "gallery/index.ts" }
+			]
+		},
+		{
+			"name": "gallery1",
+			"type": "registry:ui",
+			"title": "Gallery 1",
+			"description": "Batteries-included product gallery preset: embla carousel + thumbnails (left/right/bottom/none) + mobile peek & dots. Accepts image URLs or Medusa image objects.",
+			"dependencies": [],
+			"registryDependencies": ["gallery"],
+			"files": [
+				{
+					"path": "src/lib/registry/gallery/gallery1.svelte",
+					"type": "registry:ui",
+					"target": "gallery/gallery1.svelte"
+				}
+			]
+		},
+		{
+			"name": "gallery2",
+			"type": "registry:ui",
+			"title": "Gallery 2",
+			"description": "Gallery 1 preset plus click-to-zoom overlay.",
+			"dependencies": [],
+			"registryDependencies": ["gallery", "image-zoom"],
+			"files": [
+				{
+					"path": "src/lib/registry/gallery/gallery2.svelte",
+					"type": "registry:ui",
+					"target": "gallery/gallery2.svelte"
+				}
+			]
+		},
+		{
+			"name": "theme-button",
+			"type": "registry:ui",
+			"title": "Theme Button",
+			"description": "Icon button that toggles light/dark via mode-watcher. Resizable, with overridable sun/moon icons.",
+			"dependencies": ["mode-watcher", "@lucide/svelte"],
+			"registryDependencies": ["button"],
+			"files": [
+				{ "path": "src/lib/registry/theme/theme-button.svelte", "type": "registry:ui", "target": "theme/theme-button.svelte" }
+			]
+		},
+		{
+			"name": "theme-toggle",
+			"type": "registry:ui",
+			"title": "Theme Toggle",
+			"description": "Toggle that reflects and flips the light/dark theme via mode-watcher. Overridable icons + label.",
+			"dependencies": ["mode-watcher", "@lucide/svelte"],
+			"registryDependencies": ["toggle"],
+			"files": [
+				{ "path": "src/lib/registry/theme/theme-toggle.svelte", "type": "registry:ui", "target": "theme/theme-toggle.svelte" }
+			]
+		},
+		{
+			"name": "theme-switch",
+			"type": "registry:ui",
+			"title": "Theme Switch",
+			"description": "Bare switch that toggles light/dark via mode-watcher. Optional additive form binding for settings forms.",
+			"dependencies": ["mode-watcher"],
+			"registryDependencies": ["switch"],
+			"files": [
+				{ "path": "src/lib/registry/theme/theme-switch.svelte", "type": "registry:ui", "target": "theme/theme-switch.svelte" }
+			]
+		},
+		{
+			"name": "theme-select",
+			"type": "registry:ui",
+			"title": "Theme Select",
+			"description": "Bare light/dark/system dropdown driving mode-watcher's userPrefersMode. Optional additive form binding.",
+			"dependencies": ["mode-watcher"],
+			"registryDependencies": ["select"],
+			"files": [
+				{ "path": "src/lib/registry/theme/theme-select.svelte", "type": "registry:ui", "target": "theme/theme-select.svelte" }
 			]
 		}
 	]

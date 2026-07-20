@@ -2,10 +2,111 @@
 	{
 		"name": "markdown",
 		"title": "Markdown",
-		"type": "registry:component",
+		"type": "registry:ui",
 		"description": "Renders sanitized content HTML (e.g. body_html from the Medusa content plugin) in a shadcn-themed prose container with Shiki code styling.",
 		"dependencies": [],
 		"registryDependencies": [],
 		"relativeUrl": "markdown.json"
+	},
+	{
+		"name": "image-zoom",
+		"title": "Image Zoom",
+		"type": "registry:ui",
+		"description": "Click-to-zoom full-screen image overlay with gallery navigation. Vendored from more-shadcn-svelte (MIT, © 2025 kevwpl).",
+		"dependencies": [
+			"@lucide/svelte"
+		],
+		"registryDependencies": [
+			"button"
+		],
+		"relativeUrl": "image-zoom.json"
+	},
+	{
+		"name": "gallery",
+		"title": "Gallery",
+		"type": "registry:ui",
+		"description": "Compound product image gallery/lightbox primitives (Root, Carousel, Image, Thumbnails, ThumbnailImage, Dots) on embla, sharing a context. Compose them directly or use the gallery1/gallery2 presets.",
+		"dependencies": [],
+		"registryDependencies": [
+			"carousel"
+		],
+		"relativeUrl": "gallery.json"
+	},
+	{
+		"name": "gallery1",
+		"title": "Gallery 1",
+		"type": "registry:ui",
+		"description": "Batteries-included product gallery preset: embla carousel + thumbnails (left/right/bottom/none) + mobile peek & dots. Accepts image URLs or Medusa image objects.",
+		"dependencies": [],
+		"registryDependencies": [
+			"gallery"
+		],
+		"relativeUrl": "gallery1.json"
+	},
+	{
+		"name": "gallery2",
+		"title": "Gallery 2",
+		"type": "registry:ui",
+		"description": "Gallery 1 preset plus click-to-zoom overlay.",
+		"dependencies": [],
+		"registryDependencies": [
+			"gallery",
+			"image-zoom"
+		],
+		"relativeUrl": "gallery2.json"
+	},
+	{
+		"name": "theme-button",
+		"title": "Theme Button",
+		"type": "registry:ui",
+		"description": "Icon button that toggles light/dark via mode-watcher. Resizable, with overridable sun/moon icons.",
+		"dependencies": [
+			"mode-watcher",
+			"@lucide/svelte"
+		],
+		"registryDependencies": [
+			"button"
+		],
+		"relativeUrl": "theme-button.json"
+	},
+	{
+		"name": "theme-toggle",
+		"title": "Theme Toggle",
+		"type": "registry:ui",
+		"description": "Toggle that reflects and flips the light/dark theme via mode-watcher. Overridable icons + label.",
+		"dependencies": [
+			"mode-watcher",
+			"@lucide/svelte"
+		],
+		"registryDependencies": [
+			"toggle"
+		],
+		"relativeUrl": "theme-toggle.json"
+	},
+	{
+		"name": "theme-switch",
+		"title": "Theme Switch",
+		"type": "registry:ui",
+		"description": "Bare switch that toggles light/dark via mode-watcher. Optional additive form binding for settings forms.",
+		"dependencies": [
+			"mode-watcher"
+		],
+		"registryDependencies": [
+			"switch"
+		],
+		"relativeUrl": "theme-switch.json"
+	},
+	{
+		"name": "theme-select",
+		"title": "Theme Select",
+		"type": "registry:ui",
+		"description": "Bare light/dark/system dropdown driving mode-watcher's userPrefersMode. Optional additive form binding.",
+		"dependencies": [
+			"mode-watcher"
+		],
+		"registryDependencies": [
+			"select"
+		],
+		"relativeUrl": "theme-select.json"
 	}
 ]

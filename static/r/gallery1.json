@@ -1,0 +1,17 @@
+{
+	"$schema": "https://shadcn-svelte.com/schema/registry-item.json",
+	"name": "gallery1",
+	"title": "Gallery 1",
+	"type": "registry:ui",
+	"description": "Batteries-included product gallery preset: embla carousel + thumbnails (left/right/bottom/none) + mobile peek & dots. Accepts image URLs or Medusa image objects.",
+	"registryDependencies": [
+		"gallery"
+	],
+	"files": [
+		{
+			"content": "<script lang=\"ts\">\n\timport * as Gallery from './index.js'\n\timport { cn } from '$UTILS$.js'\n\timport type { CarouselAPI } from '$lib/components/ui/carousel/context.js'\n\timport type { EmblaOptionsType, EmblaPluginType } from 'embla-carousel'\n\timport type { GalleryImage } from './ctx.svelte.js'\n\n\tinterface Props {\n\t\timages: GalleryImage[]\n\t\tfilterString?: string\n\t\tpeek?: string | false\n\t\topts?: EmblaOptionsType\n\t\tplugins?: EmblaPluginType[]\n\t\talt?: string\n\t\tclass?: string\n\t\tapi?: CarouselAPI\n\t\tselectedIndex?: number\n\t\tthumbnails?: 'left' | 'right' | 'bottom' | 'none'\n\t\tthumbnailBreakpoint?: 'sm' | 'md' | 'lg' | 'xl'\n\t}\n\tlet {\n\t\timages,\n\t\tfilterString,\n\t\tpeek = '85%',\n\t\topts,\n\t\tplugins,\n\t\talt = '',\n\t\tclass: className = '',\n\t\tapi = $bindable(),\n\t\tselectedIndex = $bindable(0),\n\t\tthumbnails = 'bottom',\n\t\tthumbnailBreakpoint = 'md'\n\t}: Props = $props()\n\n\tconst vertical = $derived(thumbnails === 'left' || thumbnails === 'right')\n\tconst DIR = {\n\t\tleft: 'flex-row',\n\t\tright: 'flex-row-reverse',\n\t\tbottom: 'flex-col-reverse',\n\t\tnone: 'flex-col'\n\t} as const\n\tconst RAIL = {\n\t\tsm: 'hidden sm:flex',\n\t\tmd: 'hidden md:flex',\n\t\tlg: 'hidden lg:flex',\n\t\txl: 'hidden xl:flex'\n\t} as const\n\tconst DOTS = {\n\t\tsm: 'flex sm:hidden',\n\t\tmd: 'flex md:hidden',\n\t\tlg: 'flex lg:hidden',\n\t\txl: 'flex xl:hidden'\n\t} as const\n</script>\n\n<Gallery.Root\n\t{images}\n\t{filterString}\n\t{peek}\n\t{opts}\n\t{plugins}\n\t{alt}\n\tbind:api\n\tbind:selectedIndex\n\tclass={cn(DIR[thumbnails], className)}\n>\n\t{#if thumbnails !== 'none'}\n\t\t<Gallery.Thumbnails\n\t\t\torientation={vertical ? 'vertical' : 'horizontal'}\n\t\t\tclass={cn(RAIL[thumbnailBreakpoint], vertical ? 'w-20' : 'w-full')}\n\t\t>\n\t\t\t<Gallery.ThumbnailImage />\n\t\t</Gallery.Thumbnails>\n\t{/if}\n\t<div class=\"flex min-w-0 flex-1 flex-col\">\n\t\t<Gallery.Carousel>\n\t\t\t<Gallery.Image />\n\t\t</Gallery.Carousel>\n\t\t<Gallery.Dots class={cn('mt-3', thumbnails === 'none' ? 'flex' : DOTS[thumbnailBreakpoint])} />\n\t</div>\n</Gallery.Root>\n",
+			"type": "registry:ui",
+			"target": "gallery/gallery1.svelte"
+		}
+	]
+}

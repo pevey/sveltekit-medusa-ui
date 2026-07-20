@@ -1,0 +1,55 @@
+{
+	"$schema": "https://shadcn-svelte.com/schema/registry-item.json",
+	"name": "gallery",
+	"title": "Gallery",
+	"type": "registry:ui",
+	"description": "Compound product image gallery/lightbox primitives (Root, Carousel, Image, Thumbnails, ThumbnailImage, Dots) on embla, sharing a context. Compose them directly or use the gallery1/gallery2 presets.",
+	"devDependencies": [
+		"@medusajs/types@2.17.2"
+	],
+	"registryDependencies": [
+		"carousel"
+	],
+	"files": [
+		{
+			"content": "<script lang=\"ts\">\n\timport { cn } from '$UTILS$.js'\n\timport { GalleryState, setGalleryContext, type GalleryImage } from './ctx.svelte.js'\n\timport type { CarouselAPI } from '$lib/components/ui/carousel/context.js'\n\timport type { EmblaOptionsType, EmblaPluginType } from 'embla-carousel'\n\timport type { Snippet } from 'svelte'\n\n\tinterface Props {\n\t\timages: GalleryImage[]\n\t\tfilterString?: string\n\t\tpeek?: string | false\n\t\topts?: EmblaOptionsType\n\t\tplugins?: EmblaPluginType[]\n\t\talt?: string\n\t\tclass?: string\n\t\tapi?: CarouselAPI\n\t\tselectedIndex?: number\n\t\tchildren: Snippet\n\t}\n\tlet {\n\t\timages,\n\t\tfilterString,\n\t\tpeek = '85%',\n\t\topts,\n\t\tplugins,\n\t\talt = '',\n\t\tclass: className = '',\n\t\tapi = $bindable(),\n\t\tselectedIndex = $bindable(0),\n\t\tchildren\n\t}: Props = $props()\n\n\tconst gallery = new GalleryState()\n\tsetGalleryContext(gallery)\n\n\t$effect(() => {\n\t\tconst all = images.map((img, i) =>\n\t\t\ttypeof img === 'string'\n\t\t\t\t? { url: img, alt, key: `${i}` }\n\t\t\t\t: { url: img.url, alt, key: img.id ?? `${i}` }\n\t\t)\n\t\tconst filtered = filterString ? all.filter((it) => it.url.includes(filterString)) : all\n\t\tgallery.items = filtered.length ? filtered : all\n\t})\n\t$effect(() => {\n\t\tgallery.opts = opts\n\t})\n\t$effect(() => {\n\t\tgallery.plugins = plugins\n\t})\n\n\t// Wire main↔thumb sync + expose selected/api to bindables.\n\t$effect(() => {\n\t\tconst embla = gallery.mainApi\n\t\tif (!embla) return\n\t\tconst onSelect = () => {\n\t\t\tgallery.selected = embla.selectedScrollSnap()\n\t\t\tgallery.thumbApi?.scrollTo(gallery.selected)\n\t\t}\n\t\tonSelect()\n\t\tembla.on('select', onSelect)\n\t\tembla.on('reInit', onSelect)\n\t\treturn () => {\n\t\t\tembla.off('select', onSelect)\n\t\t\tembla.off('reInit', onSelect)\n\t\t}\n\t})\n\t$effect(() => {\n\t\tselectedIndex = gallery.selected\n\t})\n\t$effect(() => {\n\t\tapi = gallery.mainApi\n\t})\n</script>\n\n<div\n\tclass={cn('flex flex-col gap-4', className)}\n\tstyle={`--gallery-peek:${peek === false ? '100%' : peek}`}\n>\n\t{@render children()}\n</div>\n",
+			"type": "registry:ui",
+			"target": "gallery/gallery.svelte"
+		},
+		{
+			"content": "<script lang=\"ts\">\n\timport * as Carousel from '$lib/components/ui/carousel/index.js'\n\timport { cn } from '$UTILS$.js'\n\timport { getGalleryContext } from './ctx.svelte.js'\n\timport type { Snippet } from 'svelte'\n\n\tlet { class: className = '', children }: { class?: string; children: Snippet } = $props()\n\tconst gallery = getGalleryContext()\n</script>\n\n<Carousel.Root\n\topts={gallery.opts}\n\tplugins={gallery.plugins}\n\tsetApi={(a) => (gallery.mainApi = a)}\n\tclass={cn('min-w-0 flex-1', className)}\n>\n\t<Carousel.Content>{@render children()}</Carousel.Content>\n</Carousel.Root>\n",
+			"type": "registry:ui",
+			"target": "gallery/gallery-carousel.svelte"
+		},
+		{
+			"content": "<script lang=\"ts\">\n\timport * as Carousel from '$lib/components/ui/carousel/index.js'\n\timport { cn } from '$UTILS$.js'\n\timport { getGalleryContext } from './ctx.svelte.js'\n\timport type { Snippet } from 'svelte'\n\n\tlet {\n\t\tclass: className = '',\n\t\tchild\n\t}: {\n\t\tclass?: string\n\t\tchild?: Snippet<[{ src: string; alt: string; index: number }]>\n\t} = $props()\n\tconst gallery = getGalleryContext()\n</script>\n\n{#snippet defaultImg({ src, alt }: { src: string; alt: string; index: number })}\n\t<img\n\t\t{src}\n\t\t{alt}\n\t\tclass={cn(\n\t\t\t'mx-auto h-auto max-h-[70vh] w-auto rounded-[var(--radius)] object-contain',\n\t\t\tclassName\n\t\t)}\n\t/>\n{/snippet}\n\n{#each gallery.items as item, i (item.key)}\n\t<Carousel.Item class={cn('basis-[var(--gallery-peek)] md:basis-full', className)}>\n\t\t{@render (child ?? defaultImg)({ src: item.url, alt: item.alt, index: i })}\n\t</Carousel.Item>\n{/each}\n",
+			"type": "registry:ui",
+			"target": "gallery/gallery-image.svelte"
+		},
+		{
+			"content": "<script lang=\"ts\">\n\timport * as Carousel from '$lib/components/ui/carousel/index.js'\n\timport { cn } from '$UTILS$.js'\n\timport { getGalleryContext } from './ctx.svelte.js'\n\timport type { Snippet } from 'svelte'\n\n\tlet {\n\t\tclass: className = '',\n\t\torientation = 'horizontal',\n\t\tchildren\n\t}: {\n\t\tclass?: string\n\t\torientation?: 'horizontal' | 'vertical'\n\t\tchildren: Snippet\n\t} = $props()\n\tconst gallery = getGalleryContext()\n</script>\n\n<Carousel.Root\n\t{orientation}\n\topts={{ dragFree: true }}\n\tsetApi={(a) => (gallery.thumbApi = a)}\n\tclass={cn('w-full', className)}\n>\n\t<Carousel.Content>{@render children()}</Carousel.Content>\n</Carousel.Root>\n",
+			"type": "registry:ui",
+			"target": "gallery/gallery-thumbnails.svelte"
+		},
+		{
+			"content": "<script lang=\"ts\">\n\timport * as Carousel from '$lib/components/ui/carousel/index.js'\n\timport { cn } from '$UTILS$.js'\n\timport { getGalleryContext } from './ctx.svelte.js'\n\n\tlet { class: className = '' }: { class?: string } = $props()\n\tconst gallery = getGalleryContext()\n</script>\n\n{#each gallery.items as item, i (item.key)}\n\t<Carousel.Item class=\"basis-1/4\">\n\t\t<button\n\t\t\ttype=\"button\"\n\t\t\taria-label={`View image ${i + 1}`}\n\t\t\taria-current={gallery.selected === i}\n\t\t\tonclick={() => gallery.select(i)}\n\t\t\tclass={cn(\n\t\t\t\t'block overflow-hidden rounded-[var(--radius)] border-2 transition',\n\t\t\t\tgallery.selected === i\n\t\t\t\t\t? 'border-primary'\n\t\t\t\t\t: 'border-transparent opacity-70 hover:opacity-100',\n\t\t\t\tclassName\n\t\t\t)}\n\t\t>\n\t\t\t<img src={item.url} alt=\"\" class=\"h-full w-full object-cover\" />\n\t\t</button>\n\t</Carousel.Item>\n{/each}\n",
+			"type": "registry:ui",
+			"target": "gallery/gallery-thumbnail-image.svelte"
+		},
+		{
+			"content": "<script lang=\"ts\">\n\timport { cn } from '$UTILS$.js'\n\timport { getGalleryContext } from './ctx.svelte.js'\n\n\tlet { class: className = '' }: { class?: string } = $props()\n\tconst gallery = getGalleryContext()\n</script>\n\n{#if gallery.items.length > 1}\n\t<div class={cn('flex items-center justify-center gap-2', className)}>\n\t\t{#each gallery.items as item, i (item.key)}\n\t\t\t<button\n\t\t\t\ttype=\"button\"\n\t\t\t\taria-label={`Go to image ${i + 1}`}\n\t\t\t\taria-current={gallery.selected === i}\n\t\t\t\tonclick={() => gallery.select(i)}\n\t\t\t\tclass={cn(\n\t\t\t\t\t'h-2 w-2 rounded-full transition',\n\t\t\t\t\tgallery.selected === i ? 'bg-primary' : 'bg-muted-foreground/40'\n\t\t\t\t)}\n\t\t\t></button>\n\t\t{/each}\n\t</div>\n{/if}\n",
+			"type": "registry:ui",
+			"target": "gallery/gallery-dots.svelte"
+		},
+		{
+			"content": "import { getContext, setContext } from 'svelte'\nimport type { CarouselAPI } from '$lib/components/ui/carousel/context.js'\nimport type { EmblaOptionsType, EmblaPluginType } from 'embla-carousel'\nimport type { StoreProductImage } from '@medusajs/types'\n\nexport type GalleryImage = string | StoreProductImage\nexport type NormalizedImage = { url: string; alt: string; key: string }\n\nconst KEY = Symbol('gallery')\n\nexport class GalleryState {\n\titems = $state<NormalizedImage[]>([])\n\tselected = $state(0)\n\tmainApi = $state<CarouselAPI>()\n\tthumbApi = $state<CarouselAPI>()\n\topts = $state<EmblaOptionsType | undefined>(undefined)\n\tplugins = $state<EmblaPluginType[] | undefined>(undefined)\n\n\tselect(i: number) {\n\t\tthis.mainApi?.scrollTo(i)\n\t}\n}\n\nexport function setGalleryContext(state: GalleryState) {\n\tsetContext(KEY, state)\n}\nexport function getGalleryContext(): GalleryState {\n\tconst ctx = getContext<GalleryState>(KEY)\n\tif (!ctx) throw new Error('Gallery.* must be used within <Gallery.Root>')\n\treturn ctx\n}\n",
+			"type": "registry:file",
+			"target": "gallery/ctx.svelte.ts"
+		},
+		{
+			"content": "import Root from './gallery.svelte'\nimport Carousel from './gallery-carousel.svelte'\nimport Image from './gallery-image.svelte'\nimport Thumbnails from './gallery-thumbnails.svelte'\nimport ThumbnailImage from './gallery-thumbnail-image.svelte'\nimport Dots from './gallery-dots.svelte'\n\nexport { Root, Carousel, Image, Thumbnails, ThumbnailImage, Dots }\n",
+			"type": "registry:file",
+			"target": "gallery/index.ts"
+		}
+	]
+}
