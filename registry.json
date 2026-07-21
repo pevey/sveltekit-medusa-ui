@@ -144,6 +144,22 @@
 			"files": [
 				{ "path": "src/lib/registry/theme/theme-select.svelte", "type": "registry:ui", "target": "theme/theme-select.svelte" }
 			]
+		},
+		{
+			"name": "google-places-autocomplete",
+			"type": "registry:ui",
+			"title": "Google Places Autocomplete",
+			"description": "Address autocomplete field wrapping Google's PlaceAutocompleteElement, themed with shadcn tokens (chrome stripped, dropdown restyled). Emits a normalized address on select; no store writes.",
+			"dependencies": ["@googlemaps/js-api-loader", "mode-watcher", "tailwind-merge"],
+			"devDependencies": ["@types/google.maps"],
+			"registryDependencies": [],
+			"files": [
+				{ "path": "src/lib/registry/google-places-autocomplete/google-places-autocomplete.svelte", "type": "registry:ui", "target": "google-places-autocomplete/google-places-autocomplete.svelte" },
+				{ "path": "src/lib/registry/google-places-autocomplete/shadow-dom.ts", "type": "registry:file", "target": "google-places-autocomplete/shadow-dom.ts" },
+				{ "path": "src/lib/registry/google-places-autocomplete/address.ts", "type": "registry:file", "target": "google-places-autocomplete/address.ts" },
+				{ "path": "src/lib/registry/google-places-autocomplete/types.ts", "type": "registry:file", "target": "google-places-autocomplete/types.ts" },
+				{ "path": "src/lib/registry/google-places-autocomplete/index.ts", "type": "registry:file", "target": "google-places-autocomplete/index.ts" }
+			]
 		}
 	]
 }
