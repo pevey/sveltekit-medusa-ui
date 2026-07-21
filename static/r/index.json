@@ -124,5 +124,31 @@
 		],
 		"registryDependencies": [],
 		"relativeUrl": "google-places-autocomplete.json"
+	},
+	{
+		"name": "input-text",
+		"title": "Input Text",
+		"type": "registry:ui",
+		"description": "Text/email/tel/number/password/textarea field bound to a SvelteKit remote-form field proxy, wrapped in shadcn Field with label + validation errors.",
+		"dependencies": [
+			"@lucide/svelte"
+		],
+		"registryDependencies": [
+			"field"
+		],
+		"relativeUrl": "input-text.json"
+	},
+	{
+		"name": "input-select",
+		"title": "Input Select",
+		"type": "registry:ui",
+		"description": "Native select bound to a SvelteKit remote-form field proxy with data-driven options, wrapped in shadcn Field with label + validation errors.",
+		"dependencies": [
+			"@lucide/svelte"
+		],
+		"registryDependencies": [
+			"field"
+		],
+		"relativeUrl": "input-select.json"
 	}
 ]

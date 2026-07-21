@@ -160,6 +160,28 @@
 				{ "path": "src/lib/registry/google-places-autocomplete/types.ts", "type": "registry:file", "target": "google-places-autocomplete/types.ts" },
 				{ "path": "src/lib/registry/google-places-autocomplete/index.ts", "type": "registry:file", "target": "google-places-autocomplete/index.ts" }
 			]
+		},
+		{
+			"name": "input-text",
+			"type": "registry:ui",
+			"title": "Input Text",
+			"description": "Text/email/tel/number/password/textarea field bound to a SvelteKit remote-form field proxy, wrapped in shadcn Field with label + validation errors.",
+			"dependencies": ["@lucide/svelte"],
+			"registryDependencies": ["field"],
+			"files": [
+				{ "path": "src/lib/registry/input-text/input-text.svelte", "type": "registry:ui", "target": "input-text/input-text.svelte" }
+			]
+		},
+		{
+			"name": "input-select",
+			"type": "registry:ui",
+			"title": "Input Select",
+			"description": "Native select bound to a SvelteKit remote-form field proxy with data-driven options, wrapped in shadcn Field with label + validation errors.",
+			"dependencies": ["@lucide/svelte"],
+			"registryDependencies": ["field"],
+			"files": [
+				{ "path": "src/lib/registry/input-select/input-select.svelte", "type": "registry:ui", "target": "input-select/input-select.svelte" }
+			]
 		}
 	]
 }
