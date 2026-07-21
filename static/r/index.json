@@ -150,5 +150,38 @@
 			"field"
 		],
 		"relativeUrl": "input-select.json"
+	},
+	{
+		"name": "input-select-country",
+		"title": "Input Select Country",
+		"type": "registry:ui",
+		"description": "Country select bound to a remote-form field, options fed from the store's regions (validated ISO-2 code values). Extends input-select.",
+		"dependencies": [],
+		"registryDependencies": [
+			"input-select"
+		],
+		"relativeUrl": "input-select-country.json"
+	},
+	{
+		"name": "input-select-state",
+		"title": "Input Select State",
+		"type": "registry:ui",
+		"description": "US state select (ISO 3166-2 values) bound to a remote-form field. Extends input-select.",
+		"dependencies": [],
+		"registryDependencies": [
+			"input-select"
+		],
+		"relativeUrl": "input-select-state.json"
+	},
+	{
+		"name": "input-postal-code",
+		"title": "Input Postal Code",
+		"type": "registry:ui",
+		"description": "Postal-code text field that uppercases as you type (alphanumeric postcodes) and bubbles the change. Extends input-text.",
+		"dependencies": [],
+		"registryDependencies": [
+			"input-text"
+		],
+		"relativeUrl": "input-postal-code.json"
 	}
 ]

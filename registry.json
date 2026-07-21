@@ -182,6 +182,39 @@
 			"files": [
 				{ "path": "src/lib/registry/input-select/input-select.svelte", "type": "registry:ui", "target": "input-select/input-select.svelte" }
 			]
+		},
+		{
+			"name": "input-select-country",
+			"type": "registry:ui",
+			"title": "Input Select Country",
+			"description": "Country select bound to a remote-form field, options fed from the store's regions (validated ISO-2 code values). Extends input-select.",
+			"dependencies": [],
+			"registryDependencies": ["input-select"],
+			"files": [
+				{ "path": "src/lib/registry/input-select-country/input-select-country.svelte", "type": "registry:ui", "target": "input-select-country/input-select-country.svelte" }
+			]
+		},
+		{
+			"name": "input-select-state",
+			"type": "registry:ui",
+			"title": "Input Select State",
+			"description": "US state select (ISO 3166-2 values) bound to a remote-form field. Extends input-select.",
+			"dependencies": [],
+			"registryDependencies": ["input-select"],
+			"files": [
+				{ "path": "src/lib/registry/input-select-state/input-select-state.svelte", "type": "registry:ui", "target": "input-select-state/input-select-state.svelte" }
+			]
+		},
+		{
+			"name": "input-postal-code",
+			"type": "registry:ui",
+			"title": "Input Postal Code",
+			"description": "Postal-code text field that uppercases as you type (alphanumeric postcodes) and bubbles the change. Extends input-text.",
+			"dependencies": [],
+			"registryDependencies": ["input-text"],
+			"files": [
+				{ "path": "src/lib/registry/input-postal-code/input-postal-code.svelte", "type": "registry:ui", "target": "input-postal-code/input-postal-code.svelte" }
+			]
 		}
 	]
 }
