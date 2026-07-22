@@ -56,6 +56,41 @@
 		"relativeUrl": "gallery2.json"
 	},
 	{
+		"name": "search",
+		"title": "Search",
+		"type": "registry:ui",
+		"description": "Compound storefront search primitives (Root, Icon, Input, Results, Hit) sharing a context. Root defaults its search fn to the sveltekit-medusa-sdk `search` remote; Results renders products first (headerless) then non-product types under headings, as a dropdown or an in-flow full-page list.",
+		"dependencies": [
+			"@lucide/svelte",
+			"sveltekit-medusa-sdk"
+		],
+		"registryDependencies": [],
+		"relativeUrl": "search.json"
+	},
+	{
+		"name": "search-box",
+		"title": "Search Box",
+		"type": "registry:ui",
+		"description": "Drop-in navbar search box: full input + live-results dropdown above a configurable breakpoint, collapsing to an icon that links to a search page below it. Assembles the search primitives.",
+		"dependencies": [],
+		"registryDependencies": [
+			"search"
+		],
+		"relativeUrl": "search-box.json"
+	},
+	{
+		"name": "search-dialog",
+		"title": "Search Dialog",
+		"type": "registry:ui",
+		"description": "Command-palette search: Ctrl/Cmd+K opens a centered modal (page behind blurred) with the input autofocused and arrow-key-navigable results. Composes the search primitives inside a shadcn Dialog; drop into your layout.",
+		"dependencies": [],
+		"registryDependencies": [
+			"search",
+			"dialog"
+		],
+		"relativeUrl": "search-dialog.json"
+	},
+	{
 		"name": "theme-button",
 		"title": "Theme Button",
 		"type": "registry:ui",

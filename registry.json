@@ -102,6 +102,45 @@
 			]
 		},
 		{
+			"name": "search",
+			"type": "registry:ui",
+			"title": "Search",
+			"description": "Compound storefront search primitives (Root, Icon, Input, Results, Hit) sharing a context. Root defaults its search fn to the sveltekit-medusa-sdk `search` remote; Results renders products first (headerless) then non-product types under headings, as a dropdown or an in-flow full-page list.",
+			"dependencies": ["@lucide/svelte", "sveltekit-medusa-sdk"],
+			"registryDependencies": [],
+			"files": [
+				{ "path": "src/lib/registry/search/search.svelte", "type": "registry:ui", "target": "search/search.svelte" },
+				{ "path": "src/lib/registry/search/search-icon.svelte", "type": "registry:ui", "target": "search/search-icon.svelte" },
+				{ "path": "src/lib/registry/search/search-input.svelte", "type": "registry:ui", "target": "search/search-input.svelte" },
+				{ "path": "src/lib/registry/search/search-results.svelte", "type": "registry:ui", "target": "search/search-results.svelte" },
+				{ "path": "src/lib/registry/search/search-hit.svelte", "type": "registry:ui", "target": "search/search-hit.svelte" },
+				{ "path": "src/lib/registry/search/ctx.svelte.ts", "type": "registry:file", "target": "search/ctx.svelte.ts" },
+				{ "path": "src/lib/registry/search/index.ts", "type": "registry:file", "target": "search/index.ts" }
+			]
+		},
+		{
+			"name": "search-box",
+			"type": "registry:ui",
+			"title": "Search Box",
+			"description": "Drop-in navbar search box: full input + live-results dropdown above a configurable breakpoint, collapsing to an icon that links to a search page below it. Assembles the search primitives.",
+			"dependencies": [],
+			"registryDependencies": ["search"],
+			"files": [
+				{ "path": "src/lib/registry/search/search-box.svelte", "type": "registry:ui", "target": "search/search-box.svelte" }
+			]
+		},
+		{
+			"name": "search-dialog",
+			"type": "registry:ui",
+			"title": "Search Dialog",
+			"description": "Command-palette search: Ctrl/Cmd+K opens a centered modal (page behind blurred) with the input autofocused and arrow-key-navigable results. Composes the search primitives inside a shadcn Dialog; drop into your layout.",
+			"dependencies": [],
+			"registryDependencies": ["search", "dialog"],
+			"files": [
+				{ "path": "src/lib/registry/search/search-dialog.svelte", "type": "registry:ui", "target": "search/search-dialog.svelte" }
+			]
+		},
+		{
 			"name": "theme-button",
 			"type": "registry:ui",
 			"title": "Theme Button",

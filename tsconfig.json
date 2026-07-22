@@ -10,6 +10,8 @@
 		"paths": {
 			"$lib/components/ui/image-zoom": ["./src/lib/registry/image-zoom"],
 			"$lib/components/ui/gallery": ["./src/lib/registry/gallery"],
+			"$lib/components/ui/search": ["./src/lib/registry/search"],
+			"$lib/components/ui/search/*": ["./src/lib/registry/search/*"],
 			"$lib": ["./src/lib"],
 			"$lib/*": ["./src/lib/*"]
 		}

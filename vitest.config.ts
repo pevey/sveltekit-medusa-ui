@@ -17,6 +17,14 @@ export default defineConfig({
 				find: '$lib/components/ui/gallery',
 				replacement: fileURLToPath(new URL('./src/lib/registry/gallery', import.meta.url))
 			},
+			{
+				find: '$lib/components/ui/search',
+				replacement: fileURLToPath(new URL('./src/lib/registry/search', import.meta.url))
+			},
+			{
+				find: 'sveltekit-medusa-sdk',
+				replacement: fileURLToPath(new URL('./src/test-stubs/sveltekit-medusa-sdk.ts', import.meta.url))
+			},
 			{ find: '$lib', replacement: fileURLToPath(new URL('./src/lib', import.meta.url)) }
 		]
 	},
