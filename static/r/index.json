@@ -105,6 +105,17 @@
 		"relativeUrl": "faq.json"
 	},
 	{
+		"name": "product",
+		"title": "Product",
+		"type": "registry:ui",
+		"description": "Compound Product primitives (Root, Title, Subtitle, Description, Price, Options, OptionButton) over a Medusa StoreProduct. URL-driven variant selection (?v= links), inventory-aware option availability (manage_inventory/inventory_quantity), currency-aware price with sale strikethrough, sanitized {@html} description. Pure resolution logic in product-logic.ts; no $effect (SSR-safe). Fetch the product reactively in your route and pass it in.",
+		"dependencies": [
+			"isomorphic-dompurify"
+		],
+		"registryDependencies": [],
+		"relativeUrl": "product.json"
+	},
+	{
 		"name": "theme-button",
 		"title": "Theme Button",
 		"type": "registry:ui",

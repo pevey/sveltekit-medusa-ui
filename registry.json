@@ -156,6 +156,27 @@
 			]
 		},
 		{
+			"name": "product",
+			"type": "registry:ui",
+			"title": "Product",
+			"description": "Compound Product primitives (Root, Title, Subtitle, Description, Price, Options, OptionButton) over a Medusa StoreProduct. URL-driven variant selection (?v= links), inventory-aware option availability (manage_inventory/inventory_quantity), currency-aware price with sale strikethrough, sanitized {@html} description. Pure resolution logic in product-logic.ts; no $effect (SSR-safe). Fetch the product reactively in your route and pass it in.",
+			"dependencies": ["isomorphic-dompurify"],
+			"registryDependencies": [],
+			"files": [
+				{ "path": "src/lib/registry/product/product.svelte", "type": "registry:ui", "target": "product/product.svelte" },
+				{ "path": "src/lib/registry/product/product-title.svelte", "type": "registry:ui", "target": "product/product-title.svelte" },
+				{ "path": "src/lib/registry/product/product-subtitle.svelte", "type": "registry:ui", "target": "product/product-subtitle.svelte" },
+				{ "path": "src/lib/registry/product/product-description.svelte", "type": "registry:ui", "target": "product/product-description.svelte" },
+				{ "path": "src/lib/registry/product/product-price.svelte", "type": "registry:ui", "target": "product/product-price.svelte" },
+				{ "path": "src/lib/registry/product/product-options.svelte", "type": "registry:ui", "target": "product/product-options.svelte" },
+				{ "path": "src/lib/registry/product/product-option-button.svelte", "type": "registry:ui", "target": "product/product-option-button.svelte" },
+				{ "path": "src/lib/registry/product/ctx.svelte.ts", "type": "registry:file", "target": "product/ctx.svelte.ts" },
+				{ "path": "src/lib/registry/product/product-logic.ts", "type": "registry:file", "target": "product/product-logic.ts" },
+				{ "path": "src/lib/registry/product/format-price.ts", "type": "registry:file", "target": "product/format-price.ts" },
+				{ "path": "src/lib/registry/product/index.ts", "type": "registry:file", "target": "product/index.ts" }
+			]
+		},
+		{
 			"name": "theme-button",
 			"type": "registry:ui",
 			"title": "Theme Button",

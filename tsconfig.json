@@ -14,6 +14,8 @@
 			"$lib/components/ui/search/*": ["./src/lib/registry/search/*"],
 			"$lib/components/ui/faq": ["./src/lib/registry/faq"],
 			"$lib/components/ui/faq/*": ["./src/lib/registry/faq/*"],
+			"$lib/components/ui/product": ["./src/lib/registry/product"],
+			"$lib/components/ui/product/*": ["./src/lib/registry/product/*"],
 			"$lib": ["./src/lib"],
 			"$lib/*": ["./src/lib/*"]
 		}

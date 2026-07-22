@@ -26,6 +26,14 @@ export default defineConfig({
 				replacement: fileURLToPath(new URL('./src/lib/registry/faq', import.meta.url))
 			},
 			{
+				find: '$lib/components/ui/product',
+				replacement: fileURLToPath(new URL('./src/lib/registry/product', import.meta.url))
+			},
+			{
+				find: '$app/state',
+				replacement: fileURLToPath(new URL('./src/test-stubs/app-state.svelte.ts', import.meta.url))
+			},
+			{
 				find: 'sveltekit-medusa-sdk',
 				replacement: fileURLToPath(new URL('./src/test-stubs/sveltekit-medusa-sdk.ts', import.meta.url))
 			},
