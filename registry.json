@@ -141,6 +141,21 @@
 			]
 		},
 		{
+			"name": "faq",
+			"type": "registry:ui",
+			"title": "FAQ",
+			"description": "Compound FAQ primitives (Root, Item, Question, Answer) over the shadcn Accordion. Defaults to the stock look; each part is stylable via class. Question exposes a swappable icon snippet + configurable rotate-on-open; Answer renders children (supports {@html}). Loop your own Q&A data over the items.",
+			"dependencies": ["@lucide/svelte", "bits-ui"],
+			"registryDependencies": ["accordion"],
+			"files": [
+				{ "path": "src/lib/registry/faq/faq.svelte", "type": "registry:ui", "target": "faq/faq.svelte" },
+				{ "path": "src/lib/registry/faq/faq-item.svelte", "type": "registry:ui", "target": "faq/faq-item.svelte" },
+				{ "path": "src/lib/registry/faq/faq-question.svelte", "type": "registry:ui", "target": "faq/faq-question.svelte" },
+				{ "path": "src/lib/registry/faq/faq-answer.svelte", "type": "registry:ui", "target": "faq/faq-answer.svelte" },
+				{ "path": "src/lib/registry/faq/index.ts", "type": "registry:file", "target": "faq/index.ts" }
+			]
+		},
+		{
 			"name": "theme-button",
 			"type": "registry:ui",
 			"title": "Theme Button",

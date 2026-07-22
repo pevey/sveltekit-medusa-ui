@@ -22,6 +22,10 @@ export default defineConfig({
 				find: '$lib/components/ui/search',
 				replacement: fileURLToPath(new URL('./src/lib/registry/search', import.meta.url))
 			},
+			{
+				find: '$lib/components/ui/faq',
+				replacement: fileURLToPath(new URL('./src/lib/registry/faq', import.meta.url))
+			},
 			{ find: '$lib', replacement: fileURLToPath(new URL('./src/lib', import.meta.url)) }
 		]
 	}

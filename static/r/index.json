@@ -91,6 +91,20 @@
 		"relativeUrl": "search-dialog.json"
 	},
 	{
+		"name": "faq",
+		"title": "FAQ",
+		"type": "registry:ui",
+		"description": "Compound FAQ primitives (Root, Item, Question, Answer) over the shadcn Accordion. Defaults to the stock look; each part is stylable via class. Question exposes a swappable icon snippet + configurable rotate-on-open; Answer renders children (supports {@html}). Loop your own Q&A data over the items.",
+		"dependencies": [
+			"@lucide/svelte",
+			"bits-ui"
+		],
+		"registryDependencies": [
+			"accordion"
+		],
+		"relativeUrl": "faq.json"
+	},
+	{
 		"name": "theme-button",
 		"title": "Theme Button",
 		"type": "registry:ui",

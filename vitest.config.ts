@@ -22,6 +22,10 @@ export default defineConfig({
 				replacement: fileURLToPath(new URL('./src/lib/registry/search', import.meta.url))
 			},
 			{
+				find: '$lib/components/ui/faq',
+				replacement: fileURLToPath(new URL('./src/lib/registry/faq', import.meta.url))
+			},
+			{
 				find: 'sveltekit-medusa-sdk',
 				replacement: fileURLToPath(new URL('./src/test-stubs/sveltekit-medusa-sdk.ts', import.meta.url))
 			},

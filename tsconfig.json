@@ -12,6 +12,8 @@
 			"$lib/components/ui/gallery": ["./src/lib/registry/gallery"],
 			"$lib/components/ui/search": ["./src/lib/registry/search"],
 			"$lib/components/ui/search/*": ["./src/lib/registry/search/*"],
+			"$lib/components/ui/faq": ["./src/lib/registry/faq"],
+			"$lib/components/ui/faq/*": ["./src/lib/registry/faq/*"],
 			"$lib": ["./src/lib"],
 			"$lib/*": ["./src/lib/*"]
 		}
