@@ -156,12 +156,28 @@
 			]
 		},
 		{
+			"name": "seo",
+			"type": "registry:ui",
+			"title": "SEO",
+			"description": "Head/metadata primitives for SEO. MetaProvider seeds site-wide defaults (siteName, siteUrl, titleTemplate, twitterHandle) via context; Metadata emits per-page <title>/description/canonical/OpenGraph/Twitter tags off a MetaConfig, merging provider defaults; JsonLd renders a typed schema-dts object as a <script type=\"application/ld+json\"> tag. No env, no state mutation; provider is optional. SSR-safe.",
+			"dependencies": ["schema-dts"],
+			"registryDependencies": [],
+			"files": [
+				{ "path": "src/lib/registry/seo/meta-provider.svelte", "type": "registry:ui", "target": "seo/meta-provider.svelte" },
+				{ "path": "src/lib/registry/seo/metadata.svelte", "type": "registry:ui", "target": "seo/metadata.svelte" },
+				{ "path": "src/lib/registry/seo/json-ld.svelte", "type": "registry:ui", "target": "seo/json-ld.svelte" },
+				{ "path": "src/lib/registry/seo/ctx.svelte.ts", "type": "registry:file", "target": "seo/ctx.svelte.ts" },
+				{ "path": "src/lib/registry/seo/types.ts", "type": "registry:file", "target": "seo/types.ts" },
+				{ "path": "src/lib/registry/seo/index.ts", "type": "registry:file", "target": "seo/index.ts" }
+			]
+		},
+		{
 			"name": "product",
 			"type": "registry:ui",
 			"title": "Product",
 			"description": "Compound Product primitives (Root, Title, Subtitle, Description, Price, Options, OptionButton) over a Medusa StoreProduct. URL-driven variant selection (?v= links), inventory-aware option availability (manage_inventory/inventory_quantity), currency-aware price with sale strikethrough, sanitized {@html} description. Pure resolution logic in product-logic.ts; no $effect (SSR-safe). Fetch the product reactively in your route and pass it in.",
-			"dependencies": ["isomorphic-dompurify", "@lucide/svelte"],
-			"registryDependencies": [],
+			"dependencies": ["isomorphic-dompurify", "@lucide/svelte", "schema-dts"],
+			"registryDependencies": ["seo"],
 			"files": [
 				{ "path": "src/lib/registry/product/product.svelte", "type": "registry:ui", "target": "product/product.svelte" },
 				{ "path": "src/lib/registry/product/product-title.svelte", "type": "registry:ui", "target": "product/product-title.svelte" },
@@ -171,7 +187,9 @@
 				{ "path": "src/lib/registry/product/product-options.svelte", "type": "registry:ui", "target": "product/product-options.svelte" },
 				{ "path": "src/lib/registry/product/product-option-button.svelte", "type": "registry:ui", "target": "product/product-option-button.svelte" },
 				{ "path": "src/lib/registry/product/product-quantity-select.svelte", "type": "registry:ui", "target": "product/product-quantity-select.svelte" },
+				{ "path": "src/lib/registry/product/product-jsonld.svelte", "type": "registry:ui", "target": "product/product-jsonld.svelte" },
 				{ "path": "src/lib/registry/product/ctx.svelte.ts", "type": "registry:file", "target": "product/ctx.svelte.ts" },
+				{ "path": "src/lib/registry/product/product-schema.ts", "type": "registry:file", "target": "product/product-schema.ts" },
 				{ "path": "src/lib/registry/product/product-logic.ts", "type": "registry:file", "target": "product/product-logic.ts" },
 				{ "path": "src/lib/registry/product/format-price.ts", "type": "registry:file", "target": "product/format-price.ts" },
 				{ "path": "src/lib/registry/product/index.ts", "type": "registry:file", "target": "product/index.ts" }

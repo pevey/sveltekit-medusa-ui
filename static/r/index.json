@@ -105,15 +105,29 @@
 		"relativeUrl": "faq.json"
 	},
 	{
+		"name": "seo",
+		"title": "SEO",
+		"type": "registry:ui",
+		"description": "Head/metadata primitives for SEO. MetaProvider seeds site-wide defaults (siteName, siteUrl, titleTemplate, twitterHandle) via context; Metadata emits per-page <title>/description/canonical/OpenGraph/Twitter tags off a MetaConfig, merging provider defaults; JsonLd renders a typed schema-dts object as a <script type=\"application/ld+json\"> tag. No env, no state mutation; provider is optional. SSR-safe.",
+		"dependencies": [
+			"schema-dts"
+		],
+		"registryDependencies": [],
+		"relativeUrl": "seo.json"
+	},
+	{
 		"name": "product",
 		"title": "Product",
 		"type": "registry:ui",
 		"description": "Compound Product primitives (Root, Title, Subtitle, Description, Price, Options, OptionButton) over a Medusa StoreProduct. URL-driven variant selection (?v= links), inventory-aware option availability (manage_inventory/inventory_quantity), currency-aware price with sale strikethrough, sanitized {@html} description. Pure resolution logic in product-logic.ts; no $effect (SSR-safe). Fetch the product reactively in your route and pass it in.",
 		"dependencies": [
 			"isomorphic-dompurify",
-			"@lucide/svelte"
+			"@lucide/svelte",
+			"schema-dts"
 		],
-		"registryDependencies": [],
+		"registryDependencies": [
+			"seo"
+		],
 		"relativeUrl": "product.json"
 	},
 	{

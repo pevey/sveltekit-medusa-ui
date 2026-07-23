@@ -20,6 +20,8 @@
 			"$lib/components/ui/cta/*": ["./src/lib/registry/cta/*"],
 			"$lib/components/ui/cart": ["./src/lib/registry/cart"],
 			"$lib/components/ui/cart/*": ["./src/lib/registry/cart/*"],
+			"$lib/components/ui/seo": ["./src/lib/registry/seo"],
+			"$lib/components/ui/seo/*": ["./src/lib/registry/seo/*"],
 			"$lib": ["./src/lib"],
 			"$lib/*": ["./src/lib/*"]
 		}
