@@ -20,3 +20,14 @@ test('shows a struck-through original when on sale', async () => {
 	await expect.element(vpage.getByText('$8.00')).toBeInTheDocument()
 	expect(container.querySelector('s[data-original]')).toBeTruthy()
 })
+
+test('renders nothing when the variant has no price (e.g. no pricing region resolved)', async () => {
+	page.url = new URL('http://localhost/')
+	const noPrice = {
+		id: 'p', title: 'x', options: [],
+		variants: [{ id: 'v', options: [], manage_inventory: false }]
+	} as unknown as StoreProduct
+	const { container } = await render(Harness, { product: noPrice })
+	// No empty price line — the whole <p> is omitted rather than rendering a blank span.
+	expect(container.querySelector('p')).toBeNull()
+})

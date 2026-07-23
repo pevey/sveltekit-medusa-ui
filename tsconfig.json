@@ -16,6 +16,8 @@
 			"$lib/components/ui/faq/*": ["./src/lib/registry/faq/*"],
 			"$lib/components/ui/product": ["./src/lib/registry/product"],
 			"$lib/components/ui/product/*": ["./src/lib/registry/product/*"],
+			"$lib/components/ui/cta": ["./src/lib/registry/cta"],
+			"$lib/components/ui/cta/*": ["./src/lib/registry/cta/*"],
 			"$lib": ["./src/lib"],
 			"$lib/*": ["./src/lib/*"]
 		}

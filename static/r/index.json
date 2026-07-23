@@ -110,10 +110,25 @@
 		"type": "registry:ui",
 		"description": "Compound Product primitives (Root, Title, Subtitle, Description, Price, Options, OptionButton) over a Medusa StoreProduct. URL-driven variant selection (?v= links), inventory-aware option availability (manage_inventory/inventory_quantity), currency-aware price with sale strikethrough, sanitized {@html} description. Pure resolution logic in product-logic.ts; no $effect (SSR-safe). Fetch the product reactively in your route and pass it in.",
 		"dependencies": [
-			"isomorphic-dompurify"
+			"isomorphic-dompurify",
+			"@lucide/svelte"
 		],
 		"registryDependencies": [],
 		"relativeUrl": "product.json"
+	},
+	{
+		"name": "cta",
+		"title": "CTA",
+		"type": "registry:ui",
+		"description": "Add-to-cart primitives wired to the sveltekit-medusa-sdk cart remotes. AddToCartButton resolves variant/quantity from Product context (or props), shows pending/aria-busy state and an accessible inline success/error message, with optional post-add redirect. AddToCartToggle reflects cart membership for a variant/condition via a checkbox (or a custom children snippet). Also available as flat exports (AddToCartButton, AddToCartToggle).",
+		"dependencies": [
+			"sveltekit-medusa-sdk"
+		],
+		"registryDependencies": [
+			"product",
+			"button"
+		],
+		"relativeUrl": "cta.json"
 	},
 	{
 		"name": "theme-button",

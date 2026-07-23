@@ -34,3 +34,29 @@ test('buildHref preserves other params and sets v', async () => {
 	expect(href).toContain('tab=reviews')
 	expect(href).toContain('v=v_bm')
 })
+
+test('quantity defaults to 1 when no ?quantity=', async () => {
+	page.url = new URL('http://localhost/product/tee')
+	render(Harness, { product })
+	await expect.element(vpage.getByTestId('qty')).toHaveTextContent('1')
+})
+
+test('reads quantity from ?quantity=', async () => {
+	page.url = new URL('http://localhost/product/tee?quantity=4')
+	render(Harness, { product })
+	await expect.element(vpage.getByTestId('qty')).toHaveTextContent('4')
+})
+
+test('invalid ?quantity= falls back to 1', async () => {
+	page.url = new URL('http://localhost/product/tee?quantity=abc')
+	render(Harness, { product })
+	await expect.element(vpage.getByTestId('qty')).toHaveTextContent('1')
+})
+
+test('buildQuantityHref preserves variant param and sets quantity', async () => {
+	page.url = new URL('http://localhost/product/tee?v=v_bm')
+	render(Harness, { product })
+	const href = await vpage.getByTestId('qtyhref').element().getAttribute('href')
+	expect(href).toContain('v=v_bm')
+	expect(href).toContain('quantity=3')
+})
