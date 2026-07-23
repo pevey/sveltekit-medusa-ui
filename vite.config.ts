@@ -34,6 +34,10 @@ export default defineConfig({
 				find: '$lib/components/ui/cta',
 				replacement: fileURLToPath(new URL('./src/lib/registry/cta', import.meta.url))
 			},
+			{
+				find: '$lib/components/ui/cart',
+				replacement: fileURLToPath(new URL('./src/lib/registry/cart', import.meta.url))
+			},
 			{ find: '$lib', replacement: fileURLToPath(new URL('./src/lib', import.meta.url)) }
 		]
 	}

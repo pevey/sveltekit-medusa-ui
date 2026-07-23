@@ -193,6 +193,37 @@
 			]
 		},
 		{
+			"name": "cart",
+			"type": "registry:ui",
+			"title": "Cart",
+			"description": "Compound Cart primitives (Root, Trigger, Badge, Sheet, Items, LineItem, Image, Title, Price, Quantity, Remove, ItemSubtotal, Empty, Checkout) plus a CartDrawer preset, wired to the sveltekit-medusa-sdk cart remotes. Reactive re-render on cart changes with onupdate/onremove/onerror callbacks and pending-state disabling; per-part class override; self-contained currency-aware format-price. No $effect (SSR-safe). Badge shows total quantity and hides at 0.",
+			"dependencies": ["sveltekit-medusa-sdk", "@lucide/svelte"],
+			"registryDependencies": ["button", "sheet"],
+			"files": [
+				{ "path": "src/lib/registry/cart/cart.svelte", "type": "registry:ui", "target": "cart/cart.svelte" },
+				{ "path": "src/lib/registry/cart/cart-trigger.svelte", "type": "registry:ui", "target": "cart/cart-trigger.svelte" },
+				{ "path": "src/lib/registry/cart/cart-badge.svelte", "type": "registry:ui", "target": "cart/cart-badge.svelte" },
+				{ "path": "src/lib/registry/cart/cart-sheet.svelte", "type": "registry:ui", "target": "cart/cart-sheet.svelte" },
+				{ "path": "src/lib/registry/cart/cart-items.svelte", "type": "registry:ui", "target": "cart/cart-items.svelte" },
+				{ "path": "src/lib/registry/cart/cart-line-item.svelte", "type": "registry:ui", "target": "cart/cart-line-item.svelte" },
+				{ "path": "src/lib/registry/cart/cart-image.svelte", "type": "registry:ui", "target": "cart/cart-image.svelte" },
+				{ "path": "src/lib/registry/cart/cart-title.svelte", "type": "registry:ui", "target": "cart/cart-title.svelte" },
+				{ "path": "src/lib/registry/cart/cart-price.svelte", "type": "registry:ui", "target": "cart/cart-price.svelte" },
+				{ "path": "src/lib/registry/cart/cart-line-item-subtotal.svelte", "type": "registry:ui", "target": "cart/cart-line-item-subtotal.svelte" },
+				{ "path": "src/lib/registry/cart/cart-quantity.svelte", "type": "registry:ui", "target": "cart/cart-quantity.svelte" },
+				{ "path": "src/lib/registry/cart/cart-remove.svelte", "type": "registry:ui", "target": "cart/cart-remove.svelte" },
+				{ "path": "src/lib/registry/cart/cart-item-subtotal.svelte", "type": "registry:ui", "target": "cart/cart-item-subtotal.svelte" },
+				{ "path": "src/lib/registry/cart/cart-empty.svelte", "type": "registry:ui", "target": "cart/cart-empty.svelte" },
+				{ "path": "src/lib/registry/cart/cart-checkout.svelte", "type": "registry:ui", "target": "cart/cart-checkout.svelte" },
+				{ "path": "src/lib/registry/cart/cart-drawer.svelte", "type": "registry:ui", "target": "cart/cart-drawer.svelte" },
+				{ "path": "src/lib/registry/cart/ctx.svelte.ts", "type": "registry:file", "target": "cart/ctx.svelte.ts" },
+				{ "path": "src/lib/registry/cart/cart-logic.ts", "type": "registry:file", "target": "cart/cart-logic.ts" },
+				{ "path": "src/lib/registry/cart/format-price.ts", "type": "registry:file", "target": "cart/format-price.ts" },
+				{ "path": "src/lib/registry/cart/types.ts", "type": "registry:file", "target": "cart/types.ts" },
+				{ "path": "src/lib/registry/cart/index.ts", "type": "registry:file", "target": "cart/index.ts" }
+			]
+		},
+		{
 			"name": "theme-button",
 			"type": "registry:ui",
 			"title": "Theme Button",

@@ -131,6 +131,21 @@
 		"relativeUrl": "cta.json"
 	},
 	{
+		"name": "cart",
+		"title": "Cart",
+		"type": "registry:ui",
+		"description": "Compound Cart primitives (Root, Trigger, Badge, Sheet, Items, LineItem, Image, Title, Price, Quantity, Remove, ItemSubtotal, Empty, Checkout) plus a CartDrawer preset, wired to the sveltekit-medusa-sdk cart remotes. Reactive re-render on cart changes with onupdate/onremove/onerror callbacks and pending-state disabling; per-part class override; self-contained currency-aware format-price. No $effect (SSR-safe). Badge shows total quantity and hides at 0.",
+		"dependencies": [
+			"sveltekit-medusa-sdk",
+			"@lucide/svelte"
+		],
+		"registryDependencies": [
+			"button",
+			"sheet"
+		],
+		"relativeUrl": "cart.json"
+	},
+	{
 		"name": "theme-button",
 		"title": "Theme Button",
 		"type": "registry:ui",

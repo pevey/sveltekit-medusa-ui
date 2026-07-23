@@ -18,6 +18,8 @@
 			"$lib/components/ui/product/*": ["./src/lib/registry/product/*"],
 			"$lib/components/ui/cta": ["./src/lib/registry/cta"],
 			"$lib/components/ui/cta/*": ["./src/lib/registry/cta/*"],
+			"$lib/components/ui/cart": ["./src/lib/registry/cart"],
+			"$lib/components/ui/cart/*": ["./src/lib/registry/cart/*"],
 			"$lib": ["./src/lib"],
 			"$lib/*": ["./src/lib/*"]
 		}

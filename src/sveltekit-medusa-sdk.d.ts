@@ -17,4 +17,5 @@ declare module 'sveltekit-medusa-sdk' {
 	export const addToCart: (args: { variant_id: string; quantity: number }) => Promise<StoreCart>
 	export const removeFromCart: (lineId: string) => Promise<StoreCart | null>
 	export const getCart: () => Promise<StoreCart | null>
+	export const updateCartItem: (args: { item_id: string; quantity: number }) => Promise<StoreCart | null>
 }

@@ -34,6 +34,10 @@ export default defineConfig({
 				replacement: fileURLToPath(new URL('./src/lib/registry/cta', import.meta.url))
 			},
 			{
+				find: '$lib/components/ui/cart',
+				replacement: fileURLToPath(new URL('./src/lib/registry/cart', import.meta.url))
+			},
+			{
 				find: '$app/state',
 				replacement: fileURLToPath(new URL('./src/test-stubs/app-state.svelte.ts', import.meta.url))
 			},

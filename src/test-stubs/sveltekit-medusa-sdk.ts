@@ -19,3 +19,4 @@ export const getProductQuery = async (_args: {
 export const addToCart = async (_args: { variant_id: string; quantity: number }) => ({ id: 'cart', items: [] })
 export const removeFromCart = async (_lineId: string) => ({ id: 'cart', items: [] })
 export const getCart = async () => null
+export const updateCartItem = async (_args: { item_id: string; quantity: number }) => ({ id: 'cart', items: [] })
