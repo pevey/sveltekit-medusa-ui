@@ -41,4 +41,7 @@ declare module 'sveltekit-medusa-sdk' {
 	export const initiateBraintreePaymentSession: (args: { provider_id: string; data?: { payment_method_nonce?: string; deviceData?: string } }) => Promise<any>
 	export const formatBraintreeAddress: (type: 'billing' | 'shipping', cart: StoreCart | null) => Record<string, string>
 	export const braintreeCheckoutForm: any
+	// Generic payment remotes (see sveltekit-sdk/src/lib/payment.remote.ts).
+	export const initiatePaymentSession: (args: { provider_id: string }) => Promise<any>
+	export const listPaymentProviders: () => Promise<any[]> & { current: any[] | undefined }
 }

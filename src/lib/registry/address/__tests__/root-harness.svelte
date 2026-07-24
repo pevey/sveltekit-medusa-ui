@@ -10,6 +10,7 @@
 		getCart,
 		getRegions,
 		updateCart,
+		restrictToCurrentRegion,
 		onregionchange,
 		onaddresschange,
 		onerror
@@ -19,13 +20,14 @@
 		getCart?: GetCartFn
 		getRegions?: GetRegionsFn
 		updateCart?: UpdateCartFn
+		restrictToCurrentRegion?: boolean
 		onregionchange?: (regionId: string, country: string) => void
 		onaddresschange?: (cart: StoreCart) => void
 		onerror?: (err: unknown) => void
 	} = $props()
 </script>
 
-<Root {form} {googlePlacesApiKey} {getCart} {getRegions} {updateCart} {onregionchange} {onaddresschange} {onerror}>
+<Root {form} {googlePlacesApiKey} {getCart} {getRegions} {updateCart} {restrictToCurrentRegion} {onregionchange} {onaddresschange} {onerror}>
 	{@const ctx = getAddressContext()}
 	<span data-testid="countries">{ctx.countries.map((c) => c.code).join(',')}</span>
 	<span data-testid="isAutocomplete">{ctx.isAutocomplete}</span>

@@ -28,6 +28,19 @@ test('exposes countries from regions and isAutocomplete=false without apiKey', a
 	expect(document.querySelector('[data-testid=isAutocomplete]')!.textContent).toBe('false')
 })
 
+test('restrictToCurrentRegion narrows countries to the current region and clamps region switching', async () => {
+	const updateCart = vi.fn(async () => ({ id: 'cart_1' }) as any)
+	const getCartUS = () => ({ current: { id: 'c', region_id: 'reg_us' } }) as any
+	render(Harness, { form: makeForm({ country_code: 'us' }), getCart: getCartUS, getRegions: regionsResource, updateCart, restrictToCurrentRegion: true })
+	const countries = document.querySelector('[data-testid=countries]')!.textContent!
+	expect(countries).toContain('us')
+	expect(countries).not.toContain('ca')
+	// Region switching is clamped — selecting an out-of-region country does NOT switch region.
+	;(document.querySelector('[data-testid=region-ca]') as HTMLButtonElement).click()
+	await new Promise((r) => setTimeout(r, 50))
+	expect(updateCart).not.toHaveBeenCalledWith(expect.objectContaining({ region_id: 'reg_ca' }))
+})
+
 test('setRegionForCountry calls updateCart with the matched region_id', async () => {
 	const updateCart = vi.fn(async () => ({ id: 'cart_1' }) as any)
 	render(Harness, { form: makeForm({ country_code: 'us' }), getCart: getCartEmpty, getRegions: regionsResource, updateCart })
@@ -44,6 +57,15 @@ test('save builds a payload from field values (billing mirrors shipping by defau
 	expect(arg.email).toBe('a@b.com')
 	expect(arg.shipping_address.first_name).toBe('Ada')
 	expect(arg.billing_address).toEqual(arg.shipping_address)
+})
+
+test('save bundles region_id for the chosen country so region + address commit atomically', async () => {
+	const updateCart = vi.fn(async (_args: any) => ({ id: 'cart_1' }) as any)
+	render(Harness, { form: makeForm({ country_code: 'ca' }), getCart: getCartEmpty, getRegions: regionsResource, updateCart })
+	;(document.querySelector('[data-testid=save]') as HTMLButtonElement).click()
+	await vi.waitFor(() => expect(updateCart).toHaveBeenCalled())
+	// Without region_id, Medusa validates 'ca' against the cart's current region and rejects it.
+	expect(updateCart.mock.calls.at(-1)![0].region_id).toBe('reg_ca')
 })
 
 test('setBillingSameAsShipping(true) clears billing and sends billing_address:{}', async () => {

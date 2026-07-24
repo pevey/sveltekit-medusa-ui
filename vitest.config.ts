@@ -65,6 +65,10 @@ export default defineConfig({
 				find: 'sveltekit-medusa-sdk',
 				replacement: fileURLToPath(new URL('./src/test-stubs/sveltekit-medusa-sdk.ts', import.meta.url))
 			},
+			{
+				find: '$app/env',
+				replacement: fileURLToPath(new URL('./src/test-stubs/app-env.ts', import.meta.url))
+			},
 			{ find: '$lib', replacement: fileURLToPath(new URL('./src/lib', import.meta.url)) }
 		]
 	},

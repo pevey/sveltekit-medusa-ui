@@ -1,5 +1,14 @@
 import { expect, test, vi } from 'vitest'
-import { runPlaceOrder, resolveRedirect, getBraintreeClientToken } from '../checkout-logic'
+import { runPlaceOrder, resolveRedirect, getBraintreeClientToken, getStripeClientSecret, resolveProvider } from '../checkout-logic'
+
+const SUPPORTED = ['pp_braintree_braintree', 'pp_stripe_stripe']
+
+test('resolveProvider returns the first supported provider (skipping unsupported ids)', () => {
+	expect(resolveProvider(['pp_stripe_stripe'], SUPPORTED)).toBe('pp_stripe_stripe')
+	expect(resolveProvider(['pp_paypal_paypal', 'pp_braintree_braintree'], SUPPORTED)).toBe('pp_braintree_braintree')
+	expect(resolveProvider(['pp_paypal_paypal'], SUPPORTED)).toBeUndefined()
+	expect(resolveProvider([], SUPPORTED)).toBeUndefined()
+})
 
 test('runPlaceOrder runs steps in order and returns the order', async () => {
 	const calls: string[] = []
@@ -58,4 +67,11 @@ test('getBraintreeClientToken digs the client_token out of the session', () => {
 	expect(getBraintreeClientToken(session, 'pp_braintree_braintree')).toBe('tok_123')
 	expect(getBraintreeClientToken(null, 'pp_braintree_braintree')).toBe(undefined)
 	expect(getBraintreeClientToken({ payment_collection: { payment_sessions: [] } }, 'pp_braintree_braintree')).toBe(undefined)
+})
+
+test('getStripeClientSecret digs the client_secret out of the session (PaymentIntent data)', () => {
+	const session = { payment_collection: { payment_sessions: [{ provider_id: 'pp_stripe_stripe', data: { id: 'pi_1', client_secret: 'pi_1_secret_abc' } }] } }
+	expect(getStripeClientSecret(session, 'pp_stripe_stripe')).toBe('pi_1_secret_abc')
+	expect(getStripeClientSecret(null, 'pp_stripe_stripe')).toBe(undefined)
+	expect(getStripeClientSecret({ payment_collection: { payment_sessions: [] } }, 'pp_stripe_stripe')).toBe(undefined)
 })

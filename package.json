@@ -32,12 +32,14 @@
 		"@internationalized/date": "^3.12.0",
 		"@lucide/svelte": "^1.25.0",
 		"@medusajs/types": "2.18.0",
+		"@stripe/stripe-js": "9.10.0",
 		"@sveltejs/vite-plugin-svelte": "7.2.0",
 		"@tailwindcss/vite": "4.3.3",
 		"@types/braintree-web": "3.96.17",
 		"@types/google.maps": "3.65.2",
 		"@vitest/browser-playwright": "4.1.10",
 		"bits-ui": "2.18.1",
+		"braintree-web": "3.143.0",
 		"clsx": "2.1.1",
 		"embla-carousel-svelte": "8.6.0",
 		"isomorphic-dompurify": "^3.19.0",
@@ -47,6 +49,7 @@
 		"shadcn-svelte": "^1.4.2",
 		"svelte": "^5.56.6",
 		"svelte-check": "^4.7.3",
+		"sveltekit-stripe": "workspace:*",
 		"tailwind-merge": "3.6.0",
 		"tailwind-variants": "3.2.2",
 		"tailwindcss": "4.3.3",
@@ -55,7 +58,23 @@
 		"vitest": "4.1.10",
 		"vitest-browser-svelte": "3.0.0"
 	},
+	"peerDependencies": {
+		"@stripe/stripe-js": ">=5 <10",
+		"braintree-web": "^3.143.0",
+		"sveltekit-stripe": ">=4"
+	},
+	"peerDependenciesMeta": {
+		"@stripe/stripe-js": {
+			"optional": true
+		},
+		"braintree-web": {
+			"optional": true
+		},
+		"sveltekit-stripe": {
+			"optional": true
+		}
+	},
 	"dependencies": {
-		"braintree-web": "^3.143.0"
+		"sveltekit-medusa-sdk": "workspace:*"
 	}
 }
