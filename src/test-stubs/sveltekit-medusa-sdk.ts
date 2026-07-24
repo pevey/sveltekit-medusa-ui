@@ -43,3 +43,13 @@ export function countriesFromRegions(regions: RegionLike[] | null | undefined): 
 		}
 	return [...byCode.values()].sort((a, b) => a.name.localeCompare(b.name))
 }
+
+// Checkout remotes. DI defaults only (tests inject fakes), so no-op stubs suffice.
+export const getShippingOptions = () => Object.assign(Promise.resolve([]), { current: [] })
+export const selectShippingOption = async (_id: string) => null
+export const addPromotion = async (_code: string) => null
+export const removePromotion = async (_code: string) => null
+export const completeCart = async () => null
+export const initiateBraintreePaymentSession = async (_args: unknown) => ({})
+export const formatBraintreeAddress = (_t: string, _c: unknown) => ({})
+export const braintreeCheckoutForm = { fields: {} }

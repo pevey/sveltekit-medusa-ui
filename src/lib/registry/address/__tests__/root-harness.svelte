@@ -6,7 +6,7 @@
 	import type { GetCartFn, GetRegionsFn, UpdateCartFn } from '$lib/components/ui/address/types.js'
 	let {
 		form,
-		apiKey,
+		googlePlacesApiKey,
 		getCart,
 		getRegions,
 		updateCart,
@@ -15,7 +15,7 @@
 		onerror
 	}: {
 		form: RemoteForm<any, any>
-		apiKey?: string
+		googlePlacesApiKey?: string
 		getCart?: GetCartFn
 		getRegions?: GetRegionsFn
 		updateCart?: UpdateCartFn
@@ -25,7 +25,7 @@
 	} = $props()
 </script>
 
-<Root {form} {apiKey} {getCart} {getRegions} {updateCart} {onregionchange} {onaddresschange} {onerror}>
+<Root {form} {googlePlacesApiKey} {getCart} {getRegions} {updateCart} {onregionchange} {onaddresschange} {onerror}>
 	{@const ctx = getAddressContext()}
 	<span data-testid="countries">{ctx.countries.map((c) => c.code).join(',')}</span>
 	<span data-testid="isAutocomplete">{ctx.isAutocomplete}</span>

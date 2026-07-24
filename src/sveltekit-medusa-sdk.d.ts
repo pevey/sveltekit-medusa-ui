@@ -2,7 +2,7 @@
 // 'sveltekit-medusa-sdk'` without installing the real package (whose .d.ts
 // references `$app/server`). Consumers get the real types from the real SDK.
 declare module 'sveltekit-medusa-sdk' {
-	import type { StoreCart, StoreRegion } from '@medusajs/types'
+	import type { StoreCart, StoreOrder, StoreRegion } from '@medusajs/types'
 
 	export const search: (args: { q: string; limit?: number }) => Promise<{ hits: unknown[] }>
 	export const getProductQuery: (args: {
@@ -31,4 +31,14 @@ declare module 'sveltekit-medusa-sdk' {
 	}) => Promise<StoreCart | null>
 	export const regionForCountry: (regions: StoreRegion[] | null | undefined, countryCode: string) => StoreRegion | undefined
 	export const countriesFromRegions: (regions: unknown) => { code: string; name: string }[]
+
+	// Checkout remotes (see sveltekit-sdk/src/lib/checkout.remote.ts).
+	export const getShippingOptions: () => Promise<any[]> & { current: any[] | undefined }
+	export const selectShippingOption: (optionId: string) => Promise<StoreCart | null>
+	export const addPromotion: (code: string) => Promise<StoreCart | null>
+	export const removePromotion: (code: string) => Promise<StoreCart | null>
+	export const completeCart: () => Promise<StoreOrder | StoreCart | null>
+	export const initiateBraintreePaymentSession: (args: { provider_id: string; data?: { payment_method_nonce?: string; deviceData?: string } }) => Promise<any>
+	export const formatBraintreeAddress: (type: 'billing' | 'shipping', cart: StoreCart | null) => Record<string, string>
+	export const braintreeCheckoutForm: any
 }

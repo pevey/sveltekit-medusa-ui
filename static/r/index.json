@@ -179,6 +179,26 @@
 		"relativeUrl": "address.json"
 	},
 	{
+		"name": "checkout",
+		"title": "Checkout Braintree",
+		"type": "registry:ui",
+		"description": "Compound Checkout primitives (Root, Items, Item, Image, Title, Price, Quantity, ItemSubtotal, Remove, Delivery, Discount, Summary + 7 summary rows, BraintreePayment, PlaceOrder, Confirmation, CheckoutError) plus a batteries-included CheckoutBraintree preset that owns the <form>, composes the Address preset alongside a single-page cart summary + Braintree hosted-fields payment, and calls placeOrder (updateAddress → shipping guard → authorizePayment → completeCart) with a StoreOrder confirmation or redirectTo. Wired to the sveltekit-medusa-sdk cart/checkout/braintree remotes (DI-with-SDK-default); no $effect (SSR-safe).",
+		"dependencies": [
+			"sveltekit-medusa-sdk",
+			"braintree-web",
+			"@lucide/svelte"
+		],
+		"devDependencies": [
+			"@types/braintree-web"
+		],
+		"registryDependencies": [
+			"address",
+			"button",
+			"input-text"
+		],
+		"relativeUrl": "checkout.json"
+	},
+	{
 		"name": "theme-button",
 		"title": "Theme Button",
 		"type": "registry:ui",

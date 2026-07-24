@@ -26,6 +26,8 @@
 			"$lib/components/ui/input-province/*": ["./src/lib/registry/input-province/*"],
 			"$lib/components/ui/address": ["./src/lib/registry/address"],
 			"$lib/components/ui/address/*": ["./src/lib/registry/address/*"],
+			"$lib/components/ui/checkout": ["./src/lib/registry/checkout"],
+			"$lib/components/ui/checkout/*": ["./src/lib/registry/checkout/*"],
 			"$lib": ["./src/lib"],
 			"$lib/*": ["./src/lib/*"]
 		}
