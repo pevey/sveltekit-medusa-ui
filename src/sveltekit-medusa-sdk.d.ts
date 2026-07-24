@@ -2,7 +2,7 @@
 // 'sveltekit-medusa-sdk'` without installing the real package (whose .d.ts
 // references `$app/server`). Consumers get the real types from the real SDK.
 declare module 'sveltekit-medusa-sdk' {
-	import type { StoreCart } from '@medusajs/types'
+	import type { StoreCart, StoreRegion } from '@medusajs/types'
 
 	export const search: (args: { q: string; limit?: number }) => Promise<{ hits: unknown[] }>
 	export const getProductQuery: (args: {
@@ -18,4 +18,17 @@ declare module 'sveltekit-medusa-sdk' {
 	export const removeFromCart: (lineId: string) => Promise<StoreCart | null>
 	export const getCart: () => Promise<StoreCart | null>
 	export const updateCartItem: (args: { item_id: string; quantity: number }) => Promise<StoreCart | null>
+
+	// Region/address remotes (see sveltekit-sdk/src/lib/helpers/regions.ts).
+	type RegionsResource = Promise<StoreRegion[]> & { current: StoreRegion[] | undefined }
+	export const getRegions: () => RegionsResource
+	export const updateCart: (args: {
+		email?: string
+		region_id?: string
+		shipping_address?: Record<string, unknown>
+		billing_address?: Record<string, unknown>
+		metadata?: Record<string, unknown>
+	}) => Promise<StoreCart | null>
+	export const regionForCountry: (regions: StoreRegion[] | null | undefined, countryCode: string) => StoreRegion | undefined
+	export const countriesFromRegions: (regions: unknown) => { code: string; name: string }[]
 }

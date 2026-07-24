@@ -22,6 +22,10 @@
 			"$lib/components/ui/cart/*": ["./src/lib/registry/cart/*"],
 			"$lib/components/ui/seo": ["./src/lib/registry/seo"],
 			"$lib/components/ui/seo/*": ["./src/lib/registry/seo/*"],
+			"$lib/components/ui/input-province": ["./src/lib/registry/input-province"],
+			"$lib/components/ui/input-province/*": ["./src/lib/registry/input-province/*"],
+			"$lib/components/ui/address": ["./src/lib/registry/address"],
+			"$lib/components/ui/address/*": ["./src/lib/registry/address/*"],
 			"$lib": ["./src/lib"],
 			"$lib/*": ["./src/lib/*"]
 		}

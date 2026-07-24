@@ -160,6 +160,25 @@
 		"relativeUrl": "cart.json"
 	},
 	{
+		"name": "address",
+		"title": "Address Form",
+		"type": "registry:ui",
+		"description": "Compound Address primitives (Root, Email, FirstName, LastName, Phone, AddressLine2, City, Company, Country, PostalCode, Autocomplete, Province, BillingToggle, Billing) plus an AddressForm preset. Owns cart writes via the sveltekit-medusa-sdk cart remotes (DI-with-SDK-default + onaddresschange/onregionchange/onerror callbacks): debounced updateCart, region-by-country switching, billing same-as-shipping toggle, and Google Places autocomplete (optional; degrades to text). Receives the consumer's remote form (renders no <form>). No $effect (SSR-safe; hydrates via onMount).",
+		"dependencies": [
+			"sveltekit-medusa-sdk"
+		],
+		"registryDependencies": [
+			"field",
+			"input-text",
+			"input-select",
+			"input-select-country",
+			"input-postal-code",
+			"input-province",
+			"google-places-autocomplete"
+		],
+		"relativeUrl": "address.json"
+	},
+	{
 		"name": "theme-button",
 		"title": "Theme Button",
 		"type": "registry:ui",
@@ -267,17 +286,6 @@
 		"relativeUrl": "input-select-country.json"
 	},
 	{
-		"name": "input-select-state",
-		"title": "Input Select State",
-		"type": "registry:ui",
-		"description": "US state select (ISO 3166-2 values) bound to a remote-form field. Extends input-select.",
-		"dependencies": [],
-		"registryDependencies": [
-			"input-select"
-		],
-		"relativeUrl": "input-select-state.json"
-	},
-	{
 		"name": "input-postal-code",
 		"title": "Input Postal Code",
 		"type": "registry:ui",
@@ -287,5 +295,17 @@
 			"input-text"
 		],
 		"relativeUrl": "input-postal-code.json"
+	},
+	{
+		"name": "input-province",
+		"title": "Input Province",
+		"type": "registry:ui",
+		"description": "Config-driven province/state field bound to a remote-form field: renders a select when the current country is configured (default US + CA, ISO 3166-2 values), otherwise a freeform text input. Ships US_STATES, US_MILITARY (APO/FPO), CA_PROVINCES, and defaultProvinceConfig; stores extend per country in one place. Extends input-select + input-text.",
+		"dependencies": [],
+		"registryDependencies": [
+			"input-select",
+			"input-text"
+		],
+		"relativeUrl": "input-province.json"
 	}
 ]

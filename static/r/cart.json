@@ -9,7 +9,7 @@
 		"@lucide/svelte"
 	],
 	"devDependencies": [
-		"@medusajs/types@2.17.2",
+		"@medusajs/types@2.18.0",
 		"@lucide/svelte@^1.25.0"
 	],
 	"registryDependencies": [

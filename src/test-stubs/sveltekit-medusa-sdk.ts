@@ -20,3 +20,26 @@ export const addToCart = async (_args: { variant_id: string; quantity: number })
 export const removeFromCart = async (_lineId: string) => ({ id: 'cart', items: [] })
 export const getCart = async () => null
 export const updateCartItem = async (_args: { item_id: string; quantity: number }) => ({ id: 'cart', items: [] })
+
+// Region/address remotes. `getRegions`/`updateCart` are DI defaults only (tests inject fakes),
+// so no-op stubs suffice. `regionForCountry`/`countriesFromRegions` are called directly by
+// `Address.Root` (not injected), so these carry real implementations (copied from the SDK's
+// `helpers/regions.ts`).
+export const getRegions = () => Object.assign(Promise.resolve([]), { current: [] })
+export const updateCart = async (_args: unknown) => null
+
+type RegionLike = { id?: string; countries?: ({ iso_2?: string; display_name?: string } | null)[] | null }
+export function regionForCountry<R extends RegionLike>(regions: R[] | null | undefined, countryCode: string): R | undefined {
+	const code = countryCode.toLowerCase()
+	return regions?.find((r) => r.countries?.some((c) => c?.iso_2?.toLowerCase() === code))
+}
+export function countriesFromRegions(regions: RegionLike[] | null | undefined): { code: string; name: string }[] {
+	const byCode = new Map<string, { code: string; name: string }>()
+	for (const region of regions ?? [])
+		for (const c of region.countries ?? []) {
+			const iso = c?.iso_2?.toLowerCase()
+			if (!iso || byCode.has(iso)) continue
+			byCode.set(iso, { code: iso, name: c?.display_name ?? iso.toUpperCase() })
+		}
+	return [...byCode.values()].sort((a, b) => a.name.localeCompare(b.name))
+}

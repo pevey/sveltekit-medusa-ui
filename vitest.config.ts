@@ -42,6 +42,14 @@ export default defineConfig({
 				replacement: fileURLToPath(new URL('./src/lib/registry/seo', import.meta.url))
 			},
 			{
+				find: '$lib/components/ui/input-province',
+				replacement: fileURLToPath(new URL('./src/lib/registry/input-province', import.meta.url))
+			},
+			{
+				find: '$lib/components/ui/address',
+				replacement: fileURLToPath(new URL('./src/lib/registry/address', import.meta.url))
+			},
+			{
 				find: '$app/state',
 				replacement: fileURLToPath(new URL('./src/test-stubs/app-state.svelte.ts', import.meta.url))
 			},

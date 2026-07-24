@@ -242,6 +242,37 @@
 			]
 		},
 		{
+			"name": "address",
+			"type": "registry:ui",
+			"title": "Address Form",
+			"description": "Compound Address primitives (Root, Email, FirstName, LastName, Phone, AddressLine2, City, Company, Country, PostalCode, Autocomplete, Province, BillingToggle, Billing) plus an AddressForm preset. Owns cart writes via the sveltekit-medusa-sdk cart remotes (DI-with-SDK-default + onaddresschange/onregionchange/onerror callbacks): debounced updateCart, region-by-country switching, billing same-as-shipping toggle, and Google Places autocomplete (optional; degrades to text). Receives the consumer's remote form (renders no <form>). No $effect (SSR-safe; hydrates via onMount).",
+			"dependencies": ["sveltekit-medusa-sdk"],
+			"registryDependencies": ["field", "input-text", "input-select", "input-select-country", "input-postal-code", "input-province", "google-places-autocomplete"],
+			"files": [
+				{ "path": "src/lib/registry/address/address-root.svelte", "type": "registry:ui", "target": "address/address-root.svelte" },
+				{ "path": "src/lib/registry/address/address-email.svelte", "type": "registry:ui", "target": "address/address-email.svelte" },
+				{ "path": "src/lib/registry/address/address-first-name.svelte", "type": "registry:ui", "target": "address/address-first-name.svelte" },
+				{ "path": "src/lib/registry/address/address-last-name.svelte", "type": "registry:ui", "target": "address/address-last-name.svelte" },
+				{ "path": "src/lib/registry/address/address-phone.svelte", "type": "registry:ui", "target": "address/address-phone.svelte" },
+				{ "path": "src/lib/registry/address/address-line2.svelte", "type": "registry:ui", "target": "address/address-line2.svelte" },
+				{ "path": "src/lib/registry/address/address-city.svelte", "type": "registry:ui", "target": "address/address-city.svelte" },
+				{ "path": "src/lib/registry/address/address-company.svelte", "type": "registry:ui", "target": "address/address-company.svelte" },
+				{ "path": "src/lib/registry/address/address-country.svelte", "type": "registry:ui", "target": "address/address-country.svelte" },
+				{ "path": "src/lib/registry/address/address-postal-code.svelte", "type": "registry:ui", "target": "address/address-postal-code.svelte" },
+				{ "path": "src/lib/registry/address/address-autocomplete.svelte", "type": "registry:ui", "target": "address/address-autocomplete.svelte" },
+				{ "path": "src/lib/registry/address/address-province.svelte", "type": "registry:ui", "target": "address/address-province.svelte" },
+				{ "path": "src/lib/registry/address/address-billing-toggle.svelte", "type": "registry:ui", "target": "address/address-billing-toggle.svelte" },
+				{ "path": "src/lib/registry/address/address-billing.svelte", "type": "registry:ui", "target": "address/address-billing.svelte" },
+				{ "path": "src/lib/registry/address/address-form.svelte", "type": "registry:ui", "target": "address/address-form.svelte" },
+				{ "path": "src/lib/registry/address/address-line1.svelte", "type": "registry:ui", "target": "address/address-line1.svelte" },
+				{ "path": "src/lib/registry/address/address-form-collapsed.svelte", "type": "registry:ui", "target": "address/address-form-collapsed.svelte" },
+				{ "path": "src/lib/registry/address/ctx.svelte.ts", "type": "registry:file", "target": "address/ctx.svelte.ts" },
+				{ "path": "src/lib/registry/address/address-logic.ts", "type": "registry:file", "target": "address/address-logic.ts" },
+				{ "path": "src/lib/registry/address/types.ts", "type": "registry:file", "target": "address/types.ts" },
+				{ "path": "src/lib/registry/address/index.ts", "type": "registry:file", "target": "address/index.ts" }
+			]
+		},
+		{
 			"name": "theme-button",
 			"type": "registry:ui",
 			"title": "Theme Button",
@@ -335,17 +366,6 @@
 			]
 		},
 		{
-			"name": "input-select-state",
-			"type": "registry:ui",
-			"title": "Input Select State",
-			"description": "US state select (ISO 3166-2 values) bound to a remote-form field. Extends input-select.",
-			"dependencies": [],
-			"registryDependencies": ["input-select"],
-			"files": [
-				{ "path": "src/lib/registry/input-select-state/input-select-state.svelte", "type": "registry:ui", "target": "input-select-state/input-select-state.svelte" }
-			]
-		},
-		{
 			"name": "input-postal-code",
 			"type": "registry:ui",
 			"title": "Input Postal Code",
@@ -354,6 +374,19 @@
 			"registryDependencies": ["input-text"],
 			"files": [
 				{ "path": "src/lib/registry/input-postal-code/input-postal-code.svelte", "type": "registry:ui", "target": "input-postal-code/input-postal-code.svelte" }
+			]
+		},
+		{
+			"name": "input-province",
+			"type": "registry:ui",
+			"title": "Input Province",
+			"description": "Config-driven province/state field bound to a remote-form field: renders a select when the current country is configured (default US + CA, ISO 3166-2 values), otherwise a freeform text input. Ships US_STATES, US_MILITARY (APO/FPO), CA_PROVINCES, and defaultProvinceConfig; stores extend per country in one place. Extends input-select + input-text.",
+			"dependencies": [],
+			"registryDependencies": ["input-select", "input-text"],
+			"files": [
+				{ "path": "src/lib/registry/input-province/input-province.svelte", "type": "registry:ui", "target": "input-province/input-province.svelte" },
+				{ "path": "src/lib/registry/input-province/provinces.ts", "type": "registry:file", "target": "input-province/provinces.ts" },
+				{ "path": "src/lib/registry/input-province/index.ts", "type": "registry:file", "target": "input-province/index.ts" }
 			]
 		}
 	]

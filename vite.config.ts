@@ -42,6 +42,14 @@ export default defineConfig({
 				find: '$lib/components/ui/seo',
 				replacement: fileURLToPath(new URL('./src/lib/registry/seo', import.meta.url))
 			},
+			{
+				find: '$lib/components/ui/input-province',
+				replacement: fileURLToPath(new URL('./src/lib/registry/input-province', import.meta.url))
+			},
+			{
+				find: '$lib/components/ui/address',
+				replacement: fileURLToPath(new URL('./src/lib/registry/address', import.meta.url))
+			},
 			{ find: '$lib', replacement: fileURLToPath(new URL('./src/lib', import.meta.url)) }
 		]
 	}
