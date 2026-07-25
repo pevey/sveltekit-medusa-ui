@@ -11,7 +11,7 @@ const lines = [
 
 test('renders one row per line with title + price', async () => {
 	const { container } = await render(Harness, { getCart: cart(lines) })
-	expect(container.querySelectorAll('[data-cart-line]').length).toBe(2)
+	expect(container.querySelectorAll('[data-cart-item]').length).toBe(2)
 	await expect.element(vpage.getByText('Tee')).toBeInTheDocument()
 	await expect.element(vpage.getByText('$10.00')).toBeInTheDocument()
 })
@@ -19,5 +19,5 @@ test('renders one row per line with title + price', async () => {
 test('empty cart renders Cart.Empty', async () => {
 	const { container } = await render(Harness, { getCart: cart([]) })
 	expect(container.querySelector('[data-cart-empty]')).not.toBeNull()
-	expect(container.querySelectorAll('[data-cart-line]').length).toBe(0)
+	expect(container.querySelectorAll('[data-cart-item]').length).toBe(0)
 })

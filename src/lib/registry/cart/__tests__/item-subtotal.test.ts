@@ -1,7 +1,7 @@
 import { render } from 'vitest-browser-svelte'
 import { page as vpage } from '@vitest/browser/context'
 import { expect, test } from 'vitest'
-import Harness from './line-item-subtotal-harness.svelte'
+import Harness from './item-subtotal-harness.svelte'
 
 const cart = (items: any[]) => () => ({ current: { id: 'c', items } }) as any
 
