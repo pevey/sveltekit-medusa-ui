@@ -50,7 +50,13 @@ export const selectShippingOption = async (_id: string) => null
 export const addPromotion = async (_code: string) => null
 export const removePromotion = async (_code: string) => null
 export const completeCart = async () => null
-export const initiateBraintreePaymentSession = async (_args: unknown) => ({})
+export const initiateBraintreePaymentSession = async (args: { provider_id?: string } = {}) => ({
+	payment_collection: {
+		payment_sessions: [
+			{ provider_id: args.provider_id ?? 'pp_braintree_braintree', data: { client_token: 'test_client_token' } }
+		]
+	}
+})
 export const formatBraintreeAddress = (_t: string, _c: unknown) => ({})
 export const braintreeCheckoutForm = { fields: {} }
 // Generic payment remotes. `initiatePaymentSession` returns null so the Stripe Elements boundary

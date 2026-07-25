@@ -37,11 +37,9 @@
 		"@tailwindcss/forms": "0.5.11",
 		"@tailwindcss/typography": "0.5.20",
 		"@tailwindcss/vite": "4.3.3",
-		"@types/braintree-web": "3.96.17",
 		"@types/google.maps": "3.65.2",
 		"@vitest/browser-playwright": "4.1.10",
 		"bits-ui": "2.18.1",
-		"braintree-web": "3.143.0",
 		"clsx": "2.1.1",
 		"embla-carousel-svelte": "8.6.0",
 		"isomorphic-dompurify": "^3.19.0",
@@ -51,6 +49,7 @@
 		"shadcn-svelte": "^1.4.2",
 		"svelte": "^5.56.6",
 		"svelte-check": "^4.7.3",
+		"sveltekit-braintree": "workspace:*",
 		"sveltekit-stripe": "workspace:*",
 		"tailwind-merge": "3.6.0",
 		"tailwind-variants": "3.2.2",
@@ -62,14 +61,14 @@
 	},
 	"peerDependencies": {
 		"@stripe/stripe-js": ">=5 <10",
-		"braintree-web": "^3.143.0",
+		"sveltekit-braintree": ">=0.1",
 		"sveltekit-stripe": ">=4"
 	},
 	"peerDependenciesMeta": {
 		"@stripe/stripe-js": {
 			"optional": true
 		},
-		"braintree-web": {
+		"sveltekit-braintree": {
 			"optional": true
 		},
 		"sveltekit-stripe": {

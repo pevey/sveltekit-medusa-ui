@@ -277,8 +277,8 @@
 			"type": "registry:ui",
 			"title": "Checkout Braintree",
 			"description": "Compound Checkout primitives (Root, Items, Item, Image, Title, Price, Quantity, ItemSubtotal, Remove, Delivery, Discount, Summary + 7 summary rows, BraintreePayment, PlaceOrder, Confirmation, CheckoutError) plus a batteries-included CheckoutBraintree preset that owns the <form>, composes the Address preset alongside a single-page cart summary + Braintree hosted-fields payment, and calls placeOrder (updateAddress → shipping guard → authorizePayment → completeCart) with a StoreOrder confirmation or redirectTo. Wired to the sveltekit-medusa-sdk cart/checkout/braintree remotes (DI-with-SDK-default); no $effect (SSR-safe).",
-			"dependencies": ["sveltekit-medusa-sdk", "braintree-web", "@lucide/svelte"],
-			"devDependencies": ["@types/braintree-web"],
+			"dependencies": ["sveltekit-medusa-sdk", "sveltekit-braintree", "@lucide/svelte"],
+			"devDependencies": [],
 			"registryDependencies": ["address", "button", "input-text"],
 			"files": [
 				{ "path": "src/lib/registry/checkout/checkout.svelte", "type": "registry:ui", "target": "checkout/checkout.svelte" },
@@ -300,6 +300,7 @@
 				{ "path": "src/lib/registry/checkout/checkout-summary-gift-card.svelte", "type": "registry:ui", "target": "checkout/checkout-summary-gift-card.svelte" },
 				{ "path": "src/lib/registry/checkout/checkout-summary-total.svelte", "type": "registry:ui", "target": "checkout/checkout-summary-total.svelte" },
 				{ "path": "src/lib/registry/checkout/checkout-summary-custom.svelte", "type": "registry:ui", "target": "checkout/checkout-summary-custom.svelte" },
+				{ "path": "src/lib/registry/checkout/checkout-braintree-hosted-fields.svelte", "type": "registry:ui", "target": "checkout/checkout-braintree-hosted-fields.svelte" },
 				{ "path": "src/lib/registry/checkout/checkout-braintree-payment.svelte", "type": "registry:ui", "target": "checkout/checkout-braintree-payment.svelte" },
 				{ "path": "src/lib/registry/checkout/checkout-place-order.svelte", "type": "registry:ui", "target": "checkout/checkout-place-order.svelte" },
 				{ "path": "src/lib/registry/checkout/checkout-confirmation.svelte", "type": "registry:ui", "target": "checkout/checkout-confirmation.svelte" },
