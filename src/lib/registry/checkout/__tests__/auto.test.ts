@@ -42,6 +42,12 @@ test('renders the Stripe (Elements) body when the region uses Stripe', async () 
 	expect(document.querySelector('[data-checkout-braintree-payment]')).toBeNull()
 })
 
+test('routes the whole Stripe family (e.g. iDEAL) to the Stripe body', async () => {
+	render(Harness, { form: makeForm(), getCart: () => ({ current: cartWith(['pp_stripe-ideal_stripe']) }) })
+	await vi.waitFor(() => expect(document.querySelector('[data-checkout-stripe-loading]')).not.toBeNull())
+	expect(document.querySelector('[data-checkout-braintree-payment]')).toBeNull()
+})
+
 test('renders nothing + dev-errors for an unsupported provider id', async () => {
 	const err = vi.spyOn(console, 'error').mockImplementation(() => {})
 	render(Harness, { form: makeForm(), getCart: () => ({ current: cartWith(['pp_paypal_paypal']) }) })

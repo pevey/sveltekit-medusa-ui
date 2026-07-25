@@ -1,5 +1,20 @@
 import { expect, test, vi } from 'vitest'
-import { runPlaceOrder, resolveRedirect, getBraintreeClientToken, getStripeClientSecret, resolveProvider } from '../checkout-logic'
+import { runPlaceOrder, resolveRedirect, getBraintreeClientToken, getStripeClientSecret, resolveProvider, classifyProvider, resolveCheckoutProvider } from '../checkout-logic'
+
+test('classifyProvider routes the whole Stripe family to stripe, braintree to braintree, else null', () => {
+	expect(classifyProvider('pp_stripe_stripe')).toBe('stripe')
+	expect(classifyProvider('pp_stripe-ideal_stripe')).toBe('stripe')
+	expect(classifyProvider('pp_stripe-bancontact_stripe')).toBe('stripe')
+	expect(classifyProvider('pp_braintree_braintree')).toBe('braintree')
+	expect(classifyProvider('pp_paypal_paypal')).toBeNull()
+})
+
+test('resolveCheckoutProvider returns the first renderable provider + its kind', () => {
+	expect(resolveCheckoutProvider(['pp_paypal_paypal', 'pp_stripe-ideal_stripe'])).toEqual({ id: 'pp_stripe-ideal_stripe', kind: 'stripe' })
+	expect(resolveCheckoutProvider(['pp_braintree_braintree'])).toEqual({ id: 'pp_braintree_braintree', kind: 'braintree' })
+	expect(resolveCheckoutProvider(['pp_paypal_paypal'])).toBeNull()
+	expect(resolveCheckoutProvider([])).toBeNull()
+})
 
 const SUPPORTED = ['pp_braintree_braintree', 'pp_stripe_stripe']
 
