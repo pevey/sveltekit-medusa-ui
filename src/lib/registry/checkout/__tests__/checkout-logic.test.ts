@@ -1,5 +1,58 @@
 import { expect, test, vi } from 'vitest'
-import { runPlaceOrder, resolveRedirect, getBraintreeClientToken, getStripeClientSecret, resolveProvider, classifyProvider, resolveCheckoutProvider } from '../checkout-logic'
+import { runPlaceOrder, resolveRedirect, getBraintreeClientToken, getStripeClientSecret, resolveProvider, classifyProvider, resolveCheckoutProvider, resolveStripeMethod, cartBillingDetails, medusaShippingToStripeRates, walletAddressToMedusa } from '../checkout-logic'
+
+test('resolveStripeMethod maps wired provider ids, else null', () => {
+	expect(resolveStripeMethod('pp_stripe_stripe')).toBe('card')
+	expect(resolveStripeMethod('pp_stripe-ideal_stripe')).toBe('ideal')
+	expect(resolveStripeMethod('pp_stripe-bancontact_stripe')).toBeNull()
+})
+
+test('cartBillingDetails builds billing_details from the cart shipping address', () => {
+	const cart = {
+		email: 'a@b.co',
+		shipping_address: { first_name: 'Ada', last_name: 'L', phone: '123', address_1: '1 St', city: 'X', postal_code: '11', province: 'CA', country_code: 'us' }
+	}
+	expect(cartBillingDetails(cart)).toEqual({
+		name: 'Ada L',
+		email: 'a@b.co',
+		phone: '123',
+		address: { line1: '1 St', line2: undefined, city: 'X', postal_code: '11', state: 'CA', country: 'us' }
+	})
+})
+
+test('cartBillingDetails tolerates a null cart', () => {
+	expect(cartBillingDetails(null)).toEqual({})
+})
+
+test('medusaShippingToStripeRates maps Medusa options to Stripe shipping rates', () => {
+	expect(medusaShippingToStripeRates([{ id: 'so_1', name: 'Standard', amount: 500 }])).toEqual([
+		{ id: 'so_1', displayName: 'Standard', amount: 500 }
+	])
+	expect(medusaShippingToStripeRates([])).toEqual([])
+})
+
+test('walletAddressToMedusa splits name + maps address (lowercased country)', () => {
+	const billing = {
+		name: 'Ada L',
+		email: 'a@b.co',
+		phone: '1',
+		address: { line1: '1 St', line2: 'Apt 2', city: 'X', state: 'CA', postal_code: '11', country: 'US' }
+	}
+	expect(walletAddressToMedusa(billing)).toMatchObject({
+		email: 'a@b.co',
+		shipping_address: {
+			first_name: 'Ada',
+			last_name: 'L',
+			phone: '1',
+			address_1: '1 St',
+			address_2: 'Apt 2',
+			city: 'X',
+			province: 'CA',
+			postal_code: '11',
+			country_code: 'us'
+		}
+	})
+})
 
 test('classifyProvider routes the whole Stripe family to stripe, braintree to braintree, else null', () => {
 	expect(classifyProvider('pp_stripe_stripe')).toBe('stripe')
