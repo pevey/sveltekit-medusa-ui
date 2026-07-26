@@ -7,11 +7,31 @@ import Harness from './root-harness.svelte'
 
 const OV = (id: string, option_id: string) => ({ id, value: id, option_id }) as never
 const product = {
-	id: 'p1', title: 'Tee',
-	options: [{ id: 'oColor', title: 'Color', values: [{ id: 'red', value: 'red', rank: 1 }, { id: 'blue', value: 'blue', rank: 2 }] }],
+	id: 'p1',
+	title: 'Tee',
+	options: [
+		{
+			id: 'oColor',
+			title: 'Color',
+			values: [
+				{ id: 'red', value: 'red', rank: 1 },
+				{ id: 'blue', value: 'blue', rank: 2 }
+			]
+		}
+	],
 	variants: [
-		{ id: 'v_r', options: [OV('red', 'oColor')], manage_inventory: false, inventory_quantity: null },
-		{ id: 'v_bm', options: [OV('blue', 'oColor')], manage_inventory: false, inventory_quantity: null }
+		{
+			id: 'v_r',
+			options: [OV('red', 'oColor')],
+			manage_inventory: false,
+			inventory_quantity: null
+		},
+		{
+			id: 'v_bm',
+			options: [OV('blue', 'oColor')],
+			manage_inventory: false,
+			inventory_quantity: null
+		}
 	]
 } as unknown as StoreProduct
 

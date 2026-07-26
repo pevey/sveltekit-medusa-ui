@@ -3,7 +3,14 @@ import { expect, test, vi } from 'vitest'
 import InputPostalCode from '../input-postal-code.svelte'
 
 function mockField(set = vi.fn()) {
-	return { as: (t: string) => ({ name: 'postal_code', type: t }), issues: () => undefined, value: () => '', set, touched: () => false, dirty: () => false } as any
+	return {
+		as: (t: string) => ({ name: 'postal_code', type: t }),
+		issues: () => undefined,
+		value: () => '',
+		set,
+		touched: () => false,
+		dirty: () => false
+	} as any
 }
 
 test('uppercases on input, writes the uppercased value back to the field, and does NOT bubble onchange on input', async () => {

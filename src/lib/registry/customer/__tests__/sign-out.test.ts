@@ -2,9 +2,14 @@ import { render } from 'vitest-browser-svelte'
 import { page } from '@vitest/browser/context'
 import { expect, test, vi, beforeEach } from 'vitest'
 
-const h = vi.hoisted(() => ({ customer: null as any, refresh: vi.fn(async () => {}), logout: vi.fn(async () => {}) }))
+const h = vi.hoisted(() => ({
+	customer: null as any,
+	refresh: vi.fn(async () => {}),
+	logout: vi.fn(async () => {})
+}))
 vi.mock('sveltekit-medusa-sdk/customer', () => ({
-	getCustomer: () => Object.assign(Promise.resolve(h.customer), { refresh: h.refresh, current: h.customer })
+	getCustomer: () =>
+		Object.assign(Promise.resolve(h.customer), { refresh: h.refresh, current: h.customer })
 }))
 vi.mock('sveltekit-medusa-sdk/auth', () => ({ logout: h.logout }))
 

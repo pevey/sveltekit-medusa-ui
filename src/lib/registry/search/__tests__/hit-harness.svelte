@@ -3,10 +3,7 @@
 	import Hit from '$lib/components/ui/search/search-hit.svelte'
 	import type { SearchHit } from '$lib/components/ui/search/ctx.svelte.js'
 
-	let {
-		hit,
-		href
-	}: { hit: SearchHit; href?: (h: SearchHit) => string } = $props()
+	let { hit, href }: { hit: SearchHit; href?: (h: SearchHit) => string } = $props()
 </script>
 
 <Root>

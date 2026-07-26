@@ -70,7 +70,7 @@
 <Dialog.Root
 	bind:open={
 		() => open,
-		(v) => {
+		v => {
 			if (!v) close()
 		}
 	}
@@ -173,7 +173,12 @@
 					Sign in
 				</button>
 			{:else}
-				<ResetForm class={classes.form} {token} onsuccess={() => (resetDone = true)} onswitch={switchMode}>
+				<ResetForm
+					class={classes.form}
+					{token}
+					onsuccess={() => (resetDone = true)}
+					onswitch={switchMode}
+				>
 					<Field name="password" class={classes.field}>
 						<Label class={classes.label}>New password</Label>
 						<Input type="password" autocomplete="new-password" class={classes.input} />

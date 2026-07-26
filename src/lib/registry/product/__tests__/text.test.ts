@@ -6,7 +6,10 @@ import type { StoreProduct } from '@medusajs/types'
 import Harness from './text-harness.svelte'
 
 const product = {
-	id: 'p', title: 'Coffee Mug', subtitle: 'Ceramic', options: [],
+	id: 'p',
+	title: 'Coffee Mug',
+	subtitle: 'Ceramic',
+	options: [],
 	variants: [{ id: 'v', options: [], manage_inventory: false }]
 } as unknown as StoreProduct
 

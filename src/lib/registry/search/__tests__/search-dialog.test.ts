@@ -4,7 +4,7 @@ import { expect, test, vi, beforeEach } from 'vitest'
 import type { SearchHit } from '$lib/components/ui/search/ctx.svelte.js'
 
 const h = vi.hoisted(() => ({ search: vi.fn(async () => ({ hits: [] }) as { hits: SearchHit[] }) }))
-vi.mock('sveltekit-medusa-sdk', async (orig) => ({
+vi.mock('sveltekit-medusa-sdk', async orig => ({
 	...(await orig<Record<string, unknown>>()),
 	search: h.search
 }))
@@ -47,7 +47,7 @@ test('Cmd+K (metaKey) opens the dialog', async () => {
 test('enabled=false disables the global shortcut', async () => {
 	render(SearchDialog, { enabled: false })
 	winKey({ key: 'k', ctrlKey: true })
-	await new Promise((r) => setTimeout(r, 50))
+	await new Promise(r => setTimeout(r, 50))
 	expect(page.getByRole('dialog').query()).toBeNull()
 })
 

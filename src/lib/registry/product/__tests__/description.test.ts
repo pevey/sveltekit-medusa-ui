@@ -6,7 +6,13 @@ import type { StoreProduct } from '@medusajs/types'
 import Harness from './description-harness.svelte'
 
 const mk = (description: string) =>
-	({ id: 'p', title: 'x', description, options: [], variants: [{ id: 'v', options: [], manage_inventory: false }] } as unknown as StoreProduct)
+	({
+		id: 'p',
+		title: 'x',
+		description,
+		options: [],
+		variants: [{ id: 'v', options: [], manage_inventory: false }]
+	}) as unknown as StoreProduct
 
 test('renders allowed HTML', async () => {
 	page.url = new URL('http://localhost/')

@@ -16,10 +16,16 @@ export const getProductQuery = async (_args: {
 
 // Cart remotes. Components import these as DI defaults but tests inject fakes, so these are
 // never invoked; they exist only so the named imports resolve in the vitest bundle.
-export const addToCart = async (_args: { variant_id: string; quantity: number }) => ({ id: 'cart', items: [] })
+export const addToCart = async (_args: { variant_id: string; quantity: number }) => ({
+	id: 'cart',
+	items: []
+})
 export const removeFromCart = async (_lineId: string) => ({ id: 'cart', items: [] })
 export const getCart = async () => null
-export const updateCartItem = async (_args: { item_id: string; quantity: number }) => ({ id: 'cart', items: [] })
+export const updateCartItem = async (_args: { item_id: string; quantity: number }) => ({
+	id: 'cart',
+	items: []
+})
 
 // Region/address remotes. `getRegions`/`updateCart` are DI defaults only (tests inject fakes),
 // so no-op stubs suffice. `regionForCountry`/`countriesFromRegions` are called directly by
@@ -28,12 +34,20 @@ export const updateCartItem = async (_args: { item_id: string; quantity: number 
 export const getRegions = () => Object.assign(Promise.resolve([]), { current: [] })
 export const updateCart = async (_args: unknown) => null
 
-type RegionLike = { id?: string; countries?: ({ iso_2?: string; display_name?: string } | null)[] | null }
-export function regionForCountry<R extends RegionLike>(regions: R[] | null | undefined, countryCode: string): R | undefined {
-	const code = countryCode.toLowerCase()
-	return regions?.find((r) => r.countries?.some((c) => c?.iso_2?.toLowerCase() === code))
+type RegionLike = {
+	id?: string
+	countries?: ({ iso_2?: string; display_name?: string } | null)[] | null
 }
-export function countriesFromRegions(regions: RegionLike[] | null | undefined): { code: string; name: string }[] {
+export function regionForCountry<R extends RegionLike>(
+	regions: R[] | null | undefined,
+	countryCode: string
+): R | undefined {
+	const code = countryCode.toLowerCase()
+	return regions?.find(r => r.countries?.some(c => c?.iso_2?.toLowerCase() === code))
+}
+export function countriesFromRegions(
+	regions: RegionLike[] | null | undefined
+): { code: string; name: string }[] {
 	const byCode = new Map<string, { code: string; name: string }>()
 	for (const region of regions ?? [])
 		for (const c of region.countries ?? []) {
@@ -53,7 +67,10 @@ export const completeCart = async () => null
 export const initiateBraintreePaymentSession = async (args: { provider_id?: string } = {}) => ({
 	payment_collection: {
 		payment_sessions: [
-			{ provider_id: args.provider_id ?? 'pp_braintree_braintree', data: { client_token: 'test_client_token' } }
+			{
+				provider_id: args.provider_id ?? 'pp_braintree_braintree',
+				data: { client_token: 'test_client_token' }
+			}
 		]
 	}
 })

@@ -6,7 +6,10 @@ function mockField(over: Record<string, unknown> = {}) {
 	return {
 		as: (type: string) => ({ name: 'email', type }),
 		issues: () => undefined,
-		value: () => '', set: () => {}, touched: () => false, dirty: () => false,
+		value: () => '',
+		set: () => {},
+		touched: () => false,
+		dirty: () => false,
 		...over
 	} as any
 }
@@ -36,9 +39,14 @@ test('type="password" renders a password input and the reveal button toggles it 
 })
 
 test('renders issue messages and marks the field invalid', async () => {
-	render(InputText, { field: mockField({ issues: () => [{ message: 'Required' }] }), label: 'Email' })
+	render(InputText, {
+		field: mockField({ issues: () => [{ message: 'Required' }] }),
+		label: 'Email'
+	})
 	await vi.waitFor(() => {
 		expect(document.querySelector('[data-slot="field-error"]')?.textContent).toContain('Required')
-		expect(document.querySelector('[data-slot="field"]')?.getAttribute('data-invalid')).toBe('true')
+		expect(document.querySelector('[data-slot="field"]')?.getAttribute('data-invalid')).toBe(
+			'true'
+		)
 	})
 })

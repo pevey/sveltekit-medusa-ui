@@ -4,7 +4,9 @@ import { installGpacShadowStyling, GPAC_SHADOW_CSS } from '../shadow-dom'
 test('GPAC_SHADOW_CSS contains the chrome gates, sizing vars, and popover theming', () => {
 	expect(GPAC_SHADOW_CSS).toContain(":host([data-gpac-search='false']) .autocomplete-icon")
 	expect(GPAC_SHADOW_CSS).toContain(":host([data-gpac-close='false']) .clear-button")
-	expect(GPAC_SHADOW_CSS).toContain(":host([data-gpac-location='false']) [part~='prediction-item-icon']")
+	expect(GPAC_SHADOW_CSS).toContain(
+		":host([data-gpac-location='false']) [part~='prediction-item-icon']"
+	)
 	expect(GPAC_SHADOW_CSS).toContain('var(--gpac-input-height, 2.25rem)')
 	expect(GPAC_SHADOW_CSS).toContain('var(--popover)')
 	expect(GPAC_SHADOW_CSS).toContain('.back-button')
@@ -29,7 +31,7 @@ test('patches gmp-place-autocomplete: forces shadow open and injects the stylesh
 	el.attachShadow({ mode: 'closed' }) // patch overrides to 'open'
 	expect(el.shadowRoot).not.toBeNull()
 	const style = el.shadowRoot!.querySelector('style')
-	expect(style?.textContent).toContain('input[part=\'input\']')
+	expect(style?.textContent).toContain("input[part='input']")
 })
 
 test('non-gmp elements pass through unpatched (closed stays closed)', () => {

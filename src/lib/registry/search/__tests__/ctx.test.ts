@@ -1,14 +1,14 @@
 import { expect, test, vi, beforeEach } from 'vitest'
 
 const h = vi.hoisted(() => ({ search: vi.fn(async () => ({ hits: [] }) as { hits: any[] }) }))
-vi.mock('sveltekit-medusa-sdk', async (orig) => ({
+vi.mock('sveltekit-medusa-sdk', async orig => ({
 	...(await orig<Record<string, unknown>>()),
 	search: h.search
 }))
 
 import { SearchState } from '$lib/components/ui/search/ctx.svelte.js'
 
-const wait = (ms: number) => new Promise((r) => setTimeout(r, ms))
+const wait = (ms: number) => new Promise(r => setTimeout(r, ms))
 
 beforeEach(() => {
 	h.search.mockReset()
@@ -39,7 +39,7 @@ test('debounce coalesces rapid input into one call', async () => {
 
 test('race guard: a stale (slower earlier) response is dropped', async () => {
 	let resolvers: Array<(v: { hits: any[] }) => void> = []
-	h.search.mockImplementation(() => new Promise((res) => resolvers.push(res)))
+	h.search.mockImplementation(() => new Promise(res => resolvers.push(res)))
 	const s = new SearchState({ minLength: 2, debounce: 0 })
 
 	s.query = 'aa'
@@ -50,12 +50,36 @@ test('race guard: a stale (slower earlier) response is dropped', async () => {
 	await wait(5)
 
 	// Two in-flight requests. Resolve the SECOND first, then the stale FIRST.
-	resolvers[1]({ hits: [{ type: 'product', id: '2', slug: 'b', group_slug: null, title: 'B', snippet: null, score: 1 }] })
+	resolvers[1]({
+		hits: [
+			{
+				type: 'product',
+				id: '2',
+				slug: 'b',
+				group_slug: null,
+				title: 'B',
+				snippet: null,
+				score: 1
+			}
+		]
+	})
 	await wait(5)
-	resolvers[0]({ hits: [{ type: 'product', id: '1', slug: 'a', group_slug: null, title: 'A', snippet: null, score: 1 }] })
+	resolvers[0]({
+		hits: [
+			{
+				type: 'product',
+				id: '1',
+				slug: 'a',
+				group_slug: null,
+				title: 'A',
+				snippet: null,
+				score: 1
+			}
+		]
+	})
 	await wait(5)
 
-	expect(s.hits.map((hit) => hit.id)).toEqual(['2'])
+	expect(s.hits.map(hit => hit.id)).toEqual(['2'])
 	expect(s.loading).toBe(false)
 })
 

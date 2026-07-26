@@ -6,7 +6,8 @@ import { expect, test, vi, beforeEach } from 'vitest'
 // (resolves to the customer) AND carries `.refresh()`/`.current`. Mock it as a Promise-with-refresh.
 const h = vi.hoisted(() => ({ customer: null as any, refresh: vi.fn(async () => {}) }))
 vi.mock('sveltekit-medusa-sdk/customer', () => ({
-	getCustomer: () => Object.assign(Promise.resolve(h.customer), { refresh: h.refresh, current: h.customer })
+	getCustomer: () =>
+		Object.assign(Promise.resolve(h.customer), { refresh: h.refresh, current: h.customer })
 }))
 
 import Harness from './signed-in-out-harness.svelte'
@@ -20,7 +21,10 @@ test('signed-in customer: SignedIn renders children, SignedOut does not', async 
 	h.customer = { id: 'cus_1' }
 	render(Harness)
 	await expect.element(page.getByTestId('signed-in')).toBeInTheDocument()
-	await expect.element(page.getByTestId('signed-out')).not.toBeInTheDocument().catch(() => {})
+	await expect
+		.element(page.getByTestId('signed-out'))
+		.not.toBeInTheDocument()
+		.catch(() => {})
 	expect(document.querySelector('[data-testid=signed-out]')).toBeNull()
 })
 

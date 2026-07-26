@@ -6,7 +6,23 @@ import type { StoreProduct } from '@medusajs/types'
 import Harness from './price-harness.svelte'
 
 const mk = (calc: number, orig: number) =>
-	({ id: 'p', title: 'x', options: [], variants: [{ id: 'v', options: [], manage_inventory: false, calculated_price: { calculated_amount: calc, original_amount: orig, currency_code: 'usd' } }] } as unknown as StoreProduct)
+	({
+		id: 'p',
+		title: 'x',
+		options: [],
+		variants: [
+			{
+				id: 'v',
+				options: [],
+				manage_inventory: false,
+				calculated_price: {
+					calculated_amount: calc,
+					original_amount: orig,
+					currency_code: 'usd'
+				}
+			}
+		]
+	}) as unknown as StoreProduct
 
 test('shows the calculated price', async () => {
 	page.url = new URL('http://localhost/')
@@ -24,7 +40,9 @@ test('shows a struck-through original when on sale', async () => {
 test('renders nothing when the variant has no price (e.g. no pricing region resolved)', async () => {
 	page.url = new URL('http://localhost/')
 	const noPrice = {
-		id: 'p', title: 'x', options: [],
+		id: 'p',
+		title: 'x',
+		options: [],
 		variants: [{ id: 'v', options: [], manage_inventory: false }]
 	} as unknown as StoreProduct
 	const { container } = await render(Harness, { product: noPrice })

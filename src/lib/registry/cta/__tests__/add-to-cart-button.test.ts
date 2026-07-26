@@ -7,7 +7,7 @@ import { expect, test, vi, beforeEach } from 'vitest'
 const h = vi.hoisted(() => ({
 	addToCart: vi.fn(async () => ({ id: 'cart', items: [] }) as any)
 }))
-vi.mock('sveltekit-medusa-sdk', async (orig) => ({
+vi.mock('sveltekit-medusa-sdk', async orig => ({
 	...(await orig<Record<string, unknown>>()),
 	addToCart: h.addToCart
 }))

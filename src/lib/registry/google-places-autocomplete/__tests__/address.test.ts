@@ -39,7 +39,12 @@ describe('componentsToAddress', () => {
 
 	it('returns empty strings for missing components', () => {
 		expect(componentsToAddress([])).toEqual({
-			address_1: '', address_2: '', city: '', province: '', postal_code: '', country_code: ''
+			address_1: '',
+			address_2: '',
+			city: '',
+			province: '',
+			postal_code: '',
+			country_code: ''
 		})
 	})
 })

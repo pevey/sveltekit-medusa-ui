@@ -3,7 +3,7 @@ import { page } from '@vitest/browser/context'
 import { expect, test, vi, beforeEach } from 'vitest'
 
 const h = vi.hoisted(() => ({ search: vi.fn(async () => ({ hits: [] }) as { hits: any[] }) }))
-vi.mock('sveltekit-medusa-sdk', async (orig) => ({
+vi.mock('sveltekit-medusa-sdk', async orig => ({
 	...(await orig<Record<string, unknown>>()),
 	search: h.search
 }))
@@ -25,6 +25,6 @@ test('typing >= minLength triggers the search fn (debounced)', async () => {
 test('typing below minLength does not trigger the search fn', async () => {
 	render(Harness, {})
 	await page.getByRole('combobox', { name: 'Search' }).fill('a')
-	await new Promise((r) => setTimeout(r, 40))
+	await new Promise(r => setTimeout(r, 40))
 	expect(h.search).not.toHaveBeenCalled()
 })

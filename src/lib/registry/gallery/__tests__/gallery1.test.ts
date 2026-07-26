@@ -54,7 +54,11 @@ test('bottom thumbnails render below the main image', async () => {
 	await page.viewport(...DESKTOP)
 	render(Gallery1, { images: urls, alt: 'P' })
 	await expect.element(page.getByRole('button', { name: 'View image 1' })).toBeInTheDocument()
-	const mainTop = page.getByRole('img', { name: 'P' }).first().element().getBoundingClientRect().top
+	const mainTop = page
+		.getByRole('img', { name: 'P' })
+		.first()
+		.element()
+		.getBoundingClientRect().top
 	const thumbTop = page
 		.getByRole('button', { name: 'View image 1' })
 		.element()

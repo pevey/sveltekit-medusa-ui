@@ -37,9 +37,7 @@ test('unknown type gets a Title-Cased heading', async () => {
 
 test('custom hit snippet replaces the default Hit', async () => {
 	render(Harness, { hits: [mk('product', '1', 'Coffee')], useSnippet: true })
-	await expect
-		.element(page.getByTestId('custom-hit'))
-		.toHaveAttribute('href', '/custom/product-1')
+	await expect.element(page.getByTestId('custom-hit')).toHaveAttribute('href', '/custom/product-1')
 })
 
 test('static layout has no absolute positioning', async () => {

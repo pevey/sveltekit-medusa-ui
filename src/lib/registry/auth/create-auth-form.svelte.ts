@@ -41,7 +41,7 @@ export function createAuthForm<Input extends RemoteFormInput | void>(
 		get messages() {
 			return options().messages
 		},
-		switchMode: (m) => options().onswitch?.(m)
+		switchMode: m => options().onswitch?.(m)
 	})
 
 	const enhanced = options().form.enhance(async ({ submit }) => {

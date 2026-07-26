@@ -9,7 +9,11 @@
 	}: { type?: 'single' | 'multiple'; useIcon?: boolean; iconRotate?: number } = $props()
 
 	const items = [
-		{ value: 'q1', title: 'Question One', description: '<p>Alpha <strong>Bravo</strong> answer.</p>' },
+		{
+			value: 'q1',
+			title: 'Question One',
+			description: '<p>Alpha <strong>Bravo</strong> answer.</p>'
+		},
 		{ value: 'q2', title: 'Question Two', description: 'Plain two answer.' }
 	]
 </script>

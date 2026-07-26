@@ -6,9 +6,18 @@ import type { StoreProduct } from '@medusajs/types'
 import Harness from './quantity-select-harness.svelte'
 
 const product = {
-	id: 'p1', title: 'Tee',
+	id: 'p1',
+	title: 'Tee',
 	options: [],
-	variants: [{ id: 'v1', options: [], manage_inventory: true, allow_backorder: false, inventory_quantity: 3 }]
+	variants: [
+		{
+			id: 'v1',
+			options: [],
+			manage_inventory: true,
+			allow_backorder: false,
+			inventory_quantity: 3
+		}
+	]
 } as unknown as StoreProduct
 
 test('renders options 1..effectiveMax (min(stock, maxQuantity))', async () => {
@@ -31,7 +40,18 @@ test('changing the select navigates to ?quantity=', async () => {
 })
 
 test('out of stock disables the select', async () => {
-	const oos = { ...product, variants: [{ id: 'v1', options: [], manage_inventory: true, allow_backorder: false, inventory_quantity: 0 }] } as unknown as StoreProduct
+	const oos = {
+		...product,
+		variants: [
+			{
+				id: 'v1',
+				options: [],
+				manage_inventory: true,
+				allow_backorder: false,
+				inventory_quantity: 0
+			}
+		]
+	} as unknown as StoreProduct
 	page.url = new URL('http://localhost/product/tee')
 	render(Harness, { product: oos, navigate: () => {} })
 	await expect.element(vpage.getByRole('combobox')).toBeDisabled()

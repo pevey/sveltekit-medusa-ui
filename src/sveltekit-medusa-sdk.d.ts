@@ -17,7 +17,10 @@ declare module 'sveltekit-medusa-sdk' {
 	export const addToCart: (args: { variant_id: string; quantity: number }) => Promise<StoreCart>
 	export const removeFromCart: (lineId: string) => Promise<StoreCart | null>
 	export const getCart: () => Promise<StoreCart | null>
-	export const updateCartItem: (args: { item_id: string; quantity: number }) => Promise<StoreCart | null>
+	export const updateCartItem: (args: {
+		item_id: string
+		quantity: number
+	}) => Promise<StoreCart | null>
 
 	// Region/address remotes (see sveltekit-sdk/src/lib/helpers/regions.ts).
 	type RegionsResource = Promise<StoreRegion[]> & { current: StoreRegion[] | undefined }
@@ -29,7 +32,10 @@ declare module 'sveltekit-medusa-sdk' {
 		billing_address?: Record<string, unknown>
 		metadata?: Record<string, unknown>
 	}) => Promise<StoreCart | null>
-	export const regionForCountry: (regions: StoreRegion[] | null | undefined, countryCode: string) => StoreRegion | undefined
+	export const regionForCountry: (
+		regions: StoreRegion[] | null | undefined,
+		countryCode: string
+	) => StoreRegion | undefined
 	export const countriesFromRegions: (regions: unknown) => { code: string; name: string }[]
 
 	// Checkout remotes (see sveltekit-sdk/src/lib/checkout.remote.ts).
@@ -38,8 +44,14 @@ declare module 'sveltekit-medusa-sdk' {
 	export const addPromotion: (code: string) => Promise<StoreCart | null>
 	export const removePromotion: (code: string) => Promise<StoreCart | null>
 	export const completeCart: () => Promise<StoreOrder | StoreCart | null>
-	export const initiateBraintreePaymentSession: (args: { provider_id: string; data?: { payment_method_nonce?: string; deviceData?: string } }) => Promise<any>
-	export const formatBraintreeAddress: (type: 'billing' | 'shipping', cart: StoreCart | null) => Record<string, string>
+	export const initiateBraintreePaymentSession: (args: {
+		provider_id: string
+		data?: { payment_method_nonce?: string; deviceData?: string }
+	}) => Promise<any>
+	export const formatBraintreeAddress: (
+		type: 'billing' | 'shipping',
+		cart: StoreCart | null
+	) => Record<string, string>
 	export const braintreeCheckoutForm: any
 	// Generic payment remotes (see sveltekit-sdk/src/lib/payment.remote.ts).
 	export const initiatePaymentSession: (args: { provider_id: string }) => Promise<any>

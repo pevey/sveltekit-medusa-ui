@@ -16,7 +16,11 @@ const mk = (type: string, id: string, title: string): SearchHit => ({
 
 // Two products (rendered first, headerless) + one category (grouped) → visual/nav
 // order is [Coffee, Beans, Roasts].
-const hits = [mk('product', '1', 'Coffee'), mk('product', '2', 'Beans'), mk('category', '3', 'Roasts')]
+const hits = [
+	mk('product', '1', 'Coffee'),
+	mk('product', '2', 'Beans'),
+	mk('category', '3', 'Roasts')
+]
 
 function keydown(key: string) {
 	page
@@ -47,10 +51,9 @@ test('ArrowDown highlights the first option and sets aria-activedescendant', asy
 	keydown('ArrowDown')
 	const first = page.getByRole('option', { name: /Coffee/ })
 	await expect.element(first).toHaveAttribute('aria-selected', 'true')
-	await expect.element(page.getByRole('combobox')).toHaveAttribute(
-		'aria-activedescendant',
-		first.element().id
-	)
+	await expect
+		.element(page.getByRole('combobox'))
+		.toHaveAttribute('aria-activedescendant', first.element().id)
 })
 
 test('ArrowDown walks products then groups; ArrowUp steps back', async () => {
@@ -58,24 +61,21 @@ test('ArrowDown walks products then groups; ArrowUp steps back', async () => {
 	keydown('ArrowDown') // Coffee
 	keydown('ArrowDown') // Beans
 	keydown('ArrowDown') // Roasts (category — after both products)
-	await expect.element(page.getByRole('option', { name: /Roasts/ })).toHaveAttribute(
-		'aria-selected',
-		'true'
-	)
+	await expect
+		.element(page.getByRole('option', { name: /Roasts/ }))
+		.toHaveAttribute('aria-selected', 'true')
 	keydown('ArrowUp') // back to Beans
-	await expect.element(page.getByRole('option', { name: /Beans/ })).toHaveAttribute(
-		'aria-selected',
-		'true'
-	)
+	await expect
+		.element(page.getByRole('option', { name: /Beans/ }))
+		.toHaveAttribute('aria-selected', 'true')
 })
 
 test('ArrowUp from no selection wraps to the last option', async () => {
 	render(Harness, { hits })
 	keydown('ArrowUp')
-	await expect.element(page.getByRole('option', { name: /Roasts/ })).toHaveAttribute(
-		'aria-selected',
-		'true'
-	)
+	await expect
+		.element(page.getByRole('option', { name: /Roasts/ }))
+		.toHaveAttribute('aria-selected', 'true')
 })
 
 test('Escape closes the dropdown', async () => {

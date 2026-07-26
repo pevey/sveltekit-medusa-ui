@@ -1,7 +1,13 @@
 <script lang="ts">
 	import AddToCartToggle from '$lib/components/ui/cta/add-to-cart-toggle.svelte'
 	import type { CartCondition } from '$lib/components/ui/cta/types.js'
-	let { variantId, quantity, condition, onadd, onremove }: {
+	let {
+		variantId,
+		quantity,
+		condition,
+		onadd,
+		onremove
+	}: {
 		variantId?: string
 		quantity?: number
 		condition?: CartCondition

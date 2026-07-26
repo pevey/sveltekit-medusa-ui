@@ -28,7 +28,9 @@ const h = vi.hoisted(() => {
 })
 
 vi.mock('sveltekit-medusa-sdk/auth', () => ({ register: h.register }))
-vi.mock('sveltekit-medusa-sdk/customer', () => ({ getCustomer: () => ({ current: null, refresh: h.refresh }) }))
+vi.mock('sveltekit-medusa-sdk/customer', () => ({
+	getCustomer: () => ({ current: null, refresh: h.refresh })
+}))
 
 import Harness from './register-harness.svelte'
 
