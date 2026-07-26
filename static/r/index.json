@@ -25,35 +25,13 @@
 		"name": "gallery",
 		"title": "Gallery",
 		"type": "registry:ui",
-		"description": "Compound product image gallery/lightbox primitives (Root, Carousel, Image, Thumbnails, ThumbnailImage, Dots) on embla, sharing a context. Compose them directly or use the gallery1/gallery2 presets.",
+		"description": "Compound product image gallery/lightbox on embla: Root (optional thumbnails/thumbnailBreakpoint/zoom props), Main, Carousel, Image, Thumbnails, ThumbnailImage, Dots — sharing a context. Root publishes layout intent to the parts; set `zoom` to enable the click-to-zoom overlay. Accepts image URLs or Medusa image objects.",
 		"dependencies": [],
 		"registryDependencies": [
-			"carousel"
-		],
-		"relativeUrl": "gallery.json"
-	},
-	{
-		"name": "gallery1",
-		"title": "Gallery 1",
-		"type": "registry:ui",
-		"description": "Batteries-included product gallery preset: embla carousel + thumbnails (left/right/bottom/none) + mobile peek & dots. Accepts image URLs or Medusa image objects.",
-		"dependencies": [],
-		"registryDependencies": [
-			"gallery"
-		],
-		"relativeUrl": "gallery1.json"
-	},
-	{
-		"name": "gallery2",
-		"title": "Gallery 2",
-		"type": "registry:ui",
-		"description": "Gallery 1 preset plus click-to-zoom overlay.",
-		"dependencies": [],
-		"registryDependencies": [
-			"gallery",
+			"carousel",
 			"image-zoom"
 		],
-		"relativeUrl": "gallery2.json"
+		"relativeUrl": "gallery.json"
 	},
 	{
 		"name": "search",

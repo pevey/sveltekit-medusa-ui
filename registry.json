@@ -57,11 +57,12 @@
 			"name": "gallery",
 			"type": "registry:ui",
 			"title": "Gallery",
-			"description": "Compound product image gallery/lightbox primitives (Root, Carousel, Image, Thumbnails, ThumbnailImage, Dots) on embla, sharing a context. Compose them directly or use the gallery1/gallery2 presets.",
+			"description": "Compound product image gallery/lightbox on embla: Root (optional thumbnails/thumbnailBreakpoint/zoom props), Main, Carousel, Image, Thumbnails, ThumbnailImage, Dots — sharing a context. Root publishes layout intent to the parts; set `zoom` to enable the click-to-zoom overlay. Accepts image URLs or Medusa image objects.",
 			"dependencies": [],
-			"registryDependencies": ["carousel"],
+			"registryDependencies": ["carousel", "image-zoom"],
 			"files": [
 				{ "path": "src/lib/registry/gallery/gallery.svelte", "type": "registry:ui", "target": "gallery/gallery.svelte" },
+				{ "path": "src/lib/registry/gallery/gallery-main.svelte", "type": "registry:ui", "target": "gallery/gallery-main.svelte" },
 				{ "path": "src/lib/registry/gallery/gallery-carousel.svelte", "type": "registry:ui", "target": "gallery/gallery-carousel.svelte" },
 				{ "path": "src/lib/registry/gallery/gallery-image.svelte", "type": "registry:ui", "target": "gallery/gallery-image.svelte" },
 				{ "path": "src/lib/registry/gallery/gallery-thumbnails.svelte", "type": "registry:ui", "target": "gallery/gallery-thumbnails.svelte" },
@@ -69,36 +70,6 @@
 				{ "path": "src/lib/registry/gallery/gallery-dots.svelte", "type": "registry:ui", "target": "gallery/gallery-dots.svelte" },
 				{ "path": "src/lib/registry/gallery/ctx.svelte.ts", "type": "registry:file", "target": "gallery/ctx.svelte.ts" },
 				{ "path": "src/lib/registry/gallery/index.ts", "type": "registry:file", "target": "gallery/index.ts" }
-			]
-		},
-		{
-			"name": "gallery1",
-			"type": "registry:ui",
-			"title": "Gallery 1",
-			"description": "Batteries-included product gallery preset: embla carousel + thumbnails (left/right/bottom/none) + mobile peek & dots. Accepts image URLs or Medusa image objects.",
-			"dependencies": [],
-			"registryDependencies": ["gallery"],
-			"files": [
-				{
-					"path": "src/lib/registry/gallery/gallery1.svelte",
-					"type": "registry:ui",
-					"target": "gallery/gallery1.svelte"
-				}
-			]
-		},
-		{
-			"name": "gallery2",
-			"type": "registry:ui",
-			"title": "Gallery 2",
-			"description": "Gallery 1 preset plus click-to-zoom overlay.",
-			"dependencies": [],
-			"registryDependencies": ["gallery", "image-zoom"],
-			"files": [
-				{
-					"path": "src/lib/registry/gallery/gallery2.svelte",
-					"type": "registry:ui",
-					"target": "gallery/gallery2.svelte"
-				}
 			]
 		},
 		{
