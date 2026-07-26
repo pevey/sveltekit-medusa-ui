@@ -1,5 +1,5 @@
 import { render } from 'vitest-browser-svelte'
-import { page as vpage } from '@vitest/browser/context'
+import { page as vpage } from 'vitest/browser'
 import { expect, test, vi } from 'vitest'
 
 // The dialog statically imports all four Auth.*Form roots (one per mode), so all four SDK auth

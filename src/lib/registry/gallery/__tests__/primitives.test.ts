@@ -1,5 +1,5 @@
 import { render } from 'vitest-browser-svelte'
-import { page } from '@vitest/browser/context'
+import { page } from 'vitest/browser'
 import { expect, test } from 'vitest'
 import Harness from './main-harness.svelte'
 

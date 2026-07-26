@@ -1,5 +1,5 @@
 import { render } from 'vitest-browser-svelte'
-import { page } from '@vitest/browser/context'
+import { page } from 'vitest/browser'
 import { expect, test, vi, beforeEach } from 'vitest'
 
 // The real `getCustomer` is a remote query: calling it returns a value that is BOTH awaitable

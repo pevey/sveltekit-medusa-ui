@@ -1,5 +1,5 @@
 import { render } from 'vitest-browser-svelte'
-import { page } from '@vitest/browser/context'
+import { page } from 'vitest/browser'
 import { expect, test, vi, beforeEach } from 'vitest'
 
 const h = vi.hoisted(() => ({

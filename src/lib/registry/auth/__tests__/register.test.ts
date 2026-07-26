@@ -1,5 +1,5 @@
 import { render } from 'vitest-browser-svelte'
-import { page } from '@vitest/browser/context'
+import { page } from 'vitest/browser'
 import { expect, test, vi, beforeEach } from 'vitest'
 
 // Fake the SDK remotes the component imports directly. All test scaffolding lives here —

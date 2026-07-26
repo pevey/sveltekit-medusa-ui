@@ -1,5 +1,5 @@
 import { render } from 'vitest-browser-svelte'
-import { page as vpage } from '@vitest/browser/context'
+import { page as vpage } from 'vitest/browser'
 import { expect, test, vi, beforeEach } from 'vitest'
 
 const cart = { id: 'c', items: [{ id: 'li1', quantity: 2 }, { id: 'li2', quantity: 3 }], item_subtotal: 50 } as any

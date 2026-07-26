@@ -1,5 +1,5 @@
 import { render } from 'vitest-browser-svelte'
-import { page } from '@vitest/browser/context'
+import { page } from 'vitest/browser'
 import { expect, test, beforeEach } from 'vitest'
 import { setMode } from 'mode-watcher'
 import Harness from './mode-harness.svelte'
