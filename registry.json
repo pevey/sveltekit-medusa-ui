@@ -223,11 +223,11 @@
 				{ "path": "src/lib/registry/cart/cart-badge.svelte", "type": "registry:ui", "target": "cart/cart-badge.svelte" },
 				{ "path": "src/lib/registry/cart/cart-sheet.svelte", "type": "registry:ui", "target": "cart/cart-sheet.svelte" },
 				{ "path": "src/lib/registry/cart/cart-items.svelte", "type": "registry:ui", "target": "cart/cart-items.svelte" },
-				{ "path": "src/lib/registry/cart/cart-line-item.svelte", "type": "registry:ui", "target": "cart/cart-line-item.svelte" },
+				{ "path": "src/lib/registry/cart/cart-item.svelte", "type": "registry:ui", "target": "cart/cart-item.svelte" },
 				{ "path": "src/lib/registry/cart/cart-image.svelte", "type": "registry:ui", "target": "cart/cart-image.svelte" },
 				{ "path": "src/lib/registry/cart/cart-title.svelte", "type": "registry:ui", "target": "cart/cart-title.svelte" },
 				{ "path": "src/lib/registry/cart/cart-price.svelte", "type": "registry:ui", "target": "cart/cart-price.svelte" },
-				{ "path": "src/lib/registry/cart/cart-line-item-subtotal.svelte", "type": "registry:ui", "target": "cart/cart-line-item-subtotal.svelte" },
+				{ "path": "src/lib/registry/cart/cart-item-subtotal.svelte", "type": "registry:ui", "target": "cart/cart-item-subtotal.svelte" },
 				{ "path": "src/lib/registry/cart/cart-quantity.svelte", "type": "registry:ui", "target": "cart/cart-quantity.svelte" },
 				{ "path": "src/lib/registry/cart/cart-remove.svelte", "type": "registry:ui", "target": "cart/cart-remove.svelte" },
 				{ "path": "src/lib/registry/cart/cart-item-subtotal.svelte", "type": "registry:ui", "target": "cart/cart-item-subtotal.svelte" },
@@ -311,6 +311,51 @@
 				{ "path": "src/lib/registry/checkout/format-price.ts", "type": "registry:file", "target": "checkout/format-price.ts" },
 				{ "path": "src/lib/registry/checkout/types.ts", "type": "registry:file", "target": "checkout/types.ts" },
 				{ "path": "src/lib/registry/checkout/index.ts", "type": "registry:file", "target": "checkout/index.ts" }
+			]
+		},
+		{
+			"name": "auth",
+			"type": "registry:ui",
+			"title": "Auth",
+			"description": "Compound login/register/forgot/reset forms (a createAuthForm factory + Field/Label/Input/Error/Submit parts) plus an Auth.Dialog preset (URL-driven ?auth= modal with a per-part classes map); wired to the sveltekit-medusa-sdk auth remotes; SSR-safe, no $effect.",
+			"dependencies": ["sveltekit-medusa-sdk", "@lucide/svelte"],
+			"registryDependencies": ["dialog", "button", "field", "label"],
+			"files": [
+				{ "path": "src/lib/registry/auth/auth-dialog.svelte", "type": "registry:ui", "target": "auth/auth-dialog.svelte" },
+				{ "path": "src/lib/registry/auth/error.svelte", "type": "registry:ui", "target": "auth/error.svelte" },
+				{ "path": "src/lib/registry/auth/field.svelte", "type": "registry:ui", "target": "auth/field.svelte" },
+				{ "path": "src/lib/registry/auth/forgot-form.svelte", "type": "registry:ui", "target": "auth/forgot-form.svelte" },
+				{ "path": "src/lib/registry/auth/input.svelte", "type": "registry:ui", "target": "auth/input.svelte" },
+				{ "path": "src/lib/registry/auth/label.svelte", "type": "registry:ui", "target": "auth/label.svelte" },
+				{ "path": "src/lib/registry/auth/login-form.svelte", "type": "registry:ui", "target": "auth/login-form.svelte" },
+				{ "path": "src/lib/registry/auth/register-form.svelte", "type": "registry:ui", "target": "auth/register-form.svelte" },
+				{ "path": "src/lib/registry/auth/reset-form.svelte", "type": "registry:ui", "target": "auth/reset-form.svelte" },
+				{ "path": "src/lib/registry/auth/submit.svelte", "type": "registry:ui", "target": "auth/submit.svelte" },
+				{ "path": "src/lib/registry/auth/auth-input-class.ts", "type": "registry:file", "target": "auth/auth-input-class.ts" },
+				{ "path": "src/lib/registry/auth/auth-messages.ts", "type": "registry:file", "target": "auth/auth-messages.ts" },
+				{ "path": "src/lib/registry/auth/create-auth-form.svelte.ts", "type": "registry:file", "target": "auth/create-auth-form.svelte.ts" },
+				{ "path": "src/lib/registry/auth/ctx.svelte.ts", "type": "registry:file", "target": "auth/ctx.svelte.ts" },
+				{ "path": "src/lib/registry/auth/types.ts", "type": "registry:file", "target": "auth/types.ts" },
+				{ "path": "src/lib/registry/auth/index.ts", "type": "registry:file", "target": "auth/index.ts" }
+			]
+		},
+		{
+			"name": "customer",
+			"type": "registry:ui",
+			"title": "Customer",
+			"description": "Storefront shopper identity: SignedIn/SignedOut auth-state gates, a Menu compound over shadcn DropdownMenu, SignInButton (deep-links ?auth=login), and SignOut; reads the sveltekit-medusa-sdk customer remote directly.",
+			"dependencies": ["sveltekit-medusa-sdk", "@lucide/svelte"],
+			"registryDependencies": ["dropdown-menu", "button"],
+			"files": [
+				{ "path": "src/lib/registry/customer/menu.svelte", "type": "registry:ui", "target": "customer/menu.svelte" },
+				{ "path": "src/lib/registry/customer/menu-content.svelte", "type": "registry:ui", "target": "customer/menu-content.svelte" },
+				{ "path": "src/lib/registry/customer/menu-item.svelte", "type": "registry:ui", "target": "customer/menu-item.svelte" },
+				{ "path": "src/lib/registry/customer/menu-trigger.svelte", "type": "registry:ui", "target": "customer/menu-trigger.svelte" },
+				{ "path": "src/lib/registry/customer/signed-in.svelte", "type": "registry:ui", "target": "customer/signed-in.svelte" },
+				{ "path": "src/lib/registry/customer/signed-out.svelte", "type": "registry:ui", "target": "customer/signed-out.svelte" },
+				{ "path": "src/lib/registry/customer/sign-in-button.svelte", "type": "registry:ui", "target": "customer/sign-in-button.svelte" },
+				{ "path": "src/lib/registry/customer/sign-out.svelte", "type": "registry:ui", "target": "customer/sign-out.svelte" },
+				{ "path": "src/lib/registry/customer/index.ts", "type": "registry:file", "target": "customer/index.ts" }
 			]
 		},
 		{

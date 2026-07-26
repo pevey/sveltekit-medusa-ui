@@ -5,10 +5,10 @@
 	import Title from '$lib/components/ui/checkout/checkout-title.svelte'
 	import Price from '$lib/components/ui/checkout/checkout-price.svelte'
 	import ItemSubtotal from '$lib/components/ui/checkout/checkout-item-subtotal.svelte'
-	let { form, getCart } = $props()
+	let { form } = $props()
 </script>
 
-<Root {form} {getCart}>
+<Root {form}>
 	<Items>
 		{#snippet children()}<Title /><Price /><ItemSubtotal />{/snippet}
 	</Items>

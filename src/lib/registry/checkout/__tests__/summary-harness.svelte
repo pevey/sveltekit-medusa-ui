@@ -6,11 +6,9 @@
 	import Shipping from '$lib/components/ui/checkout/checkout-summary-shipping.svelte'
 	import Total from '$lib/components/ui/checkout/checkout-summary-total.svelte'
 	import GiftCard from '$lib/components/ui/checkout/checkout-summary-gift-card.svelte'
-
-	let { getCart }: { getCart?: any } = $props()
 </script>
 
-<Root form={{ fields: {} } as any} {getCart}>
+<Root form={{ fields: {} } as any}>
 	<Summary>
 		<Subtotal />
 		<Tax />

@@ -8,7 +8,7 @@
 	let { hits = [] }: { hits?: SearchHit[] } = $props()
 </script>
 
-<Root search={async () => ({ hits })}>
+<Root>
 	{#snippet children()}
 		<Seed {hits} />
 		<Input />

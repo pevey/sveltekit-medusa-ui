@@ -3,13 +3,9 @@
 	import { getAddressContext } from '$lib/components/ui/address/ctx.svelte.js'
 	import type { RemoteForm } from '@sveltejs/kit'
 	import type { StoreCart } from '@medusajs/types'
-	import type { GetCartFn, GetRegionsFn, UpdateCartFn } from '$lib/components/ui/address/types.js'
 	let {
 		form,
 		googlePlacesApiKey,
-		getCart,
-		getRegions,
-		updateCart,
 		restrictToCurrentRegion,
 		onregionchange,
 		onaddresschange,
@@ -17,9 +13,6 @@
 	}: {
 		form: RemoteForm<any, any>
 		googlePlacesApiKey?: string
-		getCart?: GetCartFn
-		getRegions?: GetRegionsFn
-		updateCart?: UpdateCartFn
 		restrictToCurrentRegion?: boolean
 		onregionchange?: (regionId: string, country: string) => void
 		onaddresschange?: (cart: StoreCart) => void
@@ -27,7 +20,7 @@
 	} = $props()
 </script>
 
-<Root {form} {googlePlacesApiKey} {getCart} {getRegions} {updateCart} {restrictToCurrentRegion} {onregionchange} {onaddresschange} {onerror}>
+<Root {form} {googlePlacesApiKey} {restrictToCurrentRegion} {onregionchange} {onaddresschange} {onerror}>
 	{@const ctx = getAddressContext()}
 	<span data-testid="countries">{ctx.countries.map((c) => c.code).join(',')}</span>
 	<span data-testid="isAutocomplete">{ctx.isAutocomplete}</span>

@@ -1,20 +1,34 @@
 import { render } from 'vitest-browser-svelte'
 import { page as vpage } from '@vitest/browser/context'
-import { expect, test, vi } from 'vitest'
+import { expect, test, vi, beforeEach } from 'vitest'
+
+// The component imports addToCart from the SDK barrel. Mock just that in the test file
+// (spreading the rest of the module) — the component stays injection-free.
+const h = vi.hoisted(() => ({
+	addToCart: vi.fn(async () => ({ id: 'cart', items: [] }) as any)
+}))
+vi.mock('sveltekit-medusa-sdk', async (orig) => ({
+	...(await orig<Record<string, unknown>>()),
+	addToCart: h.addToCart
+}))
+
 import Harness from './add-to-cart-button-harness.svelte'
 
+beforeEach(() => {
+	h.addToCart.mockReset()
+	h.addToCart.mockResolvedValue({ id: 'cart', items: [] } as any)
+})
+
 test('adds the resolved variant + quantity on click', async () => {
-	const addToCart = vi.fn(async () => ({ id: 'cart', items: [] }) as any)
-	render(Harness, { variantId: 'v1', quantity: 2, addToCart })
+	render(Harness, { variantId: 'v1', quantity: 2 })
 	await vpage.getByRole('button').click()
-	expect(addToCart).toHaveBeenCalledWith({ variant_id: 'v1', quantity: 2 })
+	expect(h.addToCart).toHaveBeenCalledWith({ variant_id: 'v1', quantity: 2 })
 })
 
 test('defaults quantity to 1 when not provided', async () => {
-	const addToCart = vi.fn(async () => ({ id: 'cart', items: [] }) as any)
-	render(Harness, { variantId: 'v1', addToCart })
+	render(Harness, { variantId: 'v1' })
 	await vpage.getByRole('button').click()
-	expect(addToCart).toHaveBeenCalledWith({ variant_id: 'v1', quantity: 1 })
+	expect(h.addToCart).toHaveBeenCalledWith({ variant_id: 'v1', quantity: 1 })
 })
 
 test('is disabled with no variant id', async () => {
@@ -23,23 +37,21 @@ test('is disabled with no variant id', async () => {
 })
 
 test('shows an accessible success message after add', async () => {
-	const addToCart = vi.fn(async () => ({ id: 'cart', items: [] }) as any)
-	render(Harness, { variantId: 'v1', addToCart })
+	render(Harness, { variantId: 'v1' })
 	await vpage.getByRole('button').click()
 	await expect.element(vpage.getByRole('status')).toHaveTextContent('Added to cart')
 })
 
 test('shows an alert + fires onerror on failure', async () => {
-	const addToCart = vi.fn(async () => { throw new Error('Out of stock') })
-	render(Harness, { variantId: 'v1', addToCart })
+	h.addToCart.mockRejectedValueOnce(new Error('Out of stock'))
+	render(Harness, { variantId: 'v1' })
 	await vpage.getByRole('button').click()
 	await expect.element(vpage.getByRole('alert')).toHaveTextContent('Out of stock')
 })
 
 test('redirectTo navigates on success (and suppresses the message)', async () => {
-	const addToCart = vi.fn(async () => ({ id: 'cart', items: [] }) as any)
 	const navigate = vi.fn()
-	render(Harness, { variantId: 'v1', addToCart, navigate, redirectTo: '/cart' })
+	render(Harness, { variantId: 'v1', navigate, redirectTo: '/cart' })
 	await vpage.getByRole('button').click()
 	expect(navigate).toHaveBeenCalledWith('/cart')
 })

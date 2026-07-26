@@ -1,5 +1,18 @@
 import { render } from 'vitest-browser-svelte'
-import { expect, test, vi } from 'vitest'
+import { expect, test, vi, beforeEach } from 'vitest'
+
+const h = vi.hoisted(() => ({
+	getCart: vi.fn(() => ({ current: null }) as any),
+	getRegions: vi.fn(() => Object.assign(Promise.resolve([]), { current: [] }) as any),
+	updateCart: vi.fn(async () => null as any)
+}))
+vi.mock('sveltekit-medusa-sdk', async (orig) => ({
+	...(await orig<Record<string, unknown>>()),
+	getCart: h.getCart,
+	getRegions: h.getRegions,
+	updateCart: h.updateCart
+}))
+
 import Harness from './collapsed-harness.svelte'
 
 function field(name: string) {
@@ -12,10 +25,15 @@ function makeForm() {
 	return { fields } as any
 }
 const REGIONS = [{ id: 'reg_us', countries: [{ iso_2: 'us', display_name: 'United States' }] }]
-const common = { getCart: () => ({ current: null }), getRegions: () => Object.assign(Promise.resolve(REGIONS), { current: REGIONS }), updateCart: vi.fn() }
+
+beforeEach(() => {
+	h.getCart.mockReturnValue({ current: null })
+	h.getRegions.mockImplementation(() => Object.assign(Promise.resolve(REGIONS), { current: REGIONS }))
+	h.updateCart.mockResolvedValue(null)
+})
 
 test('collapsed: anchors visible, structured block present but clipped (sr-only, not display:none)', async () => {
-	render(Harness, { form: makeForm(), ...common })
+	render(Harness, { form: makeForm() })
 	// anchors present
 	expect(document.querySelector('[name=email]')).not.toBeNull()
 	// structured field present in DOM (autofillable) ...
@@ -28,7 +46,7 @@ test('collapsed: anchors visible, structured block present but clipped (sr-only,
 })
 
 test('a change on a structured field reveals the block (removes clip)', async () => {
-	render(Harness, { form: makeForm(), ...common })
+	render(Harness, { form: makeForm() })
 	const container = document.querySelector('[data-collapsed-fields]') as HTMLElement
 	expect(container.classList.contains('sr-only')).toBe(true)
 	const city = document.querySelector('[name=city]') as HTMLInputElement
@@ -39,7 +57,8 @@ test('a change on a structured field reveals the block (removes clip)', async ()
 
 test('`input` reveals the block but does NOT save; `change` saves (save-on-blur cadence preserved)', async () => {
 	const updateCart = vi.fn(async () => ({ id: 'cart_1' }) as any)
-	render(Harness, { form: makeForm(), ...common, updateCart })
+	h.updateCart.mockImplementation(updateCart)
+	render(Harness, { form: makeForm() })
 	const container = document.querySelector('[data-collapsed-fields]') as HTMLElement
 	const city = document.querySelector('[name=city]') as HTMLInputElement
 

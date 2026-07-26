@@ -1,5 +1,20 @@
 import { render } from 'vitest-browser-svelte'
-import { expect, test, vi } from 'vitest'
+import { expect, test, vi, beforeEach } from 'vitest'
+
+// The component imports getCart/getRegions/updateCart from the SDK barrel. Mock just those three in
+// the test file (spreading the rest of the module) — the component stays injection-free.
+const h = vi.hoisted(() => ({
+	getCart: vi.fn(() => ({ current: null }) as any),
+	getRegions: vi.fn(() => Object.assign(Promise.resolve([]), { current: [] }) as any),
+	updateCart: vi.fn(async (_args: any) => null as any)
+}))
+vi.mock('sveltekit-medusa-sdk', async (orig) => ({
+	...(await orig<Record<string, unknown>>()),
+	getCart: h.getCart,
+	getRegions: h.getRegions,
+	updateCart: h.updateCart
+}))
+
 import Harness from './root-harness.svelte'
 
 function field(initial = '') {
@@ -19,19 +34,25 @@ const REGIONS = [
 	{ id: 'reg_us', countries: [{ iso_2: 'us', display_name: 'United States' }] },
 	{ id: 'reg_ca', countries: [{ iso_2: 'ca', display_name: 'Canada' }] }
 ]
-const regionsResource = () => Object.assign(Promise.resolve(REGIONS), { current: REGIONS }) as any
-const getCartEmpty = () => ({ current: null })
+const regionsResource = (rs: any[] = REGIONS) => Object.assign(Promise.resolve(rs), { current: rs })
+
+beforeEach(() => {
+	h.getCart.mockReturnValue({ current: null })
+	h.getRegions.mockImplementation(() => regionsResource())
+	h.updateCart.mockResolvedValue(null)
+})
 
 test('exposes countries from regions and isAutocomplete=false without apiKey', async () => {
-	render(Harness, { form: makeForm(), getCart: getCartEmpty, getRegions: regionsResource, updateCart: vi.fn() })
+	render(Harness, { form: makeForm() })
 	expect(document.querySelector('[data-testid=countries]')!.textContent).toContain('ca')
 	expect(document.querySelector('[data-testid=isAutocomplete]')!.textContent).toBe('false')
 })
 
 test('restrictToCurrentRegion narrows countries to the current region and clamps region switching', async () => {
 	const updateCart = vi.fn(async () => ({ id: 'cart_1' }) as any)
-	const getCartUS = () => ({ current: { id: 'c', region_id: 'reg_us' } }) as any
-	render(Harness, { form: makeForm({ country_code: 'us' }), getCart: getCartUS, getRegions: regionsResource, updateCart, restrictToCurrentRegion: true })
+	h.updateCart.mockImplementation(updateCart)
+	h.getCart.mockReturnValue({ current: { id: 'c', region_id: 'reg_us' } })
+	render(Harness, { form: makeForm({ country_code: 'us' }), restrictToCurrentRegion: true })
 	const countries = document.querySelector('[data-testid=countries]')!.textContent!
 	expect(countries).toContain('us')
 	expect(countries).not.toContain('ca')
@@ -43,14 +64,16 @@ test('restrictToCurrentRegion narrows countries to the current region and clamps
 
 test('setRegionForCountry calls updateCart with the matched region_id', async () => {
 	const updateCart = vi.fn(async () => ({ id: 'cart_1' }) as any)
-	render(Harness, { form: makeForm({ country_code: 'us' }), getCart: getCartEmpty, getRegions: regionsResource, updateCart })
+	h.updateCart.mockImplementation(updateCart)
+	render(Harness, { form: makeForm({ country_code: 'us' }) })
 	;(document.querySelector('[data-testid=region-ca]') as HTMLButtonElement).click()
 	await vi.waitFor(() => expect(updateCart).toHaveBeenCalledWith(expect.objectContaining({ region_id: 'reg_ca', shipping_address: { country_code: 'ca' } })))
 })
 
 test('save builds a payload from field values (billing mirrors shipping by default)', async () => {
 	const updateCart = vi.fn(async (_args: any) => ({ id: 'cart_1' }) as any)
-	render(Harness, { form: makeForm({ email: 'a@b.com', first_name: 'Ada', country_code: 'us' }), getCart: getCartEmpty, getRegions: regionsResource, updateCart })
+	h.updateCart.mockImplementation(updateCart)
+	render(Harness, { form: makeForm({ email: 'a@b.com', first_name: 'Ada', country_code: 'us' }) })
 	;(document.querySelector('[data-testid=save]') as HTMLButtonElement).click()
 	await vi.waitFor(() => expect(updateCart).toHaveBeenCalled())
 	const arg = updateCart.mock.calls.at(-1)![0]
@@ -61,7 +84,8 @@ test('save builds a payload from field values (billing mirrors shipping by defau
 
 test('save bundles region_id for the chosen country so region + address commit atomically', async () => {
 	const updateCart = vi.fn(async (_args: any) => ({ id: 'cart_1' }) as any)
-	render(Harness, { form: makeForm({ country_code: 'ca' }), getCart: getCartEmpty, getRegions: regionsResource, updateCart })
+	h.updateCart.mockImplementation(updateCart)
+	render(Harness, { form: makeForm({ country_code: 'ca' }) })
 	;(document.querySelector('[data-testid=save]') as HTMLButtonElement).click()
 	await vi.waitFor(() => expect(updateCart).toHaveBeenCalled())
 	// Without region_id, Medusa validates 'ca' against the cart's current region and rejects it.
@@ -70,15 +94,17 @@ test('save bundles region_id for the chosen country so region + address commit a
 
 test('setBillingSameAsShipping(true) clears billing and sends billing_address:{}', async () => {
 	const updateCart = vi.fn(async () => ({ id: 'cart_1' }) as any)
-	render(Harness, { form: makeForm({ billing_first_name: 'Grace' }), getCart: getCartEmpty, getRegions: regionsResource, updateCart })
+	h.updateCart.mockImplementation(updateCart)
+	render(Harness, { form: makeForm({ billing_first_name: 'Grace' }) })
 	;(document.querySelector('[data-testid=billing-off]') as HTMLButtonElement).click()
 	await vi.waitFor(() => expect(updateCart).toHaveBeenCalledWith({ billing_address: {} }))
 })
 
 test('setAddressFromAutocomplete maps a Google Places full province name to the ISO option value', async () => {
 	const updateCart = vi.fn(async () => ({ id: 'cart_1' }) as any)
+	h.updateCart.mockImplementation(updateCart)
 	const form = makeForm()
-	render(Harness, { form, getCart: getCartEmpty, getRegions: regionsResource, updateCart })
+	render(Harness, { form })
 	;(document.querySelector('[data-testid=autocomplete]') as HTMLButtonElement).click()
 	await vi.waitFor(() => expect(form.fields.province.value()).toBe('us-ca'))
 })

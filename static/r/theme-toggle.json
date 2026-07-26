@@ -10,7 +10,7 @@
 	],
 	"devDependencies": [
 		"mode-watcher@1.1.0",
-		"@lucide/svelte@^1.25.0"
+		"@lucide/svelte@^1.27.0"
 	],
 	"registryDependencies": [
 		"toggle"

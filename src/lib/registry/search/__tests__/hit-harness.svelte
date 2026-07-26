@@ -9,7 +9,7 @@
 	}: { hit: SearchHit; href?: (h: SearchHit) => string } = $props()
 </script>
 
-<Root search={async () => ({ hits: [] })}>
+<Root>
 	{#snippet children()}
 		<Hit {hit} {href} />
 	{/snippet}

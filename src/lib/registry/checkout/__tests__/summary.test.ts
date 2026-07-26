@@ -1,5 +1,16 @@
 import { render } from 'vitest-browser-svelte'
 import { expect, test, vi } from 'vitest'
+
+// The component imports getCart from the SDK barrel. Mock just that in the test file (spreading the
+// rest of the module) — the component stays injection-free.
+const h = vi.hoisted(() => ({
+	getCart: vi.fn(() => ({ current: null }) as any)
+}))
+vi.mock('sveltekit-medusa-sdk', async (orig) => ({
+	...(await orig<Record<string, unknown>>()),
+	getCart: h.getCart
+}))
+
 import Harness from './summary-harness.svelte'
 
 const CART = {
@@ -13,9 +24,8 @@ const CART = {
 } as any
 
 test('renders formatted amounts and labels for Subtotal, Tax, Shipping, and Total', async () => {
-	render(Harness, {
-		getCart: () => ({ current: CART })
-	})
+	h.getCart.mockReturnValue({ current: CART })
+	render(Harness, {})
 
 	// Check formatted amounts appear
 	expect(document.body.textContent).toContain('$20.00')
@@ -34,9 +44,8 @@ test('renders formatted amounts and labels for Subtotal, Tax, Shipping, and Tota
 
 test('hides a row when the amount is null', async () => {
 	const cartWithNullGiftCard = { ...CART, gift_card_total: null } as any
-	render(Harness, {
-		getCart: () => ({ current: cartWithNullGiftCard })
-	})
+	h.getCart.mockReturnValue({ current: cartWithNullGiftCard })
+	render(Harness, {})
 
 	// Gift card total is null, so row should not appear
 	const giftCardRows = document.querySelectorAll('[data-checkout-summary-gift-card]')

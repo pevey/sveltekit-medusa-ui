@@ -1,5 +1,18 @@
 import { render } from 'vitest-browser-svelte'
-import { expect, test, vi } from 'vitest'
+import { expect, test, vi, beforeEach } from 'vitest'
+
+const h = vi.hoisted(() => ({
+	getCart: vi.fn(() => ({ current: null }) as any),
+	getRegions: vi.fn(() => Object.assign(Promise.resolve([]), { current: [] }) as any),
+	updateCart: vi.fn(async () => null as any)
+}))
+vi.mock('sveltekit-medusa-sdk', async (orig) => ({
+	...(await orig<Record<string, unknown>>()),
+	getCart: h.getCart,
+	getRegions: h.getRegions,
+	updateCart: h.updateCart
+}))
+
 import Harness from './billing-harness.svelte'
 
 function field(name: string, value = '') {
@@ -14,15 +27,20 @@ function makeForm() {
 	return { fields } as any
 }
 const REGIONS = [{ id: 'reg_us', countries: [{ iso_2: 'us', display_name: 'United States' }] }]
-const common = { getCart: () => ({ current: null }), getRegions: () => Object.assign(Promise.resolve(REGIONS), { current: REGIONS }) }
+
+beforeEach(() => {
+	h.getCart.mockReturnValue({ current: null })
+	h.getRegions.mockImplementation(() => Object.assign(Promise.resolve(REGIONS), { current: REGIONS }))
+	h.updateCart.mockResolvedValue(null)
+})
 
 test('billing block is hidden by default (same as shipping)', async () => {
-	render(Harness, { form: makeForm(), ...common, updateCart: vi.fn() })
+	render(Harness, { form: makeForm() })
 	expect(document.querySelector('input[name=billing_first_name]')).toBeNull()
 })
 
 test('unchecking the toggle reveals the billing block', async () => {
-	render(Harness, { form: makeForm(), ...common, updateCart: vi.fn() })
+	render(Harness, { form: makeForm() })
 	const cb = document.querySelector('input[type=checkbox]:not(.hidden)') as HTMLInputElement
 	cb.checked = false
 	cb.dispatchEvent(new Event('change', { bubbles: true }))
@@ -31,7 +49,8 @@ test('unchecking the toggle reveals the billing block', async () => {
 
 test('re-checking clears billing and sends billing_address:{}', async () => {
 	const updateCart = vi.fn(async () => ({ id: 'c' }) as any)
-	render(Harness, { form: makeForm(), ...common, updateCart })
+	h.updateCart.mockImplementation(updateCart)
+	render(Harness, { form: makeForm() })
 	const cb = document.querySelector('input[type=checkbox]:not(.hidden)') as HTMLInputElement
 	cb.checked = false; cb.dispatchEvent(new Event('change', { bubbles: true }))
 	cb.checked = true; cb.dispatchEvent(new Event('change', { bubbles: true }))

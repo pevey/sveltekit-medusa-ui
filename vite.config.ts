@@ -60,6 +60,10 @@ export default defineConfig({
 				find: '$lib/components/ui/auth',
 				replacement: fileURLToPath(new URL('./src/lib/registry/auth', import.meta.url))
 			},
+			{
+				find: '$lib/components/ui/customer',
+				replacement: fileURLToPath(new URL('./src/lib/registry/customer', import.meta.url))
+			},
 			{ find: '$lib', replacement: fileURLToPath(new URL('./src/lib', import.meta.url)) }
 		]
 	}

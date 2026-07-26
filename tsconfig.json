@@ -30,6 +30,8 @@
 			"$lib/components/ui/checkout/*": ["./src/lib/registry/checkout/*"],
 			"$lib/components/ui/auth": ["./src/lib/registry/auth"],
 			"$lib/components/ui/auth/*": ["./src/lib/registry/auth/*"],
+			"$lib/components/ui/customer": ["./src/lib/registry/customer"],
+			"$lib/components/ui/customer/*": ["./src/lib/registry/customer/*"],
 			"$lib": ["./src/lib"],
 			"$lib/*": ["./src/lib/*"]
 		}

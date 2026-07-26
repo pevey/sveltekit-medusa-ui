@@ -27,9 +27,9 @@
 		children
 	}: Props = $props()
 
-	// Call the query once; read `.current`/`.loading`/`.error` reactively (top-level runs once).
-	// The SDK's getCart is a SvelteKit remote query exposing those at runtime, but its built type
-	// under-resolves to a bare Promise here, so bridge it to CartQuery.
+	// Keep the live query object (not awaited) so the parts can render inline loading / empty / error
+	// states from `.current`/`.loading`/`.error`. The cast restores those members, which this package's
+	// svelte-check drops from the SDK's remote-query type (runtime is fine).
 	const q = getCart() as unknown as CartQuery
 	let pending = $state(false)
 

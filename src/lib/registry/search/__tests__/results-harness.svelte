@@ -11,7 +11,7 @@
 	}: { hits?: SearchHit[]; isStatic?: boolean; useSnippet?: boolean } = $props()
 </script>
 
-<Root search={async () => ({ hits })}>
+<Root>
 	{#snippet children()}
 		<Seed {hits} />
 		{#if useSnippet}

@@ -185,18 +185,48 @@
 		"description": "Compound Checkout primitives (Root, Items, Item, Image, Title, Price, Quantity, ItemSubtotal, Remove, Delivery, Discount, Summary + 7 summary rows, BraintreePayment, PlaceOrder, Confirmation, CheckoutError) plus a batteries-included CheckoutBraintree preset that owns the <form>, composes the Address preset alongside a single-page cart summary + Braintree hosted-fields payment, and calls placeOrder (updateAddress → shipping guard → authorizePayment → completeCart) with a StoreOrder confirmation or redirectTo. Wired to the sveltekit-medusa-sdk cart/checkout/braintree remotes (DI-with-SDK-default); no $effect (SSR-safe).",
 		"dependencies": [
 			"sveltekit-medusa-sdk",
-			"braintree-web",
+			"sveltekit-braintree",
 			"@lucide/svelte"
 		],
-		"devDependencies": [
-			"@types/braintree-web"
-		],
+		"devDependencies": [],
 		"registryDependencies": [
 			"address",
 			"button",
 			"input-text"
 		],
 		"relativeUrl": "checkout.json"
+	},
+	{
+		"name": "auth",
+		"title": "Auth",
+		"type": "registry:ui",
+		"description": "Compound login/register/forgot/reset forms (a createAuthForm factory + Field/Label/Input/Error/Submit parts) plus an Auth.Dialog preset (URL-driven ?auth= modal with a per-part classes map); wired to the sveltekit-medusa-sdk auth remotes; SSR-safe, no $effect.",
+		"dependencies": [
+			"sveltekit-medusa-sdk",
+			"@lucide/svelte"
+		],
+		"registryDependencies": [
+			"dialog",
+			"button",
+			"field",
+			"label"
+		],
+		"relativeUrl": "auth.json"
+	},
+	{
+		"name": "customer",
+		"title": "Customer",
+		"type": "registry:ui",
+		"description": "Storefront shopper identity: SignedIn/SignedOut auth-state gates, a Menu compound over shadcn DropdownMenu, SignInButton (deep-links ?auth=login), and SignOut; reads the sveltekit-medusa-sdk customer remote directly.",
+		"dependencies": [
+			"sveltekit-medusa-sdk",
+			"@lucide/svelte"
+		],
+		"registryDependencies": [
+			"dropdown-menu",
+			"button"
+		],
+		"relativeUrl": "customer.json"
 	},
 	{
 		"name": "theme-button",

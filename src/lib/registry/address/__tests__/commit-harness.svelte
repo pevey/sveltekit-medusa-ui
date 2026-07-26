@@ -2,21 +2,14 @@
 	import Root from '$lib/components/ui/address/address-root.svelte'
 	import { getAddressContext } from '$lib/components/ui/address/ctx.svelte.js'
 	import type { RemoteForm } from '@sveltejs/kit'
-	import type { GetCartFn, GetRegionsFn, UpdateCartFn } from '$lib/components/ui/address/types.js'
 	let {
-		form,
-		getCart,
-		getRegions,
-		updateCart
+		form
 	}: {
 		form: RemoteForm<any, any>
-		getCart?: GetCartFn
-		getRegions?: GetRegionsFn
-		updateCart?: UpdateCartFn
 	} = $props()
 </script>
 
-<Root {form} {getCart} {getRegions} {updateCart}>
+<Root {form}>
 	{@const ctx = getAddressContext()}
 	<span data-testid="expanded">{ctx.expanded}</span>
 	<button data-testid="expand" onclick={() => ctx.setExpanded(true)}>expand</button>

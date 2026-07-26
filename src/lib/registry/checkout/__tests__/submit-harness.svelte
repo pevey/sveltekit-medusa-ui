@@ -4,20 +4,15 @@
 	import CheckoutError from '$lib/components/ui/checkout/checkout-error.svelte'
 	import Confirmation from '$lib/components/ui/checkout/checkout-confirmation.svelte'
 	import type { RemoteForm } from '@sveltejs/kit'
-	import type { GetCartFn, CompleteCartFn } from '$lib/components/ui/checkout/types.js'
 
 	let {
-		form,
-		getCart,
-		completeCart
+		form
 	}: {
 		form: RemoteForm<any, any>
-		getCart?: GetCartFn
-		completeCart?: CompleteCartFn
 	} = $props()
 </script>
 
-<Root {form} {getCart} {completeCart} navigate={() => {}}>
+<Root {form} navigate={() => {}}>
 	<PlaceOrder />
 	<CheckoutError />
 	<Confirmation />

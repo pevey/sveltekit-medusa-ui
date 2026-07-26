@@ -1,7 +1,14 @@
 import { render } from 'vitest-browser-svelte'
 import { page } from '@vitest/browser/context'
-import { expect, test, vi } from 'vitest'
-import type { SearchFn, SearchHit } from '$lib/components/ui/search/ctx.svelte.js'
+import { expect, test, vi, beforeEach } from 'vitest'
+import type { SearchHit } from '$lib/components/ui/search/ctx.svelte.js'
+
+const h = vi.hoisted(() => ({ search: vi.fn(async () => ({ hits: [] }) as { hits: SearchHit[] }) }))
+vi.mock('sveltekit-medusa-sdk', async (orig) => ({
+	...(await orig<Record<string, unknown>>()),
+	search: h.search
+}))
+
 import SearchDialog from '$lib/components/ui/search/search-dialog.svelte'
 import TriggerHarness from './search-dialog-trigger-harness.svelte'
 
@@ -15,41 +22,44 @@ const mk = (type: string, id: string, title: string): SearchHit => ({
 	score: 1
 })
 
-const noHits: SearchFn = async () => ({ hits: [] })
-
 function winKey(init: KeyboardEventInit) {
 	window.dispatchEvent(new KeyboardEvent('keydown', { bubbles: true, cancelable: true, ...init }))
 }
 
+beforeEach(() => {
+	h.search.mockReset()
+	h.search.mockResolvedValue({ hits: [] })
+})
+
 test('Ctrl+K opens the dialog', async () => {
-	render(SearchDialog, { search: noHits })
+	render(SearchDialog, {})
 	expect(page.getByRole('dialog').query()).toBeNull()
 	winKey({ key: 'k', ctrlKey: true })
 	await expect.element(page.getByRole('dialog')).toBeInTheDocument()
 })
 
 test('Cmd+K (metaKey) opens the dialog', async () => {
-	render(SearchDialog, { search: noHits })
+	render(SearchDialog, {})
 	winKey({ key: 'k', metaKey: true })
 	await expect.element(page.getByRole('dialog')).toBeInTheDocument()
 })
 
 test('enabled=false disables the global shortcut', async () => {
-	render(SearchDialog, { search: noHits, enabled: false })
+	render(SearchDialog, { enabled: false })
 	winKey({ key: 'k', ctrlKey: true })
 	await new Promise((r) => setTimeout(r, 50))
 	expect(page.getByRole('dialog').query()).toBeNull()
 })
 
 test('the trigger snippet opens the dialog', async () => {
-	render(TriggerHarness, { search: noHits })
+	render(TriggerHarness, {})
 	expect(page.getByRole('dialog').query()).toBeNull()
 	await page.getByTestId('open-btn').click()
 	await expect.element(page.getByRole('dialog')).toBeInTheDocument()
 })
 
 test('the search input is focused when the dialog opens', async () => {
-	render(SearchDialog, { search: noHits })
+	render(SearchDialog, {})
 	winKey({ key: 'k', ctrlKey: true })
 	const input = page.getByRole('combobox')
 	await expect.element(input).toBeInTheDocument()
@@ -57,10 +67,8 @@ test('the search input is focused when the dialog opens', async () => {
 })
 
 test('typing shows results as options and ArrowDown highlights the first', async () => {
-	render(SearchDialog, {
-		search: async () => ({ hits: [mk('product', '1', 'Coffee'), mk('product', '2', 'Beans')] }),
-		debounce: 0
-	})
+	h.search.mockResolvedValue({ hits: [mk('product', '1', 'Coffee'), mk('product', '2', 'Beans')] })
+	render(SearchDialog, { debounce: 0 })
 	winKey({ key: 'k', ctrlKey: true })
 	const input = page.getByRole('combobox')
 	await input.fill('coffee')
@@ -71,7 +79,7 @@ test('typing shows results as options and ArrowDown highlights the first', async
 })
 
 test('Escape closes the dialog', async () => {
-	render(SearchDialog, { search: noHits })
+	render(SearchDialog, {})
 	winKey({ key: 'k', ctrlKey: true })
 	await expect.element(page.getByRole('dialog')).toBeInTheDocument()
 	page

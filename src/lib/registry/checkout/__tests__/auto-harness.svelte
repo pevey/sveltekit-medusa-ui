@@ -5,11 +5,10 @@
 
 	let {
 		form,
-		getCart,
 		config
-	}: { form: RemoteForm<any, any>; getCart?: any; config?: any } = $props()
+	}: { form: RemoteForm<any, any>; config?: any } = $props()
 </script>
 
-<Root {form} {getCart} navigate={() => {}}>
+<Root {form} navigate={() => {}}>
 	<AutoSwitch {form} {config} publishableKey="pk_test_x" returnUrl="/checkout/return" />
 </Root>

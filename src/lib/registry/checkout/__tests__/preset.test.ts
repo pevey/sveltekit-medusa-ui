@@ -1,5 +1,19 @@
 import { render } from 'vitest-browser-svelte'
 import { expect, test, vi } from 'vitest'
+
+// CheckoutBraintree renders Checkout.Root, which imports getCart/completeCart from the SDK barrel.
+// Mock just those two in the test file (spreading the rest of the module) — the components stay
+// injection-free.
+const h = vi.hoisted(() => ({
+	getCart: vi.fn(() => ({ current: null }) as any),
+	completeCart: vi.fn(async () => null as any)
+}))
+vi.mock('sveltekit-medusa-sdk', async (orig) => ({
+	...(await orig<Record<string, unknown>>()),
+	getCart: h.getCart,
+	completeCart: h.completeCart
+}))
+
 import Harness from './preset-harness.svelte'
 
 function field(name: string) {
@@ -46,11 +60,10 @@ const CART = {
 } as any
 
 test('CheckoutBraintree renders the address fields, an items row, a summary total, and place-order — all in one form', async () => {
-	render(Harness, {
-		form: makeForm(),
-		getCart: () => ({ current: CART }),
-		completeCart: vi.fn(async () => ({ id: 'order_1' }) as any)
-	})
+	h.getCart.mockReturnValue({ current: CART })
+	h.completeCart.mockResolvedValue({ id: 'order_1' } as any)
+
+	render(Harness, { form: makeForm() })
 
 	const formEl = document.querySelector('form')
 	expect(formEl).not.toBeNull()

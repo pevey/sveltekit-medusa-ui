@@ -1,5 +1,18 @@
 import { render } from 'vitest-browser-svelte'
-import { expect, test, vi } from 'vitest'
+import { expect, test, vi, beforeEach } from 'vitest'
+
+const h = vi.hoisted(() => ({
+	getCart: vi.fn(() => ({ current: null }) as any),
+	getRegions: vi.fn(() => Object.assign(Promise.resolve([]), { current: [] }) as any),
+	updateCart: vi.fn(async (_args: any) => null as any)
+}))
+vi.mock('sveltekit-medusa-sdk', async (orig) => ({
+	...(await orig<Record<string, unknown>>()),
+	getCart: h.getCart,
+	getRegions: h.getRegions,
+	updateCart: h.updateCart
+}))
+
 import Harness from './commit-harness.svelte'
 
 function field(initial = '') {
@@ -14,11 +27,16 @@ function makeForm(values: Record<string, string> = {}) {
 	return { fields } as any
 }
 const REGIONS = [{ id: 'reg_us', countries: [{ iso_2: 'us', display_name: 'United States' }] }]
-const regionsRes = () => Object.assign(Promise.resolve(REGIONS), { current: REGIONS }) as any
-const common = { getCart: () => ({ current: null }), getRegions: regionsRes }
+const regionsResource = () => Object.assign(Promise.resolve(REGIONS), { current: REGIONS })
+
+beforeEach(() => {
+	h.getCart.mockReturnValue({ current: null })
+	h.getRegions.mockImplementation(() => regionsResource())
+	h.updateCart.mockResolvedValue(null)
+})
 
 test('setExpanded flips the expanded context value', async () => {
-	render(Harness, { form: makeForm(), ...common, updateCart: vi.fn() })
+	render(Harness, { form: makeForm() })
 	expect(document.querySelector('[data-testid=expanded]')!.textContent).toBe('false')
 	;(document.querySelector('[data-testid=expand]') as HTMLButtonElement).click()
 	await vi.waitFor(() => expect(document.querySelector('[data-testid=expanded]')!.textContent).toBe('true'))
@@ -26,7 +44,8 @@ test('setExpanded flips the expanded context value', async () => {
 
 test('updateAddress reconciles from the DOM, normalizes country/province to codes, and awaits updateCart', async () => {
 	const updateCart = vi.fn(async (_args: any) => ({ id: 'cart_1' }) as any)
-	render(Harness, { form: makeForm({ country_code: '', province: '', city: '' }), ...common, updateCart })
+	h.updateCart.mockImplementation(updateCart)
+	render(Harness, { form: makeForm({ country_code: '', province: '', city: '' }) })
 	;(document.querySelector('[data-testid=update-address]') as HTMLButtonElement).click()
 	// updateAddress() now also fires an earlier region-switch updateCart (Fix 1) before the final full-payload
 	// call, so wait for the specific final call (marked by a `province` key only the full payload has)
@@ -40,7 +59,8 @@ test('updateAddress reconciles from the DOM, normalizes country/province to code
 
 test('updateAddress reconciles the region before the final save (autofill-only country change)', async () => {
 	const updateCart = vi.fn(async (_args: any) => ({ id: 'cart_1' }) as any)
-	render(Harness, { form: makeForm({ country_code: '', province: '', city: '' }), ...common, updateCart })
+	h.updateCart.mockImplementation(updateCart)
+	render(Harness, { form: makeForm({ country_code: '', province: '', city: '' }) })
 	;(document.querySelector('[data-testid=update-address]') as HTMLButtonElement).click()
 	// Wait for the final full-payload call specifically (see comment above) rather than "called at all".
 	await vi.waitFor(() => expect(updateCart.mock.calls.some((c) => c[0]?.shipping_address?.province)).toBe(true))

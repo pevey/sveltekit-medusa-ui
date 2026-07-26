@@ -4,13 +4,12 @@ import { expect, test } from 'vitest'
 import SearchBox from '$lib/components/ui/search/search-box.svelte'
 
 test('collapsed icon links to the searchUrl', async () => {
-	render(SearchBox, { search: async () => ({ hits: [] }), searchUrl: '/search', breakpoint: 'md' })
+	render(SearchBox, { searchUrl: '/search', breakpoint: 'md' })
 	await expect.element(page.getByRole('link', { name: 'Search' })).toHaveAttribute('href', '/search')
 })
 
 test('breakpoint token drives the responsive class map', async () => {
 	const { container } = await render(SearchBox, {
-		search: async () => ({ hits: [] }),
 		breakpoint: 'lg'
 	})
 	const expanded = container.querySelector('[data-search-expanded]')
@@ -25,6 +24,6 @@ test('renders the search input in the expanded box', async () => {
 	// otherwise be excluded from the a11y tree. Desktop viewport per the
 	// gallery1.test.ts convention in this repo.
 	await page.viewport(1024, 768)
-	render(SearchBox, { search: async () => ({ hits: [] }) })
+	render(SearchBox, {})
 	await expect.element(page.getByRole('combobox')).toBeInTheDocument()
 })

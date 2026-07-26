@@ -54,7 +54,7 @@
 	function navigate(next: Mode | null) {
 		sent = false
 		resetDone = false
-		const params = new URLSearchParams(page.url.searchParams)
+		const params = new URLSearchParams(page.url.searchParams.toString())
 		if (next) {
 			params.set('auth', next)
 		} else {

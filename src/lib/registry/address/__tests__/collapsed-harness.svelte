@@ -1,5 +1,5 @@
 <script lang="ts">
 	import { AddressFormCollapsed } from '$lib/components/ui/address/index.js'
-	let { form, googlePlacesApiKey = undefined, getCart, getRegions, updateCart } = $props()
+	let { form, googlePlacesApiKey = undefined } = $props()
 </script>
-<AddressFormCollapsed {form} {googlePlacesApiKey} {getCart} {getRegions} {updateCart} />
+<AddressFormCollapsed {form} {googlePlacesApiKey} />

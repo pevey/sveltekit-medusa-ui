@@ -1,5 +1,21 @@
 import { render } from 'vitest-browser-svelte'
-import { expect, test, vi } from 'vitest'
+import { expect, test, vi, beforeEach } from 'vitest'
+
+// The component tree imports getCart/getShippingOptions/selectShippingOption from the SDK barrel.
+// Mock just those three in the test file (spreading the rest of the module) — the components stay
+// injection-free.
+const h = vi.hoisted(() => ({
+	getCart: vi.fn(() => ({ current: null }) as any),
+	getShippingOptions: vi.fn(async () => [] as any[]),
+	selectShippingOption: vi.fn(async () => null as any)
+}))
+vi.mock('sveltekit-medusa-sdk', async (orig) => ({
+	...(await orig<Record<string, unknown>>()),
+	getCart: h.getCart,
+	getShippingOptions: h.getShippingOptions,
+	selectShippingOption: h.selectShippingOption
+}))
+
 import Harness from './delivery-harness.svelte'
 
 const FAKE_OPTIONS = [
@@ -9,15 +25,14 @@ const FAKE_OPTIONS = [
 
 const CART = { id: 'c', currency_code: 'usd', shipping_methods: [] }
 
-test('after mount, renders a radio per option and auto-selects the first when cart has none', async () => {
-	const selectShippingOption = vi.fn().mockResolvedValue(CART)
-	const getShippingOptions = vi.fn().mockResolvedValue(FAKE_OPTIONS)
+beforeEach(() => {
+	h.getCart.mockReset().mockReturnValue({ current: CART })
+	h.getShippingOptions.mockReset().mockResolvedValue(FAKE_OPTIONS)
+	h.selectShippingOption.mockReset().mockResolvedValue(CART)
+})
 
-	render(Harness, {
-		getCart: () => ({ current: CART }),
-		getShippingOptions,
-		selectShippingOption
-	})
+test('after mount, renders a radio per option and auto-selects the first when cart has none', async () => {
+	render(Harness, {})
 
 	// Wait a bit for onMount to run
 	await new Promise(r => setTimeout(r, 100))
@@ -29,23 +44,16 @@ test('after mount, renders a radio per option and auto-selects the first when ca
 	expect(document.body.textContent).toContain('Express')
 
 	// Auto-select first option on mount since cart has none
-	expect(selectShippingOption).toHaveBeenCalledWith('so_1')
+	expect(h.selectShippingOption).toHaveBeenCalledWith('so_1')
 })
 
 test('changing radio selection calls selectShippingOption with the new option id', async () => {
-	const selectShippingOption = vi.fn().mockResolvedValue(CART)
-	const getShippingOptions = vi.fn().mockResolvedValue(FAKE_OPTIONS)
-
-	render(Harness, {
-		getCart: () => ({ current: CART }),
-		getShippingOptions,
-		selectShippingOption
-	})
+	render(Harness, {})
 
 	// Wait for onMount to run
 	await new Promise(r => setTimeout(r, 100))
 
-	selectShippingOption.mockClear()
+	h.selectShippingOption.mockClear()
 
 	// Find and click the Express radio
 	const radios = document.querySelectorAll('input[type=radio]')
@@ -55,24 +63,15 @@ test('changing radio selection calls selectShippingOption with the new option id
 	// Wait for change handler
 	await new Promise(r => setTimeout(r, 50))
 
-	expect(selectShippingOption).toHaveBeenCalledWith('so_2')
+	expect(h.selectShippingOption).toHaveBeenCalledWith('so_2')
 })
 
 test('re-fetches shipping options when the address changes later (options depend on the address)', async () => {
-	const selectShippingOption = vi.fn().mockResolvedValue(CART)
 	// First mount runs before any address is entered → Medusa returns no options; once the address is
 	// set, options appear. Delivery must re-fetch on the address-change signal, not stay empty.
-	const getShippingOptions = vi
-		.fn()
-		.mockResolvedValueOnce([])
-		.mockResolvedValueOnce(FAKE_OPTIONS)
+	h.getShippingOptions.mockReset().mockResolvedValueOnce([]).mockResolvedValueOnce(FAKE_OPTIONS)
 
-	render(Harness, {
-		getCart: () => ({ current: CART }),
-		getShippingOptions,
-		selectShippingOption,
-		cart: CART
-	})
+	render(Harness, { cart: CART })
 
 	await new Promise(r => setTimeout(r, 100))
 	expect(document.querySelectorAll('input[type=radio]')).toHaveLength(0)
@@ -81,6 +80,6 @@ test('re-fetches shipping options when the address changes later (options depend
 	;(document.querySelector('[data-testid=addr-change]') as HTMLButtonElement).click()
 	await new Promise(r => setTimeout(r, 100))
 
-	expect(getShippingOptions).toHaveBeenCalledTimes(2)
+	expect(h.getShippingOptions).toHaveBeenCalledTimes(2)
 	expect(document.querySelectorAll('input[type=radio]')).toHaveLength(2)
 })

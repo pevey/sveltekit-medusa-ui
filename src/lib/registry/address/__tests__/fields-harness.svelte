@@ -8,9 +8,9 @@
 	import City from '$lib/components/ui/address/address-city.svelte'
 	import Country from '$lib/components/ui/address/address-country.svelte'
 	import PostalCode from '$lib/components/ui/address/address-postal-code.svelte'
-	let { form, getCart, getRegions, updateCart } = $props()
+	let { form } = $props()
 </script>
 
-<Root {form} {getCart} {getRegions} {updateCart}>
+<Root {form}>
 	<Email /><FirstName /><LastName /><Phone /><Line2 /><City /><Country /><PostalCode />
 </Root>
