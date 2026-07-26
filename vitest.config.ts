@@ -62,12 +62,22 @@ export default defineConfig({
 				replacement: fileURLToPath(new URL('./src/test-stubs/app-navigation.ts', import.meta.url))
 			},
 			{
-				find: 'sveltekit-medusa-sdk',
+				// Exact-match the barrel only, so per-remote subpath imports (e.g.
+				// `sveltekit-medusa-sdk/auth`) pass through and can be replaced with vi.mock in tests.
+				find: /^sveltekit-medusa-sdk$/,
 				replacement: fileURLToPath(new URL('./src/test-stubs/sveltekit-medusa-sdk.ts', import.meta.url))
 			},
 			{
 				find: '$app/env',
 				replacement: fileURLToPath(new URL('./src/test-stubs/app-env.ts', import.meta.url))
+			},
+			{
+				find: '$app/server',
+				replacement: fileURLToPath(new URL('./src/test-stubs/app-server.ts', import.meta.url))
+			},
+			{
+				find: '$lib/components/ui/auth',
+				replacement: fileURLToPath(new URL('./src/lib/registry/auth', import.meta.url))
 			},
 			{ find: '$lib', replacement: fileURLToPath(new URL('./src/lib', import.meta.url)) }
 		]

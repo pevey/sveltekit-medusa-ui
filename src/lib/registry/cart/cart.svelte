@@ -1,22 +1,14 @@
 <script lang="ts">
 	import { cn } from '$lib/utils.js'
-	import {
-		getCart as sdkGetCart,
-		updateCartItem as sdkUpdateCartItem,
-		removeFromCart as sdkRemoveFromCart
-	} from 'sveltekit-medusa-sdk'
+	import { getCart, updateCartItem, removeFromCart } from 'sveltekit-medusa-sdk'
 	import { setCartContext } from './ctx.svelte.js'
 	import * as logic from './cart-logic.js'
 	import { defaultLineHref } from './cart-logic.js'
-	import type { GetCartFn, UpdateCartItemFn, RemoveFromCartFn, LineHrefFn } from './types.js'
+	import type { CartQuery, LineHrefFn } from './types.js'
 	import type { StoreCart } from '@medusajs/types'
-	import { untrack } from 'svelte'
 	import type { Snippet } from 'svelte'
 
 	interface Props {
-		getCart?: GetCartFn
-		updateCartItem?: UpdateCartItemFn
-		removeFromCart?: RemoveFromCartFn
 		onupdate?: (cart: StoreCart) => void
 		onremove?: (cart: StoreCart) => void
 		onerror?: (err: unknown) => void
@@ -26,9 +18,6 @@
 		children: Snippet
 	}
 	let {
-		getCart = sdkGetCart as unknown as GetCartFn,
-		updateCartItem = sdkUpdateCartItem as unknown as UpdateCartItemFn,
-		removeFromCart = sdkRemoveFromCart as unknown as RemoveFromCartFn,
 		onupdate,
 		onremove,
 		onerror,
@@ -38,8 +27,10 @@
 		children
 	}: Props = $props()
 
-	// Call the query once; read `.current`/`.loading`/`.error` reactively (no $effect).
-	const q = untrack(() => getCart())
+	// Call the query once; read `.current`/`.loading`/`.error` reactively (top-level runs once).
+	// The SDK's getCart is a SvelteKit remote query exposing those at runtime, but its built type
+	// under-resolves to a bare Promise here, so bridge it to CartQuery.
+	const q = getCart() as unknown as CartQuery
 	let pending = $state(false)
 
 	async function updateItem(itemId: string, quantity: number) {

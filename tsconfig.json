@@ -28,6 +28,8 @@
 			"$lib/components/ui/address/*": ["./src/lib/registry/address/*"],
 			"$lib/components/ui/checkout": ["./src/lib/registry/checkout"],
 			"$lib/components/ui/checkout/*": ["./src/lib/registry/checkout/*"],
+			"$lib/components/ui/auth": ["./src/lib/registry/auth"],
+			"$lib/components/ui/auth/*": ["./src/lib/registry/auth/*"],
 			"$lib": ["./src/lib"],
 			"$lib/*": ["./src/lib/*"]
 		}

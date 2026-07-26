@@ -44,7 +44,9 @@ export default defineConfig({
 			},
 			{
 				find: '$lib/components/ui/input-province',
-				replacement: fileURLToPath(new URL('./src/lib/registry/input-province', import.meta.url))
+				replacement: fileURLToPath(
+					new URL('./src/lib/registry/input-province', import.meta.url)
+				)
 			},
 			{
 				find: '$lib/components/ui/address',
@@ -53,6 +55,10 @@ export default defineConfig({
 			{
 				find: '$lib/components/ui/checkout',
 				replacement: fileURLToPath(new URL('./src/lib/registry/checkout', import.meta.url))
+			},
+			{
+				find: '$lib/components/ui/auth',
+				replacement: fileURLToPath(new URL('./src/lib/registry/auth', import.meta.url))
 			},
 			{ find: '$lib', replacement: fileURLToPath(new URL('./src/lib', import.meta.url)) }
 		]

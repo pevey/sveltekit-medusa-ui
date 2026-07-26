@@ -1,12 +1,10 @@
 <script lang="ts">
 	import Root from '$lib/components/ui/cart/cart.svelte'
 	import { getCartContext } from '$lib/components/ui/cart/ctx.svelte.js'
-	import type { GetCartFn, UpdateCartItemFn, RemoveFromCartFn } from '$lib/components/ui/cart/types.js'
-	let { getCart, updateCartItem, removeFromCart, onupdate, onremove, onerror }:
-		{ getCart?: GetCartFn; updateCartItem?: UpdateCartItemFn; removeFromCart?: RemoveFromCartFn; onupdate?: any; onremove?: any; onerror?: any } = $props()
+	let { onupdate, onremove, onerror }: { onupdate?: any; onremove?: any; onerror?: any } = $props()
 </script>
 
-<Root {getCart} {updateCartItem} {removeFromCart} {onupdate} {onremove} {onerror}>
+<Root {onupdate} {onremove} {onerror}>
 	{@const ctx = getCartContext()}
 	<span data-testid="count">{ctx.count}</span>
 	<span data-testid="lines">{ctx.lineCount}</span>
