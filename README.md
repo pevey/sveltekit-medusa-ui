@@ -1,85 +1,89 @@
 # sveltekit-medusa-ui
 
-Ready-made, theme-native SvelteKit components for Medusa storefronts, distributed as a
-[shadcn-svelte](https://shadcn-svelte.com) registry. Every component styles itself purely through
-shadcn CSS variables, so it drops into any shadcn-svelte project and inherits its theme (including
-dark mode) like a first-party component.
+Ready-made, theme-native SvelteKit components for [Medusa](https://medusajs.com) storefronts,
+distributed as a [shadcn-svelte](https://shadcn-svelte.com) registry. Every component styles itself
+purely through shadcn CSS variables, so it drops into any shadcn-svelte project and inherits its
+theme — including dark mode — like a first-party component. Commerce components are wired to the
+[`sveltekit-medusa-sdk`](https://www.npmjs.com/package/sveltekit-medusa-sdk) remote functions.
 
-Add a component with the shadcn-svelte CLI:
+Built for Svelte 5 / SvelteKit. Per-component API documentation is hosted separately.
+
+## Getting started
+
+**Prerequisites:** a shadcn-svelte project (a `components.json`, Tailwind, and the shadcn base
+setup). If you don't have one, run `npx shadcn-svelte@latest init` first.
+
+Add a component with the shadcn-svelte CLI, passing the full URL to its registry item:
 
 ```bash
-npx shadcn-svelte@latest add <registry-url>/gallery2
+# Registry dependencies are resolved and installed automatically.
+npx shadcn-svelte@latest add https://pevey.com/r/cart.json
+npx shadcn-svelte@latest add https://pevey.com/r/gallery.json
 ```
+
+Adding `gallery`, for example, also pulls its registry dependencies (`carousel`, `image-zoom`).
+
+**Backend:** the commerce components (`cart`, `cta`, `address`, `checkout`, `auth`, `customer`,
+`product`, `search`) expect the SDK configured once via `createMedusaHandle(...)` in your
+`hooks.server.ts`. **Theme controls** need `<ModeWatcher />` placed once in your root layout.
 
 ## Components
 
-Each component ships as shadcn-style **compound primitives** (`X.Root` + parts) _and_ thin numbered **presets**
-(`X1`, `X2`, …) that compose them. A **new number** is only introduced for a different installed dependency or
-composition; layout, position, breakpoint visibility, and per-part styling are **composition + `class`**, not props.
+| Component                     | What it is                                                                                          | Registry deps                                                                             |
+| ----------------------------- | -------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `product`                     | Product display (Title/Subtitle/Description/Price/Options) over a Medusa `StoreProduct`; URL-driven variant selection, inventory-aware, SSR-safe. | `seo`                                                                                     |
+| `cta`                         | Add-to-cart button + toggle; resolves variant/quantity from `Product` context, pending/success states, optional redirect. | `product`, `button`                                                                       |
+| `cart`                        | Compound cart with a `CartDrawer` preset; reactive, currency-aware, per-part styling.               | `button`, `sheet`                                                                         |
+| `address`                     | Compound address form (`AddressForm` preset) that owns cart writes; region switching + optional Google Places autocomplete. | `field`, `input-text`, `input-select`, `input-select-country`, `input-postal-code`, `input-province`, `google-places-autocomplete` |
+| `checkout`                    | Compound checkout with a batteries-included Braintree preset (address + summary + hosted-fields payment + place order). | `address`, `button`, `input-text`                                                         |
+| `auth`                        | Login / register / forgot / reset forms + an `Auth.Dialog` (`?auth=` modal).                        | `dialog`, `button`, `field`, `label`                                                      |
+| `customer`                    | Shopper identity: `SignedIn`/`SignedOut` gates, account menu, sign-in / sign-out.                   | `dropdown-menu`, `button`                                                                 |
+| `search`                      | Compound storefront search (Root/Icon/Input/Results/Hit); products-first results, dropdown or full page. | —                                                                                        |
+| `search-box`                  | Drop-in navbar search box that assembles the search primitives.                                     | `search`                                                                                  |
+| `search-dialog`               | Command-palette (⌘/Ctrl-K) search modal.                                                            | `search`, `dialog`                                                                        |
+| `gallery`                     | Product image gallery/lightbox on embla; optional thumbnail rail + click-to-zoom (`thumbnails`/`zoom` props). | `carousel`, `image-zoom`                                                                  |
+| `image-zoom`                  | Standalone click-to-zoom full-screen image overlay with navigation.                                 | `button`                                                                                  |
+| `faq`                         | Compound FAQ over the shadcn Accordion.                                                             | `accordion`                                                                               |
+| `markdown`                    | Themed prose renderer for backend HTML (e.g. the content plugin), with Shiki code styling.          | —                                                                                        |
+| `seo`                         | Head/metadata primitives: `MetaProvider`, `Metadata` (OpenGraph/Twitter), `JsonLd`. SSR-safe.       | —                                                                                        |
+| `google-places-autocomplete`  | Address autocomplete field over Google's `PlaceAutocompleteElement`, themed with shadcn tokens.     | —                                                                                        |
+| `input-text`                  | Text/textarea field bound to a SvelteKit remote-form field, in a shadcn `Field`.                    | `field`                                                                                   |
+| `input-select`                | Native select bound to a remote-form field, with data-driven options.                               | `field`                                                                                   |
+| `input-select-country`        | Country select fed from the store's regions (ISO-2 values).                                         | `input-select`                                                                            |
+| `input-postal-code`           | Postal-code field that uppercases as you type.                                                      | `input-text`                                                                              |
+| `input-province`              | Config-driven province/state field (select where configured, else freeform text).                  | `input-select`, `input-text`                                                              |
+| `theme-button`                | Icon button that toggles light/dark via mode-watcher.                                               | `button`                                                                                  |
+| `theme-toggle`                | Toggle reflecting/flipping the theme.                                                               | `toggle`                                                                                  |
+| `theme-switch`                | Bare switch toggling light/dark (optional settings-form binding).                                   | `switch`                                                                                  |
+| `theme-select`                | Light / dark / system dropdown driving `userPrefersMode`.                                           | `select`                                                                                  |
 
-| Component    | Kind       | Features                                                                                                                                                | Registry deps           |
-| ------------ | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------- |
-| `gallery`    | primitives | `Gallery.Root` + `.Carousel`/`.Image`/`.Thumbnails`/`.ThumbnailImage`/`.Dots` on embla, sharing a context. Compose freely; style each part via `class`. | `carousel`              |
-| `gallery1`   | preset     | Batteries-included: thumbnails (`left`/`right`/`bottom`/`none`), mobile peek + dots, embla passthrough, `filterString`, bindable selected index.        | `gallery`               |
-| `gallery2`   | preset     | `gallery1` **plus** click-to-zoom overlay.                                                                                                              | `gallery`, `image-zoom` |
-| `image-zoom` | primitive  | Standalone click-to-zoom full-screen overlay with gallery navigation.                                                                                   | `button`                |
-| `markdown`   | component  | Themed prose renderer for backend-rendered HTML.                                                                                                        | —                       |
+## Styling individual subcomponents
 
-### Compound usage
+Components ship as shadcn-style **compound primitives** — an `X.Root` that provides context plus the
+parts you compose inside it. **Every part takes a `class`** that is `cn`-merged onto its element, so
+you style each piece independently. Layout is child order + flex classes; behavior is props on `Root`.
+There are no custom styling CSS variables — parts use the shadcn tokens (`--radius`, `bg-primary`, …)
+and inherit your theme.
 
 ```svelte
 <script lang="ts">
 	import * as Gallery from '$lib/components/ui/gallery'
 </script>
 
-<Gallery.Root {images} alt="Product" class="flex-row">
-	<Gallery.Thumbnails class="hidden w-20 md:flex"><Gallery.ThumbnailImage /></Gallery.Thumbnails>
-	<div class="flex min-w-0 flex-1 flex-col">
-		<Gallery.Carousel><Gallery.Image class="aspect-square object-cover" /></Gallery.Carousel>
-		<Gallery.Dots class="mt-3 flex md:hidden" />
-	</div>
+<Gallery.Root {images} alt="Product" thumbnails="left" zoom>
+	<Gallery.Thumbnails class="w-24"><Gallery.ThumbnailImage /></Gallery.Thumbnails>
+	<Gallery.Main>
+		<Gallery.Carousel><Gallery.Image class="aspect-square rounded-xl object-cover" /></Gallery.Carousel>
+		<Gallery.Dots class="mt-3" />
+	</Gallery.Main>
 </Gallery.Root>
 ```
 
-Position = child order + a flex-direction class on `Gallery.Root`; breakpoint visibility = responsive classes on
-`Gallery.Thumbnails`/`Gallery.Dots`; per-part styling = each part's `class`. No position/breakpoint props on the
-primitives, and no custom styling CSS vars — reuse the shadcn tokens (`--radius`, `bg-primary`, …). For custom
-per-image rendering: `<Gallery.Image>{#snippet child({ src, alt })}…{/snippet}</Gallery.Image>`.
-
-### Preset props (`Gallery1` / `Gallery2`)
-
-| Prop                  | Type                                      | Default    | Notes                                                                                   |
-| --------------------- | ----------------------------------------- | ---------- | --------------------------------------------------------------------------------------- |
-| `images`              | `(string \| StoreProductImage)[]`         | —          | URL strings or Medusa image objects (uses `.url`).                                      |
-| `filterString`        | `string`                                  | —          | Keep only images whose URL includes this substring; falls back to all if none match.    |
-| `thumbnails`          | `'left' \| 'right' \| 'bottom' \| 'none'` | `'bottom'` | Rail position (`left`/`right` = vertical rail).                                         |
-| `thumbnailBreakpoint` | `'sm' \| 'md' \| 'lg' \| 'xl'`            | `'md'`     | At/above this width the rail shows; below it, mobile peek + dots.                       |
-| `peek`                | `string \| false`                         | `'85%'`    | Mobile main-image width; remainder reveals the next image. `false` = full width + dots. |
-| `alt`                 | `string`                                  | `''`       | Fallback alt text.                                                                      |
-| `class`               | `string`                                  | `''`       | Merged onto the root flex container.                                                    |
-| `opts`                | `EmblaOptionsType`                        | —          | Embla passthrough (`loop`, `align`, `dragFree`, …).                                     |
-| `plugins`             | `EmblaPluginType[]`                       | —          | Embla plugins, e.g. `embla-carousel-autoplay` (install the plugin yourself).            |
-| `api`                 | `CarouselAPI` (`$bindable`)               | —          | The main embla api.                                                                     |
-| `selectedIndex`       | `number` (`$bindable`)                    | `0`        | The selected image index — bind to observe/drive selection.                             |
-
-## Theme switchers
-
-Four light/dark theme controls built on **[`mode-watcher`](https://github.com/svecosystem/mode-watcher)** (installed
-automatically). **Setup:** place **`<ModeWatcher />`** once in your root layout (`+layout.svelte`) — it seeds the theme
-from the OS/cookie and persists changes. Each control changes the theme immediately on interaction.
-
-| Component      | Kind     | Notes                                                                                                                                                                          | Registry deps |
-| -------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------- |
-| `theme-button` | `Button` | Icon button; toggles. Props: `size`, `variant` (default `ghost`), `class`, `sun`/`moon` snippets.                                                                              | `button`      |
-| `theme-toggle` | `Toggle` | `pressed = mode === onMode`; icon + text `label` (default `"Mode"`). Props: `size`, `variant` (default `outline`), `onMode` (default `light`), `label`, `class`, `sun`/`moon`. | `toggle`      |
-| `theme-switch` | `Switch` | Bare switch (no label — wrap in `Field` if you want one). `checked = mode === onMode`. Props: `onMode` (default `light`), `size`, `class`, `aria-label`, `form?`, `field?`.    | `switch`      |
-| `theme-select` | `Select` | Bare **light / dark / system** dropdown (the only 3-state control) driving `userPrefersMode`. Props: `size`, `class`, `aria-label`, `form?`, `field?`.                         | `select`      |
-
-- **`onMode`** (`theme-toggle`/`theme-switch`): which mode counts as _on_ (default `'light'` → on = light, off = dark; set `'dark'` to reverse).
-- **Icons** (`theme-button`/`theme-toggle`) reflect the current mode (sun = light, moon = dark); override with `sun`/`moon` snippets.
-- **`form` + `field`** (`theme-switch`/`theme-select`) is _optional and additive_ — for wiring the control into a SvelteKit remote-function settings form; it never replaces the immediate theme change.
+Here `zoom` and `thumbnails="left"` are behavior/layout props on `Root`, while `class` on
+`Gallery.Thumbnails`, `Gallery.Image`, and `Gallery.Dots` restyles each part in place. The same
+pattern applies to every compound component in the registry.
 
 ## Credits
 
-`image-zoom` is from **[more-shadcn-svelte](https://github.com/kevwpl/more-shadcn-svelte)**
+`image-zoom` is vendored from **[more-shadcn-svelte](https://github.com/kevwpl/more-shadcn-svelte)**
 by kevwpl, used under the MIT License.

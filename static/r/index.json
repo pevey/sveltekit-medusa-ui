@@ -101,10 +101,14 @@
 		"dependencies": [
 			"isomorphic-dompurify",
 			"@lucide/svelte",
-			"schema-dts"
+			"schema-dts",
+			"sveltekit-medusa-sdk"
 		],
 		"registryDependencies": [
-			"seo"
+			"seo",
+			"input-text",
+			"field",
+			"button"
 		],
 		"relativeUrl": "product.json"
 	},
