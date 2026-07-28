@@ -22,8 +22,9 @@
 	"homepage": "https://pevey.com/sveltekit-medusa-ui",
 	"type": "module",
 	"scripts": {
-		"registry:build": "shadcn-svelte registry build",
+		"build": "shadcn-svelte registry build -o .registry",
 		"check": "svelte-check --tsconfig ./tsconfig.json",
+		"registry:build": "shadcn-svelte registry build -o .registry",
 		"test:unit": "vitest",
 		"test": "vitest --run"
 	},
