@@ -1,6 +1,6 @@
 {
 	"name": "sveltekit-medusa-ui",
-	"version": "0.0.1",
+	"version": "2.18.0",
 	"description": "Ready-made SvelteKit components for the Medusa storefronts",
 	"author": "Lacey Pevey",
 	"license": "MIT",
