@@ -1,5 +1,6 @@
 import { expect, test } from 'vitest'
-import { averageToStarFills, ratingToStarFills, barFill, pageCount, formatReviewDate } from '../reviews-logic.js'
+import { averageToStarFills, ratingToStarFills, formatReviewDate } from '../../review/review-logic.js'
+import { barFill, pageCount } from '../../reviews/reviews-logic.js'
 
 test('averageToStarFills half-snaps', () => {
 	expect(averageToStarFills(4.2)).toEqual([1, 1, 1, 1, 0]) // 4.2 -> 4.0

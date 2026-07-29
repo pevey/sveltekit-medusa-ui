@@ -1,7 +1,7 @@
 <script lang="ts">
-	import Review from '$lib/components/ui/product/review.svelte'
-	import Author from '$lib/components/ui/product/review-author.svelte'
-	import Rating from '$lib/components/ui/product/review-rating.svelte'
+	import Review from '../../review/review.svelte'
+	import Author from '../../review/review-author.svelte'
+	import Rating from '../../review/review-rating.svelte'
 	let { review }: { review: any } = $props()
 </script>
 
