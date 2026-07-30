@@ -97,7 +97,22 @@ export default defineConfig({
 		maxWorkers: 2,
 		browser: {
 			enabled: true,
-			provider: playwright(),
+			provider: playwright({
+				// Playwright passes `--disable-dev-shm-usage` by default, which makes Chromium back
+				// its shared memory with files under TMPDIR (/tmp) instead of /dev/shm. When /tmp is
+				// a tmpfs that is close to full, those allocations start failing mid-run: module
+				// requests from a freshly created tester iframe fail with "Failed to fetch
+				// dynamically imported module", the iframe lands on an opaque-origin network-error
+				// page ("Cannot connect to the iframe ... unknown due to CORS"), and the browser
+				// process sometimes aborts outright (SIGTRAP). The failing file differed every run
+				// and always passed in isolation, which is what made this look like a path or
+				// concurrency bug rather than an environment one.
+				//
+				// Dropping the flag puts shared memory back on /dev/shm and takes the suite from
+				// ~25-41 of 92 files to all 92. In a container, give the runner a real /dev/shm
+				// (`docker run --shm-size=1g`) or set TMPDIR to a roomy on-disk path instead.
+				launchOptions: { ignoreDefaultArgs: ['--disable-dev-shm-usage'] }
+			}),
 			// Default is 30s. These pages each load Tailwind + shadcn tokens through the setup file,
 			// so on a busy machine startup can exceed it even at low concurrency.
 			connectTimeout: 120_000,
