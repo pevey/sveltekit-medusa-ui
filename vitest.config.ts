@@ -89,9 +89,18 @@ export default defineConfig({
 	test: {
 		// Real Chromium via Playwright — embla needs real layout/scroll (jsdom can't).
 		setupFiles: ['./src/test-setup.ts'],
+		// Cap concurrent browser pages. Vitest otherwise scales workers to the core count (32 here),
+		// and past roughly 6-8 simultaneous Chromium pages the @vitest/browser client cannot finish
+		// its handshake inside `connectTimeout` — every page in flight then fails at once with
+		// "Cannot connect to the server", and the run never reports a single test. Demonstrated by
+		// bisection: the same 12 test files fail at the default worker count and pass at 4.
+		maxWorkers: 2,
 		browser: {
 			enabled: true,
 			provider: playwright(),
+			// Default is 30s. These pages each load Tailwind + shadcn tokens through the setup file,
+			// so on a busy machine startup can exceed it even at low concurrency.
+			connectTimeout: 120_000,
 			instances: [{ browser: 'chromium', headless: true }]
 		}
 	}
