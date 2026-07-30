@@ -7,7 +7,7 @@ const h = vi.hoisted(() => ({
 	getCart: vi.fn(() => ({ current: null }) as any),
 	completeCart: vi.fn(async () => null as any)
 }))
-vi.mock('sveltekit-medusa-sdk', async (orig) => ({
+vi.mock('sveltekit-medusa-sdk', async orig => ({
 	...(await orig<Record<string, unknown>>()),
 	getCart: h.getCart,
 	completeCart: h.completeCart
@@ -15,7 +15,10 @@ vi.mock('sveltekit-medusa-sdk', async (orig) => ({
 
 import Harness from './root-harness.svelte'
 
-const CART_WITH_SHIPPING = { id: 'c', shipping_methods: [{ id: 'sm', shipping_option_id: 'so' }] } as any
+const CART_WITH_SHIPPING = {
+	id: 'c',
+	shipping_methods: [{ id: 'sm', shipping_option_id: 'so' }]
+} as any
 const makeForm = () => ({ fields: {} }) as any
 
 beforeEach(() => {
@@ -39,7 +42,9 @@ test('placeOrder navigates to redirectTo(order) instead of setting in-place orde
 	h.getCart.mockReturnValue({ current: CART_WITH_SHIPPING })
 	h.completeCart.mockResolvedValue({ id: 'order_5' } as any)
 	render(Harness, {
-		form: makeForm(), navigate, redirectTo: (o: any) => `/order/${o.id}`
+		form: makeForm(),
+		navigate,
+		redirectTo: (o: any) => `/order/${o.id}`
 	})
 	;(document.querySelector('[data-testid=reg-pay]') as HTMLButtonElement).click()
 	;(document.querySelector('[data-testid=place]') as HTMLButtonElement).click()

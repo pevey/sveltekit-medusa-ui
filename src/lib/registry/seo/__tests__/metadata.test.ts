@@ -3,10 +3,8 @@ import { expect, test } from 'vitest'
 import { page } from '$app/state'
 import Harness from './metadata-harness.svelte'
 
-const meta = (name: string) =>
-	document.head.querySelector(`meta[name="${name}"]`)?.getAttribute('content')
-const prop = (p: string) =>
-	document.head.querySelector(`meta[property="${p}"]`)?.getAttribute('content')
+const meta = (name: string) => document.head.querySelector(`meta[name="${name}"]`)?.getAttribute('content')
+const prop = (p: string) => document.head.querySelector(`meta[property="${p}"]`)?.getAttribute('content')
 const canonical = () => document.head.querySelector('link[rel="canonical"]')?.getAttribute('href')
 
 test('merges page config over provider defaults; applies title template off-home', async () => {

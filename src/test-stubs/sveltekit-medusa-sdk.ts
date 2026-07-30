@@ -6,13 +6,7 @@
 // actually invoked.
 export const search = async (_args: { q: string; limit?: number }) => ({ hits: [] })
 
-export const getProductQuery = async (_args: {
-	slug?: string
-	id?: string
-	region_id?: string
-	country_code?: string
-	fields?: string
-}) => null
+export const getProductQuery = async (_args: { slug?: string; id?: string; region_id?: string; country_code?: string; fields?: string }) => null
 
 // Cart remotes. Components import these as DI defaults but tests inject fakes, so these are
 // never invoked; they exist only so the named imports resolve in the vitest bundle.
@@ -38,16 +32,11 @@ type RegionLike = {
 	id?: string
 	countries?: ({ iso_2?: string; display_name?: string } | null)[] | null
 }
-export function regionForCountry<R extends RegionLike>(
-	regions: R[] | null | undefined,
-	countryCode: string
-): R | undefined {
+export function regionForCountry<R extends RegionLike>(regions: R[] | null | undefined, countryCode: string): R | undefined {
 	const code = countryCode.toLowerCase()
 	return regions?.find(r => r.countries?.some(c => c?.iso_2?.toLowerCase() === code))
 }
-export function countriesFromRegions(
-	regions: RegionLike[] | null | undefined
-): { code: string; name: string }[] {
+export function countriesFromRegions(regions: RegionLike[] | null | undefined): { code: string; name: string }[] {
 	const byCode = new Map<string, { code: string; name: string }>()
 	for (const region of regions ?? [])
 		for (const c of region.countries ?? []) {

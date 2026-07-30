@@ -1,10 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import {
-	resolveVariantId,
-	resolveQuantity,
-	findCartLine,
-	cartSatisfiesCondition
-} from '$lib/components/ui/cta/add-to-cart-logic.js'
+import { resolveVariantId, resolveQuantity, findCartLine, cartSatisfiesCondition } from '$lib/components/ui/cta/add-to-cart-logic.js'
 import type { StoreCart } from '@medusajs/types'
 import type { ProductContext } from '$lib/components/ui/product/ctx.svelte.js'
 

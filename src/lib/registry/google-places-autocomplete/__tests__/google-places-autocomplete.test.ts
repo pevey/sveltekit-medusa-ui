@@ -67,12 +67,7 @@ test('gmp-select emits a normalized address', async () => {
 		})
 	}
 	host.dispatchEvent(evt)
-	await vi.waitFor(() =>
-		expect(onselect).toHaveBeenCalledWith(
-			expect.objectContaining({ city: 'Springfield', country_code: 'us' }),
-			expect.anything()
-		)
-	)
+	await vi.waitFor(() => expect(onselect).toHaveBeenCalledWith(expect.objectContaining({ city: 'Springfield', country_code: 'us' }), expect.anything()))
 })
 
 test('input mirrors the composed inner value', async () => {

@@ -7,7 +7,7 @@ const h = vi.hoisted(() => ({
 	updateCartItem: vi.fn(async () => null as any),
 	removeFromCart: vi.fn(async () => null as any)
 }))
-vi.mock('sveltekit-medusa-sdk', async (orig) => ({
+vi.mock('sveltekit-medusa-sdk', async orig => ({
 	...(await orig<Record<string, unknown>>()),
 	getCart: h.getCart,
 	updateCartItem: h.updateCartItem,
@@ -18,8 +18,26 @@ import Harness from './items-harness.svelte'
 
 const cart = (items: any[]) => ({ current: { id: 'c', items } }) as any
 const lines = [
-	{ id: 'li1', product_title: 'Tee', variant_title: 'Red', quantity: 2, unit_price: 10, currency_code: 'usd', product_handle: 'tee', variant_id: 'v1' },
-	{ id: 'li2', product_title: 'Mug', variant_title: 'Blue', quantity: 1, unit_price: 8, currency_code: 'usd', product_handle: 'mug', variant_id: 'v2' }
+	{
+		id: 'li1',
+		product_title: 'Tee',
+		variant_title: 'Red',
+		quantity: 2,
+		unit_price: 10,
+		currency_code: 'usd',
+		product_handle: 'tee',
+		variant_id: 'v1'
+	},
+	{
+		id: 'li2',
+		product_title: 'Mug',
+		variant_title: 'Blue',
+		quantity: 1,
+		unit_price: 8,
+		currency_code: 'usd',
+		product_handle: 'mug',
+		variant_id: 'v2'
+	}
 ]
 
 test('renders one row per line with title + price', async () => {

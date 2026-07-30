@@ -11,7 +11,7 @@ const h = vi.hoisted(() => ({
 	refresh: vi.fn(async () => {}),
 	deleteReview: vi.fn(async () => ({}) as any)
 }))
-vi.mock('sveltekit-medusa-sdk/reviews', async (orig) => ({
+vi.mock('sveltekit-medusa-sdk/reviews', async orig => ({
 	...(await orig<Record<string, unknown>>()),
 	getMyReviews: (_args?: Record<string, unknown>) =>
 		Object.assign(Promise.resolve({ reviews: h.reviews, count: h.count }), {
@@ -64,7 +64,7 @@ test('renders rows from getMyReviews through the shared List/Review, incl. the p
 	expect(container.querySelectorAll('[data-review]').length).toBe(2)
 })
 
-test('clicking Delete calls deleteReview with the row\'s product_id + id, then refreshes the list', async () => {
+test("clicking Delete calls deleteReview with the row's product_id + id, then refreshes the list", async () => {
 	await render(Harness)
 	// Rows render in `ctx.reviews` order (r1 first) — target the first row's Delete button.
 	await vpage.getByRole('button', { name: 'Delete' }).first().click()

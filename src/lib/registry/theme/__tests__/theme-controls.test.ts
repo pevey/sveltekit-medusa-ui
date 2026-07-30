@@ -41,9 +41,7 @@ test('ThemeSwitch is checked in light (onMode default) and flips theme on change
 test('ThemeSwitch onMode="dark" reverses the mapping', async () => {
 	render(Harness, { component: ThemeSwitch, onMode: 'dark' })
 	// light mode → checked should now be false (on == dark)
-	await expect
-		.element(page.getByRole('switch', { name: 'Toggle theme' }))
-		.toHaveAttribute('aria-checked', 'false')
+	await expect.element(page.getByRole('switch', { name: 'Toggle theme' })).toHaveAttribute('aria-checked', 'false')
 })
 
 test('ThemeSelect reflects userPrefersMode and sets it (incl. system)', async () => {

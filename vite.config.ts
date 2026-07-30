@@ -44,9 +44,7 @@ export default defineConfig({
 			},
 			{
 				find: '$lib/components/ui/input-province',
-				replacement: fileURLToPath(
-					new URL('./src/lib/registry/input-province', import.meta.url)
-				)
+				replacement: fileURLToPath(new URL('./src/lib/registry/input-province', import.meta.url))
 			},
 			{
 				find: '$lib/components/ui/address',

@@ -9,7 +9,7 @@ const h = vi.hoisted(() => ({
 	getShippingOptions: vi.fn(async () => [] as any[]),
 	selectShippingOption: vi.fn(async () => null as any)
 }))
-vi.mock('sveltekit-medusa-sdk', async (orig) => ({
+vi.mock('sveltekit-medusa-sdk', async orig => ({
 	...(await orig<Record<string, unknown>>()),
 	getCart: h.getCart,
 	getShippingOptions: h.getShippingOptions,

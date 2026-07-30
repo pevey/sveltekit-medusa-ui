@@ -7,7 +7,7 @@ const h = vi.hoisted(() => ({
 	updateCartItem: vi.fn(async () => null as any),
 	removeFromCart: vi.fn(async () => null as any)
 }))
-vi.mock('sveltekit-medusa-sdk', async (orig) => ({
+vi.mock('sveltekit-medusa-sdk', async orig => ({
 	...(await orig<Record<string, unknown>>()),
 	getCart: h.getCart,
 	updateCartItem: h.updateCartItem,
@@ -16,7 +16,21 @@ vi.mock('sveltekit-medusa-sdk', async (orig) => ({
 
 import Harness from './mutations-harness.svelte'
 
-const cart = { id: 'c', items: [{ id: 'li1', product_title: 'Tee', variant_title: 'Red', quantity: 2, unit_price: 10, currency_code: 'usd', product_handle: 'tee', variant_id: 'v1' }] } as any
+const cart = {
+	id: 'c',
+	items: [
+		{
+			id: 'li1',
+			product_title: 'Tee',
+			variant_title: 'Red',
+			quantity: 2,
+			unit_price: 10,
+			currency_code: 'usd',
+			product_handle: 'tee',
+			variant_id: 'v1'
+		}
+	]
+} as any
 
 test('increment calls updateCartItem with quantity+1', async () => {
 	h.getCart.mockReturnValue({ current: cart })
@@ -41,7 +55,7 @@ test('controls disable while a mutation is pending', async () => {
 	h.getCart.mockReturnValue({ current: cart })
 	h.removeFromCart.mockResolvedValue(cart)
 	let resolve: (v: any) => void = () => {}
-	h.updateCartItem.mockImplementation(() => new Promise((r) => (resolve = r)) as any)
+	h.updateCartItem.mockImplementation(() => new Promise(r => (resolve = r)) as any)
 	await render(Harness, {})
 	await vpage.getByRole('button', { name: 'Increase quantity' }).click()
 	await expect.element(vpage.getByRole('button', { name: 'Remove' })).toBeDisabled()

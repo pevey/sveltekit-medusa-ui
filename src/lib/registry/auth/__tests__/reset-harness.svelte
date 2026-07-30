@@ -6,11 +6,7 @@
 	import ErrorPart from '$lib/components/ui/auth/error.svelte'
 	import Submit from '$lib/components/ui/auth/submit.svelte'
 
-	let {
-		token = '',
-		onsuccess,
-		onerror
-	}: { token?: string; onsuccess?: () => void; onerror?: (r: unknown) => void } = $props()
+	let { token = '', onsuccess, onerror }: { token?: string; onsuccess?: () => void; onerror?: (r: unknown) => void } = $props()
 </script>
 
 <ResetForm {token} {onsuccess} {onerror}>

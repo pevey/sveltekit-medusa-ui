@@ -45,8 +45,6 @@ test('renders issue messages and marks the field invalid', async () => {
 	})
 	await vi.waitFor(() => {
 		expect(document.querySelector('[data-slot="field-error"]')?.textContent).toContain('Required')
-		expect(document.querySelector('[data-slot="field"]')?.getAttribute('data-invalid')).toBe(
-			'true'
-		)
+		expect(document.querySelector('[data-slot="field"]')?.getAttribute('data-invalid')).toBe('true')
 	})
 })

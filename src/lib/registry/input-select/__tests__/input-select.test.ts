@@ -45,9 +45,5 @@ test('renders issue messages', async () => {
 		field: mockField({ issues: () => [{ message: 'Select a country' }] }),
 		options: OPTIONS
 	})
-	await vi.waitFor(() =>
-		expect(document.querySelector('[data-slot="field-error"]')?.textContent).toContain(
-			'Select a country'
-		)
-	)
+	await vi.waitFor(() => expect(document.querySelector('[data-slot="field-error"]')?.textContent).toContain('Select a country'))
 })

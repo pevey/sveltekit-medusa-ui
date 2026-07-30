@@ -4,11 +4,7 @@
 	import type { SearchHit } from '$lib/components/ui/search/ctx.svelte.js'
 	import Seed from './results-seed.svelte'
 
-	let {
-		hits = [],
-		isStatic = false,
-		useSnippet = false
-	}: { hits?: SearchHit[]; isStatic?: boolean; useSnippet?: boolean } = $props()
+	let { hits = [], isStatic = false, useSnippet = false }: { hits?: SearchHit[]; isStatic?: boolean; useSnippet?: boolean } = $props()
 </script>
 
 <Root>

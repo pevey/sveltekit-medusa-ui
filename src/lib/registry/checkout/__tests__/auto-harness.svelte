@@ -3,10 +3,7 @@
 	import AutoSwitch from '$lib/components/ui/checkout/checkout-auto-switch.svelte'
 	import type { RemoteForm } from '@sveltejs/kit'
 
-	let {
-		form,
-		config
-	}: { form: RemoteForm<any, any>; config?: any } = $props()
+	let { form, config }: { form: RemoteForm<any, any>; config?: any } = $props()
 </script>
 
 <Root {form} navigate={() => {}}>

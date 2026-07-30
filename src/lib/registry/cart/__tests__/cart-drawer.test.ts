@@ -7,7 +7,7 @@ const h = vi.hoisted(() => ({
 	updateCartItem: vi.fn(async () => null as any),
 	removeFromCart: vi.fn(async () => null as any)
 }))
-vi.mock('sveltekit-medusa-sdk', async (orig) => ({
+vi.mock('sveltekit-medusa-sdk', async orig => ({
 	...(await orig<Record<string, unknown>>()),
 	getCart: h.getCart,
 	updateCartItem: h.updateCartItem,

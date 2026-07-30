@@ -1,11 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import {
-	resolveVariant,
-	isAvailable,
-	isSelected,
-	inStock,
-	defaultVariantId
-} from '$lib/components/ui/product/product-logic.js'
+import { resolveVariant, isAvailable, isSelected, inStock, defaultVariantId } from '$lib/components/ui/product/product-logic.js'
 import type { StoreProduct, StoreProductVariant } from '@medusajs/types'
 
 // options Color(red,blue) x Size(S,M). 4 variants; mixed stock.
@@ -76,18 +70,10 @@ describe('product-logic', () => {
 	})
 
 	it('inStock: manage_inventory false always in stock; else qty>0', () => {
-		expect(
-			inStock({ manage_inventory: false, inventory_quantity: null } as StoreProductVariant)
-		).toBe(true)
-		expect(
-			inStock({ manage_inventory: true, inventory_quantity: 5 } as StoreProductVariant)
-		).toBe(true)
-		expect(
-			inStock({ manage_inventory: true, inventory_quantity: 0 } as StoreProductVariant)
-		).toBe(false)
-		expect(
-			inStock({ manage_inventory: true, inventory_quantity: null } as StoreProductVariant)
-		).toBe(false)
+		expect(inStock({ manage_inventory: false, inventory_quantity: null } as StoreProductVariant)).toBe(true)
+		expect(inStock({ manage_inventory: true, inventory_quantity: 5 } as StoreProductVariant)).toBe(true)
+		expect(inStock({ manage_inventory: true, inventory_quantity: 0 } as StoreProductVariant)).toBe(false)
+		expect(inStock({ manage_inventory: true, inventory_quantity: null } as StoreProductVariant)).toBe(false)
 	})
 
 	it('isAvailable is relative to the other selected options', () => {
@@ -117,13 +103,7 @@ describe('product-logic', () => {
 	})
 })
 
-import {
-	isPurchasable,
-	effectiveMax,
-	quantityRange,
-	clampQuantity,
-	clampToStock
-} from '$lib/components/ui/product/product-logic.js'
+import { isPurchasable, effectiveMax, quantityRange, clampQuantity, clampToStock } from '$lib/components/ui/product/product-logic.js'
 
 const v = (p: Partial<StoreProductVariant>) => p as StoreProductVariant
 
@@ -135,49 +115,28 @@ describe('isPurchasable', () => {
 		expect(isPurchasable(v({ manage_inventory: false, inventory_quantity: 0 }))).toBe(true)
 	})
 	it('backorderable at 0 stock is purchasable', () => {
-		expect(
-			isPurchasable(v({ manage_inventory: true, allow_backorder: true, inventory_quantity: 0 }))
-		).toBe(true)
+		expect(isPurchasable(v({ manage_inventory: true, allow_backorder: true, inventory_quantity: 0 }))).toBe(true)
 	})
 	it('managed, no backorder, 0 stock is NOT purchasable', () => {
-		expect(
-			isPurchasable(v({ manage_inventory: true, allow_backorder: false, inventory_quantity: 0 }))
-		).toBe(false)
+		expect(isPurchasable(v({ manage_inventory: true, allow_backorder: false, inventory_quantity: 0 }))).toBe(false)
 	})
 	it('managed with positive stock is purchasable', () => {
-		expect(
-			isPurchasable(v({ manage_inventory: true, allow_backorder: false, inventory_quantity: 3 }))
-		).toBe(true)
+		expect(isPurchasable(v({ manage_inventory: true, allow_backorder: false, inventory_quantity: 3 }))).toBe(true)
 	})
 })
 
 describe('effectiveMax', () => {
 	it('caps to stock when managed & no backorder', () => {
-		expect(
-			effectiveMax(
-				v({ manage_inventory: true, allow_backorder: false, inventory_quantity: 3 }),
-				10
-			)
-		).toBe(3)
+		expect(effectiveMax(v({ manage_inventory: true, allow_backorder: false, inventory_quantity: 3 }), 10)).toBe(3)
 	})
 	it('uses max when stock exceeds it', () => {
-		expect(
-			effectiveMax(
-				v({ manage_inventory: true, allow_backorder: false, inventory_quantity: 50 }),
-				10
-			)
-		).toBe(10)
+		expect(effectiveMax(v({ manage_inventory: true, allow_backorder: false, inventory_quantity: 50 }), 10)).toBe(10)
 	})
 	it('uses max when unmanaged', () => {
 		expect(effectiveMax(v({ manage_inventory: false }), 10)).toBe(10)
 	})
 	it('uses max when backorderable', () => {
-		expect(
-			effectiveMax(
-				v({ manage_inventory: true, allow_backorder: true, inventory_quantity: 0 }),
-				10
-			)
-		).toBe(10)
+		expect(effectiveMax(v({ manage_inventory: true, allow_backorder: true, inventory_quantity: 0 }), 10)).toBe(10)
 	})
 	it('null variant uses max', () => {
 		expect(effectiveMax(null, 10)).toBe(10)
@@ -204,12 +163,7 @@ describe('quantityRange', () => {
 		expect(quantityRange(null, { min: 2, step: 2, max: 8 })).toEqual([2, 4, 6, 8])
 	})
 	it('is empty when stock is below min', () => {
-		expect(
-			quantityRange(
-				v({ manage_inventory: true, allow_backorder: false, inventory_quantity: 0 }),
-				{ min: 1, step: 1, max: 10 }
-			)
-		).toEqual([])
+		expect(quantityRange(v({ manage_inventory: true, allow_backorder: false, inventory_quantity: 0 }), { min: 1, step: 1, max: 10 })).toEqual([])
 	})
 })
 
@@ -227,12 +181,7 @@ describe('clampQuantity', () => {
 
 describe('clampToStock', () => {
 	it('caps to stock when managed & no backorder', () => {
-		expect(
-			clampToStock(
-				5,
-				v({ manage_inventory: true, allow_backorder: false, inventory_quantity: 3 })
-			)
-		).toBe(3)
+		expect(clampToStock(5, v({ manage_inventory: true, allow_backorder: false, inventory_quantity: 3 }))).toBe(3)
 	})
 	it('floors at 1', () => {
 		expect(clampToStock(0, null)).toBe(1)

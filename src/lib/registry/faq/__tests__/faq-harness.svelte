@@ -2,11 +2,7 @@
 	import * as Faq from '$lib/components/ui/faq'
 	import Star from '@lucide/svelte/icons/star'
 
-	let {
-		type = 'single',
-		useIcon = false,
-		iconRotate = 180
-	}: { type?: 'single' | 'multiple'; useIcon?: boolean; iconRotate?: number } = $props()
+	let { type = 'single', useIcon = false, iconRotate = 180 }: { type?: 'single' | 'multiple'; useIcon?: boolean; iconRotate?: number } = $props()
 
 	const items = [
 		{

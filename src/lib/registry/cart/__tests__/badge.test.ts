@@ -7,7 +7,7 @@ const h = vi.hoisted(() => ({
 	updateCartItem: vi.fn(async () => null as any),
 	removeFromCart: vi.fn(async () => null as any)
 }))
-vi.mock('sveltekit-medusa-sdk', async (orig) => ({
+vi.mock('sveltekit-medusa-sdk', async orig => ({
 	...(await orig<Record<string, unknown>>()),
 	getCart: h.getCart,
 	updateCartItem: h.updateCartItem,
@@ -16,7 +16,15 @@ vi.mock('sveltekit-medusa-sdk', async (orig) => ({
 
 import Harness from './badge-harness.svelte'
 
-const withItems = { current: { id: 'c', items: [{ id: 'a', quantity: 2 }, { id: 'b', quantity: 3 }] } } as any
+const withItems = {
+	current: {
+		id: 'c',
+		items: [
+			{ id: 'a', quantity: 2 },
+			{ id: 'b', quantity: 3 }
+		]
+	}
+} as any
 const empty = { current: { id: 'c', items: [] } } as any
 
 test('badge shows total quantity by default', async () => {

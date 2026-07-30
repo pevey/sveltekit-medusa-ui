@@ -44,9 +44,9 @@ export function makeReviewsContext(get: () => Partial<ReviewsListContext> = () =
 		get productId() {
 			return get().productId ?? ''
 		},
-		pushReview: (review) => get().pushReview?.(review),
-		setRating: (n) => get().setRating?.(n),
-		setOrder: (s) => get().setOrder?.(s),
-		setPage: (n) => get().setPage?.(n)
+		pushReview: review => get().pushReview?.(review),
+		setRating: n => get().setRating?.(n),
+		setOrder: s => get().setOrder?.(s),
+		setPage: n => get().setPage?.(n)
 	}
 }

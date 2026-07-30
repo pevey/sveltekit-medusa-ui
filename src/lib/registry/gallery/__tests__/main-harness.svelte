@@ -11,27 +11,11 @@
 		thumbnailBreakpoint?: ThumbnailBreakpoint
 		zoom?: boolean
 	}
-	let {
-		images,
-		alt = '',
-		filterString,
-		imageClass = '',
-		thumbnails = 'bottom',
-		thumbnailBreakpoint = 'md',
-		zoom = false
-	}: Props = $props()
+	let { images, alt = '', filterString, imageClass = '', thumbnails = 'bottom', thumbnailBreakpoint = 'md', zoom = false }: Props = $props()
 	let selectedIndex = $state(0)
 </script>
 
-<Gallery.Root
-	{images}
-	{alt}
-	{filterString}
-	{thumbnails}
-	{thumbnailBreakpoint}
-	{zoom}
-	bind:selectedIndex
->
+<Gallery.Root {images} {alt} {filterString} {thumbnails} {thumbnailBreakpoint} {zoom} bind:selectedIndex>
 	{#if thumbnails !== 'none'}
 		<Gallery.Thumbnails>
 			<Gallery.ThumbnailImage />

@@ -4,7 +4,11 @@ import { expect, test, vi } from 'vitest'
 import Harness from './reviews-pagination-harness.svelte'
 
 test('renders nav + info when filteredCount exceeds pageSize', async () => {
-	const { container } = await render(Harness, { filteredCount: 25, pageSize: 10, setPage: vi.fn() })
+	const { container } = await render(Harness, {
+		filteredCount: 25,
+		pageSize: 10,
+		setPage: vi.fn()
+	})
 	expect(container.querySelector('[data-pagination]')).not.toBeNull()
 	await expect.element(page.getByText('Page 1 of 3')).toBeInTheDocument()
 })

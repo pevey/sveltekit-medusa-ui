@@ -3,11 +3,7 @@
 	import Review from '../../review/index.js'
 	import type { StoreReview } from '../index.js'
 
-	let {
-		reviews,
-		productId,
-		pageSize
-	}: { reviews?: StoreReview[]; productId?: string; pageSize?: number } = $props()
+	let { reviews, productId, pageSize }: { reviews?: StoreReview[]; productId?: string; pageSize?: number } = $props()
 </script>
 
 <Reviews.Root {reviews} {productId} {pageSize}>

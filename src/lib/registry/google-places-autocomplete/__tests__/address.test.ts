@@ -2,8 +2,7 @@ import { describe, it, expect } from 'vitest'
 import { componentsToAddress } from '../address'
 
 // Minimal shape matching google.maps.places.AddressComponent (longText/shortText/types).
-const comp = (types: string[], longText: string, shortText = longText) =>
-	({ types, longText, shortText }) as any
+const comp = (types: string[], longText: string, shortText = longText) => ({ types, longText, shortText }) as any
 
 describe('componentsToAddress', () => {
 	it('maps a full component set to a normalized address', () => {
@@ -27,11 +26,7 @@ describe('componentsToAddress', () => {
 	})
 
 	it('falls back to postal_town for city and trims address_1 when street_number is absent', () => {
-		const out = componentsToAddress([
-			comp(['route'], 'High Street'),
-			comp(['postal_town'], 'Cambridge'),
-			comp(['country'], 'United Kingdom', 'GB')
-		])
+		const out = componentsToAddress([comp(['route'], 'High Street'), comp(['postal_town'], 'Cambridge'), comp(['country'], 'United Kingdom', 'GB')])
 		expect(out.address_1).toBe('High Street')
 		expect(out.city).toBe('Cambridge')
 		expect(out.country_code).toBe('gb')

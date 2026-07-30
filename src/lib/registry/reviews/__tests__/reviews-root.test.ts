@@ -8,7 +8,7 @@ const h = vi.hoisted(() => ({
 	getReviews: vi.fn(() => ({ current: undefined }) as any),
 	getReviewSummary: vi.fn(() => ({ current: undefined }) as any)
 }))
-vi.mock('sveltekit-medusa-sdk/reviews', async (orig) => ({
+vi.mock('sveltekit-medusa-sdk/reviews', async orig => ({
 	...(await orig<Record<string, unknown>>()),
 	getReviews: h.getReviews,
 	getReviewSummary: h.getReviewSummary
@@ -17,9 +17,30 @@ vi.mock('sveltekit-medusa-sdk/reviews', async (orig) => ({
 import Harness from './reviews-root-harness.svelte'
 
 const reviews = [
-	{ id: 'r1', rating: 5, title: 'Great', body: 'Loved it', author_name: 'Alice', created_at: '2026-01-01' },
-	{ id: 'r2', rating: 3, title: 'Okay', body: 'Meh', author_name: 'Bob', created_at: '2026-02-01' },
-	{ id: 'r3', rating: 4, title: 'Good', body: 'Nice', author_name: 'Carol', created_at: '2026-03-01' }
+	{
+		id: 'r1',
+		rating: 5,
+		title: 'Great',
+		body: 'Loved it',
+		author_name: 'Alice',
+		created_at: '2026-01-01'
+	},
+	{
+		id: 'r2',
+		rating: 3,
+		title: 'Okay',
+		body: 'Meh',
+		author_name: 'Bob',
+		created_at: '2026-02-01'
+	},
+	{
+		id: 'r3',
+		rating: 4,
+		title: 'Good',
+		body: 'Nice',
+		author_name: 'Carol',
+		created_at: '2026-03-01'
+	}
 ]
 
 test('headless: renders a supplied review array through the shared List/Review', async () => {
@@ -53,9 +74,7 @@ test('fetch mode: renders reviews fetched for a productId', async () => {
 	await expect.element(page.getByText('Dan')).toBeInTheDocument()
 	await expect.element(page.getByText('Eve')).toBeInTheDocument()
 	expect(container.querySelectorAll('[data-review]').length).toBe(2)
-	expect(h.getReviews).toHaveBeenCalledWith(
-		expect.objectContaining({ productId: 'p1', order: '-created_at', limit: 10, offset: 0 })
-	)
+	expect(h.getReviews).toHaveBeenCalledWith(expect.objectContaining({ productId: 'p1', order: '-created_at', limit: 10, offset: 0 }))
 })
 
 test('fetch mode: paging re-fetches with a new offset', async () => {

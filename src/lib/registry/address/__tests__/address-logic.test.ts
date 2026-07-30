@@ -7,15 +7,30 @@ function getterFrom(values: Record<string, string>) {
 
 const SHIP = {
 	email: 'a@b.com',
-	first_name: 'Ada', last_name: 'Lovelace', address_1: '1 St', address_2: 'Apt 2',
-	city: 'Town', province: 'us-ca', postal_code: '90210', country_code: 'us', phone: '555'
+	first_name: 'Ada',
+	last_name: 'Lovelace',
+	address_1: '1 St',
+	address_2: 'Apt 2',
+	city: 'Town',
+	province: 'us-ca',
+	postal_code: '90210',
+	country_code: 'us',
+	phone: '555'
 }
 
 test('readAddress pulls the unprefixed fields', () => {
 	const a = readAddress(getterFrom(SHIP))
 	expect(a).toEqual({
-		first_name: 'Ada', last_name: 'Lovelace', address_1: '1 St', address_2: 'Apt 2',
-		city: 'Town', province: 'us-ca', postal_code: '90210', country_code: 'us', phone: '555', company: undefined
+		first_name: 'Ada',
+		last_name: 'Lovelace',
+		address_1: '1 St',
+		address_2: 'Apt 2',
+		city: 'Town',
+		province: 'us-ca',
+		postal_code: '90210',
+		country_code: 'us',
+		phone: '555',
+		company: undefined
 	})
 })
 

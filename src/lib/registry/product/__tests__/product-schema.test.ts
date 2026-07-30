@@ -11,9 +11,7 @@ describe('productSchema', () => {
 	})
 
 	it('maps name/description/image', () => {
-		const s = productSchema(
-			mk({ description: 'Soft', images: [{ url: 'a.jpg' } as any], variants: [] })
-		)!
+		const s = productSchema(mk({ description: 'Soft', images: [{ url: 'a.jpg' } as any], variants: [] }))!
 		expect(s['@type']).toBe('Product')
 		expect(s.name).toBe('Tee')
 		expect(s.description).toBe('Soft')
@@ -38,10 +36,7 @@ describe('productSchema', () => {
 	it('multiple variants → AggregateOffer low/high/offerCount, no sku', () => {
 		const s = productSchema(
 			mk({
-				variants: [
-					{ manage_inventory: false, calculated_price: cp(10) } as any,
-					{ manage_inventory: false, calculated_price: cp(25) } as any
-				]
+				variants: [{ manage_inventory: false, calculated_price: cp(10) } as any, { manage_inventory: false, calculated_price: cp(25) } as any]
 			})
 		)!
 		expect(s.sku).toBeUndefined()
@@ -90,9 +85,7 @@ describe('productSchema', () => {
 
 	it('non-array review relation → no aggregateRating/review, no throw', () => {
 		expect(() => productSchema(mk({ variants: [], review: undefined } as any))).not.toThrow()
-		const s = productSchema(
-			mk({ variants: [], review: { status: 'approved', rating: 5 } } as any)
-		)!
+		const s = productSchema(mk({ variants: [], review: { status: 'approved', rating: 5 } } as any))!
 		expect(s.aggregateRating).toBeUndefined()
 		expect(s.review).toBeUndefined()
 	})

@@ -3,8 +3,7 @@
 // vi.mock the SDK subpaths still need those real modules to TRANSFORM (vite processes the import
 // graph), so this makes the virtual resolvable. The factories are no-ops — vi.mock replaces the
 // remote modules' actual exports at runtime, so these are never exercised.
-export const query = (..._args: unknown[]) =>
-	Object.assign(async () => undefined, { current: undefined, refresh: async () => {} })
+export const query = (..._args: unknown[]) => Object.assign(async () => undefined, { current: undefined, refresh: async () => {} })
 export const command = (..._args: unknown[]) => Object.assign(async () => undefined, { pending: 0 })
 export const form = (..._args: unknown[]) => ({
 	pending: 0,
@@ -13,8 +12,7 @@ export const form = (..._args: unknown[]) => ({
 	enhance: () => ({}),
 	submit: async () => {}
 })
-export const prerender = (..._args: unknown[]) =>
-	Object.assign(async () => undefined, { current: undefined })
+export const prerender = (..._args: unknown[]) => Object.assign(async () => undefined, { current: undefined })
 export const getRequestEvent = () => ({
 	cookies: { get: () => undefined, set: () => {}, delete: () => {} },
 	request: new Request('http://localhost'),

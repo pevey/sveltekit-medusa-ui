@@ -6,14 +6,27 @@ import { expect, test, vi } from 'vitest'
 const h = vi.hoisted(() => ({
 	getCart: vi.fn(() => ({ current: null }) as any)
 }))
-vi.mock('sveltekit-medusa-sdk', async (orig) => ({
+vi.mock('sveltekit-medusa-sdk', async orig => ({
 	...(await orig<Record<string, unknown>>()),
 	getCart: h.getCart
 }))
 
 import Harness from './items-harness.svelte'
 
-const CART = { id: 'c', items: [{ id: 'li_1', product_title: 'Widget', variant_title: 'Blue', quantity: 2, unit_price: 10, subtotal: 20, currency_code: 'usd' }] }
+const CART = {
+	id: 'c',
+	items: [
+		{
+			id: 'li_1',
+			product_title: 'Widget',
+			variant_title: 'Blue',
+			quantity: 2,
+			unit_price: 10,
+			subtotal: 20,
+			currency_code: 'usd'
+		}
+	]
+}
 
 test('renders a row per cart item with title/price/subtotal', async () => {
 	h.getCart.mockReturnValue({ current: CART })

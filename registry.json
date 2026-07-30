@@ -61,15 +61,51 @@
 			"dependencies": [],
 			"registryDependencies": ["carousel", "image-zoom"],
 			"files": [
-				{ "path": "src/lib/registry/gallery/gallery.svelte", "type": "registry:ui", "target": "gallery/gallery.svelte" },
-				{ "path": "src/lib/registry/gallery/gallery-main.svelte", "type": "registry:ui", "target": "gallery/gallery-main.svelte" },
-				{ "path": "src/lib/registry/gallery/gallery-carousel.svelte", "type": "registry:ui", "target": "gallery/gallery-carousel.svelte" },
-				{ "path": "src/lib/registry/gallery/gallery-image.svelte", "type": "registry:ui", "target": "gallery/gallery-image.svelte" },
-				{ "path": "src/lib/registry/gallery/gallery-thumbnails.svelte", "type": "registry:ui", "target": "gallery/gallery-thumbnails.svelte" },
-				{ "path": "src/lib/registry/gallery/gallery-thumbnail-image.svelte", "type": "registry:ui", "target": "gallery/gallery-thumbnail-image.svelte" },
-				{ "path": "src/lib/registry/gallery/gallery-dots.svelte", "type": "registry:ui", "target": "gallery/gallery-dots.svelte" },
-				{ "path": "src/lib/registry/gallery/ctx.svelte.ts", "type": "registry:file", "target": "gallery/ctx.svelte.ts" },
-				{ "path": "src/lib/registry/gallery/index.ts", "type": "registry:file", "target": "gallery/index.ts" }
+				{
+					"path": "src/lib/registry/gallery/gallery.svelte",
+					"type": "registry:ui",
+					"target": "gallery/gallery.svelte"
+				},
+				{
+					"path": "src/lib/registry/gallery/gallery-main.svelte",
+					"type": "registry:ui",
+					"target": "gallery/gallery-main.svelte"
+				},
+				{
+					"path": "src/lib/registry/gallery/gallery-carousel.svelte",
+					"type": "registry:ui",
+					"target": "gallery/gallery-carousel.svelte"
+				},
+				{
+					"path": "src/lib/registry/gallery/gallery-image.svelte",
+					"type": "registry:ui",
+					"target": "gallery/gallery-image.svelte"
+				},
+				{
+					"path": "src/lib/registry/gallery/gallery-thumbnails.svelte",
+					"type": "registry:ui",
+					"target": "gallery/gallery-thumbnails.svelte"
+				},
+				{
+					"path": "src/lib/registry/gallery/gallery-thumbnail-image.svelte",
+					"type": "registry:ui",
+					"target": "gallery/gallery-thumbnail-image.svelte"
+				},
+				{
+					"path": "src/lib/registry/gallery/gallery-dots.svelte",
+					"type": "registry:ui",
+					"target": "gallery/gallery-dots.svelte"
+				},
+				{
+					"path": "src/lib/registry/gallery/ctx.svelte.ts",
+					"type": "registry:file",
+					"target": "gallery/ctx.svelte.ts"
+				},
+				{
+					"path": "src/lib/registry/gallery/index.ts",
+					"type": "registry:file",
+					"target": "gallery/index.ts"
+				}
 			]
 		},
 		{
@@ -80,13 +116,41 @@
 			"dependencies": ["@lucide/svelte", "sveltekit-medusa-sdk"],
 			"registryDependencies": [],
 			"files": [
-				{ "path": "src/lib/registry/search/search.svelte", "type": "registry:ui", "target": "search/search.svelte" },
-				{ "path": "src/lib/registry/search/search-icon.svelte", "type": "registry:ui", "target": "search/search-icon.svelte" },
-				{ "path": "src/lib/registry/search/search-input.svelte", "type": "registry:ui", "target": "search/search-input.svelte" },
-				{ "path": "src/lib/registry/search/search-results.svelte", "type": "registry:ui", "target": "search/search-results.svelte" },
-				{ "path": "src/lib/registry/search/search-hit.svelte", "type": "registry:ui", "target": "search/search-hit.svelte" },
-				{ "path": "src/lib/registry/search/ctx.svelte.ts", "type": "registry:file", "target": "search/ctx.svelte.ts" },
-				{ "path": "src/lib/registry/search/index.ts", "type": "registry:file", "target": "search/index.ts" }
+				{
+					"path": "src/lib/registry/search/search.svelte",
+					"type": "registry:ui",
+					"target": "search/search.svelte"
+				},
+				{
+					"path": "src/lib/registry/search/search-icon.svelte",
+					"type": "registry:ui",
+					"target": "search/search-icon.svelte"
+				},
+				{
+					"path": "src/lib/registry/search/search-input.svelte",
+					"type": "registry:ui",
+					"target": "search/search-input.svelte"
+				},
+				{
+					"path": "src/lib/registry/search/search-results.svelte",
+					"type": "registry:ui",
+					"target": "search/search-results.svelte"
+				},
+				{
+					"path": "src/lib/registry/search/search-hit.svelte",
+					"type": "registry:ui",
+					"target": "search/search-hit.svelte"
+				},
+				{
+					"path": "src/lib/registry/search/ctx.svelte.ts",
+					"type": "registry:file",
+					"target": "search/ctx.svelte.ts"
+				},
+				{
+					"path": "src/lib/registry/search/index.ts",
+					"type": "registry:file",
+					"target": "search/index.ts"
+				}
 			]
 		},
 		{
@@ -97,7 +161,11 @@
 			"dependencies": [],
 			"registryDependencies": ["search"],
 			"files": [
-				{ "path": "src/lib/registry/search/search-box.svelte", "type": "registry:ui", "target": "search/search-box.svelte" }
+				{
+					"path": "src/lib/registry/search/search-box.svelte",
+					"type": "registry:ui",
+					"target": "search/search-box.svelte"
+				}
 			]
 		},
 		{
@@ -108,7 +176,11 @@
 			"dependencies": [],
 			"registryDependencies": ["search", "dialog"],
 			"files": [
-				{ "path": "src/lib/registry/search/search-dialog.svelte", "type": "registry:ui", "target": "search/search-dialog.svelte" }
+				{
+					"path": "src/lib/registry/search/search-dialog.svelte",
+					"type": "registry:ui",
+					"target": "search/search-dialog.svelte"
+				}
 			]
 		},
 		{
@@ -119,11 +191,31 @@
 			"dependencies": ["@lucide/svelte", "bits-ui"],
 			"registryDependencies": ["accordion"],
 			"files": [
-				{ "path": "src/lib/registry/faq/faq.svelte", "type": "registry:ui", "target": "faq/faq.svelte" },
-				{ "path": "src/lib/registry/faq/faq-item.svelte", "type": "registry:ui", "target": "faq/faq-item.svelte" },
-				{ "path": "src/lib/registry/faq/faq-question.svelte", "type": "registry:ui", "target": "faq/faq-question.svelte" },
-				{ "path": "src/lib/registry/faq/faq-answer.svelte", "type": "registry:ui", "target": "faq/faq-answer.svelte" },
-				{ "path": "src/lib/registry/faq/index.ts", "type": "registry:file", "target": "faq/index.ts" }
+				{
+					"path": "src/lib/registry/faq/faq.svelte",
+					"type": "registry:ui",
+					"target": "faq/faq.svelte"
+				},
+				{
+					"path": "src/lib/registry/faq/faq-item.svelte",
+					"type": "registry:ui",
+					"target": "faq/faq-item.svelte"
+				},
+				{
+					"path": "src/lib/registry/faq/faq-question.svelte",
+					"type": "registry:ui",
+					"target": "faq/faq-question.svelte"
+				},
+				{
+					"path": "src/lib/registry/faq/faq-answer.svelte",
+					"type": "registry:ui",
+					"target": "faq/faq-answer.svelte"
+				},
+				{
+					"path": "src/lib/registry/faq/index.ts",
+					"type": "registry:file",
+					"target": "faq/index.ts"
+				}
 			]
 		},
 		{
@@ -134,12 +226,36 @@
 			"dependencies": ["schema-dts"],
 			"registryDependencies": [],
 			"files": [
-				{ "path": "src/lib/registry/seo/meta-provider.svelte", "type": "registry:ui", "target": "seo/meta-provider.svelte" },
-				{ "path": "src/lib/registry/seo/metadata.svelte", "type": "registry:ui", "target": "seo/metadata.svelte" },
-				{ "path": "src/lib/registry/seo/json-ld.svelte", "type": "registry:ui", "target": "seo/json-ld.svelte" },
-				{ "path": "src/lib/registry/seo/ctx.svelte.ts", "type": "registry:file", "target": "seo/ctx.svelte.ts" },
-				{ "path": "src/lib/registry/seo/types.ts", "type": "registry:file", "target": "seo/types.ts" },
-				{ "path": "src/lib/registry/seo/index.ts", "type": "registry:file", "target": "seo/index.ts" }
+				{
+					"path": "src/lib/registry/seo/meta-provider.svelte",
+					"type": "registry:ui",
+					"target": "seo/meta-provider.svelte"
+				},
+				{
+					"path": "src/lib/registry/seo/metadata.svelte",
+					"type": "registry:ui",
+					"target": "seo/metadata.svelte"
+				},
+				{
+					"path": "src/lib/registry/seo/json-ld.svelte",
+					"type": "registry:ui",
+					"target": "seo/json-ld.svelte"
+				},
+				{
+					"path": "src/lib/registry/seo/ctx.svelte.ts",
+					"type": "registry:file",
+					"target": "seo/ctx.svelte.ts"
+				},
+				{
+					"path": "src/lib/registry/seo/types.ts",
+					"type": "registry:file",
+					"target": "seo/types.ts"
+				},
+				{
+					"path": "src/lib/registry/seo/index.ts",
+					"type": "registry:file",
+					"target": "seo/index.ts"
+				}
 			]
 		},
 		{
@@ -150,18 +266,66 @@
 			"dependencies": [],
 			"registryDependencies": [],
 			"files": [
-				{ "path": "src/lib/registry/review/review.svelte", "type": "registry:ui", "target": "review/review.svelte" },
-				{ "path": "src/lib/registry/review/review-title.svelte", "type": "registry:ui", "target": "review/review-title.svelte" },
-				{ "path": "src/lib/registry/review/review-rating.svelte", "type": "registry:ui", "target": "review/review-rating.svelte" },
-				{ "path": "src/lib/registry/review/review-author.svelte", "type": "registry:ui", "target": "review/review-author.svelte" },
-				{ "path": "src/lib/registry/review/review-date.svelte", "type": "registry:ui", "target": "review/review-date.svelte" },
-				{ "path": "src/lib/registry/review/review-body.svelte", "type": "registry:ui", "target": "review/review-body.svelte" },
-				{ "path": "src/lib/registry/review/review-item.svelte", "type": "registry:ui", "target": "review/review-item.svelte" },
-				{ "path": "src/lib/registry/review/star.svelte", "type": "registry:ui", "target": "review/star.svelte" },
-				{ "path": "src/lib/registry/review/reviews-item-ctx.svelte.ts", "type": "registry:file", "target": "review/reviews-item-ctx.svelte.ts" },
-				{ "path": "src/lib/registry/review/review-logic.ts", "type": "registry:file", "target": "review/review-logic.ts" },
-				{ "path": "src/lib/registry/review/review-types.ts", "type": "registry:file", "target": "review/review-types.ts" },
-				{ "path": "src/lib/registry/review/index.ts", "type": "registry:file", "target": "review/index.ts" }
+				{
+					"path": "src/lib/registry/review/review.svelte",
+					"type": "registry:ui",
+					"target": "review/review.svelte"
+				},
+				{
+					"path": "src/lib/registry/review/review-title.svelte",
+					"type": "registry:ui",
+					"target": "review/review-title.svelte"
+				},
+				{
+					"path": "src/lib/registry/review/review-rating.svelte",
+					"type": "registry:ui",
+					"target": "review/review-rating.svelte"
+				},
+				{
+					"path": "src/lib/registry/review/review-author.svelte",
+					"type": "registry:ui",
+					"target": "review/review-author.svelte"
+				},
+				{
+					"path": "src/lib/registry/review/review-date.svelte",
+					"type": "registry:ui",
+					"target": "review/review-date.svelte"
+				},
+				{
+					"path": "src/lib/registry/review/review-body.svelte",
+					"type": "registry:ui",
+					"target": "review/review-body.svelte"
+				},
+				{
+					"path": "src/lib/registry/review/review-item.svelte",
+					"type": "registry:ui",
+					"target": "review/review-item.svelte"
+				},
+				{
+					"path": "src/lib/registry/review/star.svelte",
+					"type": "registry:ui",
+					"target": "review/star.svelte"
+				},
+				{
+					"path": "src/lib/registry/review/reviews-item-ctx.svelte.ts",
+					"type": "registry:file",
+					"target": "review/reviews-item-ctx.svelte.ts"
+				},
+				{
+					"path": "src/lib/registry/review/review-logic.ts",
+					"type": "registry:file",
+					"target": "review/review-logic.ts"
+				},
+				{
+					"path": "src/lib/registry/review/review-types.ts",
+					"type": "registry:file",
+					"target": "review/review-types.ts"
+				},
+				{
+					"path": "src/lib/registry/review/index.ts",
+					"type": "registry:file",
+					"target": "review/index.ts"
+				}
 			]
 		},
 		{
@@ -172,37 +336,161 @@
 			"dependencies": ["sveltekit-medusa-sdk"],
 			"registryDependencies": ["review", "product", "carousel", "button", "input-text"],
 			"files": [
-				{ "path": "src/lib/registry/reviews/reviews-root.svelte", "type": "registry:ui", "target": "reviews/reviews-root.svelte" },
-				{ "path": "src/lib/registry/reviews/reviews-list.svelte", "type": "registry:ui", "target": "reviews/reviews-list.svelte" },
-				{ "path": "src/lib/registry/reviews/reviews-sort.svelte", "type": "registry:ui", "target": "reviews/reviews-sort.svelte" },
-				{ "path": "src/lib/registry/reviews/reviews-pagination.svelte", "type": "registry:ui", "target": "reviews/reviews-pagination.svelte" },
-				{ "path": "src/lib/registry/reviews/reviews-pagination-prev.svelte", "type": "registry:ui", "target": "reviews/reviews-pagination-prev.svelte" },
-				{ "path": "src/lib/registry/reviews/reviews-pagination-next.svelte", "type": "registry:ui", "target": "reviews/reviews-pagination-next.svelte" },
-				{ "path": "src/lib/registry/reviews/reviews-pagination-info.svelte", "type": "registry:ui", "target": "reviews/reviews-pagination-info.svelte" },
-				{ "path": "src/lib/registry/reviews/reviews-carousel.svelte", "type": "registry:ui", "target": "reviews/reviews-carousel.svelte" },
-				{ "path": "src/lib/registry/reviews/reviews-summary.svelte", "type": "registry:ui", "target": "reviews/reviews-summary.svelte" },
-				{ "path": "src/lib/registry/reviews/reviews-summary-title.svelte", "type": "registry:ui", "target": "reviews/reviews-summary-title.svelte" },
-				{ "path": "src/lib/registry/reviews/reviews-summary-average.svelte", "type": "registry:ui", "target": "reviews/reviews-summary-average.svelte" },
-				{ "path": "src/lib/registry/reviews/reviews-summary-stars.svelte", "type": "registry:ui", "target": "reviews/reviews-summary-stars.svelte" },
-				{ "path": "src/lib/registry/reviews/reviews-summary-count.svelte", "type": "registry:ui", "target": "reviews/reviews-summary-count.svelte" },
-				{ "path": "src/lib/registry/reviews/reviews-histogram.svelte", "type": "registry:ui", "target": "reviews/reviews-histogram.svelte" },
-				{ "path": "src/lib/registry/reviews/reviews-histogram-bar.svelte", "type": "registry:ui", "target": "reviews/reviews-histogram-bar.svelte" },
-				{ "path": "src/lib/registry/reviews/reviews-histogram-label.svelte", "type": "registry:ui", "target": "reviews/reviews-histogram-label.svelte" },
-				{ "path": "src/lib/registry/reviews/reviews-histogram-level.svelte", "type": "registry:ui", "target": "reviews/reviews-histogram-level.svelte" },
-				{ "path": "src/lib/registry/reviews/reviews-form.svelte", "type": "registry:ui", "target": "reviews/reviews-form.svelte" },
-				{ "path": "src/lib/registry/reviews/reviews-form-author.svelte", "type": "registry:ui", "target": "reviews/reviews-form-author.svelte" },
-				{ "path": "src/lib/registry/reviews/reviews-form-rating.svelte", "type": "registry:ui", "target": "reviews/reviews-form-rating.svelte" },
-				{ "path": "src/lib/registry/reviews/reviews-form-title.svelte", "type": "registry:ui", "target": "reviews/reviews-form-title.svelte" },
-				{ "path": "src/lib/registry/reviews/reviews-form-body.svelte", "type": "registry:ui", "target": "reviews/reviews-form-body.svelte" },
-				{ "path": "src/lib/registry/reviews/reviews-form-submit.svelte", "type": "registry:ui", "target": "reviews/reviews-form-submit.svelte" },
-				{ "path": "src/lib/registry/reviews/reviews-form-cancel.svelte", "type": "registry:ui", "target": "reviews/reviews-form-cancel.svelte" },
-				{ "path": "src/lib/registry/reviews/reviews-form-error.svelte", "type": "registry:ui", "target": "reviews/reviews-form-error.svelte" },
-				{ "path": "src/lib/registry/reviews/reviews-ctx.svelte.ts", "type": "registry:file", "target": "reviews/reviews-ctx.svelte.ts" },
-				{ "path": "src/lib/registry/reviews/reviews-logic.ts", "type": "registry:file", "target": "reviews/reviews-logic.ts" },
-				{ "path": "src/lib/registry/reviews/create-review-form.svelte.ts", "type": "registry:file", "target": "reviews/create-review-form.svelte.ts" },
-				{ "path": "src/lib/registry/reviews/review-form-ctx.svelte.ts", "type": "registry:file", "target": "reviews/review-form-ctx.svelte.ts" },
-				{ "path": "src/lib/registry/reviews/review-form-messages.ts", "type": "registry:file", "target": "reviews/review-form-messages.ts" },
-				{ "path": "src/lib/registry/reviews/index.ts", "type": "registry:file", "target": "reviews/index.ts" }
+				{
+					"path": "src/lib/registry/reviews/reviews-root.svelte",
+					"type": "registry:ui",
+					"target": "reviews/reviews-root.svelte"
+				},
+				{
+					"path": "src/lib/registry/reviews/reviews-list.svelte",
+					"type": "registry:ui",
+					"target": "reviews/reviews-list.svelte"
+				},
+				{
+					"path": "src/lib/registry/reviews/reviews-sort.svelte",
+					"type": "registry:ui",
+					"target": "reviews/reviews-sort.svelte"
+				},
+				{
+					"path": "src/lib/registry/reviews/reviews-pagination.svelte",
+					"type": "registry:ui",
+					"target": "reviews/reviews-pagination.svelte"
+				},
+				{
+					"path": "src/lib/registry/reviews/reviews-pagination-prev.svelte",
+					"type": "registry:ui",
+					"target": "reviews/reviews-pagination-prev.svelte"
+				},
+				{
+					"path": "src/lib/registry/reviews/reviews-pagination-next.svelte",
+					"type": "registry:ui",
+					"target": "reviews/reviews-pagination-next.svelte"
+				},
+				{
+					"path": "src/lib/registry/reviews/reviews-pagination-info.svelte",
+					"type": "registry:ui",
+					"target": "reviews/reviews-pagination-info.svelte"
+				},
+				{
+					"path": "src/lib/registry/reviews/reviews-carousel.svelte",
+					"type": "registry:ui",
+					"target": "reviews/reviews-carousel.svelte"
+				},
+				{
+					"path": "src/lib/registry/reviews/reviews-summary.svelte",
+					"type": "registry:ui",
+					"target": "reviews/reviews-summary.svelte"
+				},
+				{
+					"path": "src/lib/registry/reviews/reviews-summary-title.svelte",
+					"type": "registry:ui",
+					"target": "reviews/reviews-summary-title.svelte"
+				},
+				{
+					"path": "src/lib/registry/reviews/reviews-summary-average.svelte",
+					"type": "registry:ui",
+					"target": "reviews/reviews-summary-average.svelte"
+				},
+				{
+					"path": "src/lib/registry/reviews/reviews-summary-stars.svelte",
+					"type": "registry:ui",
+					"target": "reviews/reviews-summary-stars.svelte"
+				},
+				{
+					"path": "src/lib/registry/reviews/reviews-summary-count.svelte",
+					"type": "registry:ui",
+					"target": "reviews/reviews-summary-count.svelte"
+				},
+				{
+					"path": "src/lib/registry/reviews/reviews-histogram.svelte",
+					"type": "registry:ui",
+					"target": "reviews/reviews-histogram.svelte"
+				},
+				{
+					"path": "src/lib/registry/reviews/reviews-histogram-bar.svelte",
+					"type": "registry:ui",
+					"target": "reviews/reviews-histogram-bar.svelte"
+				},
+				{
+					"path": "src/lib/registry/reviews/reviews-histogram-label.svelte",
+					"type": "registry:ui",
+					"target": "reviews/reviews-histogram-label.svelte"
+				},
+				{
+					"path": "src/lib/registry/reviews/reviews-histogram-level.svelte",
+					"type": "registry:ui",
+					"target": "reviews/reviews-histogram-level.svelte"
+				},
+				{
+					"path": "src/lib/registry/reviews/reviews-form.svelte",
+					"type": "registry:ui",
+					"target": "reviews/reviews-form.svelte"
+				},
+				{
+					"path": "src/lib/registry/reviews/reviews-form-author.svelte",
+					"type": "registry:ui",
+					"target": "reviews/reviews-form-author.svelte"
+				},
+				{
+					"path": "src/lib/registry/reviews/reviews-form-rating.svelte",
+					"type": "registry:ui",
+					"target": "reviews/reviews-form-rating.svelte"
+				},
+				{
+					"path": "src/lib/registry/reviews/reviews-form-title.svelte",
+					"type": "registry:ui",
+					"target": "reviews/reviews-form-title.svelte"
+				},
+				{
+					"path": "src/lib/registry/reviews/reviews-form-body.svelte",
+					"type": "registry:ui",
+					"target": "reviews/reviews-form-body.svelte"
+				},
+				{
+					"path": "src/lib/registry/reviews/reviews-form-submit.svelte",
+					"type": "registry:ui",
+					"target": "reviews/reviews-form-submit.svelte"
+				},
+				{
+					"path": "src/lib/registry/reviews/reviews-form-cancel.svelte",
+					"type": "registry:ui",
+					"target": "reviews/reviews-form-cancel.svelte"
+				},
+				{
+					"path": "src/lib/registry/reviews/reviews-form-error.svelte",
+					"type": "registry:ui",
+					"target": "reviews/reviews-form-error.svelte"
+				},
+				{
+					"path": "src/lib/registry/reviews/reviews-ctx.svelte.ts",
+					"type": "registry:file",
+					"target": "reviews/reviews-ctx.svelte.ts"
+				},
+				{
+					"path": "src/lib/registry/reviews/reviews-logic.ts",
+					"type": "registry:file",
+					"target": "reviews/reviews-logic.ts"
+				},
+				{
+					"path": "src/lib/registry/reviews/create-review-form.svelte.ts",
+					"type": "registry:file",
+					"target": "reviews/create-review-form.svelte.ts"
+				},
+				{
+					"path": "src/lib/registry/reviews/review-form-ctx.svelte.ts",
+					"type": "registry:file",
+					"target": "reviews/review-form-ctx.svelte.ts"
+				},
+				{
+					"path": "src/lib/registry/reviews/review-form-messages.ts",
+					"type": "registry:file",
+					"target": "reviews/review-form-messages.ts"
+				},
+				{
+					"path": "src/lib/registry/reviews/index.ts",
+					"type": "registry:file",
+					"target": "reviews/index.ts"
+				}
 			]
 		},
 		{
@@ -213,21 +501,81 @@
 			"dependencies": ["isomorphic-dompurify", "@lucide/svelte", "schema-dts", "sveltekit-medusa-sdk"],
 			"registryDependencies": ["seo", "review"],
 			"files": [
-				{ "path": "src/lib/registry/product/product.svelte", "type": "registry:ui", "target": "product/product.svelte" },
-				{ "path": "src/lib/registry/product/product-title.svelte", "type": "registry:ui", "target": "product/product-title.svelte" },
-				{ "path": "src/lib/registry/product/product-subtitle.svelte", "type": "registry:ui", "target": "product/product-subtitle.svelte" },
-				{ "path": "src/lib/registry/product/product-description.svelte", "type": "registry:ui", "target": "product/product-description.svelte" },
-				{ "path": "src/lib/registry/product/product-price.svelte", "type": "registry:ui", "target": "product/product-price.svelte" },
-				{ "path": "src/lib/registry/product/product-options.svelte", "type": "registry:ui", "target": "product/product-options.svelte" },
-				{ "path": "src/lib/registry/product/product-option-button.svelte", "type": "registry:ui", "target": "product/product-option-button.svelte" },
-				{ "path": "src/lib/registry/product/product-quantity-select.svelte", "type": "registry:ui", "target": "product/product-quantity-select.svelte" },
-				{ "path": "src/lib/registry/product/product-jsonld.svelte", "type": "registry:ui", "target": "product/product-jsonld.svelte" },
-				{ "path": "src/lib/registry/product/product-rating.svelte", "type": "registry:ui", "target": "product/product-rating.svelte" },
-				{ "path": "src/lib/registry/product/ctx.svelte.ts", "type": "registry:file", "target": "product/ctx.svelte.ts" },
-				{ "path": "src/lib/registry/product/product-schema.ts", "type": "registry:file", "target": "product/product-schema.ts" },
-				{ "path": "src/lib/registry/product/product-logic.ts", "type": "registry:file", "target": "product/product-logic.ts" },
-				{ "path": "src/lib/registry/product/format-price.ts", "type": "registry:file", "target": "product/format-price.ts" },
-				{ "path": "src/lib/registry/product/index.ts", "type": "registry:file", "target": "product/index.ts" }
+				{
+					"path": "src/lib/registry/product/product.svelte",
+					"type": "registry:ui",
+					"target": "product/product.svelte"
+				},
+				{
+					"path": "src/lib/registry/product/product-title.svelte",
+					"type": "registry:ui",
+					"target": "product/product-title.svelte"
+				},
+				{
+					"path": "src/lib/registry/product/product-subtitle.svelte",
+					"type": "registry:ui",
+					"target": "product/product-subtitle.svelte"
+				},
+				{
+					"path": "src/lib/registry/product/product-description.svelte",
+					"type": "registry:ui",
+					"target": "product/product-description.svelte"
+				},
+				{
+					"path": "src/lib/registry/product/product-price.svelte",
+					"type": "registry:ui",
+					"target": "product/product-price.svelte"
+				},
+				{
+					"path": "src/lib/registry/product/product-options.svelte",
+					"type": "registry:ui",
+					"target": "product/product-options.svelte"
+				},
+				{
+					"path": "src/lib/registry/product/product-option-button.svelte",
+					"type": "registry:ui",
+					"target": "product/product-option-button.svelte"
+				},
+				{
+					"path": "src/lib/registry/product/product-quantity-select.svelte",
+					"type": "registry:ui",
+					"target": "product/product-quantity-select.svelte"
+				},
+				{
+					"path": "src/lib/registry/product/product-jsonld.svelte",
+					"type": "registry:ui",
+					"target": "product/product-jsonld.svelte"
+				},
+				{
+					"path": "src/lib/registry/product/product-rating.svelte",
+					"type": "registry:ui",
+					"target": "product/product-rating.svelte"
+				},
+				{
+					"path": "src/lib/registry/product/ctx.svelte.ts",
+					"type": "registry:file",
+					"target": "product/ctx.svelte.ts"
+				},
+				{
+					"path": "src/lib/registry/product/product-schema.ts",
+					"type": "registry:file",
+					"target": "product/product-schema.ts"
+				},
+				{
+					"path": "src/lib/registry/product/product-logic.ts",
+					"type": "registry:file",
+					"target": "product/product-logic.ts"
+				},
+				{
+					"path": "src/lib/registry/product/format-price.ts",
+					"type": "registry:file",
+					"target": "product/format-price.ts"
+				},
+				{
+					"path": "src/lib/registry/product/index.ts",
+					"type": "registry:file",
+					"target": "product/index.ts"
+				}
 			]
 		},
 		{
@@ -238,12 +586,36 @@
 			"dependencies": ["sveltekit-medusa-sdk", "sveltekit-stripe"],
 			"registryDependencies": ["product", "button"],
 			"files": [
-				{ "path": "src/lib/registry/cta/add-to-cart-button.svelte", "type": "registry:ui", "target": "cta/add-to-cart-button.svelte" },
-				{ "path": "src/lib/registry/cta/add-to-cart-toggle.svelte", "type": "registry:ui", "target": "cta/add-to-cart-toggle.svelte" },
-				{ "path": "src/lib/registry/cta/stripe-express-checkout.svelte", "type": "registry:ui", "target": "cta/stripe-express-checkout.svelte" },
-				{ "path": "src/lib/registry/cta/add-to-cart-logic.ts", "type": "registry:file", "target": "cta/add-to-cart-logic.ts" },
-				{ "path": "src/lib/registry/cta/types.ts", "type": "registry:file", "target": "cta/types.ts" },
-				{ "path": "src/lib/registry/cta/index.ts", "type": "registry:file", "target": "cta/index.ts" }
+				{
+					"path": "src/lib/registry/cta/add-to-cart-button.svelte",
+					"type": "registry:ui",
+					"target": "cta/add-to-cart-button.svelte"
+				},
+				{
+					"path": "src/lib/registry/cta/add-to-cart-toggle.svelte",
+					"type": "registry:ui",
+					"target": "cta/add-to-cart-toggle.svelte"
+				},
+				{
+					"path": "src/lib/registry/cta/stripe-express-checkout.svelte",
+					"type": "registry:ui",
+					"target": "cta/stripe-express-checkout.svelte"
+				},
+				{
+					"path": "src/lib/registry/cta/add-to-cart-logic.ts",
+					"type": "registry:file",
+					"target": "cta/add-to-cart-logic.ts"
+				},
+				{
+					"path": "src/lib/registry/cta/types.ts",
+					"type": "registry:file",
+					"target": "cta/types.ts"
+				},
+				{
+					"path": "src/lib/registry/cta/index.ts",
+					"type": "registry:file",
+					"target": "cta/index.ts"
+				}
 			]
 		},
 		{
@@ -254,27 +626,111 @@
 			"dependencies": ["sveltekit-medusa-sdk", "@lucide/svelte"],
 			"registryDependencies": ["button", "sheet"],
 			"files": [
-				{ "path": "src/lib/registry/cart/cart.svelte", "type": "registry:ui", "target": "cart/cart.svelte" },
-				{ "path": "src/lib/registry/cart/cart-trigger.svelte", "type": "registry:ui", "target": "cart/cart-trigger.svelte" },
-				{ "path": "src/lib/registry/cart/cart-badge.svelte", "type": "registry:ui", "target": "cart/cart-badge.svelte" },
-				{ "path": "src/lib/registry/cart/cart-sheet.svelte", "type": "registry:ui", "target": "cart/cart-sheet.svelte" },
-				{ "path": "src/lib/registry/cart/cart-items.svelte", "type": "registry:ui", "target": "cart/cart-items.svelte" },
-				{ "path": "src/lib/registry/cart/cart-item.svelte", "type": "registry:ui", "target": "cart/cart-item.svelte" },
-				{ "path": "src/lib/registry/cart/cart-image.svelte", "type": "registry:ui", "target": "cart/cart-image.svelte" },
-				{ "path": "src/lib/registry/cart/cart-title.svelte", "type": "registry:ui", "target": "cart/cart-title.svelte" },
-				{ "path": "src/lib/registry/cart/cart-price.svelte", "type": "registry:ui", "target": "cart/cart-price.svelte" },
-				{ "path": "src/lib/registry/cart/cart-item-subtotal.svelte", "type": "registry:ui", "target": "cart/cart-item-subtotal.svelte" },
-				{ "path": "src/lib/registry/cart/cart-quantity.svelte", "type": "registry:ui", "target": "cart/cart-quantity.svelte" },
-				{ "path": "src/lib/registry/cart/cart-remove.svelte", "type": "registry:ui", "target": "cart/cart-remove.svelte" },
-				{ "path": "src/lib/registry/cart/cart-subtotal.svelte", "type": "registry:ui", "target": "cart/cart-subtotal.svelte" },
-				{ "path": "src/lib/registry/cart/cart-empty.svelte", "type": "registry:ui", "target": "cart/cart-empty.svelte" },
-				{ "path": "src/lib/registry/cart/cart-checkout.svelte", "type": "registry:ui", "target": "cart/cart-checkout.svelte" },
-				{ "path": "src/lib/registry/cart/cart-drawer.svelte", "type": "registry:ui", "target": "cart/cart-drawer.svelte" },
-				{ "path": "src/lib/registry/cart/ctx.svelte.ts", "type": "registry:file", "target": "cart/ctx.svelte.ts" },
-				{ "path": "src/lib/registry/cart/cart-logic.ts", "type": "registry:file", "target": "cart/cart-logic.ts" },
-				{ "path": "src/lib/registry/cart/format-price.ts", "type": "registry:file", "target": "cart/format-price.ts" },
-				{ "path": "src/lib/registry/cart/types.ts", "type": "registry:file", "target": "cart/types.ts" },
-				{ "path": "src/lib/registry/cart/index.ts", "type": "registry:file", "target": "cart/index.ts" }
+				{
+					"path": "src/lib/registry/cart/cart.svelte",
+					"type": "registry:ui",
+					"target": "cart/cart.svelte"
+				},
+				{
+					"path": "src/lib/registry/cart/cart-trigger.svelte",
+					"type": "registry:ui",
+					"target": "cart/cart-trigger.svelte"
+				},
+				{
+					"path": "src/lib/registry/cart/cart-badge.svelte",
+					"type": "registry:ui",
+					"target": "cart/cart-badge.svelte"
+				},
+				{
+					"path": "src/lib/registry/cart/cart-sheet.svelte",
+					"type": "registry:ui",
+					"target": "cart/cart-sheet.svelte"
+				},
+				{
+					"path": "src/lib/registry/cart/cart-items.svelte",
+					"type": "registry:ui",
+					"target": "cart/cart-items.svelte"
+				},
+				{
+					"path": "src/lib/registry/cart/cart-item.svelte",
+					"type": "registry:ui",
+					"target": "cart/cart-item.svelte"
+				},
+				{
+					"path": "src/lib/registry/cart/cart-image.svelte",
+					"type": "registry:ui",
+					"target": "cart/cart-image.svelte"
+				},
+				{
+					"path": "src/lib/registry/cart/cart-title.svelte",
+					"type": "registry:ui",
+					"target": "cart/cart-title.svelte"
+				},
+				{
+					"path": "src/lib/registry/cart/cart-price.svelte",
+					"type": "registry:ui",
+					"target": "cart/cart-price.svelte"
+				},
+				{
+					"path": "src/lib/registry/cart/cart-item-subtotal.svelte",
+					"type": "registry:ui",
+					"target": "cart/cart-item-subtotal.svelte"
+				},
+				{
+					"path": "src/lib/registry/cart/cart-quantity.svelte",
+					"type": "registry:ui",
+					"target": "cart/cart-quantity.svelte"
+				},
+				{
+					"path": "src/lib/registry/cart/cart-remove.svelte",
+					"type": "registry:ui",
+					"target": "cart/cart-remove.svelte"
+				},
+				{
+					"path": "src/lib/registry/cart/cart-subtotal.svelte",
+					"type": "registry:ui",
+					"target": "cart/cart-subtotal.svelte"
+				},
+				{
+					"path": "src/lib/registry/cart/cart-empty.svelte",
+					"type": "registry:ui",
+					"target": "cart/cart-empty.svelte"
+				},
+				{
+					"path": "src/lib/registry/cart/cart-checkout.svelte",
+					"type": "registry:ui",
+					"target": "cart/cart-checkout.svelte"
+				},
+				{
+					"path": "src/lib/registry/cart/cart-drawer.svelte",
+					"type": "registry:ui",
+					"target": "cart/cart-drawer.svelte"
+				},
+				{
+					"path": "src/lib/registry/cart/ctx.svelte.ts",
+					"type": "registry:file",
+					"target": "cart/ctx.svelte.ts"
+				},
+				{
+					"path": "src/lib/registry/cart/cart-logic.ts",
+					"type": "registry:file",
+					"target": "cart/cart-logic.ts"
+				},
+				{
+					"path": "src/lib/registry/cart/format-price.ts",
+					"type": "registry:file",
+					"target": "cart/format-price.ts"
+				},
+				{
+					"path": "src/lib/registry/cart/types.ts",
+					"type": "registry:file",
+					"target": "cart/types.ts"
+				},
+				{
+					"path": "src/lib/registry/cart/index.ts",
+					"type": "registry:file",
+					"target": "cart/index.ts"
+				}
 			]
 		},
 		{
@@ -285,27 +741,111 @@
 			"dependencies": ["sveltekit-medusa-sdk"],
 			"registryDependencies": ["field", "input-text", "input-select-country", "input-postal-code", "input-province", "google-places-autocomplete"],
 			"files": [
-				{ "path": "src/lib/registry/address/address-root.svelte", "type": "registry:ui", "target": "address/address-root.svelte" },
-				{ "path": "src/lib/registry/address/address-email.svelte", "type": "registry:ui", "target": "address/address-email.svelte" },
-				{ "path": "src/lib/registry/address/address-first-name.svelte", "type": "registry:ui", "target": "address/address-first-name.svelte" },
-				{ "path": "src/lib/registry/address/address-last-name.svelte", "type": "registry:ui", "target": "address/address-last-name.svelte" },
-				{ "path": "src/lib/registry/address/address-phone.svelte", "type": "registry:ui", "target": "address/address-phone.svelte" },
-				{ "path": "src/lib/registry/address/address-line2.svelte", "type": "registry:ui", "target": "address/address-line2.svelte" },
-				{ "path": "src/lib/registry/address/address-city.svelte", "type": "registry:ui", "target": "address/address-city.svelte" },
-				{ "path": "src/lib/registry/address/address-company.svelte", "type": "registry:ui", "target": "address/address-company.svelte" },
-				{ "path": "src/lib/registry/address/address-country.svelte", "type": "registry:ui", "target": "address/address-country.svelte" },
-				{ "path": "src/lib/registry/address/address-postal-code.svelte", "type": "registry:ui", "target": "address/address-postal-code.svelte" },
-				{ "path": "src/lib/registry/address/address-autocomplete.svelte", "type": "registry:ui", "target": "address/address-autocomplete.svelte" },
-				{ "path": "src/lib/registry/address/address-province.svelte", "type": "registry:ui", "target": "address/address-province.svelte" },
-				{ "path": "src/lib/registry/address/address-billing-toggle.svelte", "type": "registry:ui", "target": "address/address-billing-toggle.svelte" },
-				{ "path": "src/lib/registry/address/address-billing.svelte", "type": "registry:ui", "target": "address/address-billing.svelte" },
-				{ "path": "src/lib/registry/address/address-form.svelte", "type": "registry:ui", "target": "address/address-form.svelte" },
-				{ "path": "src/lib/registry/address/address-line1.svelte", "type": "registry:ui", "target": "address/address-line1.svelte" },
-				{ "path": "src/lib/registry/address/address-form-collapsed.svelte", "type": "registry:ui", "target": "address/address-form-collapsed.svelte" },
-				{ "path": "src/lib/registry/address/ctx.svelte.ts", "type": "registry:file", "target": "address/ctx.svelte.ts" },
-				{ "path": "src/lib/registry/address/address-logic.ts", "type": "registry:file", "target": "address/address-logic.ts" },
-				{ "path": "src/lib/registry/address/types.ts", "type": "registry:file", "target": "address/types.ts" },
-				{ "path": "src/lib/registry/address/index.ts", "type": "registry:file", "target": "address/index.ts" }
+				{
+					"path": "src/lib/registry/address/address-root.svelte",
+					"type": "registry:ui",
+					"target": "address/address-root.svelte"
+				},
+				{
+					"path": "src/lib/registry/address/address-email.svelte",
+					"type": "registry:ui",
+					"target": "address/address-email.svelte"
+				},
+				{
+					"path": "src/lib/registry/address/address-first-name.svelte",
+					"type": "registry:ui",
+					"target": "address/address-first-name.svelte"
+				},
+				{
+					"path": "src/lib/registry/address/address-last-name.svelte",
+					"type": "registry:ui",
+					"target": "address/address-last-name.svelte"
+				},
+				{
+					"path": "src/lib/registry/address/address-phone.svelte",
+					"type": "registry:ui",
+					"target": "address/address-phone.svelte"
+				},
+				{
+					"path": "src/lib/registry/address/address-line2.svelte",
+					"type": "registry:ui",
+					"target": "address/address-line2.svelte"
+				},
+				{
+					"path": "src/lib/registry/address/address-city.svelte",
+					"type": "registry:ui",
+					"target": "address/address-city.svelte"
+				},
+				{
+					"path": "src/lib/registry/address/address-company.svelte",
+					"type": "registry:ui",
+					"target": "address/address-company.svelte"
+				},
+				{
+					"path": "src/lib/registry/address/address-country.svelte",
+					"type": "registry:ui",
+					"target": "address/address-country.svelte"
+				},
+				{
+					"path": "src/lib/registry/address/address-postal-code.svelte",
+					"type": "registry:ui",
+					"target": "address/address-postal-code.svelte"
+				},
+				{
+					"path": "src/lib/registry/address/address-autocomplete.svelte",
+					"type": "registry:ui",
+					"target": "address/address-autocomplete.svelte"
+				},
+				{
+					"path": "src/lib/registry/address/address-province.svelte",
+					"type": "registry:ui",
+					"target": "address/address-province.svelte"
+				},
+				{
+					"path": "src/lib/registry/address/address-billing-toggle.svelte",
+					"type": "registry:ui",
+					"target": "address/address-billing-toggle.svelte"
+				},
+				{
+					"path": "src/lib/registry/address/address-billing.svelte",
+					"type": "registry:ui",
+					"target": "address/address-billing.svelte"
+				},
+				{
+					"path": "src/lib/registry/address/address-form.svelte",
+					"type": "registry:ui",
+					"target": "address/address-form.svelte"
+				},
+				{
+					"path": "src/lib/registry/address/address-line1.svelte",
+					"type": "registry:ui",
+					"target": "address/address-line1.svelte"
+				},
+				{
+					"path": "src/lib/registry/address/address-form-collapsed.svelte",
+					"type": "registry:ui",
+					"target": "address/address-form-collapsed.svelte"
+				},
+				{
+					"path": "src/lib/registry/address/ctx.svelte.ts",
+					"type": "registry:file",
+					"target": "address/ctx.svelte.ts"
+				},
+				{
+					"path": "src/lib/registry/address/address-logic.ts",
+					"type": "registry:file",
+					"target": "address/address-logic.ts"
+				},
+				{
+					"path": "src/lib/registry/address/types.ts",
+					"type": "registry:file",
+					"target": "address/types.ts"
+				},
+				{
+					"path": "src/lib/registry/address/index.ts",
+					"type": "registry:file",
+					"target": "address/index.ts"
+				}
 			]
 		},
 		{
@@ -316,51 +856,231 @@
 			"dependencies": ["sveltekit-medusa-sdk", "sveltekit-braintree", "sveltekit-stripe", "@stripe/stripe-js", "@lucide/svelte"],
 			"registryDependencies": ["address", "button"],
 			"files": [
-				{ "path": "src/lib/registry/checkout/checkout.svelte", "type": "registry:ui", "target": "checkout/checkout.svelte" },
-				{ "path": "src/lib/registry/checkout/checkout-items.svelte", "type": "registry:ui", "target": "checkout/checkout-items.svelte" },
-				{ "path": "src/lib/registry/checkout/checkout-item.svelte", "type": "registry:ui", "target": "checkout/checkout-item.svelte" },
-				{ "path": "src/lib/registry/checkout/checkout-image.svelte", "type": "registry:ui", "target": "checkout/checkout-image.svelte" },
-				{ "path": "src/lib/registry/checkout/checkout-title.svelte", "type": "registry:ui", "target": "checkout/checkout-title.svelte" },
-				{ "path": "src/lib/registry/checkout/checkout-price.svelte", "type": "registry:ui", "target": "checkout/checkout-price.svelte" },
-				{ "path": "src/lib/registry/checkout/checkout-quantity.svelte", "type": "registry:ui", "target": "checkout/checkout-quantity.svelte" },
-				{ "path": "src/lib/registry/checkout/checkout-item-subtotal.svelte", "type": "registry:ui", "target": "checkout/checkout-item-subtotal.svelte" },
-				{ "path": "src/lib/registry/checkout/checkout-remove.svelte", "type": "registry:ui", "target": "checkout/checkout-remove.svelte" },
-				{ "path": "src/lib/registry/checkout/checkout-delivery.svelte", "type": "registry:ui", "target": "checkout/checkout-delivery.svelte" },
-				{ "path": "src/lib/registry/checkout/checkout-discount.svelte", "type": "registry:ui", "target": "checkout/checkout-discount.svelte" },
-				{ "path": "src/lib/registry/checkout/checkout-summary.svelte", "type": "registry:ui", "target": "checkout/checkout-summary.svelte" },
-				{ "path": "src/lib/registry/checkout/checkout-summary-subtotal.svelte", "type": "registry:ui", "target": "checkout/checkout-summary-subtotal.svelte" },
-				{ "path": "src/lib/registry/checkout/checkout-summary-discount.svelte", "type": "registry:ui", "target": "checkout/checkout-summary-discount.svelte" },
-				{ "path": "src/lib/registry/checkout/checkout-summary-shipping.svelte", "type": "registry:ui", "target": "checkout/checkout-summary-shipping.svelte" },
-				{ "path": "src/lib/registry/checkout/checkout-summary-tax.svelte", "type": "registry:ui", "target": "checkout/checkout-summary-tax.svelte" },
-				{ "path": "src/lib/registry/checkout/checkout-summary-gift-card.svelte", "type": "registry:ui", "target": "checkout/checkout-summary-gift-card.svelte" },
-				{ "path": "src/lib/registry/checkout/checkout-summary-total.svelte", "type": "registry:ui", "target": "checkout/checkout-summary-total.svelte" },
-				{ "path": "src/lib/registry/checkout/checkout-summary-custom.svelte", "type": "registry:ui", "target": "checkout/checkout-summary-custom.svelte" },
-				{ "path": "src/lib/registry/checkout/checkout-braintree-hosted-fields.svelte", "type": "registry:ui", "target": "checkout/checkout-braintree-hosted-fields.svelte" },
-				{ "path": "src/lib/registry/checkout/checkout-braintree-payment.svelte", "type": "registry:ui", "target": "checkout/checkout-braintree-payment.svelte" },
-				{ "path": "src/lib/registry/checkout/checkout-stripe-elements.svelte", "type": "registry:ui", "target": "checkout/checkout-stripe-elements.svelte" },
-				{ "path": "src/lib/registry/checkout/checkout-stripe-payment.svelte", "type": "registry:ui", "target": "checkout/checkout-stripe-payment.svelte" },
-				{ "path": "src/lib/registry/checkout/checkout-stripe-address.svelte", "type": "registry:ui", "target": "checkout/checkout-stripe-address.svelte" },
-				{ "path": "src/lib/registry/checkout/checkout-stripe-card.svelte", "type": "registry:ui", "target": "checkout/checkout-stripe-card.svelte" },
-				{ "path": "src/lib/registry/checkout/checkout-stripe-container.svelte", "type": "registry:ui", "target": "checkout/checkout-stripe-container.svelte" },
-				{ "path": "src/lib/registry/checkout/checkout-stripe-express.svelte", "type": "registry:ui", "target": "checkout/checkout-stripe-express.svelte" },
-				{ "path": "src/lib/registry/checkout/checkout-stripe-ideal.svelte", "type": "registry:ui", "target": "checkout/checkout-stripe-ideal.svelte" },
-				{ "path": "src/lib/registry/checkout/checkout-place-order.svelte", "type": "registry:ui", "target": "checkout/checkout-place-order.svelte" },
-				{ "path": "src/lib/registry/checkout/checkout-confirmation.svelte", "type": "registry:ui", "target": "checkout/checkout-confirmation.svelte" },
-				{ "path": "src/lib/registry/checkout/checkout-return.svelte", "type": "registry:ui", "target": "checkout/checkout-return.svelte" },
-				{ "path": "src/lib/registry/checkout/checkout-error.svelte", "type": "registry:ui", "target": "checkout/checkout-error.svelte" },
-				{ "path": "src/lib/registry/checkout/checkout-braintree.svelte", "type": "registry:ui", "target": "checkout/checkout-braintree.svelte" },
-				{ "path": "src/lib/registry/checkout/checkout-braintree-body.svelte", "type": "registry:ui", "target": "checkout/checkout-braintree-body.svelte" },
-				{ "path": "src/lib/registry/checkout/checkout-stripe.svelte", "type": "registry:ui", "target": "checkout/checkout-stripe.svelte" },
-				{ "path": "src/lib/registry/checkout/checkout-stripe-body.svelte", "type": "registry:ui", "target": "checkout/checkout-stripe-body.svelte" },
-				{ "path": "src/lib/registry/checkout/checkout-auto.svelte", "type": "registry:ui", "target": "checkout/checkout-auto.svelte" },
-				{ "path": "src/lib/registry/checkout/checkout-auto-switch.svelte", "type": "registry:ui", "target": "checkout/checkout-auto-switch.svelte" },
-				{ "path": "src/lib/registry/checkout/ctx.svelte.ts", "type": "registry:file", "target": "checkout/ctx.svelte.ts" },
-				{ "path": "src/lib/registry/checkout/checkout-logic.ts", "type": "registry:file", "target": "checkout/checkout-logic.ts" },
-				{ "path": "src/lib/registry/checkout/stripe-appearance.ts", "type": "registry:file", "target": "checkout/stripe-appearance.ts" },
-				{ "path": "src/lib/registry/checkout/stripe-cs-context.ts", "type": "registry:file", "target": "checkout/stripe-cs-context.ts" },
-				{ "path": "src/lib/registry/checkout/format-price.ts", "type": "registry:file", "target": "checkout/format-price.ts" },
-				{ "path": "src/lib/registry/checkout/types.ts", "type": "registry:file", "target": "checkout/types.ts" },
-				{ "path": "src/lib/registry/checkout/index.ts", "type": "registry:file", "target": "checkout/index.ts" }
+				{
+					"path": "src/lib/registry/checkout/checkout.svelte",
+					"type": "registry:ui",
+					"target": "checkout/checkout.svelte"
+				},
+				{
+					"path": "src/lib/registry/checkout/checkout-items.svelte",
+					"type": "registry:ui",
+					"target": "checkout/checkout-items.svelte"
+				},
+				{
+					"path": "src/lib/registry/checkout/checkout-item.svelte",
+					"type": "registry:ui",
+					"target": "checkout/checkout-item.svelte"
+				},
+				{
+					"path": "src/lib/registry/checkout/checkout-image.svelte",
+					"type": "registry:ui",
+					"target": "checkout/checkout-image.svelte"
+				},
+				{
+					"path": "src/lib/registry/checkout/checkout-title.svelte",
+					"type": "registry:ui",
+					"target": "checkout/checkout-title.svelte"
+				},
+				{
+					"path": "src/lib/registry/checkout/checkout-price.svelte",
+					"type": "registry:ui",
+					"target": "checkout/checkout-price.svelte"
+				},
+				{
+					"path": "src/lib/registry/checkout/checkout-quantity.svelte",
+					"type": "registry:ui",
+					"target": "checkout/checkout-quantity.svelte"
+				},
+				{
+					"path": "src/lib/registry/checkout/checkout-item-subtotal.svelte",
+					"type": "registry:ui",
+					"target": "checkout/checkout-item-subtotal.svelte"
+				},
+				{
+					"path": "src/lib/registry/checkout/checkout-remove.svelte",
+					"type": "registry:ui",
+					"target": "checkout/checkout-remove.svelte"
+				},
+				{
+					"path": "src/lib/registry/checkout/checkout-delivery.svelte",
+					"type": "registry:ui",
+					"target": "checkout/checkout-delivery.svelte"
+				},
+				{
+					"path": "src/lib/registry/checkout/checkout-discount.svelte",
+					"type": "registry:ui",
+					"target": "checkout/checkout-discount.svelte"
+				},
+				{
+					"path": "src/lib/registry/checkout/checkout-summary.svelte",
+					"type": "registry:ui",
+					"target": "checkout/checkout-summary.svelte"
+				},
+				{
+					"path": "src/lib/registry/checkout/checkout-summary-subtotal.svelte",
+					"type": "registry:ui",
+					"target": "checkout/checkout-summary-subtotal.svelte"
+				},
+				{
+					"path": "src/lib/registry/checkout/checkout-summary-discount.svelte",
+					"type": "registry:ui",
+					"target": "checkout/checkout-summary-discount.svelte"
+				},
+				{
+					"path": "src/lib/registry/checkout/checkout-summary-shipping.svelte",
+					"type": "registry:ui",
+					"target": "checkout/checkout-summary-shipping.svelte"
+				},
+				{
+					"path": "src/lib/registry/checkout/checkout-summary-tax.svelte",
+					"type": "registry:ui",
+					"target": "checkout/checkout-summary-tax.svelte"
+				},
+				{
+					"path": "src/lib/registry/checkout/checkout-summary-gift-card.svelte",
+					"type": "registry:ui",
+					"target": "checkout/checkout-summary-gift-card.svelte"
+				},
+				{
+					"path": "src/lib/registry/checkout/checkout-summary-total.svelte",
+					"type": "registry:ui",
+					"target": "checkout/checkout-summary-total.svelte"
+				},
+				{
+					"path": "src/lib/registry/checkout/checkout-summary-custom.svelte",
+					"type": "registry:ui",
+					"target": "checkout/checkout-summary-custom.svelte"
+				},
+				{
+					"path": "src/lib/registry/checkout/checkout-braintree-hosted-fields.svelte",
+					"type": "registry:ui",
+					"target": "checkout/checkout-braintree-hosted-fields.svelte"
+				},
+				{
+					"path": "src/lib/registry/checkout/checkout-braintree-payment.svelte",
+					"type": "registry:ui",
+					"target": "checkout/checkout-braintree-payment.svelte"
+				},
+				{
+					"path": "src/lib/registry/checkout/checkout-stripe-elements.svelte",
+					"type": "registry:ui",
+					"target": "checkout/checkout-stripe-elements.svelte"
+				},
+				{
+					"path": "src/lib/registry/checkout/checkout-stripe-payment.svelte",
+					"type": "registry:ui",
+					"target": "checkout/checkout-stripe-payment.svelte"
+				},
+				{
+					"path": "src/lib/registry/checkout/checkout-stripe-address.svelte",
+					"type": "registry:ui",
+					"target": "checkout/checkout-stripe-address.svelte"
+				},
+				{
+					"path": "src/lib/registry/checkout/checkout-stripe-card.svelte",
+					"type": "registry:ui",
+					"target": "checkout/checkout-stripe-card.svelte"
+				},
+				{
+					"path": "src/lib/registry/checkout/checkout-stripe-container.svelte",
+					"type": "registry:ui",
+					"target": "checkout/checkout-stripe-container.svelte"
+				},
+				{
+					"path": "src/lib/registry/checkout/checkout-stripe-express.svelte",
+					"type": "registry:ui",
+					"target": "checkout/checkout-stripe-express.svelte"
+				},
+				{
+					"path": "src/lib/registry/checkout/checkout-stripe-ideal.svelte",
+					"type": "registry:ui",
+					"target": "checkout/checkout-stripe-ideal.svelte"
+				},
+				{
+					"path": "src/lib/registry/checkout/checkout-place-order.svelte",
+					"type": "registry:ui",
+					"target": "checkout/checkout-place-order.svelte"
+				},
+				{
+					"path": "src/lib/registry/checkout/checkout-confirmation.svelte",
+					"type": "registry:ui",
+					"target": "checkout/checkout-confirmation.svelte"
+				},
+				{
+					"path": "src/lib/registry/checkout/checkout-return.svelte",
+					"type": "registry:ui",
+					"target": "checkout/checkout-return.svelte"
+				},
+				{
+					"path": "src/lib/registry/checkout/checkout-error.svelte",
+					"type": "registry:ui",
+					"target": "checkout/checkout-error.svelte"
+				},
+				{
+					"path": "src/lib/registry/checkout/checkout-braintree.svelte",
+					"type": "registry:ui",
+					"target": "checkout/checkout-braintree.svelte"
+				},
+				{
+					"path": "src/lib/registry/checkout/checkout-braintree-body.svelte",
+					"type": "registry:ui",
+					"target": "checkout/checkout-braintree-body.svelte"
+				},
+				{
+					"path": "src/lib/registry/checkout/checkout-stripe.svelte",
+					"type": "registry:ui",
+					"target": "checkout/checkout-stripe.svelte"
+				},
+				{
+					"path": "src/lib/registry/checkout/checkout-stripe-body.svelte",
+					"type": "registry:ui",
+					"target": "checkout/checkout-stripe-body.svelte"
+				},
+				{
+					"path": "src/lib/registry/checkout/checkout-auto.svelte",
+					"type": "registry:ui",
+					"target": "checkout/checkout-auto.svelte"
+				},
+				{
+					"path": "src/lib/registry/checkout/checkout-auto-switch.svelte",
+					"type": "registry:ui",
+					"target": "checkout/checkout-auto-switch.svelte"
+				},
+				{
+					"path": "src/lib/registry/checkout/ctx.svelte.ts",
+					"type": "registry:file",
+					"target": "checkout/ctx.svelte.ts"
+				},
+				{
+					"path": "src/lib/registry/checkout/checkout-logic.ts",
+					"type": "registry:file",
+					"target": "checkout/checkout-logic.ts"
+				},
+				{
+					"path": "src/lib/registry/checkout/stripe-appearance.ts",
+					"type": "registry:file",
+					"target": "checkout/stripe-appearance.ts"
+				},
+				{
+					"path": "src/lib/registry/checkout/stripe-cs-context.ts",
+					"type": "registry:file",
+					"target": "checkout/stripe-cs-context.ts"
+				},
+				{
+					"path": "src/lib/registry/checkout/format-price.ts",
+					"type": "registry:file",
+					"target": "checkout/format-price.ts"
+				},
+				{
+					"path": "src/lib/registry/checkout/types.ts",
+					"type": "registry:file",
+					"target": "checkout/types.ts"
+				},
+				{
+					"path": "src/lib/registry/checkout/index.ts",
+					"type": "registry:file",
+					"target": "checkout/index.ts"
+				}
 			]
 		},
 		{
@@ -371,22 +1091,86 @@
 			"dependencies": ["sveltekit-medusa-sdk", "@lucide/svelte"],
 			"registryDependencies": ["dialog", "button", "field"],
 			"files": [
-				{ "path": "src/lib/registry/auth/auth-dialog.svelte", "type": "registry:ui", "target": "auth/auth-dialog.svelte" },
-				{ "path": "src/lib/registry/auth/error.svelte", "type": "registry:ui", "target": "auth/error.svelte" },
-				{ "path": "src/lib/registry/auth/field.svelte", "type": "registry:ui", "target": "auth/field.svelte" },
-				{ "path": "src/lib/registry/auth/forgot-form.svelte", "type": "registry:ui", "target": "auth/forgot-form.svelte" },
-				{ "path": "src/lib/registry/auth/input.svelte", "type": "registry:ui", "target": "auth/input.svelte" },
-				{ "path": "src/lib/registry/auth/label.svelte", "type": "registry:ui", "target": "auth/label.svelte" },
-				{ "path": "src/lib/registry/auth/login-form.svelte", "type": "registry:ui", "target": "auth/login-form.svelte" },
-				{ "path": "src/lib/registry/auth/register-form.svelte", "type": "registry:ui", "target": "auth/register-form.svelte" },
-				{ "path": "src/lib/registry/auth/reset-form.svelte", "type": "registry:ui", "target": "auth/reset-form.svelte" },
-				{ "path": "src/lib/registry/auth/submit.svelte", "type": "registry:ui", "target": "auth/submit.svelte" },
-				{ "path": "src/lib/registry/auth/auth-input-class.ts", "type": "registry:file", "target": "auth/auth-input-class.ts" },
-				{ "path": "src/lib/registry/auth/auth-messages.ts", "type": "registry:file", "target": "auth/auth-messages.ts" },
-				{ "path": "src/lib/registry/auth/create-auth-form.svelte.ts", "type": "registry:file", "target": "auth/create-auth-form.svelte.ts" },
-				{ "path": "src/lib/registry/auth/ctx.svelte.ts", "type": "registry:file", "target": "auth/ctx.svelte.ts" },
-				{ "path": "src/lib/registry/auth/types.ts", "type": "registry:file", "target": "auth/types.ts" },
-				{ "path": "src/lib/registry/auth/index.ts", "type": "registry:file", "target": "auth/index.ts" }
+				{
+					"path": "src/lib/registry/auth/auth-dialog.svelte",
+					"type": "registry:ui",
+					"target": "auth/auth-dialog.svelte"
+				},
+				{
+					"path": "src/lib/registry/auth/error.svelte",
+					"type": "registry:ui",
+					"target": "auth/error.svelte"
+				},
+				{
+					"path": "src/lib/registry/auth/field.svelte",
+					"type": "registry:ui",
+					"target": "auth/field.svelte"
+				},
+				{
+					"path": "src/lib/registry/auth/forgot-form.svelte",
+					"type": "registry:ui",
+					"target": "auth/forgot-form.svelte"
+				},
+				{
+					"path": "src/lib/registry/auth/input.svelte",
+					"type": "registry:ui",
+					"target": "auth/input.svelte"
+				},
+				{
+					"path": "src/lib/registry/auth/label.svelte",
+					"type": "registry:ui",
+					"target": "auth/label.svelte"
+				},
+				{
+					"path": "src/lib/registry/auth/login-form.svelte",
+					"type": "registry:ui",
+					"target": "auth/login-form.svelte"
+				},
+				{
+					"path": "src/lib/registry/auth/register-form.svelte",
+					"type": "registry:ui",
+					"target": "auth/register-form.svelte"
+				},
+				{
+					"path": "src/lib/registry/auth/reset-form.svelte",
+					"type": "registry:ui",
+					"target": "auth/reset-form.svelte"
+				},
+				{
+					"path": "src/lib/registry/auth/submit.svelte",
+					"type": "registry:ui",
+					"target": "auth/submit.svelte"
+				},
+				{
+					"path": "src/lib/registry/auth/auth-input-class.ts",
+					"type": "registry:file",
+					"target": "auth/auth-input-class.ts"
+				},
+				{
+					"path": "src/lib/registry/auth/auth-messages.ts",
+					"type": "registry:file",
+					"target": "auth/auth-messages.ts"
+				},
+				{
+					"path": "src/lib/registry/auth/create-auth-form.svelte.ts",
+					"type": "registry:file",
+					"target": "auth/create-auth-form.svelte.ts"
+				},
+				{
+					"path": "src/lib/registry/auth/ctx.svelte.ts",
+					"type": "registry:file",
+					"target": "auth/ctx.svelte.ts"
+				},
+				{
+					"path": "src/lib/registry/auth/types.ts",
+					"type": "registry:file",
+					"target": "auth/types.ts"
+				},
+				{
+					"path": "src/lib/registry/auth/index.ts",
+					"type": "registry:file",
+					"target": "auth/index.ts"
+				}
 			]
 		},
 		{
@@ -397,20 +1181,76 @@
 			"dependencies": ["sveltekit-medusa-sdk"],
 			"registryDependencies": ["dropdown-menu", "button", "reviews", "review", "textarea", "label"],
 			"files": [
-				{ "path": "src/lib/registry/customer/menu.svelte", "type": "registry:ui", "target": "customer/menu.svelte" },
-				{ "path": "src/lib/registry/customer/menu-content.svelte", "type": "registry:ui", "target": "customer/menu-content.svelte" },
-				{ "path": "src/lib/registry/customer/menu-item.svelte", "type": "registry:ui", "target": "customer/menu-item.svelte" },
-				{ "path": "src/lib/registry/customer/menu-trigger.svelte", "type": "registry:ui", "target": "customer/menu-trigger.svelte" },
-				{ "path": "src/lib/registry/customer/signed-in.svelte", "type": "registry:ui", "target": "customer/signed-in.svelte" },
-				{ "path": "src/lib/registry/customer/signed-out.svelte", "type": "registry:ui", "target": "customer/signed-out.svelte" },
-				{ "path": "src/lib/registry/customer/sign-in-button.svelte", "type": "registry:ui", "target": "customer/sign-in-button.svelte" },
-				{ "path": "src/lib/registry/customer/sign-out.svelte", "type": "registry:ui", "target": "customer/sign-out.svelte" },
-				{ "path": "src/lib/registry/customer/customer-reviews.svelte", "type": "registry:ui", "target": "customer/customer-reviews.svelte" },
-				{ "path": "src/lib/registry/customer/customer-review.svelte", "type": "registry:ui", "target": "customer/customer-review.svelte" },
-				{ "path": "src/lib/registry/customer/customer-review-delete.svelte", "type": "registry:ui", "target": "customer/customer-review-delete.svelte" },
-				{ "path": "src/lib/registry/customer/customer-review-edit.svelte", "type": "registry:ui", "target": "customer/customer-review-edit.svelte" },
-				{ "path": "src/lib/registry/customer/customer-review-product.svelte", "type": "registry:ui", "target": "customer/customer-review-product.svelte" },
-				{ "path": "src/lib/registry/customer/index.ts", "type": "registry:file", "target": "customer/index.ts" }
+				{
+					"path": "src/lib/registry/customer/menu.svelte",
+					"type": "registry:ui",
+					"target": "customer/menu.svelte"
+				},
+				{
+					"path": "src/lib/registry/customer/menu-content.svelte",
+					"type": "registry:ui",
+					"target": "customer/menu-content.svelte"
+				},
+				{
+					"path": "src/lib/registry/customer/menu-item.svelte",
+					"type": "registry:ui",
+					"target": "customer/menu-item.svelte"
+				},
+				{
+					"path": "src/lib/registry/customer/menu-trigger.svelte",
+					"type": "registry:ui",
+					"target": "customer/menu-trigger.svelte"
+				},
+				{
+					"path": "src/lib/registry/customer/signed-in.svelte",
+					"type": "registry:ui",
+					"target": "customer/signed-in.svelte"
+				},
+				{
+					"path": "src/lib/registry/customer/signed-out.svelte",
+					"type": "registry:ui",
+					"target": "customer/signed-out.svelte"
+				},
+				{
+					"path": "src/lib/registry/customer/sign-in-button.svelte",
+					"type": "registry:ui",
+					"target": "customer/sign-in-button.svelte"
+				},
+				{
+					"path": "src/lib/registry/customer/sign-out.svelte",
+					"type": "registry:ui",
+					"target": "customer/sign-out.svelte"
+				},
+				{
+					"path": "src/lib/registry/customer/customer-reviews.svelte",
+					"type": "registry:ui",
+					"target": "customer/customer-reviews.svelte"
+				},
+				{
+					"path": "src/lib/registry/customer/customer-review.svelte",
+					"type": "registry:ui",
+					"target": "customer/customer-review.svelte"
+				},
+				{
+					"path": "src/lib/registry/customer/customer-review-delete.svelte",
+					"type": "registry:ui",
+					"target": "customer/customer-review-delete.svelte"
+				},
+				{
+					"path": "src/lib/registry/customer/customer-review-edit.svelte",
+					"type": "registry:ui",
+					"target": "customer/customer-review-edit.svelte"
+				},
+				{
+					"path": "src/lib/registry/customer/customer-review-product.svelte",
+					"type": "registry:ui",
+					"target": "customer/customer-review-product.svelte"
+				},
+				{
+					"path": "src/lib/registry/customer/index.ts",
+					"type": "registry:file",
+					"target": "customer/index.ts"
+				}
 			]
 		},
 		{
@@ -421,7 +1261,11 @@
 			"dependencies": ["mode-watcher", "@lucide/svelte"],
 			"registryDependencies": ["button"],
 			"files": [
-				{ "path": "src/lib/registry/theme/theme-button.svelte", "type": "registry:ui", "target": "theme/theme-button.svelte" }
+				{
+					"path": "src/lib/registry/theme/theme-button.svelte",
+					"type": "registry:ui",
+					"target": "theme/theme-button.svelte"
+				}
 			]
 		},
 		{
@@ -432,7 +1276,11 @@
 			"dependencies": ["mode-watcher", "@lucide/svelte"],
 			"registryDependencies": ["toggle"],
 			"files": [
-				{ "path": "src/lib/registry/theme/theme-toggle.svelte", "type": "registry:ui", "target": "theme/theme-toggle.svelte" }
+				{
+					"path": "src/lib/registry/theme/theme-toggle.svelte",
+					"type": "registry:ui",
+					"target": "theme/theme-toggle.svelte"
+				}
 			]
 		},
 		{
@@ -443,7 +1291,11 @@
 			"dependencies": ["mode-watcher"],
 			"registryDependencies": ["switch"],
 			"files": [
-				{ "path": "src/lib/registry/theme/theme-switch.svelte", "type": "registry:ui", "target": "theme/theme-switch.svelte" }
+				{
+					"path": "src/lib/registry/theme/theme-switch.svelte",
+					"type": "registry:ui",
+					"target": "theme/theme-switch.svelte"
+				}
 			]
 		},
 		{
@@ -454,7 +1306,11 @@
 			"dependencies": ["mode-watcher"],
 			"registryDependencies": ["select"],
 			"files": [
-				{ "path": "src/lib/registry/theme/theme-select.svelte", "type": "registry:ui", "target": "theme/theme-select.svelte" }
+				{
+					"path": "src/lib/registry/theme/theme-select.svelte",
+					"type": "registry:ui",
+					"target": "theme/theme-select.svelte"
+				}
 			]
 		},
 		{
@@ -466,11 +1322,31 @@
 			"devDependencies": ["@types/google.maps"],
 			"registryDependencies": [],
 			"files": [
-				{ "path": "src/lib/registry/google-places-autocomplete/google-places-autocomplete.svelte", "type": "registry:ui", "target": "google-places-autocomplete/google-places-autocomplete.svelte" },
-				{ "path": "src/lib/registry/google-places-autocomplete/shadow-dom.ts", "type": "registry:file", "target": "google-places-autocomplete/shadow-dom.ts" },
-				{ "path": "src/lib/registry/google-places-autocomplete/address.ts", "type": "registry:file", "target": "google-places-autocomplete/address.ts" },
-				{ "path": "src/lib/registry/google-places-autocomplete/types.ts", "type": "registry:file", "target": "google-places-autocomplete/types.ts" },
-				{ "path": "src/lib/registry/google-places-autocomplete/index.ts", "type": "registry:file", "target": "google-places-autocomplete/index.ts" }
+				{
+					"path": "src/lib/registry/google-places-autocomplete/google-places-autocomplete.svelte",
+					"type": "registry:ui",
+					"target": "google-places-autocomplete/google-places-autocomplete.svelte"
+				},
+				{
+					"path": "src/lib/registry/google-places-autocomplete/shadow-dom.ts",
+					"type": "registry:file",
+					"target": "google-places-autocomplete/shadow-dom.ts"
+				},
+				{
+					"path": "src/lib/registry/google-places-autocomplete/address.ts",
+					"type": "registry:file",
+					"target": "google-places-autocomplete/address.ts"
+				},
+				{
+					"path": "src/lib/registry/google-places-autocomplete/types.ts",
+					"type": "registry:file",
+					"target": "google-places-autocomplete/types.ts"
+				},
+				{
+					"path": "src/lib/registry/google-places-autocomplete/index.ts",
+					"type": "registry:file",
+					"target": "google-places-autocomplete/index.ts"
+				}
 			]
 		},
 		{
@@ -481,7 +1357,11 @@
 			"dependencies": ["@lucide/svelte"],
 			"registryDependencies": ["field"],
 			"files": [
-				{ "path": "src/lib/registry/input-text/input-text.svelte", "type": "registry:ui", "target": "input-text/input-text.svelte" }
+				{
+					"path": "src/lib/registry/input-text/input-text.svelte",
+					"type": "registry:ui",
+					"target": "input-text/input-text.svelte"
+				}
 			]
 		},
 		{
@@ -492,7 +1372,11 @@
 			"dependencies": ["@lucide/svelte"],
 			"registryDependencies": ["field"],
 			"files": [
-				{ "path": "src/lib/registry/input-select/input-select.svelte", "type": "registry:ui", "target": "input-select/input-select.svelte" }
+				{
+					"path": "src/lib/registry/input-select/input-select.svelte",
+					"type": "registry:ui",
+					"target": "input-select/input-select.svelte"
+				}
 			]
 		},
 		{
@@ -503,7 +1387,11 @@
 			"dependencies": [],
 			"registryDependencies": ["input-select"],
 			"files": [
-				{ "path": "src/lib/registry/input-select-country/input-select-country.svelte", "type": "registry:ui", "target": "input-select-country/input-select-country.svelte" }
+				{
+					"path": "src/lib/registry/input-select-country/input-select-country.svelte",
+					"type": "registry:ui",
+					"target": "input-select-country/input-select-country.svelte"
+				}
 			]
 		},
 		{
@@ -514,7 +1402,11 @@
 			"dependencies": [],
 			"registryDependencies": ["input-text"],
 			"files": [
-				{ "path": "src/lib/registry/input-postal-code/input-postal-code.svelte", "type": "registry:ui", "target": "input-postal-code/input-postal-code.svelte" }
+				{
+					"path": "src/lib/registry/input-postal-code/input-postal-code.svelte",
+					"type": "registry:ui",
+					"target": "input-postal-code/input-postal-code.svelte"
+				}
 			]
 		},
 		{
@@ -525,9 +1417,21 @@
 			"dependencies": [],
 			"registryDependencies": ["input-select", "input-text"],
 			"files": [
-				{ "path": "src/lib/registry/input-province/input-province.svelte", "type": "registry:ui", "target": "input-province/input-province.svelte" },
-				{ "path": "src/lib/registry/input-province/provinces.ts", "type": "registry:file", "target": "input-province/provinces.ts" },
-				{ "path": "src/lib/registry/input-province/index.ts", "type": "registry:file", "target": "input-province/index.ts" }
+				{
+					"path": "src/lib/registry/input-province/input-province.svelte",
+					"type": "registry:ui",
+					"target": "input-province/input-province.svelte"
+				},
+				{
+					"path": "src/lib/registry/input-province/provinces.ts",
+					"type": "registry:file",
+					"target": "input-province/provinces.ts"
+				},
+				{
+					"path": "src/lib/registry/input-province/index.ts",
+					"type": "registry:file",
+					"target": "input-province/index.ts"
+				}
 			]
 		}
 	]

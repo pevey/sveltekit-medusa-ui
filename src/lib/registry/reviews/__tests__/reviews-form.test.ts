@@ -31,7 +31,7 @@ const h = vi.hoisted(() => {
 	return { reviewForm }
 })
 
-vi.mock('sveltekit-medusa-sdk/reviews', async (orig) => ({
+vi.mock('sveltekit-medusa-sdk/reviews', async orig => ({
 	...(await orig<Record<string, unknown>>()),
 	reviewForm: h.reviewForm
 }))

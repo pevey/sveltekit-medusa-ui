@@ -6,7 +6,11 @@ import Harness from './reviews-histogram-harness.svelte'
 const summary = { average: 4.2, count: 10, distribution: { 1: 0, 2: 1, 3: 1, 4: 3, 5: 5 } }
 
 test('renders 5 level rows, most-starred first', async () => {
-	const { container } = await render(Harness, { summary, count: summary.count, setRating: vi.fn() })
+	const { container } = await render(Harness, {
+		summary,
+		count: summary.count,
+		setRating: vi.fn()
+	})
 	const bars = container.querySelectorAll('[data-histogram-bar]')
 	expect(bars.length).toBe(5)
 	expect(container.querySelector('[data-histogram]')).not.toBeNull()

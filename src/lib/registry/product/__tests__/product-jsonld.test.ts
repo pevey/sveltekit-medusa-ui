@@ -20,9 +20,7 @@ const product = {
 } as unknown as StoreProduct
 
 function ld() {
-	const el = [
-		...document.head.querySelectorAll('script[type="application/ld+json"]')
-	].pop() as HTMLScriptElement
+	const el = [...document.head.querySelectorAll('script[type="application/ld+json"]')].pop() as HTMLScriptElement
 	return JSON.parse(el.textContent!)
 }
 

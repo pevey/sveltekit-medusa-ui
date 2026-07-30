@@ -8,7 +8,7 @@ const h = vi.hoisted(() => ({
 	getCart: vi.fn(() => ({ current: null }) as any),
 	completeCart: vi.fn(async () => null as any)
 }))
-vi.mock('sveltekit-medusa-sdk', async (orig) => ({
+vi.mock('sveltekit-medusa-sdk', async orig => ({
 	...(await orig<Record<string, unknown>>()),
 	getCart: h.getCart,
 	completeCart: h.completeCart
@@ -32,9 +32,25 @@ function field(name: string) {
 function makeForm() {
 	const fields: Record<string, any> = {}
 	const names = [
-		'email', 'hideBilling', 'first_name', 'last_name', 'address_1', 'address_2', 'city', 'province',
-		'postal_code', 'country_code', 'phone', 'billing_first_name', 'billing_last_name', 'billing_address_1',
-		'billing_address_2', 'billing_city', 'billing_province', 'billing_postal_code', 'billing_country_code',
+		'email',
+		'hideBilling',
+		'first_name',
+		'last_name',
+		'address_1',
+		'address_2',
+		'city',
+		'province',
+		'postal_code',
+		'country_code',
+		'phone',
+		'billing_first_name',
+		'billing_last_name',
+		'billing_address_1',
+		'billing_address_2',
+		'billing_city',
+		'billing_province',
+		'billing_postal_code',
+		'billing_country_code',
 		'billing_phone'
 	]
 	for (const n of names) fields[n] = field(n)
@@ -46,7 +62,15 @@ const CART = {
 	currency_code: 'usd',
 	email: 'test@example.com',
 	items: [
-		{ id: 'item_1', product_title: 'Widget', variant_title: 'Blue', quantity: 2, unit_price: 1000, subtotal: 2000, thumbnail: null }
+		{
+			id: 'item_1',
+			product_title: 'Widget',
+			variant_title: 'Blue',
+			quantity: 2,
+			unit_price: 1000,
+			subtotal: 2000,
+			thumbnail: null
+		}
 	],
 	shipping_methods: [{ id: 'sm_1', shipping_option_id: 'so_1', name: 'Standard' }],
 	shipping_address: {},

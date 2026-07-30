@@ -8,8 +8,7 @@ const h = vi.hoisted(() => ({
 	logout: vi.fn(async () => {})
 }))
 vi.mock('sveltekit-medusa-sdk/customer', () => ({
-	getCustomer: () =>
-		Object.assign(Promise.resolve(h.customer), { refresh: h.refresh, current: h.customer })
+	getCustomer: () => Object.assign(Promise.resolve(h.customer), { refresh: h.refresh, current: h.customer })
 }))
 vi.mock('sveltekit-medusa-sdk/auth', () => ({ logout: h.logout }))
 

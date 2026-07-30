@@ -8,7 +8,7 @@ const h = vi.hoisted(() => ({
 	getRegions: vi.fn(() => Object.assign(Promise.resolve([]), { current: [] }) as any),
 	updateCart: vi.fn(async (_args: any) => null as any)
 }))
-vi.mock('sveltekit-medusa-sdk', async (orig) => ({
+vi.mock('sveltekit-medusa-sdk', async orig => ({
 	...(await orig<Record<string, unknown>>()),
 	getCart: h.getCart,
 	getRegions: h.getRegions,
@@ -19,15 +19,48 @@ import Harness from './root-harness.svelte'
 
 function field(initial = '') {
 	let v = initial
-	return { as: (t: string, d?: unknown) => ({ name: '', type: t }), issues: () => undefined, value: () => v, set: (nv: string) => { v = nv }, touched: () => false, dirty: () => false }
+	return {
+		as: (t: string, d?: unknown) => ({ name: '', type: t }),
+		issues: () => undefined,
+		value: () => v,
+		set: (nv: string) => {
+			v = nv
+		},
+		touched: () => false,
+		dirty: () => false
+	}
 }
 function makeForm(values: Record<string, string> = {}) {
 	const fields: Record<string, any> = {}
 	const names = [
-		'email', 'hideBilling', 'first_name', 'last_name', 'address_1', 'address_2', 'city', 'province', 'postal_code', 'country_code', 'phone',
-		'billing_first_name', 'billing_last_name', 'billing_address_1', 'billing_address_2', 'billing_city', 'billing_province', 'billing_postal_code', 'billing_country_code', 'billing_phone', 'company', 'billing_company'
+		'email',
+		'hideBilling',
+		'first_name',
+		'last_name',
+		'address_1',
+		'address_2',
+		'city',
+		'province',
+		'postal_code',
+		'country_code',
+		'phone',
+		'billing_first_name',
+		'billing_last_name',
+		'billing_address_1',
+		'billing_address_2',
+		'billing_city',
+		'billing_province',
+		'billing_postal_code',
+		'billing_country_code',
+		'billing_phone',
+		'company',
+		'billing_company'
 	]
-	for (const n of names) { const f = field(values[n] ?? ''); f.as = (t: string) => ({ name: n, type: t }); fields[n] = f }
+	for (const n of names) {
+		const f = field(values[n] ?? '')
+		f.as = (t: string) => ({ name: n, type: t })
+		fields[n] = f
+	}
 	return { fields } as any
 }
 const REGIONS = [
@@ -58,7 +91,7 @@ test('restrictToCurrentRegion narrows countries to the current region and clamps
 	expect(countries).not.toContain('ca')
 	// Region switching is clamped — selecting an out-of-region country does NOT switch region.
 	;(document.querySelector('[data-testid=region-ca]') as HTMLButtonElement).click()
-	await new Promise((r) => setTimeout(r, 50))
+	await new Promise(r => setTimeout(r, 50))
 	expect(updateCart).not.toHaveBeenCalledWith(expect.objectContaining({ region_id: 'reg_ca' }))
 })
 

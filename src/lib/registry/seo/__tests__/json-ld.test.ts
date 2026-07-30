@@ -3,9 +3,7 @@ import { expect, test } from 'vitest'
 import JsonLd from '$lib/components/ui/seo/json-ld.svelte'
 
 function ldScript() {
-	return [...document.head.querySelectorAll('script[type="application/ld+json"]')].pop() as
-		| HTMLScriptElement
-		| undefined
+	return [...document.head.querySelectorAll('script[type="application/ld+json"]')].pop() as HTMLScriptElement | undefined
 }
 
 test('injects a JSON-LD script with @context and the schema', async () => {

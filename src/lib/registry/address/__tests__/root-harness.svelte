@@ -22,7 +22,7 @@
 
 <Root {form} {googlePlacesApiKey} {restrictToCurrentRegion} {onregionchange} {onaddresschange} {onerror}>
 	{@const ctx = getAddressContext()}
-	<span data-testid="countries">{ctx.countries.map((c) => c.code).join(',')}</span>
+	<span data-testid="countries">{ctx.countries.map(c => c.code).join(',')}</span>
 	<span data-testid="isAutocomplete">{ctx.isAutocomplete}</span>
 	<span data-testid="showBilling">{ctx.showBilling}</span>
 	<button data-testid="region-ca" onclick={() => ctx.setRegionForCountry('ca')}>region</button>
@@ -34,6 +34,6 @@
 			ctx.setAddressFromAutocomplete(
 				{ address_1: '1 Main St', address_2: '', city: 'LA', province: 'California', postal_code: '90001', country_code: 'us' },
 				''
-			)}
-	>autocomplete</button>
+			)}>autocomplete</button
+	>
 </Root>

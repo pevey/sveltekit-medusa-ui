@@ -1,12 +1,5 @@
 import { expect, test } from 'vitest'
-import {
-	resolveProvince,
-	resolveProvinceValue,
-	defaultProvinceConfig,
-	US_STATES,
-	CA_PROVINCES,
-	US_MILITARY
-} from '../provinces'
+import { resolveProvince, resolveProvinceValue, defaultProvinceConfig, US_STATES, CA_PROVINCES, US_MILITARY } from '../provinces'
 
 test('resolveProvince returns select mode with label + options for a configured country', () => {
 	const r = resolveProvince(defaultProvinceConfig, 'us')
@@ -43,9 +36,7 @@ test('resolveProvinceValue is case-insensitive on country and province', () => {
 	expect(resolveProvinceValue(defaultProvinceConfig, 'US', 'california')).toBe('us-ca')
 })
 test('resolveProvinceValue returns the raw string for a freeform (unconfigured) country', () => {
-	expect(resolveProvinceValue(defaultProvinceConfig, 'gb', 'Greater London')).toBe(
-		'Greater London'
-	)
+	expect(resolveProvinceValue(defaultProvinceConfig, 'gb', 'Greater London')).toBe('Greater London')
 })
 test('resolveProvinceValue returns the raw string when no option matches', () => {
 	expect(resolveProvinceValue(defaultProvinceConfig, 'us', 'Nowhere')).toBe('Nowhere')

@@ -6,7 +6,7 @@ const h = vi.hoisted(() => ({
 	getRegions: vi.fn(() => Object.assign(Promise.resolve([]), { current: [] }) as any),
 	updateCart: vi.fn(async () => null as any)
 }))
-vi.mock('sveltekit-medusa-sdk', async (orig) => ({
+vi.mock('sveltekit-medusa-sdk', async orig => ({
 	...(await orig<Record<string, unknown>>()),
 	getCart: h.getCart,
 	getRegions: h.getRegions,
@@ -17,11 +17,21 @@ import Harness from './collapsed-harness.svelte'
 
 function field(name: string) {
 	let v = ''
-	return { as: (t: string) => ({ name, type: t }), issues: () => undefined, value: () => v, set: (nv: string) => { v = nv }, touched: () => false, dirty: () => false }
+	return {
+		as: (t: string) => ({ name, type: t }),
+		issues: () => undefined,
+		value: () => v,
+		set: (nv: string) => {
+			v = nv
+		},
+		touched: () => false,
+		dirty: () => false
+	}
 }
 function makeForm() {
 	const fields: Record<string, any> = {}
-	for (const n of ['email', 'hideBilling', 'first_name', 'last_name', 'address_1', 'address_2', 'city', 'province', 'postal_code', 'country_code', 'phone']) fields[n] = field(n)
+	for (const n of ['email', 'hideBilling', 'first_name', 'last_name', 'address_1', 'address_2', 'city', 'province', 'postal_code', 'country_code', 'phone'])
+		fields[n] = field(n)
 	return { fields } as any
 }
 const REGIONS = [{ id: 'reg_us', countries: [{ iso_2: 'us', display_name: 'United States' }] }]
@@ -67,7 +77,7 @@ test('`input` reveals the block but does NOT save; `change` saves (save-on-blur 
 	city.dispatchEvent(new Event('input', { bubbles: true }))
 	await vi.waitFor(() => expect(container.classList.contains('sr-only')).toBe(false))
 	// Give a debounce-length window a chance to elapse; updateCart must still not have fired.
-	await new Promise((r) => setTimeout(r, 250))
+	await new Promise(r => setTimeout(r, 250))
 	expect(updateCart).not.toHaveBeenCalled()
 
 	// `change` on the same field: saving stays on `change` (onchange → reconcileAndSave).

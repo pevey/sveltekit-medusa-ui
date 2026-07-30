@@ -27,9 +27,7 @@ test('clicking a thumbnail marks it current (main↔thumb sync)', async () => {
 	await page.viewport(...DESKTOP)
 	render(Harness, { images: urls, alt: 'P' })
 	await page.getByRole('button', { name: 'View image 2' }).click()
-	await expect
-		.element(page.getByRole('button', { name: 'View image 2' }))
-		.toHaveAttribute('aria-current', 'true')
+	await expect.element(page.getByRole('button', { name: 'View image 2' })).toHaveAttribute('aria-current', 'true')
 })
 
 test('renders a dot per image at a mobile viewport', async () => {
@@ -58,15 +56,8 @@ test('bottom thumbnails render below the main image', async () => {
 	await page.viewport(...DESKTOP)
 	render(Harness, { images: urls, alt: 'P' })
 	await expect.element(page.getByRole('button', { name: 'View image 1' })).toBeInTheDocument()
-	const mainTop = page
-		.getByRole('img', { name: 'P' })
-		.first()
-		.element()
-		.getBoundingClientRect().top
-	const thumbTop = page
-		.getByRole('button', { name: 'View image 1' })
-		.element()
-		.getBoundingClientRect().top
+	const mainTop = page.getByRole('img', { name: 'P' }).first().element().getBoundingClientRect().top
+	const thumbTop = page.getByRole('button', { name: 'View image 1' }).element().getBoundingClientRect().top
 	expect(thumbTop).toBeGreaterThan(mainTop)
 })
 

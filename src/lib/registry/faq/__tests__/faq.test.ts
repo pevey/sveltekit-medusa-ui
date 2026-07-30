@@ -5,9 +5,7 @@ import Harness from './faq-harness.svelte'
 
 test('questions render as collapsed buttons (aria-expanded=false)', async () => {
 	render(Harness)
-	await expect
-		.element(page.getByRole('button', { name: /Question One/ }))
-		.toHaveAttribute('aria-expanded', 'false')
+	await expect.element(page.getByRole('button', { name: /Question One/ })).toHaveAttribute('aria-expanded', 'false')
 })
 
 test('clicking a question expands it', async () => {
@@ -21,21 +19,15 @@ test('type="single" closes the previously open question', async () => {
 	render(Harness, { type: 'single' })
 	await page.getByRole('button', { name: /Question One/ }).click()
 	await page.getByRole('button', { name: /Question Two/ }).click()
-	await expect
-		.element(page.getByRole('button', { name: /Question One/ }))
-		.toHaveAttribute('aria-expanded', 'false')
+	await expect.element(page.getByRole('button', { name: /Question One/ })).toHaveAttribute('aria-expanded', 'false')
 })
 
 test('type="multiple" keeps multiple questions open', async () => {
 	render(Harness, { type: 'multiple' })
 	await page.getByRole('button', { name: /Question One/ }).click()
 	await page.getByRole('button', { name: /Question Two/ }).click()
-	await expect
-		.element(page.getByRole('button', { name: /Question One/ }))
-		.toHaveAttribute('aria-expanded', 'true')
-	await expect
-		.element(page.getByRole('button', { name: /Question Two/ }))
-		.toHaveAttribute('aria-expanded', 'true')
+	await expect.element(page.getByRole('button', { name: /Question One/ })).toHaveAttribute('aria-expanded', 'true')
+	await expect.element(page.getByRole('button', { name: /Question Two/ })).toHaveAttribute('aria-expanded', 'true')
 })
 
 test('the default indicator is a chevron svg', async () => {
@@ -58,7 +50,5 @@ test('iconRotate sets the --faq-icon-rotate CSS var', async () => {
 test('{@html} answer renders HTML markup', async () => {
 	const { container } = await render(Harness)
 	await page.getByRole('button', { name: /Question One/ }).click()
-	await vi.waitFor(() =>
-		expect(container.querySelector('[data-slot="faq-answer"] strong')?.textContent).toBe('Bravo')
-	)
+	await vi.waitFor(() => expect(container.querySelector('[data-slot="faq-answer"] strong')?.textContent).toBe('Bravo'))
 })

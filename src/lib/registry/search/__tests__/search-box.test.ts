@@ -5,9 +5,7 @@ import SearchBox from '$lib/components/ui/search/search-box.svelte'
 
 test('collapsed icon links to the searchUrl', async () => {
 	render(SearchBox, { searchUrl: '/search', breakpoint: 'md' })
-	await expect
-		.element(page.getByRole('link', { name: 'Search' }))
-		.toHaveAttribute('href', '/search')
+	await expect.element(page.getByRole('link', { name: 'Search' })).toHaveAttribute('href', '/search')
 })
 
 test('breakpoint token drives the responsive class map', async () => {

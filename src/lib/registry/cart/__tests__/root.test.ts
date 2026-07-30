@@ -2,7 +2,14 @@ import { render } from 'vitest-browser-svelte'
 import { page as vpage } from 'vitest/browser'
 import { expect, test, vi, beforeEach } from 'vitest'
 
-const cart = { id: 'c', items: [{ id: 'li1', quantity: 2 }, { id: 'li2', quantity: 3 }], item_subtotal: 50 } as any
+const cart = {
+	id: 'c',
+	items: [
+		{ id: 'li1', quantity: 2 },
+		{ id: 'li2', quantity: 3 }
+	],
+	item_subtotal: 50
+} as any
 
 // The component imports getCart/updateCartItem/removeFromCart from the SDK barrel. Mock just those
 // three in the test file (spreading the rest of the module) — the component stays injection-free.
@@ -11,7 +18,7 @@ const h = vi.hoisted(() => ({
 	updateCartItem: vi.fn(async () => null as any),
 	removeFromCart: vi.fn(async () => null as any)
 }))
-vi.mock('sveltekit-medusa-sdk', async (orig) => ({
+vi.mock('sveltekit-medusa-sdk', async orig => ({
 	...(await orig<Record<string, unknown>>()),
 	getCart: h.getCart,
 	updateCartItem: h.updateCartItem,

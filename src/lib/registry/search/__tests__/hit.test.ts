@@ -17,16 +17,12 @@ const mk = (over: Partial<SearchHit>): SearchHit => ({
 
 test('product hit links to /products/<slug>', async () => {
 	render(Harness, { hit: mk({ type: 'product', slug: 'coffee', title: 'Coffee' }) })
-	await expect
-		.element(page.getByRole('link', { name: /Coffee/ }))
-		.toHaveAttribute('href', '/products/coffee')
+	await expect.element(page.getByRole('link', { name: /Coffee/ })).toHaveAttribute('href', '/products/coffee')
 })
 
 test('category hit links to /categories/<slug>', async () => {
 	render(Harness, { hit: mk({ type: 'category', slug: 'beans', title: 'Beans' }) })
-	await expect
-		.element(page.getByRole('link', { name: /Beans/ }))
-		.toHaveAttribute('href', '/categories/beans')
+	await expect.element(page.getByRole('link', { name: /Beans/ })).toHaveAttribute('href', '/categories/beans')
 })
 
 test('content hit links to /<slug> (root)', async () => {
@@ -39,9 +35,7 @@ test('href override wins over the route map', async () => {
 		hit: mk({ type: 'product', slug: 'coffee', title: 'Coffee' }),
 		href: h => `/shop/${h.slug}`
 	})
-	await expect
-		.element(page.getByRole('link', { name: /Coffee/ }))
-		.toHaveAttribute('href', '/shop/coffee')
+	await expect.element(page.getByRole('link', { name: /Coffee/ })).toHaveAttribute('href', '/shop/coffee')
 })
 
 test('renders the snippet when present', async () => {

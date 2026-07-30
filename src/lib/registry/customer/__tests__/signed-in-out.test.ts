@@ -6,8 +6,7 @@ import { expect, test, vi, beforeEach } from 'vitest'
 // (resolves to the customer) AND carries `.refresh()`/`.current`. Mock it as a Promise-with-refresh.
 const h = vi.hoisted(() => ({ customer: null as any, refresh: vi.fn(async () => {}) }))
 vi.mock('sveltekit-medusa-sdk/customer', () => ({
-	getCustomer: () =>
-		Object.assign(Promise.resolve(h.customer), { refresh: h.refresh, current: h.customer })
+	getCustomer: () => Object.assign(Promise.resolve(h.customer), { refresh: h.refresh, current: h.customer })
 }))
 
 import Harness from './signed-in-out-harness.svelte'

@@ -6,7 +6,7 @@ const h = vi.hoisted(() => ({
 	getRegions: vi.fn(() => Object.assign(Promise.resolve([]), { current: [] }) as any),
 	updateCart: vi.fn(async () => null as any)
 }))
-vi.mock('sveltekit-medusa-sdk', async (orig) => ({
+vi.mock('sveltekit-medusa-sdk', async orig => ({
 	...(await orig<Record<string, unknown>>()),
 	getCart: h.getCart,
 	getRegions: h.getRegions,
@@ -16,12 +16,21 @@ vi.mock('sveltekit-medusa-sdk', async (orig) => ({
 import Harness from './fields-harness.svelte'
 
 function field() {
-	return { as: (t: string) => ({ name: '', type: t }), issues: () => undefined, value: () => '', set: vi.fn(), touched: () => false, dirty: () => false }
+	return {
+		as: (t: string) => ({ name: '', type: t }),
+		issues: () => undefined,
+		value: () => '',
+		set: vi.fn(),
+		touched: () => false,
+		dirty: () => false
+	}
 }
 function makeForm() {
 	const fields: Record<string, any> = {}
 	for (const n of ['email', 'first_name', 'last_name', 'phone', 'address_1', 'address_2', 'city', 'country_code', 'postal_code', 'hideBilling']) {
-		const f = field(); f.as = (t: string) => ({ name: n, type: t }); fields[n] = f
+		const f = field()
+		f.as = (t: string) => ({ name: n, type: t })
+		fields[n] = f
 	}
 	return { fields } as any
 }
@@ -35,14 +44,14 @@ beforeEach(() => {
 
 test('renders inputs bound to the expected field names', async () => {
 	render(Harness, { form: makeForm() })
-	const names = Array.from(document.querySelectorAll('input,select')).map((el) => el.getAttribute('name'))
+	const names = Array.from(document.querySelectorAll('input,select')).map(el => el.getAttribute('name'))
 	expect(names).toEqual(expect.arrayContaining(['email', 'first_name', 'last_name', 'phone', 'address_2', 'city', 'country_code', 'postal_code']))
 })
 
 test('the country select lists options from regions', async () => {
 	render(Harness, { form: makeForm() })
 	const country = document.querySelector('select[name=country_code]') as HTMLSelectElement
-	expect(Array.from(country.querySelectorAll('option')).some((o) => o.value === 'us')).toBe(true)
+	expect(Array.from(country.querySelectorAll('option')).some(o => o.value === 'us')).toBe(true)
 })
 
 test('structured fields carry the expected autocomplete tokens', async () => {

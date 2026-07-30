@@ -6,7 +6,7 @@ import { expect, test, vi } from 'vitest'
 const h = vi.hoisted(() => ({
 	getCart: vi.fn(() => ({ current: null }) as any)
 }))
-vi.mock('sveltekit-medusa-sdk', async (orig) => ({
+vi.mock('sveltekit-medusa-sdk', async orig => ({
 	...(await orig<Record<string, unknown>>()),
 	getCart: h.getCart
 }))

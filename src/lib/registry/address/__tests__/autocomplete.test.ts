@@ -6,7 +6,7 @@ const h = vi.hoisted(() => ({
 	getRegions: vi.fn(() => Object.assign(Promise.resolve([]), { current: [] }) as any),
 	updateCart: vi.fn(async () => null as any)
 }))
-vi.mock('sveltekit-medusa-sdk', async (orig) => ({
+vi.mock('sveltekit-medusa-sdk', async orig => ({
 	...(await orig<Record<string, unknown>>()),
 	getCart: h.getCart,
 	getRegions: h.getRegions,
@@ -16,7 +16,14 @@ vi.mock('sveltekit-medusa-sdk', async (orig) => ({
 import Harness from './autocomplete-harness.svelte'
 
 function field() {
-	return { as: (t: string) => ({ name: 'address_1', type: t }), issues: () => undefined, value: () => '', set: vi.fn(), touched: () => false, dirty: () => false }
+	return {
+		as: (t: string) => ({ name: 'address_1', type: t }),
+		issues: () => undefined,
+		value: () => '',
+		set: vi.fn(),
+		touched: () => false,
+		dirty: () => false
+	}
 }
 function makeForm() {
 	return { fields: { address_1: field(), hideBilling: field() } } as any

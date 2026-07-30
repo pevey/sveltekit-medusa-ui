@@ -15,6 +15,7 @@
 		oncomplete?: (order: StoreOrder) => void
 	} = $props()
 </script>
+
 <Root {form} {navigate} {redirectTo} {oncomplete}>
 	{@const ctx = getCheckoutContext()}
 	<span data-testid="placing">{ctx.placing}</span>

@@ -3,4 +3,5 @@
 	import Autocomplete from '$lib/components/ui/address/address-autocomplete.svelte'
 	let { form, googlePlacesApiKey } = $props()
 </script>
+
 <Root {form} {googlePlacesApiKey}><Autocomplete /></Root>

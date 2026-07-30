@@ -30,8 +30,6 @@ test('renders a freeform text input when country is unconfigured', async () => {
 test('custom config with military options renders them', async () => {
 	const config = { us: { label: 'State', options: US_MILITARY } }
 	render(InputProvince, { field: mockField(), country: 'us', config })
-	const values = Array.from(document.querySelectorAll('option')).map(
-		o => (o as HTMLOptionElement).value
-	)
+	const values = Array.from(document.querySelectorAll('option')).map(o => (o as HTMLOptionElement).value)
 	expect(values).toContain('us-ap')
 })

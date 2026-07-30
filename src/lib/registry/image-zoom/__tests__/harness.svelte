@@ -1,8 +1,7 @@
 <script lang="ts">
 	import * as ImageZoom from '$lib/components/ui/image-zoom'
 
-	let { srcs = ['https://example.com/a.jpg', 'https://example.com/b.jpg'] }: { srcs?: string[] } =
-		$props()
+	let { srcs = ['https://example.com/a.jpg', 'https://example.com/b.jpg'] }: { srcs?: string[] } = $props()
 </script>
 
 <ImageZoom.Root>

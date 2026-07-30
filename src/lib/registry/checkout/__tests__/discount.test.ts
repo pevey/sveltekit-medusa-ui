@@ -8,7 +8,7 @@ const h = vi.hoisted(() => ({
 	addPromotion: vi.fn(async () => null as any),
 	removePromotion: vi.fn(async () => null as any)
 }))
-vi.mock('sveltekit-medusa-sdk', async (orig) => ({
+vi.mock('sveltekit-medusa-sdk', async orig => ({
 	...(await orig<Record<string, unknown>>()),
 	getCart: h.getCart,
 	addPromotion: h.addPromotion,
@@ -50,7 +50,9 @@ test('typing a code and clicking Redeem calls injected addPromotion with lowerca
 })
 
 test('with a cart containing promotions, a chip renders per promotion and clicking remove calls removePromotion', async () => {
-	h.getCart.mockReturnValue({ current: { id: 'c', promotions: [{ id: 'p1', code: 'save10' }] } as any })
+	h.getCart.mockReturnValue({
+		current: { id: 'c', promotions: [{ id: 'p1', code: 'save10' }] } as any
+	})
 	h.removePromotion.mockResolvedValue({ id: 'c', promotions: [] } as any)
 
 	render(Harness, {})

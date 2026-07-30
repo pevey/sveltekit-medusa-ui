@@ -3,8 +3,7 @@ import { page as vpage } from 'vitest/browser'
 import { expect, test, vi, beforeEach } from 'vitest'
 
 const emptyCart = { id: 'cart', items: [] } as any
-const cartWith = (variant_id: string) =>
-	({ id: 'cart', items: [{ id: 'li1', variant_id, quantity: 1 }] }) as any
+const cartWith = (variant_id: string) => ({ id: 'cart', items: [{ id: 'li1', variant_id, quantity: 1 }] }) as any
 
 // The component reads the cart via `$derived(await getCart())`, so the getCart mock is an async fn
 // whose resolved value the derived awaits (no `.current`). Mock just the three fns the component uses.
