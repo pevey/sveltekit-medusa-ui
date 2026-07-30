@@ -13,6 +13,15 @@ describe('Product public API (trimmed to display + Rating)', () => {
 		expect(Product.QuantitySelect).toBeDefined()
 		expect(Product.JsonLd).toBeDefined()
 	})
+	it('exposes the card/listing parts', () => {
+		expect(Product.Card).toBeDefined()
+		expect(Product.Thumbnail).toBeDefined()
+		expect(Product.PriceMin).toBeDefined()
+		expect(Product.PriceMax).toBeDefined()
+	})
+	it('exposes the context factory', () => {
+		expect(Product.createProductContext).toBeTypeOf('function')
+	})
 	it('exposes Product.Rating and Product.Star', () => {
 		expect(Product.Rating).toBeDefined()
 		expect(Product.Star).toBeDefined()

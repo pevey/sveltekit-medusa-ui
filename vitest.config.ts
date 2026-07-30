@@ -83,6 +83,22 @@ export default defineConfig({
 				find: '$lib/components/ui/customer',
 				replacement: fileURLToPath(new URL('./src/lib/registry/customer', import.meta.url))
 			},
+			{
+				find: '$lib/components/ui/page-nav',
+				replacement: fileURLToPath(new URL('./src/lib/registry/page-nav', import.meta.url))
+			},
+			{
+				find: '$lib/components/ui/products',
+				replacement: fileURLToPath(new URL('./src/lib/registry/products', import.meta.url))
+			},
+			{
+				find: '$lib/components/ui/categories',
+				replacement: fileURLToPath(new URL('./src/lib/registry/categories', import.meta.url))
+			},
+			{
+				find: '$lib/components/ui/collections',
+				replacement: fileURLToPath(new URL('./src/lib/registry/collections', import.meta.url))
+			},
 			{ find: '$lib', replacement: fileURLToPath(new URL('./src/lib', import.meta.url)) }
 		]
 	},

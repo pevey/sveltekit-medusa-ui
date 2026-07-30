@@ -1,5 +1,13 @@
 import { describe, it, expect } from 'vitest'
-import { resolveVariant, isAvailable, isSelected, inStock, defaultVariantId } from '$lib/components/ui/product/product-logic.js'
+import {
+	resolveVariant,
+	isAvailable,
+	isSelected,
+	inStock,
+	defaultVariantId,
+	priceRange,
+	cheapestPurchasableVariantId
+} from '$lib/components/ui/product/product-logic.js'
 import type { StoreProduct, StoreProductVariant } from '@medusajs/types'
 
 // options Color(red,blue) x Size(S,M). 4 variants; mixed stock.
@@ -200,5 +208,89 @@ describe('clampToStock', () => {
 				})
 			)
 		).toBe(3)
+	})
+})
+
+// --- price range / cheapest variant ---
+
+const priceOf = (amount: number, currency = 'usd') => ({ calculated_amount: amount, original_amount: amount, currency_code: currency })
+
+const productWithPrices = {
+	id: 'prod_1',
+	variants: [
+		{ id: 'v_1', manage_inventory: false, calculated_price: priceOf(30) },
+		{ id: 'v_2', manage_inventory: false, calculated_price: priceOf(10) },
+		{ id: 'v_3', manage_inventory: false, calculated_price: priceOf(20) }
+	]
+} as never
+
+describe('priceRange', () => {
+	it('returns the cheapest and dearest calculated prices', () => {
+		const r = priceRange(productWithPrices)
+		expect(r?.min.calculated_amount).toBe(10)
+		expect(r?.max.calculated_amount).toBe(30)
+		expect(r?.min.currency_code).toBe('usd')
+	})
+
+	it('returns equal min and max for a single-variant product', () => {
+		const p = { id: 'p', variants: [{ id: 'v', manage_inventory: false, calculated_price: priceOf(15) }] } as never
+		const r = priceRange(p)
+		expect(r?.min.calculated_amount).toBe(15)
+		expect(r?.max.calculated_amount).toBe(15)
+	})
+
+	it('returns null when no variant has a resolved price', () => {
+		expect(priceRange({ id: 'p', variants: [{ id: 'v', manage_inventory: false }] } as never)).toBeNull()
+	})
+
+	it('returns null for a null product', () => {
+		expect(priceRange(null)).toBeNull()
+	})
+
+	it('ignores variants without a price', () => {
+		const p = {
+			id: 'p',
+			variants: [
+				{ id: 'a', manage_inventory: false },
+				{ id: 'b', manage_inventory: false, calculated_price: priceOf(25) }
+			]
+		} as never
+		expect(priceRange(p)?.min.calculated_amount).toBe(25)
+	})
+})
+
+describe('cheapestPurchasableVariantId', () => {
+	it('returns the id of the cheapest variant', () => {
+		expect(cheapestPurchasableVariantId(productWithPrices)).toBe('v_2')
+	})
+
+	it('skips out-of-stock variants when a purchasable one exists', () => {
+		const p = {
+			id: 'p',
+			variants: [
+				{ id: 'oos', manage_inventory: true, allow_backorder: false, inventory_quantity: 0, calculated_price: priceOf(5) },
+				{ id: 'ok', manage_inventory: false, calculated_price: priceOf(50) }
+			]
+		} as never
+		expect(cheapestPurchasableVariantId(p)).toBe('ok')
+	})
+
+	it('falls back to the cheapest variant when none are purchasable', () => {
+		const p = {
+			id: 'p',
+			variants: [
+				{ id: 'a', manage_inventory: true, allow_backorder: false, inventory_quantity: 0, calculated_price: priceOf(9) },
+				{ id: 'b', manage_inventory: true, allow_backorder: false, inventory_quantity: 0, calculated_price: priceOf(4) }
+			]
+		} as never
+		expect(cheapestPurchasableVariantId(p)).toBe('b')
+	})
+
+	it('returns undefined when no variant has a price', () => {
+		expect(cheapestPurchasableVariantId({ id: 'p', variants: [{ id: 'v', manage_inventory: false }] } as never)).toBeUndefined()
+	})
+
+	it('returns undefined for a null product', () => {
+		expect(cheapestPurchasableVariantId(null)).toBeUndefined()
 	})
 })

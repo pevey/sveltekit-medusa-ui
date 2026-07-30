@@ -32,6 +32,14 @@
 			"$lib/components/ui/auth/*": ["./src/lib/registry/auth/*"],
 			"$lib/components/ui/customer": ["./src/lib/registry/customer"],
 			"$lib/components/ui/customer/*": ["./src/lib/registry/customer/*"],
+			"$lib/components/ui/page-nav": ["./src/lib/registry/page-nav"],
+			"$lib/components/ui/page-nav/*": ["./src/lib/registry/page-nav/*"],
+			"$lib/components/ui/products": ["./src/lib/registry/products"],
+			"$lib/components/ui/products/*": ["./src/lib/registry/products/*"],
+			"$lib/components/ui/categories": ["./src/lib/registry/categories"],
+			"$lib/components/ui/categories/*": ["./src/lib/registry/categories/*"],
+			"$lib/components/ui/collections": ["./src/lib/registry/collections"],
+			"$lib/components/ui/collections/*": ["./src/lib/registry/collections/*"],
 			"$lib": ["./src/lib"],
 			"$lib/*": ["./src/lib/*"]
 		}
