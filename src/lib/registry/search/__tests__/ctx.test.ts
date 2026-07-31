@@ -89,3 +89,51 @@ test('close() sets open false', () => {
 	s.close()
 	expect(s.open).toBe(false)
 })
+
+test('seed() searches immediately, without waiting out the debounce', async () => {
+	h.search.mockResolvedValue({
+		hits: [{ type: 'product', id: '1', slug: 'cafe', group_slug: null, title: 'Cafe', snippet: null, score: 1 }]
+	})
+	const s = new SearchState({ minLength: 2, debounce: 500 })
+	s.seed('cafe')
+	await wait(20) // far below the debounce window
+	expect(h.search).toHaveBeenCalledWith({ q: 'cafe' })
+	expect(s.query).toBe('cafe')
+	expect(s.hits).toHaveLength(1)
+	expect(s.loading).toBe(false)
+})
+
+test('seed() does not open the dropdown', async () => {
+	const s = new SearchState({ minLength: 2, debounce: 10 })
+	s.seed('cafe')
+	await wait(30)
+	expect(s.open).toBe(false)
+})
+
+test('seed() below minLength clears hits and does not search', async () => {
+	const s = new SearchState({ minLength: 2, debounce: 10 })
+	s.hits = [{ type: 'product', id: '1', slug: 'a', group_slug: null, title: 'A', snippet: null, score: 1 }]
+	s.seed('c')
+	await wait(30)
+	expect(h.search).not.toHaveBeenCalled()
+	expect(s.query).toBe('c')
+	expect(s.hits).toEqual([])
+	expect(s.loading).toBe(false)
+})
+
+test('seed() cancels a pending debounced input', async () => {
+	const s = new SearchState({ minLength: 2, debounce: 40 })
+	s.query = 'typed'
+	s.onInput()
+	s.seed('seeded')
+	await wait(80)
+	expect(h.search).toHaveBeenCalledTimes(1)
+	expect(h.search).toHaveBeenCalledWith({ q: 'seeded' })
+})
+
+test('seed() passes limit through when configured', async () => {
+	const s = new SearchState({ minLength: 2, debounce: 10, limit: 5 })
+	s.seed('cafe')
+	await wait(20)
+	expect(h.search).toHaveBeenCalledWith({ q: 'cafe', limit: 5 })
+})
