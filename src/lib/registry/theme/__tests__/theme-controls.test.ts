@@ -15,14 +15,14 @@ beforeEach(() => {
 })
 
 test('ThemeButton toggles the theme (html .dark) on click', async () => {
-	render(Harness, { component: ThemeButton })
+	await render(Harness, { component: ThemeButton })
 	expect(document.documentElement.classList.contains('dark')).toBe(false)
 	await page.getByRole('button', { name: 'Toggle theme' }).click()
 	await expect.poll(() => document.documentElement.classList.contains('dark')).toBe(true)
 })
 
 test('ThemeToggle is pressed in light (onMode default) and flips on click', async () => {
-	render(Harness, { component: ThemeToggle })
+	await render(Harness, { component: ThemeToggle })
 	const btn = page.getByRole('button', { name: 'Toggle theme' })
 	await expect.element(btn).toHaveAttribute('aria-pressed', 'true') // light == on
 	await btn.click()
@@ -30,7 +30,7 @@ test('ThemeToggle is pressed in light (onMode default) and flips on click', asyn
 })
 
 test('ThemeSwitch is checked in light (onMode default) and flips theme on change', async () => {
-	render(Harness, { component: ThemeSwitch })
+	await render(Harness, { component: ThemeSwitch })
 	const sw = page.getByRole('switch', { name: 'Toggle theme' })
 	await expect.element(sw).toHaveAttribute('aria-checked', 'true') // light == on
 	await sw.click()
@@ -39,14 +39,14 @@ test('ThemeSwitch is checked in light (onMode default) and flips theme on change
 })
 
 test('ThemeSwitch onMode="dark" reverses the mapping', async () => {
-	render(Harness, { component: ThemeSwitch, onMode: 'dark' })
+	await render(Harness, { component: ThemeSwitch, onMode: 'dark' })
 	// light mode → checked should now be false (on == dark)
 	await expect.element(page.getByRole('switch', { name: 'Toggle theme' })).toHaveAttribute('aria-checked', 'false')
 })
 
 test('ThemeSelect reflects userPrefersMode and sets it (incl. system)', async () => {
 	setMode('light')
-	render(Harness, { component: ThemeSelect })
+	await render(Harness, { component: ThemeSelect })
 	const trigger = page.getByRole('button', { name: 'Theme' })
 	await expect.element(trigger).toHaveTextContent('Light')
 	await trigger.click()

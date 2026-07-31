@@ -46,7 +46,7 @@ test('successful login refreshes the customer then fires onsuccess', async () =>
 		return true
 	})
 	const onsuccess = vi.fn()
-	render(Harness, { onsuccess })
+	await render(Harness, { onsuccess })
 	await h.login.cb({ submit: h.login.submit })
 	expect(h.login.submit).toHaveBeenCalled()
 	expect(h.refresh).toHaveBeenCalled()
@@ -59,7 +59,7 @@ test('failed login shows the mapped error copy and fires onerror', async () => {
 		return true
 	})
 	const onerror = vi.fn()
-	render(Harness, { onerror })
+	await render(Harness, { onerror })
 	await h.login.cb({ submit: h.login.submit })
 	await expect.element(page.getByText('Invalid email or password.')).toBeInTheDocument()
 	expect(onerror).toHaveBeenCalledWith({ ok: false, code: 'invalid_credentials' })

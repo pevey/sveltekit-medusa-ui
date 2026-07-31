@@ -43,19 +43,19 @@ beforeEach(() => {
 })
 
 test('renders inputs bound to the expected field names', async () => {
-	render(Harness, { form: makeForm() })
+	await render(Harness, { form: makeForm() })
 	const names = Array.from(document.querySelectorAll('input,select')).map(el => el.getAttribute('name'))
 	expect(names).toEqual(expect.arrayContaining(['email', 'first_name', 'last_name', 'phone', 'address_2', 'city', 'country_code', 'postal_code']))
 })
 
 test('the country select lists options from regions', async () => {
-	render(Harness, { form: makeForm() })
+	await render(Harness, { form: makeForm() })
 	const country = document.querySelector('select[name=country_code]') as HTMLSelectElement
 	expect(Array.from(country.querySelectorAll('option')).some(o => o.value === 'us')).toBe(true)
 })
 
 test('structured fields carry the expected autocomplete tokens', async () => {
-	render(Harness, { form: makeForm() })
+	await render(Harness, { form: makeForm() })
 	const ac = (name: string) => document.querySelector(`[name=${name}]`)?.getAttribute('autocomplete')
 	expect(ac('city')).toBe('address-level2')
 	expect(ac('address_2')).toBe('address-line2')
@@ -64,7 +64,7 @@ test('structured fields carry the expected autocomplete tokens', async () => {
 
 import AddressLine1Only from './line1-harness.svelte'
 test('AddressLine1 renders a text input bound to address_1 with autocomplete=address-line1', async () => {
-	render(AddressLine1Only, { form: makeForm() })
+	await render(AddressLine1Only, { form: makeForm() })
 	const el = document.querySelector('input[name=address_1]') as HTMLInputElement
 	expect(el).not.toBeNull()
 	expect(el.getAttribute('autocomplete')).toBe('address-line1')

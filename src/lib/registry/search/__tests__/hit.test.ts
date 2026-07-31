@@ -16,22 +16,22 @@ const mk = (over: Partial<SearchHit>): SearchHit => ({
 })
 
 test('product hit links to /products/<slug>', async () => {
-	render(Harness, { hit: mk({ type: 'product', slug: 'coffee', title: 'Coffee' }) })
+	await render(Harness, { hit: mk({ type: 'product', slug: 'coffee', title: 'Coffee' }) })
 	await expect.element(page.getByRole('link', { name: /Coffee/ })).toHaveAttribute('href', '/products/coffee')
 })
 
 test('category hit links to /categories/<slug>', async () => {
-	render(Harness, { hit: mk({ type: 'category', slug: 'beans', title: 'Beans' }) })
+	await render(Harness, { hit: mk({ type: 'category', slug: 'beans', title: 'Beans' }) })
 	await expect.element(page.getByRole('link', { name: /Beans/ })).toHaveAttribute('href', '/categories/beans')
 })
 
 test('content hit links to /<slug> (root)', async () => {
-	render(Harness, { hit: mk({ type: 'content', slug: 'about', title: 'About' }) })
+	await render(Harness, { hit: mk({ type: 'content', slug: 'about', title: 'About' }) })
 	await expect.element(page.getByRole('link', { name: /About/ })).toHaveAttribute('href', '/about')
 })
 
 test('href override wins over the route map', async () => {
-	render(Harness, {
+	await render(Harness, {
 		hit: mk({ type: 'product', slug: 'coffee', title: 'Coffee' }),
 		href: h => `/shop/${h.slug}`
 	})
@@ -39,6 +39,6 @@ test('href override wins over the route map', async () => {
 })
 
 test('renders the snippet when present', async () => {
-	render(Harness, { hit: mk({ title: 'Coffee', snippet: 'Fresh roast' }) })
+	await render(Harness, { hit: mk({ title: 'Coffee', snippet: 'Fresh roast' }) })
 	await expect.element(page.getByText('Fresh roast')).toBeInTheDocument()
 })

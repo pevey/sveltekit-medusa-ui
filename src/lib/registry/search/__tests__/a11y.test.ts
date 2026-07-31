@@ -26,7 +26,7 @@ function keydown(key: string) {
 }
 
 test('input exposes combobox semantics wired to the listbox', async () => {
-	render(Harness, { hits })
+	await render(Harness, { hits })
 	const input = page.getByRole('combobox')
 	await expect.element(input).toHaveAttribute('aria-expanded', 'true')
 	await expect.element(input).toHaveAttribute('aria-autocomplete', 'list')
@@ -36,14 +36,14 @@ test('input exposes combobox semantics wired to the listbox', async () => {
 })
 
 test('results are exposed as listbox options in visual order', async () => {
-	render(Harness, { hits })
+	await render(Harness, { hits })
 	await expect.element(page.getByRole('option', { name: /Coffee/ })).toBeInTheDocument()
 	await expect.element(page.getByRole('option', { name: /Beans/ })).toBeInTheDocument()
 	await expect.element(page.getByRole('option', { name: /Roasts/ })).toBeInTheDocument()
 })
 
 test('ArrowDown highlights the first option and sets aria-activedescendant', async () => {
-	render(Harness, { hits })
+	await render(Harness, { hits })
 	keydown('ArrowDown')
 	const first = page.getByRole('option', { name: /Coffee/ })
 	await expect.element(first).toHaveAttribute('aria-selected', 'true')
@@ -51,7 +51,7 @@ test('ArrowDown highlights the first option and sets aria-activedescendant', asy
 })
 
 test('ArrowDown walks products then groups; ArrowUp steps back', async () => {
-	render(Harness, { hits })
+	await render(Harness, { hits })
 	keydown('ArrowDown') // Coffee
 	keydown('ArrowDown') // Beans
 	keydown('ArrowDown') // Roasts (category — after both products)
@@ -61,13 +61,13 @@ test('ArrowDown walks products then groups; ArrowUp steps back', async () => {
 })
 
 test('ArrowUp from no selection wraps to the last option', async () => {
-	render(Harness, { hits })
+	await render(Harness, { hits })
 	keydown('ArrowUp')
 	await expect.element(page.getByRole('option', { name: /Roasts/ })).toHaveAttribute('aria-selected', 'true')
 })
 
 test('Escape closes the dropdown', async () => {
-	render(Harness, { hits })
+	await render(Harness, { hits })
 	await expect.element(page.getByRole('listbox')).toBeInTheDocument()
 	keydown('Escape')
 	await expect.element(page.getByRole('listbox')).not.toBeInTheDocument()

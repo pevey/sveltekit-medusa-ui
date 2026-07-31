@@ -26,7 +26,7 @@ const mk = (calc: number, orig: number) =>
 
 test('shows the calculated price', async () => {
 	page.url = new URL('http://localhost/')
-	render(Harness, { product: mk(10, 10) })
+	await render(Harness, { product: mk(10, 10) })
 	await expect.element(vpage.getByText('$10.00')).toBeInTheDocument()
 })
 

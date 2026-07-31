@@ -64,7 +64,7 @@ beforeEach(() => {
 })
 
 test('preset renders the standard shipping fields inside one Root', async () => {
-	render(Harness, { form: makeForm() })
+	await render(Harness, { form: makeForm() })
 	for (const name of ['email', 'first_name', 'last_name', 'address_1', 'city', 'country_code', 'postal_code', 'phone']) {
 		expect(document.querySelector(`[name=${name}]`), name).not.toBeNull()
 	}

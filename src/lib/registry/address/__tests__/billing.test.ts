@@ -63,12 +63,12 @@ beforeEach(() => {
 })
 
 test('billing block is hidden by default (same as shipping)', async () => {
-	render(Harness, { form: makeForm() })
+	await render(Harness, { form: makeForm() })
 	expect(document.querySelector('input[name=billing_first_name]')).toBeNull()
 })
 
 test('unchecking the toggle reveals the billing block', async () => {
-	render(Harness, { form: makeForm() })
+	await render(Harness, { form: makeForm() })
 	const cb = document.querySelector('input[type=checkbox]:not(.hidden)') as HTMLInputElement
 	cb.checked = false
 	cb.dispatchEvent(new Event('change', { bubbles: true }))
@@ -78,7 +78,7 @@ test('unchecking the toggle reveals the billing block', async () => {
 test('re-checking clears billing and sends billing_address:{}', async () => {
 	const updateCart = vi.fn(async () => ({ id: 'c' }) as any)
 	h.updateCart.mockImplementation(updateCart)
-	render(Harness, { form: makeForm() })
+	await render(Harness, { form: makeForm() })
 	const cb = document.querySelector('input[type=checkbox]:not(.hidden)') as HTMLInputElement
 	cb.checked = false
 	cb.dispatchEvent(new Event('change', { bubbles: true }))

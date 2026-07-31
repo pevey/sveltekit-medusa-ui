@@ -30,7 +30,7 @@ const CART = {
 
 test('renders a row per cart item with title/price/subtotal', async () => {
 	h.getCart.mockReturnValue({ current: CART })
-	render(Harness, { form: { fields: {} } as any })
+	await render(Harness, { form: { fields: {} } as any })
 	expect(document.body.textContent).toContain('Widget')
 	expect(document.querySelector('[data-checkout-price]')?.textContent).toContain('$10.00')
 	expect(document.querySelector('[data-checkout-item-subtotal]')?.textContent).toContain('$20.00')

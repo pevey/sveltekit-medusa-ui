@@ -19,7 +19,7 @@ const OPTIONS = [
 ]
 
 test('renders one <option> per option (plus placeholder) and binds the field name', async () => {
-	render(InputSelect, {
+	await render(InputSelect, {
 		field: mockField(),
 		options: OPTIONS,
 		label: 'Country',
@@ -33,7 +33,7 @@ test('renders one <option> per option (plus placeholder) and binds the field nam
 
 test('fires the onchange passthrough', async () => {
 	const onchange = vi.fn()
-	render(InputSelect, { field: mockField(), options: OPTIONS, onchange })
+	await render(InputSelect, { field: mockField(), options: OPTIONS, onchange })
 	const select = document.querySelector('select') as HTMLSelectElement
 	select.value = 'ca'
 	select.dispatchEvent(new Event('change', { bubbles: true }))
@@ -41,7 +41,7 @@ test('fires the onchange passthrough', async () => {
 })
 
 test('renders issue messages', async () => {
-	render(InputSelect, {
+	await render(InputSelect, {
 		field: mockField({ issues: () => [{ message: 'Select a country' }] }),
 		options: OPTIONS
 	})

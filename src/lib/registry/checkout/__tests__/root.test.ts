@@ -29,7 +29,7 @@ beforeEach(() => {
 test('placeOrder runs address→payment→completeCart and sets order', async () => {
 	h.getCart.mockReturnValue({ current: CART_WITH_SHIPPING })
 	h.completeCart.mockResolvedValue({ id: 'order_9' } as any)
-	render(Harness, { form: makeForm(), navigate: vi.fn() })
+	await render(Harness, { form: makeForm(), navigate: vi.fn() })
 	;(document.querySelector('[data-testid=reg-addr]') as HTMLButtonElement).click()
 	;(document.querySelector('[data-testid=reg-pay]') as HTMLButtonElement).click()
 	;(document.querySelector('[data-testid=place]') as HTMLButtonElement).click()
@@ -41,7 +41,7 @@ test('placeOrder navigates to redirectTo(order) instead of setting in-place orde
 	const navigate = vi.fn()
 	h.getCart.mockReturnValue({ current: CART_WITH_SHIPPING })
 	h.completeCart.mockResolvedValue({ id: 'order_5' } as any)
-	render(Harness, {
+	await render(Harness, {
 		form: makeForm(),
 		navigate,
 		redirectTo: (o: any) => `/order/${o.id}`
@@ -56,7 +56,7 @@ test('placeOrder navigates to redirectTo(order) instead of setting in-place orde
 
 test('placeOrder errors (no order set) when the cart has no shipping method', async () => {
 	h.getCart.mockReturnValue({ current: { id: 'c', shipping_methods: [] } as any })
-	render(Harness, { form: makeForm(), navigate: vi.fn() })
+	await render(Harness, { form: makeForm(), navigate: vi.fn() })
 	;(document.querySelector('[data-testid=place]') as HTMLButtonElement).click()
 	await vi.waitFor(() => expect(document.querySelector('[data-testid=placing]')!.textContent).toBe('false'))
 	expect(h.completeCart).not.toHaveBeenCalled()

@@ -18,7 +18,7 @@ beforeEach(() => {
 
 test('signed-in customer: SignedIn renders children, SignedOut does not', async () => {
 	h.customer = { id: 'cus_1' }
-	render(Harness)
+	await render(Harness)
 	await expect.element(page.getByTestId('signed-in')).toBeInTheDocument()
 	await expect
 		.element(page.getByTestId('signed-out'))
@@ -29,7 +29,7 @@ test('signed-in customer: SignedIn renders children, SignedOut does not', async 
 
 test('no customer: SignedOut renders children, SignedIn does not', async () => {
 	h.customer = null
-	render(Harness)
+	await render(Harness)
 	await expect.element(page.getByTestId('signed-out')).toBeInTheDocument()
 	expect(document.querySelector('[data-testid=signed-in]')).toBeNull()
 })

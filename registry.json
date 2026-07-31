@@ -27,9 +27,13 @@
 			"name": "image-zoom",
 			"type": "registry:ui",
 			"title": "Image Zoom",
-			"description": "Click-to-zoom full-screen image overlay with gallery navigation: Root, Trigger, and a getImageZoomContextOptional hook that lets nested images (e.g. Gallery.Image) auto-detect an ancestor overlay. Vendored from more-shadcn-svelte (MIT, © 2025 kevwpl).",
-			"dependencies": ["@lucide/svelte"],
-			"registryDependencies": ["button"],
+			"description": "Click-to-zoom full-screen image overlay with gallery navigation: Root, Trigger, and a getImageZoomContextOptional hook that lets nested images (e.g. Gallery.Image) auto-detect an ancestor overlay. Vendored from more-shadcn-svelte (MIT, \u00a9 2025 kevwpl).",
+			"dependencies": [
+				"@lucide/svelte"
+			],
+			"registryDependencies": [
+				"button"
+			],
 			"files": [
 				{
 					"path": "src/lib/registry/image-zoom/image-zoom.svelte",
@@ -57,9 +61,12 @@
 			"name": "gallery",
 			"type": "registry:ui",
 			"title": "Gallery",
-			"description": "Compound product image gallery/lightbox on embla: Root (optional thumbnails/thumbnailBreakpoint/zoom props), Main, Carousel, Image, Thumbnails, ThumbnailImage, Dots — sharing a context. Root publishes layout intent to the parts; set `zoom` to enable the click-to-zoom overlay. Accepts image URLs or Medusa image objects.",
+			"description": "Compound product image gallery/lightbox on embla: Root (optional thumbnails/thumbnailBreakpoint/zoom props), Main, Carousel, Image, Thumbnails, ThumbnailImage, Dots \u2014 sharing a context. Root publishes layout intent to the parts; set `zoom` to enable the click-to-zoom overlay. Accepts image URLs or Medusa image objects.",
 			"dependencies": [],
-			"registryDependencies": ["carousel", "image-zoom"],
+			"registryDependencies": [
+				"carousel",
+				"image-zoom"
+			],
 			"files": [
 				{
 					"path": "src/lib/registry/gallery/gallery.svelte",
@@ -113,7 +120,10 @@
 			"type": "registry:ui",
 			"title": "Search",
 			"description": "Compound storefront search primitives (Root, Icon, Input, Results, Hit) sharing a context. Root defaults its search fn to the sveltekit-medusa-sdk `search` remote; Results renders products first (headerless) then non-product types under headings, as a dropdown or an in-flow full-page list.",
-			"dependencies": ["@lucide/svelte", "sveltekit-medusa-sdk"],
+			"dependencies": [
+				"@lucide/svelte",
+				"sveltekit-medusa-sdk"
+			],
 			"registryDependencies": [],
 			"files": [
 				{
@@ -159,7 +169,9 @@
 			"title": "Search Box",
 			"description": "Drop-in navbar search box: full input + live-results dropdown above a configurable breakpoint, collapsing to an icon that links to a search page below it. Assembles the search primitives.",
 			"dependencies": [],
-			"registryDependencies": ["search"],
+			"registryDependencies": [
+				"search"
+			],
 			"files": [
 				{
 					"path": "src/lib/registry/search/search-box.svelte",
@@ -174,7 +186,10 @@
 			"title": "Search Dialog",
 			"description": "Command-palette search: Ctrl/Cmd+K opens a centered modal (page behind blurred) with the input autofocused and arrow-key-navigable results. Composes the search primitives inside a shadcn Dialog; drop into your layout.",
 			"dependencies": [],
-			"registryDependencies": ["search", "dialog"],
+			"registryDependencies": [
+				"search",
+				"dialog"
+			],
 			"files": [
 				{
 					"path": "src/lib/registry/search/search-dialog.svelte",
@@ -188,8 +203,13 @@
 			"type": "registry:ui",
 			"title": "FAQ",
 			"description": "Compound FAQ primitives (Root, Item, Question, Answer) over the shadcn Accordion. Defaults to the stock look; each part is stylable via class. Question exposes a swappable icon snippet + configurable rotate-on-open; Answer renders children (supports {@html}). Loop your own Q&A data over the items.",
-			"dependencies": ["@lucide/svelte", "bits-ui"],
-			"registryDependencies": ["accordion"],
+			"dependencies": [
+				"@lucide/svelte",
+				"bits-ui"
+			],
+			"registryDependencies": [
+				"accordion"
+			],
 			"files": [
 				{
 					"path": "src/lib/registry/faq/faq.svelte",
@@ -223,7 +243,9 @@
 			"type": "registry:ui",
 			"title": "SEO",
 			"description": "Head/metadata primitives for SEO. MetaProvider seeds site-wide defaults (siteName, siteUrl, titleTemplate, twitterHandle) via context; Metadata emits per-page <title>/description/canonical/OpenGraph/Twitter tags off a MetaConfig, merging provider defaults; JsonLd renders a typed schema-dts object as a <script type=\"application/ld+json\"> tag. No env, no state mutation; provider is optional. SSR-safe.",
-			"dependencies": ["schema-dts"],
+			"dependencies": [
+				"schema-dts"
+			],
 			"registryDependencies": [],
 			"files": [
 				{
@@ -332,9 +354,17 @@
 			"name": "reviews",
 			"type": "registry:ui",
 			"title": "Reviews",
-			"description": "Compound review-collection primitives composed over the `review` atom (Star, Review.*): Root, Summary (.Title/.Average/.Stars/.Count/.Histogram(.Bar/.Label)), Sort, List, Pagination (.Prev/.Next/.Info), Carousel, and a submission Form (.Author/.Rating/.Title/.Body/.Submit/.Cancel/.Error). Root is context-aware — headless when given a `reviews` array (client-side filter/sort/paginate), otherwise it fetches summary + paginated reviews for a product (explicit `productId` or the ambient Product context) via the sveltekit-medusa-sdk reviews remotes, with optimistic display of just-submitted reviews. Render-prop children expose { reviews, summary, count, page, pageCount }; parts read a surface-neutral ReviewsListContext, so other surfaces (e.g. Customer.Reviews) reuse them. No $effect (SSR-safe).",
-			"dependencies": ["sveltekit-medusa-sdk"],
-			"registryDependencies": ["review", "product", "carousel", "button", "input-text"],
+			"description": "Compound review-collection primitives composed over the `review` atom (Star, Review.*): Root, Summary (.Title/.Average/.Stars/.Count/.Histogram(.Bar/.Label)), Sort, List, Pagination (.Prev/.Next/.Info), Carousel, and a submission Form (.Author/.Rating/.Title/.Body/.Submit/.Cancel/.Error). Root is context-aware \u2014 headless when given a `reviews` array (client-side filter/sort/paginate), otherwise it fetches summary + paginated reviews for a product (explicit `productId` or the ambient Product context) via the sveltekit-medusa-sdk reviews remotes, with optimistic display of just-submitted reviews. Render-prop children expose { reviews, summary, count, page, pageCount }; parts read a surface-neutral ReviewsListContext, so other surfaces (e.g. Customer.Reviews) reuse them. No $effect (SSR-safe).",
+			"dependencies": [
+				"sveltekit-medusa-sdk"
+			],
+			"registryDependencies": [
+				"review",
+				"product",
+				"carousel",
+				"button",
+				"input-text"
+			],
 			"files": [
 				{
 					"path": "src/lib/registry/reviews/reviews-root.svelte",
@@ -497,9 +527,18 @@
 			"name": "product",
 			"type": "registry:ui",
 			"title": "Product",
-			"description": "Compound Product primitives (Root, Card, Title, Subtitle, Description, Price, PriceMin, PriceMax, Thumbnail, Options, OptionButton, QuantitySelect, Rating, JsonLd) over a Medusa StoreProduct. Root drives variant selection from the URL (?v= links) for a detail page; Card is a sibling context provider using local selection, so a grid of cards each track their own variant and swatches swap in place instead of navigating — every part works inside either. Card takes an `href` (string or builder, default /products/<handle>), an `actions` snippet for an add-to-cart button (composed rather than built in, since `cta` already depends on `product`), and a `children` snippet that replaces the whole body; its context seeds the cheapest purchasable variant so <AddToCartButton /> needs no props. Title takes `as` so cards render an h3 rather than a page full of h1s. PriceMin/PriceMax render the range bounds as separate styleable parts (Medusa has no product-level price). Rating renders the product's aggregate star summary from the sveltekit-medusa-sdk reviews remote (re-exporting Star from the `review` atom) and JsonLd emits schema.org Product/AggregateOffer markup. Inventory-aware option availability (manage_inventory/inventory_quantity), currency-aware price with sale strikethrough, sanitized {@html} description. Pure resolution logic in product-logic.ts; no $effect (SSR-safe). Fetch the product reactively in your route and pass it in.",
-			"dependencies": ["isomorphic-dompurify", "@lucide/svelte", "schema-dts", "sveltekit-medusa-sdk"],
-			"registryDependencies": ["seo", "review", "card"],
+			"description": "Compound Product primitives (Root, Card, Title, Subtitle, Description, Price, PriceMin, PriceMax, Thumbnail, Options, OptionButton, QuantitySelect, Rating, JsonLd) over a Medusa StoreProduct. Root drives variant selection from the URL (?v= links) for a detail page; Card is a sibling context provider using local selection, so a grid of cards each track their own variant and swatches swap in place instead of navigating \u2014 every part works inside either. Card takes an `href` (string or builder, default /products/<handle>), an `actions` snippet for an add-to-cart button (composed rather than built in, since `cta` already depends on `product`), and a `children` snippet that replaces the whole body; its context seeds the cheapest purchasable variant so <AddToCartButton /> needs no props. Title takes `as` so cards render an h3 rather than a page full of h1s. PriceMin/PriceMax render the range bounds as separate styleable parts (Medusa has no product-level price). Rating renders the product's aggregate star summary from the sveltekit-medusa-sdk reviews remote (re-exporting Star from the `review` atom) and JsonLd emits schema.org Product/AggregateOffer markup. Inventory-aware option availability (manage_inventory/inventory_quantity), currency-aware price with sale strikethrough, sanitized {@html} description. Pure resolution logic in product-logic.ts; no $effect (SSR-safe). Fetch the product reactively in your route and pass it in.",
+			"dependencies": [
+				"isomorphic-dompurify",
+				"@lucide/svelte",
+				"schema-dts",
+				"sveltekit-medusa-sdk"
+			],
+			"registryDependencies": [
+				"seo",
+				"review",
+				"card"
+			],
 			"files": [
 				{
 					"path": "src/lib/registry/product/product.svelte",
@@ -602,9 +641,15 @@
 			"name": "cta",
 			"type": "registry:ui",
 			"title": "CTA",
-			"description": "Add-to-cart primitives wired to the sveltekit-medusa-sdk cart remotes. AddToCartButton resolves variant/quantity from Product context (or props), shows pending/aria-busy state and an accessible inline success/error message, with optional post-add redirect. AddToCartToggle reflects cart membership for a variant/condition via a checkbox (or a custom children snippet). StripeExpressCheckout renders Stripe's Express Checkout wallet button (Apple Pay / Google Pay / Link) in deferred mode for product cards and landing pages — Medusa-agnostic: you create the PaymentIntent in onConfirm and call the supplied confirm(clientSecret). All flat exports; no compound namespace.",
-			"dependencies": ["sveltekit-medusa-sdk", "sveltekit-stripe"],
-			"registryDependencies": ["product", "button"],
+			"description": "Add-to-cart primitives wired to the sveltekit-medusa-sdk cart remotes. AddToCartButton resolves variant/quantity from Product context (or props), shows pending/aria-busy state and an accessible inline success/error message, with optional post-add redirect. AddToCartToggle reflects cart membership for a variant/condition via a checkbox (or a custom children snippet). StripeExpressCheckout renders Stripe's Express Checkout wallet button (Apple Pay / Google Pay / Link) in deferred mode for product cards and landing pages \u2014 Medusa-agnostic: you create the PaymentIntent in onConfirm and call the supplied confirm(clientSecret). All flat exports; no compound namespace.",
+			"dependencies": [
+				"sveltekit-medusa-sdk",
+				"sveltekit-stripe"
+			],
+			"registryDependencies": [
+				"product",
+				"button"
+			],
 			"files": [
 				{
 					"path": "src/lib/registry/cta/add-to-cart-button.svelte",
@@ -643,8 +688,14 @@
 			"type": "registry:ui",
 			"title": "Cart",
 			"description": "Compound Cart primitives (Root, Trigger, Badge, Sheet, Items, Item, Image, Title, Price, Quantity, Remove, ItemSubtotal, Subtotal, Empty, Checkout) plus a CartDrawer preset, wired to the sveltekit-medusa-sdk cart remotes. Reactive re-render on cart changes with onupdate/onremove/onerror callbacks and pending-state disabling; per-part class override; self-contained currency-aware format-price. No $effect (SSR-safe). Badge shows total quantity and hides at 0.",
-			"dependencies": ["sveltekit-medusa-sdk", "@lucide/svelte"],
-			"registryDependencies": ["button", "sheet"],
+			"dependencies": [
+				"sveltekit-medusa-sdk",
+				"@lucide/svelte"
+			],
+			"registryDependencies": [
+				"button",
+				"sheet"
+			],
 			"files": [
 				{
 					"path": "src/lib/registry/cart/cart.svelte",
@@ -758,8 +809,17 @@
 			"type": "registry:ui",
 			"title": "Address Form",
 			"description": "Compound Address primitives (Root, Email, FirstName, LastName, Phone, AddressLine1, AddressLine2, City, Company, Country, PostalCode, Autocomplete, Province, BillingToggle, Billing) plus AddressForm and AddressFormCollapsed presets. Owns cart writes via the sveltekit-medusa-sdk cart remotes (DI-with-SDK-default + onaddresschange/onregionchange/onerror callbacks): debounced updateCart, region-by-country switching, billing same-as-shipping toggle, and Google Places autocomplete (optional; degrades to text). Receives the consumer's remote form (renders no <form>). No $effect (SSR-safe; hydrates via onMount).",
-			"dependencies": ["sveltekit-medusa-sdk"],
-			"registryDependencies": ["field", "input-text", "input-select-country", "input-postal-code", "input-province", "google-places-autocomplete"],
+			"dependencies": [
+				"sveltekit-medusa-sdk"
+			],
+			"registryDependencies": [
+				"field",
+				"input-text",
+				"input-select-country",
+				"input-postal-code",
+				"input-province",
+				"google-places-autocomplete"
+			],
 			"files": [
 				{
 					"path": "src/lib/registry/address/address-root.svelte",
@@ -872,9 +932,18 @@
 			"name": "checkout",
 			"type": "registry:ui",
 			"title": "Checkout",
-			"description": "Compound Checkout primitives (Root, Items, Item, Image, Title, Price, Quantity, ItemSubtotal, Remove, Delivery, Discount, Summary + 7 summary rows, PlaceOrder, Confirmation, CheckoutError) with payment parts for both providers — BraintreePayment/BraintreeHostedFields and StripeElements/StripePayment/StripeAddress — plus three batteries-included presets: CheckoutBraintree (hosted fields), CheckoutStripe (Payment Element / card fields), and CheckoutAuto (renders whichever provider the cart's region is configured for, from region.payment_providers). Each preset owns the <form>, composes the Address preset alongside a single-page cart summary, and calls placeOrder (updateAddress → shipping guard → authorizePayment → completeCart) with a StoreOrder confirmation or redirectTo. Return is a standalone handler for redirect-based Stripe methods (iDEAL, Bancontact, giropay, Przelewy24) — drop it on the route your returnUrl points at. Wired to the sveltekit-medusa-sdk cart/checkout/braintree/stripe remotes (DI-with-SDK-default); no $effect (SSR-safe).",
-			"dependencies": ["sveltekit-medusa-sdk", "sveltekit-braintree", "sveltekit-stripe", "@stripe/stripe-js", "@lucide/svelte"],
-			"registryDependencies": ["address", "button"],
+			"description": "Compound Checkout primitives (Root, Items, Item, Image, Title, Price, Quantity, ItemSubtotal, Remove, Delivery, Discount, Summary + 7 summary rows, PlaceOrder, Confirmation, CheckoutError) with payment parts for both providers \u2014 BraintreePayment/BraintreeHostedFields and StripeElements/StripePayment/StripeAddress \u2014 plus three batteries-included presets: CheckoutBraintree (hosted fields), CheckoutStripe (Payment Element / card fields), and CheckoutAuto (renders whichever provider the cart's region is configured for, from region.payment_providers). Each preset owns the <form>, composes the Address preset alongside a single-page cart summary, and calls placeOrder (updateAddress \u2192 shipping guard \u2192 authorizePayment \u2192 completeCart) with a StoreOrder confirmation or redirectTo. Return is a standalone handler for redirect-based Stripe methods (iDEAL, Bancontact, giropay, Przelewy24) \u2014 drop it on the route your returnUrl points at. Wired to the sveltekit-medusa-sdk cart/checkout/braintree/stripe remotes (DI-with-SDK-default); no $effect (SSR-safe).",
+			"dependencies": [
+				"sveltekit-medusa-sdk",
+				"sveltekit-braintree",
+				"sveltekit-stripe",
+				"@stripe/stripe-js",
+				"@lucide/svelte"
+			],
+			"registryDependencies": [
+				"address",
+				"button"
+			],
 			"files": [
 				{
 					"path": "src/lib/registry/checkout/checkout.svelte",
@@ -1087,6 +1156,11 @@
 					"target": "checkout/stripe-cs-context.ts"
 				},
 				{
+					"path": "src/lib/registry/checkout/stripe-session.ts",
+					"type": "registry:file",
+					"target": "checkout/stripe-session.ts"
+				},
+				{
 					"path": "src/lib/registry/checkout/format-price.ts",
 					"type": "registry:file",
 					"target": "checkout/format-price.ts"
@@ -1108,8 +1182,15 @@
 			"type": "registry:ui",
 			"title": "Auth",
 			"description": "Compound login/register/forgot/reset forms (a createAuthForm factory + Field/Label/Input/Error/Submit parts) plus an Auth.Dialog preset (URL-driven ?auth= modal with a per-part classes map); wired to the sveltekit-medusa-sdk auth remotes; SSR-safe, no $effect.",
-			"dependencies": ["sveltekit-medusa-sdk", "@lucide/svelte"],
-			"registryDependencies": ["dialog", "button", "field"],
+			"dependencies": [
+				"sveltekit-medusa-sdk",
+				"@lucide/svelte"
+			],
+			"registryDependencies": [
+				"dialog",
+				"button",
+				"field"
+			],
 			"files": [
 				{
 					"path": "src/lib/registry/auth/auth-dialog.svelte",
@@ -1197,9 +1278,18 @@
 			"name": "customer",
 			"type": "registry:ui",
 			"title": "Customer",
-			"description": "Storefront shopper identity: SignedIn/SignedOut auth-state gates, Menu/MenuTrigger/MenuContent/MenuItem over the shadcn DropdownMenu, SignInButton (deep-links ?auth=login), and SignOut; plus Customer.Reviews — the shopper's own reviews across all products, composed from the `reviews` collection parts (List/Sort/Pagination) with Review.Product, Review.Edit, and Review.Delete. Reads the sveltekit-medusa-sdk customer & reviews remotes directly.",
-			"dependencies": ["sveltekit-medusa-sdk"],
-			"registryDependencies": ["dropdown-menu", "button", "reviews", "review", "textarea", "label"],
+			"description": "Storefront shopper identity: SignedIn/SignedOut auth-state gates, Menu/MenuTrigger/MenuContent/MenuItem over the shadcn DropdownMenu, SignInButton (deep-links ?auth=login), and SignOut; plus Customer.Reviews \u2014 the shopper's own reviews across all products, composed from the `reviews` collection parts (List/Sort/Pagination) with Review.Product, Review.Edit, and Review.Delete. Reads the sveltekit-medusa-sdk customer & reviews remotes directly.",
+			"dependencies": [
+				"sveltekit-medusa-sdk"
+			],
+			"registryDependencies": [
+				"dropdown-menu",
+				"button",
+				"reviews",
+				"review",
+				"textarea",
+				"label"
+			],
 			"files": [
 				{
 					"path": "src/lib/registry/customer/menu.svelte",
@@ -1278,8 +1368,13 @@
 			"type": "registry:ui",
 			"title": "Theme Button",
 			"description": "Icon button that toggles light/dark via mode-watcher. Resizable, with overridable sun/moon icons.",
-			"dependencies": ["mode-watcher", "@lucide/svelte"],
-			"registryDependencies": ["button"],
+			"dependencies": [
+				"mode-watcher",
+				"@lucide/svelte"
+			],
+			"registryDependencies": [
+				"button"
+			],
 			"files": [
 				{
 					"path": "src/lib/registry/theme/theme-button.svelte",
@@ -1293,8 +1388,13 @@
 			"type": "registry:ui",
 			"title": "Theme Toggle",
 			"description": "Toggle that reflects and flips the light/dark theme via mode-watcher. Overridable icons + label.",
-			"dependencies": ["mode-watcher", "@lucide/svelte"],
-			"registryDependencies": ["toggle"],
+			"dependencies": [
+				"mode-watcher",
+				"@lucide/svelte"
+			],
+			"registryDependencies": [
+				"toggle"
+			],
 			"files": [
 				{
 					"path": "src/lib/registry/theme/theme-toggle.svelte",
@@ -1308,8 +1408,12 @@
 			"type": "registry:ui",
 			"title": "Theme Switch",
 			"description": "Bare switch that toggles light/dark via mode-watcher. Optional additive form binding for settings forms.",
-			"dependencies": ["mode-watcher"],
-			"registryDependencies": ["switch"],
+			"dependencies": [
+				"mode-watcher"
+			],
+			"registryDependencies": [
+				"switch"
+			],
 			"files": [
 				{
 					"path": "src/lib/registry/theme/theme-switch.svelte",
@@ -1323,8 +1427,12 @@
 			"type": "registry:ui",
 			"title": "Theme Select",
 			"description": "Bare light/dark/system dropdown driving mode-watcher's userPrefersMode. Optional additive form binding.",
-			"dependencies": ["mode-watcher"],
-			"registryDependencies": ["select"],
+			"dependencies": [
+				"mode-watcher"
+			],
+			"registryDependencies": [
+				"select"
+			],
 			"files": [
 				{
 					"path": "src/lib/registry/theme/theme-select.svelte",
@@ -1338,8 +1446,13 @@
 			"type": "registry:ui",
 			"title": "Google Places Autocomplete",
 			"description": "Address autocomplete field wrapping Google's PlaceAutocompleteElement, themed with shadcn tokens (chrome stripped, dropdown restyled). Emits a normalized address on select; no store writes.",
-			"dependencies": ["@googlemaps/js-api-loader", "tailwind-merge"],
-			"devDependencies": ["@types/google.maps"],
+			"dependencies": [
+				"@googlemaps/js-api-loader",
+				"tailwind-merge"
+			],
+			"devDependencies": [
+				"@types/google.maps"
+			],
 			"registryDependencies": [],
 			"files": [
 				{
@@ -1374,8 +1487,12 @@
 			"type": "registry:ui",
 			"title": "Input Text",
 			"description": "Text/email/tel/number/password/textarea field bound to a SvelteKit remote-form field proxy, wrapped in shadcn Field with label + validation errors.",
-			"dependencies": ["@lucide/svelte"],
-			"registryDependencies": ["field"],
+			"dependencies": [
+				"@lucide/svelte"
+			],
+			"registryDependencies": [
+				"field"
+			],
 			"files": [
 				{
 					"path": "src/lib/registry/input-text/input-text.svelte",
@@ -1389,8 +1506,12 @@
 			"type": "registry:ui",
 			"title": "Input Select",
 			"description": "Native select bound to a SvelteKit remote-form field proxy with data-driven options, wrapped in shadcn Field with label + validation errors.",
-			"dependencies": ["@lucide/svelte"],
-			"registryDependencies": ["field"],
+			"dependencies": [
+				"@lucide/svelte"
+			],
+			"registryDependencies": [
+				"field"
+			],
 			"files": [
 				{
 					"path": "src/lib/registry/input-select/input-select.svelte",
@@ -1405,7 +1526,9 @@
 			"title": "Input Select Country",
 			"description": "Country select bound to a remote-form field: takes a `countries` list (the Address family feeds it the store's regions) and renders ISO-2 code values with country names as labels. Exports the `Country` type. Extends input-select.",
 			"dependencies": [],
-			"registryDependencies": ["input-select"],
+			"registryDependencies": [
+				"input-select"
+			],
 			"files": [
 				{
 					"path": "src/lib/registry/input-select-country/input-select-country.svelte",
@@ -1420,7 +1543,9 @@
 			"title": "Input Postal Code",
 			"description": "Postal-code text field that uppercases as you type (alphanumeric postcodes) and bubbles the change. Extends input-text.",
 			"dependencies": [],
-			"registryDependencies": ["input-text"],
+			"registryDependencies": [
+				"input-text"
+			],
 			"files": [
 				{
 					"path": "src/lib/registry/input-postal-code/input-postal-code.svelte",
@@ -1435,7 +1560,10 @@
 			"title": "Input Province",
 			"description": "Config-driven province/state field bound to a remote-form field: renders a select when the current country is configured (default US + CA, ISO 3166-2 values), otherwise a freeform text input. Ships US_STATES, US_MILITARY (APO/FPO), CA_PROVINCES, defaultProvinceConfig, and the resolveProvince helper; stores extend per country in one place. Extends input-select + input-text.",
 			"dependencies": [],
-			"registryDependencies": ["input-select", "input-text"],
+			"registryDependencies": [
+				"input-select",
+				"input-text"
+			],
 			"files": [
 				{
 					"path": "src/lib/registry/input-province/input-province.svelte",
@@ -1460,7 +1588,9 @@
 			"title": "Page Nav",
 			"description": "URL-driven pagination primitives (Root, Prev, Next, Pages, Info) shared by the products, categories and collections listings. The page lives in the URL as a 1-based `?p=` param (page 1 omits it) so pages are linkable, crawlable and back-button-correct; links preserve every other search param. Prev/Next render as aria-disabled spans at the ends, Pages renders a windowed range with ellipses and aria-current, Root renders nothing for a single page. Named `page-nav` rather than `pagination` to avoid colliding with shadcn-svelte's own pagination component. Pure math in page-nav-logic.ts; no $effect (SSR-safe).",
 			"dependencies": [],
-			"registryDependencies": ["button"],
+			"registryDependencies": [
+				"button"
+			],
 			"files": [
 				{
 					"path": "src/lib/registry/page-nav/page-nav.svelte",
@@ -1508,9 +1638,14 @@
 			"name": "products",
 			"type": "registry:ui",
 			"title": "Products",
-			"description": "Paginated product listing for category, collection and index pages: Root, Grid and Pagination. Root is context-aware — headless when given a `products` array (client-side paging), otherwise it fetches a page from the sveltekit-medusa-sdk products remote filtered by categoryId / collectionId / typeId / q / order. The page lives in the URL as a 1-based `?p=` param, so page 2 is linkable and crawlable. Grid defaults to 1/2/3/4 columns at base/md/lg/xl (override with `class`) and renders a Product.Card per product, or your own snippet per item, with an `empty` slot. Render-prop children expose { products, count, page, pageCount, loading, error }. No $effect (SSR-safe).",
-			"dependencies": ["sveltekit-medusa-sdk"],
-			"registryDependencies": ["product", "page-nav"],
+			"description": "Paginated product listing for category, collection and index pages: Root, Grid and Pagination. Root is context-aware \u2014 headless when given a `products` array (client-side paging), otherwise it fetches a page from the sveltekit-medusa-sdk products remote filtered by categoryId / collectionId / typeId / q / order. The page lives in the URL as a 1-based `?p=` param, so page 2 is linkable and crawlable. Grid defaults to 1/2/3/4 columns at base/md/lg/xl (override with `class`) and renders a Product.Card per product, or your own snippet per item, with an `empty` slot. Render-prop children expose { products, count, page, pageCount, loading, error }. No $effect (SSR-safe).",
+			"dependencies": [
+				"sveltekit-medusa-sdk"
+			],
+			"registryDependencies": [
+				"product",
+				"page-nav"
+			],
 			"files": [
 				{
 					"path": "src/lib/registry/products/products-root.svelte",
@@ -1548,9 +1683,14 @@
 			"name": "categories",
 			"type": "registry:ui",
 			"title": "Categories",
-			"description": "Paginated product-category listing: Root, Grid, Card and Pagination. Root is context-aware — headless when given a `categories` array, otherwise it fetches a page from the sveltekit-medusa-sdk categories remote, optionally filtered to one parent (`parentId`) for the subcategories-on-a-category-page case. Card links to /categories/<handle> by default (string or builder `href`) and reads its image from `metadata.thumbnail` — configurable via `imageKey`, overridable via an `image` snippet — since Medusa categories have no image field; it degrades to a text-only card when the key is absent. Grid defaults to 1/2/3/4 columns at base/md/lg/xl with a per-item snippet override and an `empty` slot. The page lives in the URL as a 1-based `?p=` param. No $effect (SSR-safe).",
-			"dependencies": ["sveltekit-medusa-sdk"],
-			"registryDependencies": ["page-nav", "card"],
+			"description": "Paginated product-category listing: Root, Grid, Card and Pagination. Root is context-aware \u2014 headless when given a `categories` array, otherwise it fetches a page from the sveltekit-medusa-sdk categories remote, optionally filtered to one parent (`parentId`) for the subcategories-on-a-category-page case. Card links to /categories/<handle> by default (string or builder `href`) and reads its image from `metadata.thumbnail` \u2014 configurable via `imageKey`, overridable via an `image` snippet \u2014 since Medusa categories have no image field; it degrades to a text-only card when the key is absent. Grid defaults to 1/2/3/4 columns at base/md/lg/xl with a per-item snippet override and an `empty` slot. The page lives in the URL as a 1-based `?p=` param. No $effect (SSR-safe).",
+			"dependencies": [
+				"sveltekit-medusa-sdk"
+			],
+			"registryDependencies": [
+				"page-nav",
+				"card"
+			],
 			"files": [
 				{
 					"path": "src/lib/registry/categories/categories-root.svelte",
@@ -1593,9 +1733,14 @@
 			"name": "collections",
 			"type": "registry:ui",
 			"title": "Collections",
-			"description": "Paginated collection listing: Root, Grid, Card and Pagination. Root is context-aware — headless when given a `collections` array, otherwise it fetches a page from the sveltekit-medusa-sdk collections remote. Card links to /collections/<handle> by default (string or builder `href`) and reads its image from `metadata.thumbnail` — configurable via `imageKey`, overridable via an `image` snippet — since Medusa collections carry only title, handle and metadata; it degrades to a text-only card when the key is absent. Grid defaults to 1/2/3/4 columns at base/md/lg/xl with a per-item snippet override and an `empty` slot. The page lives in the URL as a 1-based `?p=` param. No $effect (SSR-safe).",
-			"dependencies": ["sveltekit-medusa-sdk"],
-			"registryDependencies": ["page-nav", "card"],
+			"description": "Paginated collection listing: Root, Grid, Card and Pagination. Root is context-aware \u2014 headless when given a `collections` array, otherwise it fetches a page from the sveltekit-medusa-sdk collections remote. Card links to /collections/<handle> by default (string or builder `href`) and reads its image from `metadata.thumbnail` \u2014 configurable via `imageKey`, overridable via an `image` snippet \u2014 since Medusa collections carry only title, handle and metadata; it degrades to a text-only card when the key is absent. Grid defaults to 1/2/3/4 columns at base/md/lg/xl with a per-item snippet override and an `empty` slot. The page lives in the URL as a 1-based `?p=` param. No $effect (SSR-safe).",
+			"dependencies": [
+				"sveltekit-medusa-sdk"
+			],
+			"registryDependencies": [
+				"page-nav",
+				"card"
+			],
 			"files": [
 				{
 					"path": "src/lib/registry/collections/collections-root.svelte",

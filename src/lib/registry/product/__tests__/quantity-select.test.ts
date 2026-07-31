@@ -22,7 +22,7 @@ const product = {
 
 test('renders options 1..effectiveMax (min(stock, maxQuantity))', async () => {
 	page.url = new URL('http://localhost/product/tee')
-	render(Harness, { product, navigate: () => {} })
+	await render(Harness, { product, navigate: () => {} })
 	const opts = vpage.getByRole('option')
 	await expect.element(opts.nth(0)).toHaveTextContent('1')
 	// stock 3 caps below maxQuantity 5 → 3 options
@@ -33,7 +33,7 @@ test('renders options 1..effectiveMax (min(stock, maxQuantity))', async () => {
 test('changing the select navigates to ?quantity=', async () => {
 	page.url = new URL('http://localhost/product/tee?v=v1')
 	const navigate = vi.fn()
-	render(Harness, { product, navigate })
+	await render(Harness, { product, navigate })
 	const select = vpage.getByRole('combobox')
 	await select.selectOptions('2')
 	expect(navigate).toHaveBeenCalledWith(expect.stringContaining('quantity=2'))
@@ -53,12 +53,12 @@ test('out of stock disables the select', async () => {
 		]
 	} as unknown as StoreProduct
 	page.url = new URL('http://localhost/product/tee')
-	render(Harness, { product: oos, navigate: () => {} })
+	await render(Harness, { product: oos, navigate: () => {} })
 	await expect.element(vpage.getByRole('combobox')).toBeDisabled()
 })
 
 test('standalone (no Root) uses maxQuantity prop range', async () => {
 	page.url = new URL('http://localhost/x')
-	render(Harness, { standalone: true })
+	await render(Harness, { standalone: true })
 	expect(document.querySelectorAll('[data-quantity-select] option').length).toBe(5)
 })

@@ -37,7 +37,7 @@ beforeEach(() => {
 })
 
 test('degrades to a plain text input for address_1 when no apiKey', async () => {
-	render(Harness, { form: makeForm(), googlePlacesApiKey: undefined })
+	await render(Harness, { form: makeForm(), googlePlacesApiKey: undefined })
 	const input = document.querySelector('input[name=address_1]')
 	expect(input).not.toBeNull()
 	// GPAC would mount a <gmp-place-autocomplete> host; without apiKey it must not.

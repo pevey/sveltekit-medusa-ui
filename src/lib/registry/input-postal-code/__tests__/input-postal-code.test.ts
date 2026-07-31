@@ -16,7 +16,7 @@ function mockField(set = vi.fn()) {
 test('uppercases on input, writes the uppercased value back to the field, and does NOT bubble onchange on input', async () => {
 	const set = vi.fn()
 	const onchange = vi.fn()
-	render(InputPostalCode, { field: mockField(set), label: 'Postal code', onchange })
+	await render(InputPostalCode, { field: mockField(set), label: 'Postal code', onchange })
 	const input = document.querySelector('input') as HTMLInputElement
 	input.value = 'k1a 0b1'
 	input.dispatchEvent(new Event('input', { bubbles: true }))
@@ -27,7 +27,7 @@ test('uppercases on input, writes the uppercased value back to the field, and do
 
 test('bubbles onchange (once) on the change event, with the value already uppercased', async () => {
 	const onchange = vi.fn()
-	render(InputPostalCode, { field: mockField(), onchange })
+	await render(InputPostalCode, { field: mockField(), onchange })
 	const input = document.querySelector('input') as HTMLInputElement
 	input.value = 'sw1a 1aa'
 	input.dispatchEvent(new Event('input', { bubbles: true }))

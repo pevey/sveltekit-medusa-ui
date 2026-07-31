@@ -29,7 +29,7 @@ beforeEach(() => {
 
 test('off state adds the target variant on toggle', async () => {
 	h.getCart.mockResolvedValue(emptyCart)
-	render(Harness, { variantId: 'v1', quantity: 1 })
+	await render(Harness, { variantId: 'v1', quantity: 1 })
 	await expect.element(vpage.getByRole('checkbox')).not.toBeChecked()
 	await vpage.getByRole('checkbox').click()
 	expect(h.addToCart).toHaveBeenCalledWith({ variant_id: 'v1', quantity: 1 })
@@ -37,7 +37,7 @@ test('off state adds the target variant on toggle', async () => {
 
 test('on state (variant already in cart) removes the line on toggle', async () => {
 	h.getCart.mockResolvedValue(cartWith('v1'))
-	render(Harness, { variantId: 'v1' })
+	await render(Harness, { variantId: 'v1' })
 	await expect.element(vpage.getByRole('checkbox')).toBeChecked()
 	await vpage.getByRole('checkbox').click()
 	expect(h.removeFromCart).toHaveBeenCalledWith('li1')
@@ -45,7 +45,7 @@ test('on state (variant already in cart) removes the line on toggle', async () =
 
 test('renders nothing when condition is unmet', async () => {
 	h.getCart.mockResolvedValue(emptyCart)
-	render(Harness, { variantId: 'v1', condition: { collectionTitle: 'Warby Parker' } })
+	await render(Harness, { variantId: 'v1', condition: { collectionTitle: 'Warby Parker' } })
 	// Best-effort wait for the suspense to settle; the real assertion is that no checkbox renders.
 	await expect
 		.element(vpage.getByTestId('loading'))
@@ -60,6 +60,6 @@ test('renders when condition is met', async () => {
 		items: [{ id: 'li9', variant_id: 'other', product_collection: 'Warby Parker', quantity: 1 }]
 	} as any
 	h.getCart.mockResolvedValue(met)
-	render(Harness, { variantId: 'v1', condition: { collectionTitle: 'warby parker' } })
+	await render(Harness, { variantId: 'v1', condition: { collectionTitle: 'warby parker' } })
 	await expect.element(vpage.getByRole('checkbox')).toBeInTheDocument()
 })

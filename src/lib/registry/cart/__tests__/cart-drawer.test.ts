@@ -18,7 +18,7 @@ import { CartDrawer } from '$lib/components/ui/cart'
 
 test('CartDrawer renders a trigger with the badge count', async () => {
 	h.getCart.mockReturnValue({ current: { id: 'c', items: [{ id: 'a', quantity: 2 }] } })
-	render(CartDrawer, {})
+	await render(CartDrawer, {})
 	// The trigger + badge render even before the sheet opens.
 	await expect.element(vpage.getByText('2')).toBeInTheDocument()
 	await expect.element(vpage.getByText('Cart')).toBeInTheDocument()

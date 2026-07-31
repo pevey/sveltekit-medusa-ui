@@ -21,7 +21,7 @@ beforeEach(() => {
 
 test('clicking sign out logs out, refreshes the customer, and fires onsignout', async () => {
 	const onsignout = vi.fn()
-	render(Harness, { onsignout })
+	await render(Harness, { onsignout })
 	await page.getByRole('button', { name: 'Sign out' }).click()
 	expect(h.logout).toHaveBeenCalled()
 	expect(h.refresh).toHaveBeenCalled()

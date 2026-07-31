@@ -87,7 +87,7 @@ test('CheckoutBraintree renders the address fields, an items row, a summary tota
 	h.getCart.mockReturnValue({ current: CART })
 	h.completeCart.mockResolvedValue({ id: 'order_1' } as any)
 
-	render(Harness, { form: makeForm() })
+	await render(Harness, { form: makeForm() })
 
 	const formEl = document.querySelector('form')
 	expect(formEl).not.toBeNull()

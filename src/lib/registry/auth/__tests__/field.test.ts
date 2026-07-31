@@ -4,7 +4,7 @@ import { expect, test } from 'vitest'
 import Harness from './field-harness.svelte'
 
 test('label is associated with the input id and input renders', async () => {
-	render(Harness, {})
+	await render(Harness, {})
 	const label = document.querySelector('label')!
 	const input = document.querySelector('input')!
 	expect(label.getAttribute('for')).toBe('email')
@@ -13,7 +13,7 @@ test('label is associated with the input id and input renders', async () => {
 })
 
 test('field-level Auth.Error shows field issues; form-level shows the form error', async () => {
-	render(Harness, {
+	await render(Harness, {
 		issues: [{ message: 'Required', path: [] }],
 		formError: 'Invalid email or password.'
 	})

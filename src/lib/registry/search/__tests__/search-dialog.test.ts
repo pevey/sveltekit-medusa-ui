@@ -32,34 +32,34 @@ beforeEach(() => {
 })
 
 test('Ctrl+K opens the dialog', async () => {
-	render(SearchDialog, {})
+	await render(SearchDialog, {})
 	expect(page.getByRole('dialog').query()).toBeNull()
 	winKey({ key: 'k', ctrlKey: true })
 	await expect.element(page.getByRole('dialog')).toBeInTheDocument()
 })
 
 test('Cmd+K (metaKey) opens the dialog', async () => {
-	render(SearchDialog, {})
+	await render(SearchDialog, {})
 	winKey({ key: 'k', metaKey: true })
 	await expect.element(page.getByRole('dialog')).toBeInTheDocument()
 })
 
 test('enabled=false disables the global shortcut', async () => {
-	render(SearchDialog, { enabled: false })
+	await render(SearchDialog, { enabled: false })
 	winKey({ key: 'k', ctrlKey: true })
 	await new Promise(r => setTimeout(r, 50))
 	expect(page.getByRole('dialog').query()).toBeNull()
 })
 
 test('the trigger snippet opens the dialog', async () => {
-	render(TriggerHarness, {})
+	await render(TriggerHarness, {})
 	expect(page.getByRole('dialog').query()).toBeNull()
 	await page.getByTestId('open-btn').click()
 	await expect.element(page.getByRole('dialog')).toBeInTheDocument()
 })
 
 test('the search input is focused when the dialog opens', async () => {
-	render(SearchDialog, {})
+	await render(SearchDialog, {})
 	winKey({ key: 'k', ctrlKey: true })
 	const input = page.getByRole('combobox')
 	await expect.element(input).toBeInTheDocument()
@@ -68,7 +68,7 @@ test('the search input is focused when the dialog opens', async () => {
 
 test('typing shows results as options and ArrowDown highlights the first', async () => {
 	h.search.mockResolvedValue({ hits: [mk('product', '1', 'Coffee'), mk('product', '2', 'Beans')] })
-	render(SearchDialog, { debounce: 0 })
+	await render(SearchDialog, { debounce: 0 })
 	winKey({ key: 'k', ctrlKey: true })
 	const input = page.getByRole('combobox')
 	await input.fill('coffee')
@@ -79,7 +79,7 @@ test('typing shows results as options and ArrowDown highlights the first', async
 })
 
 test('Escape closes the dialog', async () => {
-	render(SearchDialog, {})
+	await render(SearchDialog, {})
 	winKey({ key: 'k', ctrlKey: true })
 	await expect.element(page.getByRole('dialog')).toBeInTheDocument()
 	page

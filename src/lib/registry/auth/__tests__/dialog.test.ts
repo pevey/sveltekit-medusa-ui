@@ -43,7 +43,7 @@ vi.mock('$app/state', () => ({ page: { url: new URL('http://localhost/?auth=logi
 import AuthDialog from '../auth-dialog.svelte'
 
 test('renders the login form when ?auth=login and applies the content class', async () => {
-	render(AuthDialog, { classes: { content: 'p-8 test-content' } })
+	await render(AuthDialog, { classes: { content: 'p-8 test-content' } })
 	await expect.element(vpage.getByText('Sign in to your account')).toBeInTheDocument()
 	await expect.element(vpage.getByRole('button', { name: 'Sign in' })).toBeInTheDocument()
 	// Dialog.Content is portalled to body; assert the class landed.

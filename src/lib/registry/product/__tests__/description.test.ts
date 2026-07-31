@@ -16,7 +16,7 @@ const mk = (description: string) =>
 
 test('renders allowed HTML', async () => {
 	page.url = new URL('http://localhost/')
-	render(Harness, { product: mk('<p>Rich <strong>text</strong>.</p>') })
+	await render(Harness, { product: mk('<p>Rich <strong>text</strong>.</p>') })
 	await expect.element(vpage.getByText('text')).toBeInTheDocument()
 })
 

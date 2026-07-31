@@ -29,20 +29,20 @@ const product = {
 
 test('renders the option title and a control per value', async () => {
 	page.url = new URL('http://localhost/')
-	render(Harness, { product })
+	await render(Harness, { product })
 	await expect.element(vpage.getByText('Size')).toBeInTheDocument()
 	await expect.element(vpage.getByText('S', { exact: true })).toBeInTheDocument()
 })
 
 test('the selected value is marked aria-current', async () => {
 	page.url = new URL('http://localhost/?v=v_s')
-	render(Harness, { product })
+	await render(Harness, { product })
 	await expect.element(vpage.getByText('S', { exact: true })).toHaveAttribute('aria-current', 'true')
 })
 
 test('an in-stock value is a link to its variant (preserving params)', async () => {
 	page.url = new URL('http://localhost/?v=v_s')
-	render(Harness, { product })
+	await render(Harness, { product })
 	await expect.element(vpage.getByRole('link', { name: 'L' })).toHaveAttribute('href', '?v=v_l')
 })
 

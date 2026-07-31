@@ -30,14 +30,14 @@ const mockEls = () => Array.from(document.querySelectorAll('[data-mock-gpac]')) 
 // across tests within this file (Vitest browser mode isolates per file, not per test), so this must
 // execute before any other test's mount has already flipped it.
 test('two instances each replace their own placeholder (no id collision) and configure loader once', async () => {
-	render(GooglePlacesAutocomplete, { apiKey: 'k' })
-	render(GooglePlacesAutocomplete, { apiKey: 'k' })
+	await render(GooglePlacesAutocomplete, { apiKey: 'k' })
+	await render(GooglePlacesAutocomplete, { apiKey: 'k' })
 	await vi.waitFor(() => expect(mockEls().length).toBe(2))
 	expect(setOptions).toHaveBeenCalledTimes(1) // module-level guard
 })
 
 test('replaces its own placeholder, merges host class, sets data-gpac-* from icons', async () => {
-	render(GooglePlacesAutocomplete, {
+	await render(GooglePlacesAutocomplete, {
 		apiKey: 'k',
 		class: 'my-host',
 		icons: { search: true } // close/location default false
@@ -53,7 +53,7 @@ test('replaces its own placeholder, merges host class, sets data-gpac-* from ico
 
 test('gmp-select emits a normalized address', async () => {
 	const onselect = vi.fn()
-	render(GooglePlacesAutocomplete, { apiKey: 'k', onselect })
+	await render(GooglePlacesAutocomplete, { apiKey: 'k', onselect })
 	await vi.waitFor(() => expect(mockEls().length).toBe(1))
 	const host = mockEls()[0]
 	const evt = new Event('gmp-select') as any
@@ -72,7 +72,7 @@ test('gmp-select emits a normalized address', async () => {
 
 test('input mirrors the composed inner value', async () => {
 	const oninput = vi.fn()
-	render(GooglePlacesAutocomplete, { apiKey: 'k', oninput })
+	await render(GooglePlacesAutocomplete, { apiKey: 'k', oninput })
 	await vi.waitFor(() => expect(mockEls().length).toBe(1))
 	const host = mockEls()[0]
 	const inner = document.createElement('input')

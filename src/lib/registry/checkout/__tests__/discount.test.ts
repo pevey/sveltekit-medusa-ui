@@ -27,7 +27,7 @@ test('typing a code and clicking Redeem calls injected addPromotion with lowerca
 	h.getCart.mockReturnValue({ current: { id: 'c', promotions: [] } as any })
 	h.addPromotion.mockResolvedValue({ id: 'c', promotions: [] } as any)
 
-	render(Harness, {})
+	await render(Harness, {})
 
 	const input = document.querySelector('input[type="text"]') as HTMLInputElement
 	const button = document.querySelector('button[type="button"]') as HTMLButtonElement
@@ -55,7 +55,7 @@ test('with a cart containing promotions, a chip renders per promotion and clicki
 	})
 	h.removePromotion.mockResolvedValue({ id: 'c', promotions: [] } as any)
 
-	render(Harness, {})
+	await render(Harness, {})
 
 	// Check that the chip is rendered
 	await vi.waitFor(() => {

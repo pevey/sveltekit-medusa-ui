@@ -16,7 +16,7 @@ function mockField(name = 'pref') {
 }
 
 test('ThemeSwitch: with `field`, renders a hidden native checkbox carrying the binding name', async () => {
-	render(ThemeSwitch, { field: mockField('darkMode') })
+	await render(ThemeSwitch, { field: mockField('darkMode') })
 	const hidden = document.querySelector('input.sr-only') as HTMLInputElement
 	expect(hidden).not.toBeNull()
 	expect(hidden.getAttribute('name')).toBe('darkMode')
@@ -24,18 +24,18 @@ test('ThemeSwitch: with `field`, renders a hidden native checkbox carrying the b
 })
 
 test('ThemeSwitch: without `field`, renders no hidden input', async () => {
-	render(ThemeSwitch, {})
+	await render(ThemeSwitch, {})
 	expect(document.querySelector('input.sr-only')).toBeNull()
 })
 
 test('ThemeSelect: with `field`, renders a hidden native input carrying the binding name', async () => {
-	render(ThemeSelect, { field: mockField('theme') })
+	await render(ThemeSelect, { field: mockField('theme') })
 	const hidden = document.querySelector('input.sr-only') as HTMLInputElement
 	expect(hidden).not.toBeNull()
 	expect(hidden.getAttribute('name')).toBe('theme')
 })
 
 test('ThemeSelect: without `field`, renders no hidden input', async () => {
-	render(ThemeSelect, {})
+	await render(ThemeSelect, {})
 	expect(document.querySelector('input.sr-only')).toBeNull()
 })

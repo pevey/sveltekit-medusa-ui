@@ -43,7 +43,7 @@ beforeEach(() => {
 })
 
 test('collapsed: anchors visible, structured block present but clipped (sr-only, not display:none)', async () => {
-	render(Harness, { form: makeForm() })
+	await render(Harness, { form: makeForm() })
 	// anchors present
 	expect(document.querySelector('[name=email]')).not.toBeNull()
 	// structured field present in DOM (autofillable) ...
@@ -56,7 +56,7 @@ test('collapsed: anchors visible, structured block present but clipped (sr-only,
 })
 
 test('a change on a structured field reveals the block (removes clip)', async () => {
-	render(Harness, { form: makeForm() })
+	await render(Harness, { form: makeForm() })
 	const container = document.querySelector('[data-collapsed-fields]') as HTMLElement
 	expect(container.classList.contains('sr-only')).toBe(true)
 	const city = document.querySelector('[name=city]') as HTMLInputElement
@@ -68,7 +68,7 @@ test('a change on a structured field reveals the block (removes clip)', async ()
 test('`input` reveals the block but does NOT save; `change` saves (save-on-blur cadence preserved)', async () => {
 	const updateCart = vi.fn(async () => ({ id: 'cart_1' }) as any)
 	h.updateCart.mockImplementation(updateCart)
-	render(Harness, { form: makeForm() })
+	await render(Harness, { form: makeForm() })
 	const container = document.querySelector('[data-collapsed-fields]') as HTMLElement
 	const city = document.querySelector('[name=city]') as HTMLInputElement
 

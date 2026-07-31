@@ -18,7 +18,7 @@ const COUNTRIES = [
 ]
 
 test('renders an option per country (value=code, text=name) and binds the field', async () => {
-	render(InputSelectCountry, { field: mockField(), countries: COUNTRIES, label: 'Country' })
+	await render(InputSelectCountry, { field: mockField(), countries: COUNTRIES, label: 'Country' })
 	const select = document.querySelector('select') as HTMLSelectElement
 	expect(select.getAttribute('name')).toBe('country_code')
 	const opts = Array.from(select.querySelectorAll('option'))
@@ -28,7 +28,7 @@ test('renders an option per country (value=code, text=name) and binds the field'
 
 test('bubbles the native change event', async () => {
 	const onchange = vi.fn()
-	render(InputSelectCountry, { field: mockField(), countries: COUNTRIES, onchange })
+	await render(InputSelectCountry, { field: mockField(), countries: COUNTRIES, onchange })
 	const select = document.querySelector('select') as HTMLSelectElement
 	select.value = 'ca'
 	select.dispatchEvent(new Event('change', { bubbles: true }))

@@ -43,12 +43,12 @@ beforeEach(() => {
 })
 
 test('renders a state select when country_code is us', async () => {
-	render(Harness, { form: makeForm('us') })
+	await render(Harness, { form: makeForm('us') })
 	expect(document.querySelector('select[name=province]')).not.toBeNull()
 })
 
 test('renders a freeform text province when country_code is unconfigured', async () => {
-	render(Harness, { form: makeForm('gb') })
+	await render(Harness, { form: makeForm('gb') })
 	expect(document.querySelector('select[name=province]')).toBeNull()
 	expect(document.querySelector('input[name=province]')).not.toBeNull()
 })

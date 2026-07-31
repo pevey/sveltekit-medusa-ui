@@ -34,7 +34,7 @@ beforeEach(() => {
 })
 
 test('exposes total quantity, line count, subtotal from getCart().current', async () => {
-	render(Harness, {})
+	await render(Harness, {})
 	await expect.element(vpage.getByTestId('count')).toHaveTextContent('5')
 	await expect.element(vpage.getByTestId('lines')).toHaveTextContent('2')
 	await expect.element(vpage.getByTestId('subtotal')).toHaveTextContent('50')
@@ -42,7 +42,7 @@ test('exposes total quantity, line count, subtotal from getCart().current', asyn
 
 test('updateItem calls updateCartItem and fires onupdate', async () => {
 	const onupdate = vi.fn()
-	render(Harness, { onupdate })
+	await render(Harness, { onupdate })
 	await vpage.getByTestId('do-update').click()
 	expect(h.updateCartItem).toHaveBeenCalledWith({ item_id: 'li1', quantity: 4 })
 	expect(onupdate).toHaveBeenCalledWith(cart)
@@ -50,7 +50,7 @@ test('updateItem calls updateCartItem and fires onupdate', async () => {
 
 test('removeItem calls removeFromCart and fires onremove', async () => {
 	const onremove = vi.fn()
-	render(Harness, { onremove })
+	await render(Harness, { onremove })
 	await vpage.getByTestId('do-remove').click()
 	expect(h.removeFromCart).toHaveBeenCalledWith('li1')
 	expect(onremove).toHaveBeenCalledWith(cart)
@@ -59,7 +59,7 @@ test('removeItem calls removeFromCart and fires onremove', async () => {
 test('onerror fires when a mutation throws', async () => {
 	const onerror = vi.fn()
 	h.updateCartItem.mockRejectedValueOnce(new Error('boom'))
-	render(Harness, { onerror })
+	await render(Harness, { onerror })
 	await vpage.getByTestId('do-update').click()
 	expect(onerror).toHaveBeenCalled()
 })

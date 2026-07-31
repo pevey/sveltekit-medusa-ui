@@ -4,26 +4,26 @@ import { expect, test, vi } from 'vitest'
 import Harness from './faq-harness.svelte'
 
 test('questions render as collapsed buttons (aria-expanded=false)', async () => {
-	render(Harness)
+	await render(Harness)
 	await expect.element(page.getByRole('button', { name: /Question One/ })).toHaveAttribute('aria-expanded', 'false')
 })
 
 test('clicking a question expands it', async () => {
-	render(Harness)
+	await render(Harness)
 	const q1 = page.getByRole('button', { name: /Question One/ })
 	await q1.click()
 	await expect.element(q1).toHaveAttribute('aria-expanded', 'true')
 })
 
 test('type="single" closes the previously open question', async () => {
-	render(Harness, { type: 'single' })
+	await render(Harness, { type: 'single' })
 	await page.getByRole('button', { name: /Question One/ }).click()
 	await page.getByRole('button', { name: /Question Two/ }).click()
 	await expect.element(page.getByRole('button', { name: /Question One/ })).toHaveAttribute('aria-expanded', 'false')
 })
 
 test('type="multiple" keeps multiple questions open', async () => {
-	render(Harness, { type: 'multiple' })
+	await render(Harness, { type: 'multiple' })
 	await page.getByRole('button', { name: /Question One/ }).click()
 	await page.getByRole('button', { name: /Question Two/ }).click()
 	await expect.element(page.getByRole('button', { name: /Question One/ })).toHaveAttribute('aria-expanded', 'true')

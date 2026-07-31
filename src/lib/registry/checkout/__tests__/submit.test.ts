@@ -30,7 +30,7 @@ beforeEach(() => {
 test('PlaceOrder button reflects ctx.placing and clicking it calls the flow', async () => {
 	h.getCart.mockReturnValue({ current: CART_WITH_SHIPPING })
 	h.completeCart.mockResolvedValue({ id: 'order_1' } as any)
-	render(Harness, { form: makeForm() })
+	await render(Harness, { form: makeForm() })
 
 	const button = document.querySelector('[data-checkout-place-order]') as HTMLButtonElement
 	expect(button.disabled).toBe(false)
@@ -50,7 +50,7 @@ test('Confirmation renders nothing until an order is placed, then shows the orde
 		total: 10,
 		currency_code: 'usd'
 	} as any)
-	render(Harness, { form: makeForm() })
+	await render(Harness, { form: makeForm() })
 
 	expect(document.querySelector('[data-checkout-confirmation]')).toBeNull()
 
@@ -63,7 +63,7 @@ test('Confirmation renders nothing until an order is placed, then shows the orde
 
 test('Error banner shows the failure message when the cart has no shipping method', async () => {
 	h.getCart.mockReturnValue({ current: CART_WITHOUT_SHIPPING })
-	render(Harness, { form: makeForm() })
+	await render(Harness, { form: makeForm() })
 
 	expect(document.querySelector('[data-checkout-error]')).toBeNull()
 

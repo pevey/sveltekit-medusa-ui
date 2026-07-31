@@ -42,7 +42,7 @@ test('successful request fires onsuccess', async () => {
 		return true
 	})
 	const onsuccess = vi.fn()
-	render(Harness, { onsuccess })
+	await render(Harness, { onsuccess })
 	await h.forgot.cb({ submit: h.forgot.submit })
 	expect(h.forgot.submit).toHaveBeenCalled()
 	expect(onsuccess).toHaveBeenCalled()

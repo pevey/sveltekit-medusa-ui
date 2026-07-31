@@ -47,7 +47,7 @@ test('successful register refreshes the customer then fires onsuccess', async ()
 		return true
 	})
 	const onsuccess = vi.fn()
-	render(Harness, { onsuccess })
+	await render(Harness, { onsuccess })
 	await h.register.cb({ submit: h.register.submit })
 	expect(h.register.submit).toHaveBeenCalled()
 	expect(h.refresh).toHaveBeenCalled()
@@ -60,7 +60,7 @@ test('failed register shows the mapped error copy and fires onerror', async () =
 		return true
 	})
 	const onerror = vi.fn()
-	render(Harness, { onerror })
+	await render(Harness, { onerror })
 	await h.register.cb({ submit: h.register.submit })
 	await expect.element(page.getByText('An account with that email already exists.')).toBeInTheDocument()
 	expect(onerror).toHaveBeenCalledWith({ ok: false, code: 'email_exists' })

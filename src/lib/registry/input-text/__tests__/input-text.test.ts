@@ -15,7 +15,7 @@ function mockField(over: Record<string, unknown> = {}) {
 }
 
 test('renders a label bound to the field name and a text input', async () => {
-	render(InputText, { field: mockField(), label: 'Email', type: 'email' })
+	await render(InputText, { field: mockField(), label: 'Email', type: 'email' })
 	const label = document.querySelector('label') as HTMLLabelElement
 	const input = document.querySelector('input') as HTMLInputElement
 	expect(label.textContent).toContain('Email')
@@ -25,12 +25,12 @@ test('renders a label bound to the field name and a text input', async () => {
 })
 
 test('type="textarea" renders a <textarea>', async () => {
-	render(InputText, { field: mockField(), type: 'textarea' })
+	await render(InputText, { field: mockField(), type: 'textarea' })
 	expect(document.querySelector('textarea')).not.toBeNull()
 })
 
 test('type="password" renders a password input and the reveal button toggles it to text', async () => {
-	render(InputText, { field: mockField(), type: 'password' })
+	await render(InputText, { field: mockField(), type: 'password' })
 	const input = () => document.querySelector('input') as HTMLInputElement
 	expect(input().getAttribute('type')).toBe('password')
 	const toggle = document.querySelector('button[aria-label="Show"]') as HTMLButtonElement
@@ -39,7 +39,7 @@ test('type="password" renders a password input and the reveal button toggles it 
 })
 
 test('renders issue messages and marks the field invalid', async () => {
-	render(InputText, {
+	await render(InputText, {
 		field: mockField({ issues: () => [{ message: 'Required' }] }),
 		label: 'Email'
 	})

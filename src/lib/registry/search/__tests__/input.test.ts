@@ -16,14 +16,14 @@ beforeEach(() => {
 })
 
 test('typing >= minLength triggers the search fn (debounced)', async () => {
-	render(Harness, {})
+	await render(Harness, {})
 	const input = page.getByRole('combobox', { name: 'Search' })
 	await input.fill('cafe')
 	await vi.waitFor(() => expect(h.search).toHaveBeenCalledWith({ q: 'cafe' }))
 })
 
 test('typing below minLength does not trigger the search fn', async () => {
-	render(Harness, {})
+	await render(Harness, {})
 	await page.getByRole('combobox', { name: 'Search' }).fill('a')
 	await new Promise(r => setTimeout(r, 40))
 	expect(h.search).not.toHaveBeenCalled()

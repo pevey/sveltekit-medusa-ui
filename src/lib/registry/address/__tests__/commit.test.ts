@@ -71,7 +71,7 @@ beforeEach(() => {
 })
 
 test('setExpanded flips the expanded context value', async () => {
-	render(Harness, { form: makeForm() })
+	await render(Harness, { form: makeForm() })
 	expect(document.querySelector('[data-testid=expanded]')!.textContent).toBe('false')
 	;(document.querySelector('[data-testid=expand]') as HTMLButtonElement).click()
 	await vi.waitFor(() => expect(document.querySelector('[data-testid=expanded]')!.textContent).toBe('true'))
@@ -80,7 +80,7 @@ test('setExpanded flips the expanded context value', async () => {
 test('updateAddress reconciles from the DOM, normalizes country/province to codes, and awaits updateCart', async () => {
 	const updateCart = vi.fn(async (_args: any) => ({ id: 'cart_1' }) as any)
 	h.updateCart.mockImplementation(updateCart)
-	render(Harness, { form: makeForm({ country_code: '', province: '', city: '' }) })
+	await render(Harness, { form: makeForm({ country_code: '', province: '', city: '' }) })
 	;(document.querySelector('[data-testid=update-address]') as HTMLButtonElement).click()
 	// updateAddress() now also fires an earlier region-switch updateCart (Fix 1) before the final full-payload
 	// call, so wait for the specific final call (marked by a `province` key only the full payload has)
@@ -95,7 +95,7 @@ test('updateAddress reconciles from the DOM, normalizes country/province to code
 test('updateAddress reconciles the region before the final save (autofill-only country change)', async () => {
 	const updateCart = vi.fn(async (_args: any) => ({ id: 'cart_1' }) as any)
 	h.updateCart.mockImplementation(updateCart)
-	render(Harness, { form: makeForm({ country_code: '', province: '', city: '' }) })
+	await render(Harness, { form: makeForm({ country_code: '', province: '', city: '' }) })
 	;(document.querySelector('[data-testid=update-address]') as HTMLButtonElement).click()
 	// Wait for the final full-payload call specifically (see comment above) rather than "called at all".
 	await vi.waitFor(() => expect(updateCart.mock.calls.some(c => c[0]?.shipping_address?.province)).toBe(true))

@@ -15,7 +15,7 @@ const product = {
 
 test('renders the title and subtitle', async () => {
 	page.url = new URL('http://localhost/')
-	render(Harness, { product })
+	await render(Harness, { product })
 	await expect.element(vpage.getByRole('heading', { name: 'Coffee Mug' })).toBeInTheDocument()
 	await expect.element(vpage.getByText('Ceramic')).toBeInTheDocument()
 })

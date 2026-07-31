@@ -18,12 +18,12 @@ beforeEach(() => {
 })
 
 test('Root provides SearchState context to children', async () => {
-	render(Harness)
+	await render(Harness)
 	await expect.element(page.getByTestId('state')).toHaveTextContent('closed')
 })
 
 test('clicking outside closes (open -> closed)', async () => {
-	render(Harness)
+	await render(Harness)
 	await page.getByTestId('open').click()
 	await expect.element(page.getByTestId('state')).toHaveTextContent('open')
 	await page.getByTestId('outside').click()
@@ -31,14 +31,14 @@ test('clicking outside closes (open -> closed)', async () => {
 })
 
 test('no query prop: nothing is seeded and no search runs', async () => {
-	render(Harness)
+	await render(Harness)
 	await expect.element(page.getByTestId('state')).toHaveTextContent('closed')
 	expect(h.search).not.toHaveBeenCalled()
 })
 
 test('query prop seeds the term and searches immediately', async () => {
 	h.search.mockResolvedValue({ hits: [hit('cafe-au-lait'), hit('cafetiere')] })
-	render(Harness, { query: 'cafe' })
+	await render(Harness, { query: 'cafe' })
 	await expect.element(page.getByTestId('query')).toHaveTextContent('cafe')
 	await expect.element(page.getByTestId('hits')).toHaveTextContent('2')
 	expect(h.search).toHaveBeenCalledWith({ q: 'cafe' })
@@ -46,13 +46,13 @@ test('query prop seeds the term and searches immediately', async () => {
 
 test('seeding does not open the dropdown', async () => {
 	h.search.mockResolvedValue({ hits: [hit('cafe-au-lait')] })
-	render(Harness, { query: 'cafe' })
+	await render(Harness, { query: 'cafe' })
 	await expect.element(page.getByTestId('hits')).toHaveTextContent('1')
 	await expect.element(page.getByTestId('state')).toHaveTextContent('closed')
 })
 
 test('seeding below minLength clears hits without searching', async () => {
-	render(Harness, { query: 'c' })
+	await render(Harness, { query: 'c' })
 	await expect.element(page.getByTestId('query')).toHaveTextContent('c')
 	await expect.element(page.getByTestId('hits')).toHaveTextContent('0')
 	expect(h.search).not.toHaveBeenCalled()

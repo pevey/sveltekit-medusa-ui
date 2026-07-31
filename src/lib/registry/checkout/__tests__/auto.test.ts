@@ -86,31 +86,31 @@ beforeEach(() => {
 
 test('renders the Braintree body when the region uses Braintree', async () => {
 	h.getCart.mockReturnValue({ current: cartWith(['pp_braintree_braintree']) })
-	render(Harness, { form: makeForm() })
+	await render(Harness, { form: makeForm() })
 	await vi.waitFor(() => expect(document.querySelector('[data-checkout-braintree-payment]')).not.toBeNull())
 	expect(document.querySelector('[data-checkout-stripe-loading]')).toBeNull()
 })
 
 test('renders the Stripe (Elements) body when the region uses Stripe', async () => {
 	h.getCart.mockReturnValue({ current: cartWith(['pp_stripe_stripe']) })
-	render(Harness, { form: makeForm() })
-	// The stub's initiatePaymentSession returns null → the Elements boundary shows its loading state,
-	// which is enough to prove the Stripe path was chosen (no live gateway in tests).
-	await vi.waitFor(() => expect(document.querySelector('[data-checkout-stripe-loading]')).not.toBeNull())
+	await render(Harness, { form: makeForm() })
+	// Elements now mounts in deferred mode (no payment session required), so assert the Stripe
+	// boundary itself rather than the loading state it used to be stuck in.
+	await vi.waitFor(() => expect(document.querySelector('[data-checkout-stripe-elements]')).not.toBeNull())
 	expect(document.querySelector('[data-checkout-braintree-payment]')).toBeNull()
 })
 
 test('routes the whole Stripe family (e.g. iDEAL) to the Stripe body', async () => {
 	h.getCart.mockReturnValue({ current: cartWith(['pp_stripe-ideal_stripe']) })
-	render(Harness, { form: makeForm() })
-	await vi.waitFor(() => expect(document.querySelector('[data-checkout-stripe-loading]')).not.toBeNull())
+	await render(Harness, { form: makeForm() })
+	await vi.waitFor(() => expect(document.querySelector('[data-checkout-stripe-elements]')).not.toBeNull())
 	expect(document.querySelector('[data-checkout-braintree-payment]')).toBeNull()
 })
 
 test('renders nothing + dev-errors for an unsupported provider id', async () => {
 	const err = vi.spyOn(console, 'error').mockImplementation(() => {})
 	h.getCart.mockReturnValue({ current: cartWith(['pp_paypal_paypal']) })
-	render(Harness, { form: makeForm() })
+	await render(Harness, { form: makeForm() })
 	await vi.waitFor(() => expect(err).toHaveBeenCalledWith(expect.stringContaining('pp_paypal_paypal')))
 	expect(document.querySelector('[data-checkout-braintree-payment]')).toBeNull()
 	expect(document.querySelector('[data-checkout-stripe-loading]')).toBeNull()

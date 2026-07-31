@@ -1,17 +1,12 @@
 # sveltekit-medusa-ui
 
-Ready-made, theme-native SvelteKit components for [Medusa](https://medusajs.com) storefronts,
-distributed as a [shadcn-svelte](https://shadcn-svelte.com) registry. Every component styles itself
-purely through shadcn CSS variables, so it drops into any shadcn-svelte project and inherits its
-theme — including dark mode — like a first-party component. Commerce components are wired to the
-[`sveltekit-medusa-sdk`](https://www.npmjs.com/package/sveltekit-medusa-sdk) remote functions.
+Ready-made, theme-native SvelteKit components for [Medusa](https://medusajs.com) storefronts, distributed as a [shadcn-svelte](https://shadcn-svelte.com) registry. Every component styles itself purely through shadcn CSS variables, so it drops into any shadcn-svelte project and inherits its theme — including dark mode — like a first-party component. Commerce components are wired to the [`sveltekit-medusa-sdk`](https://www.npmjs.com/package/sveltekit-medusa-sdk) remote functions.
 
 Built for Svelte 5 / SvelteKit. Per-component API documentation is hosted separately.
 
 ## Getting started
 
-**Prerequisites:** a shadcn-svelte project (a `components.json`, Tailwind, and the shadcn base
-setup). If you don't have one, run `npx shadcn-svelte@latest init` first.
+**Prerequisites:** a shadcn-svelte project (a `components.json`, Tailwind, and the shadcn base setup). If you don't have one, run `npx shadcn-svelte@latest init` first.
 
 Add a component with the shadcn-svelte CLI, passing the full URL to its registry item:
 
@@ -23,9 +18,7 @@ npx shadcn-svelte@latest add https://pevey.com/r/gallery.json
 
 Adding `gallery`, for example, also pulls its registry dependencies (`carousel`, `image-zoom`).
 
-**Backend:** the commerce components (`cart`, `cta`, `address`, `checkout`, `auth`, `customer`,
-`product`, `reviews`, `search`) expect the SDK configured once via `createMedusaHandle(...)` in your
-`hooks.server.ts`. **Theme controls** need `<ModeWatcher />` placed once in your root layout.
+**Backend:** the commerce components (`cart`, `cta`, `address`, `checkout`, `auth`, `customer`, `product`, `reviews`, `search`) expect the SDK configured once via `createMedusaHandle(...)` in your `hooks.server.ts`. **Theme controls** need `<ModeWatcher />` placed once in your root layout.
 
 ## Components
 
@@ -65,15 +58,9 @@ Adding `gallery`, for example, also pulls its registry dependencies (`carousel`,
 
 ## Product cards and listings
 
-`Product.Root` (a detail page) keeps variant selection in the URL — `?v=`, so it is shareable and
-back-button-correct. `Product.Card` is its **sibling**, not a wrapper: it provides the same
-`ProductContext` in **local** mode, seeded to the cheapest purchasable variant. That is what lets a
-grid of cards each track their own variant, lets swatches inside a card swap in place instead of
-navigating, and lets every existing part (`Title`, `Price`, `PriceMin`, `Rating`, …) work in either
-place unchanged.
+`Product.Root` (a detail page) keeps variant selection in the URL — `?v=`, so it is shareable and back-button-correct. `Product.Card` is its **sibling**, not a wrapper: it provides the same `ProductContext` in **local** mode, seeded to the cheapest purchasable variant. That is what lets a grid of cards each track their own variant, lets swatches inside a card swap in place instead of navigating, and lets every existing part (`Title`, `Price`, `PriceMin`, `Rating`, …) work in either place unchanged.
 
-Because the card provides that context, an add-to-cart button inside it needs **no props** — it
-reads the card's variant itself:
+Because the card provides that context, an add-to-cart button inside it needs **no props** — it reads the card's variant itself:
 
 ```svelte
 <script lang="ts">
@@ -97,30 +84,19 @@ reads the card's variant itself:
 </Products.Root>
 ```
 
-The button is **composed in** rather than built into the card on purpose: `cta` already declares
-`product` as a registry dependency, so a button baked into `product` would be a dependency cycle.
+The button is **composed in** rather than built into the card on purpose: `cta` already declares `product` as a registry dependency, so a button baked into `product` would be a dependency cycle.
 
-Medusa has no product-level price (prices are per variant), so a range renders as two separate
-parts — `Product.PriceMin` and `Product.PriceMax` — which you lay out and style however you want,
-rather than a single pre-formatted "$20 – $45" string.
+Medusa has no product-level price (prices are per variant), so a range renders as two separate parts — `Product.PriceMin` and `Product.PriceMax` — which you lay out and style however you want, rather than a single pre-formatted "$20 – $45" string.
 
-`Categories` and `Collections` have the same `Root` / `Grid` / `Card` / `Pagination` shape. Their
-cards read an image from `metadata.thumbnail` (change the key with `imageKey`, or replace the
-rendering with an `image` snippet), because neither entity has an image field in Medusa; without
-it the card degrades to text.
+`Categories` and `Collections` have the same `Root` / `Grid` / `Card` / `Pagination` shape. Their cards read an image from `metadata.thumbnail` (change the key with `imageKey`, or replace the rendering with an `image` snippet), because neither entity has an image field in Medusa; without it the card degrades to text.
 
-All three listings put the page in the URL as a **1-based** `?p=` param (page 1 omits it), so
-page 2 of a category is a real, indexable, linkable URL. The short name matches the package's other
-URL params — `?v=` for variant, `?q=` for query — and avoids reading as SvelteKit's `page`. Pass
-`pageParam` if two listings share a page.
+All three listings put the page in the URL as a **1-based** `?p=` param (page 1 omits it), so page 2 of a category is a real, indexable, linkable URL. The short name matches the package's other URL params — `?v=` for variant, `?q=` for query — and avoids reading as SvelteKit's `page`. Pass `pageParam` if two listings share a page.
 
 ## Subcomponents or your own markup
 
-Every listing supports both, and you pick per listing — the `Root` is the same either way. It
-fetches, paginates, and publishes context; what renders the items is up to you.
+Every listing supports both, and you pick per listing — the `Root` is the same either way. It fetches, paginates, and publishes context; what renders the items is up to you.
 
-**With subcomponents.** `Grid` reads the page off the context and renders a `Card` per item, so the
-listing is four tags:
+**With subcomponents.** `Grid` reads the page off the context and renders a `Card` per item, so the listing is four tags:
 
 ```svelte
 <Collections.Root pageSize={12}>
@@ -134,11 +110,9 @@ listing is four tags:
 </Collections.Root>
 ```
 
-You still control the look: `class` on `Grid` overrides the default 1/2/3/4 breakpoint columns, and
-`Card` takes `class`, `href`, `imageKey`, and an `image` snippet.
+You still control the look: `class` on `Grid` overrides the default 1/2/3/4 breakpoint columns, and `Card` takes `class`, `href`, `imageKey`, and an `image` snippet.
 
-**With your own markup.** Take the items off the `Root`'s render-prop and skip `Grid` and `Card`
-entirely — here a list instead of a grid:
+**With your own markup.** Take the items off the `Root`'s render-prop and skip `Grid` and `Card` entirely — here a list instead of a grid:
 
 ```svelte
 <Categories.Root pageSize={12}>
@@ -162,17 +136,12 @@ entirely — here a list instead of a grid:
 </Categories.Root>
 ```
 
-Note `Pagination` works in both — it reads the same context, so replacing the item rendering never
-costs you the paging. Two things do become yours in the headless version:
+Note `Pagination` works in both — it reads the same context, so replacing the item rendering never costs you the paging. Two things do become yours in the headless version:
 
-- **The empty state.** There is no `Grid`, so there is no `empty` snippet. Guard on `loading` as
-  above, or "no results" flashes before the first fetch resolves.
-- **The item URL.** `Card` builds hrefs from the `href` you set on `Root`; hand-written markup
-  doesn't see it, so a custom `href` on the `Root` won't apply unless you call
-  `getCategoriesContext()` yourself.
+- **The empty state.** There is no `Grid`, so there is no `empty` snippet. Guard on `loading` as above, or "no results" flashes before the first fetch resolves.
+- **The item URL.** `Card` builds hrefs from the `href` you set on `Root`; hand-written markup doesn't see it, so a custom `href` on the `Root` won't apply unless you call `getCategoriesContext()` yourself.
 
-There is a middle rung too: keep `Grid` for the responsive shell and pass a `children` snippet to
-replace only the per-item rendering.
+There is a middle rung too: keep `Grid` for the responsive shell and pass a `children` snippet to replace only the per-item rendering.
 
 ```svelte
 <Products.Grid class="lg:grid-cols-2">
@@ -180,16 +149,11 @@ replace only the per-item rendering.
 </Products.Grid>
 ```
 
-All three are live in the demo storefront — `collections-demo` (subcomponents), `categories-demo`
-(headless), `products-demo` (both, plus the per-item snippet).
+All three are live in the demo storefront — `collections-demo` (subcomponents), `categories-demo` (headless), `products-demo` (both, plus the per-item snippet).
 
 ## Styling individual subcomponents
 
-Components ship as shadcn-style **compound primitives** — an `X.Root` that provides context plus the
-parts you compose inside it. **Every part takes a `class`** that is `cn`-merged onto its element, so
-you style each piece independently. Layout is child order + flex classes; behavior is props on `Root`.
-There are no custom styling CSS variables — parts use the shadcn tokens (`--radius`, `bg-primary`, …)
-and inherit your theme.
+Components ship as shadcn-style **compound primitives** — an `X.Root` that provides context plus the parts you compose inside it. **Every part takes a `class`** that is `cn`-merged onto its element, so you style each piece independently. Layout is child order + flex classes; behavior is props on `Root`. There are no custom styling CSS variables — parts use the shadcn tokens (`--radius`, `bg-primary`, …) and inherit your theme.
 
 ```svelte
 <script lang="ts">
@@ -205,11 +169,41 @@ and inherit your theme.
 </Gallery.Root>
 ```
 
-Here `zoom` and `thumbnails="left"` are behavior/layout props on `Root`, while `class` on
-`Gallery.Thumbnails`, `Gallery.Image`, and `Gallery.Dots` restyles each part in place. The same
-pattern applies to every compound component in the registry.
+Here `zoom` and `thumbnails="left"` are behavior/layout props on `Root`, while `class` on `Gallery.Thumbnails`, `Gallery.Image`, and `Gallery.Dots` restyles each part in place. The same pattern applies to every compound component in the registry.
+
+## Search on a dedicated route
+
+`SearchBox` is self-contained for a navbar. A full-page `/search` route additionally needs the term to come from the URL, so `Search.Root` takes a `query` prop: it runs the search on mount and again whenever the value changes (client-side navigation to a different term). It is one-way — nothing is written back to the URL, and the dropdown is never forced open. Leave it undefined to opt out; pass `''` to clear.
+
+```svelte
+<script lang="ts">
+	import { page } from '$app/state'
+	import * as Search from '$lib/components/ui/search'
+
+	const q = $derived(page.url.searchParams.get('q') ?? '')
+</script>
+
+<Search.Root query={q}>
+	<Search.Input placeholder="Search products…" />
+	<Search.Results static />
+</Search.Root>
+```
+
+`Search.Results static` lays results out in flow instead of as the floating dropdown. `SearchBox` accepts the same `query` prop, so a navbar box can show the term the results page is displaying.
+
+## Checkout and payment sessions
+
+The presets need no extra wiring — `CheckoutStripe` takes `publishableKey` and `returnUrl`, `CheckoutBraintree` takes an optional `googlePlacesApiKey`, and `CheckoutAuto` picks the provider from the cart region's `payment_providers`. Worth knowing what they do internally, though, because it constrains any payment surface you add yourself:
+
+**Medusa deletes a cart's payment sessions whenever the total changes** — choosing a shipping method, applying a discount, or changing a quantity. Any session created when the checkout mounts is already dead by the time the shopper pays. So the checkout creates its payment session **at place-order**, after the last cart mutation:
+
+- **Stripe** mounts `<Elements>` in deferred mode (`{ mode: 'payment', amount, currency }`) with no session, keeps Stripe's amount aligned with the cart via `elements.update({ amount })` — no remount, so in-progress card input survives a shipping change — and creates the PaymentIntent inside the confirm step.
+- **Braintree** fetches its amount-agnostic `client_token` up front and creates the session with the card nonce at place-order.
+
+If you build a custom payment surface, take the secret from the checkout's session context (`getStripeSessionContext().ensureClientSecret()`) at confirm time rather than caching it.
+
+> **Upgrading an existing install:** the `checkout` item gained `stripe-session.ts`, and its Stripe context changed from a `clientSecret` value to `ensureClientSecret()`. Re-run `npx shadcn-svelte@latest add https://pevey.com/r/checkout.json` and re-apply any local edits.
 
 ## Credits
 
-`image-zoom` is from **[more-shadcn-svelte](https://github.com/kevwpl/more-shadcn-svelte)**
-by kevwpl, used under the MIT License.
+`image-zoom` is from **[more-shadcn-svelte](https://github.com/kevwpl/more-shadcn-svelte)** by kevwpl, used under the MIT License.

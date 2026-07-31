@@ -25,7 +25,7 @@ const CART = {
 
 test('renders formatted amounts and labels for Subtotal, Tax, Shipping, and Total', async () => {
 	h.getCart.mockReturnValue({ current: CART })
-	render(Harness, {})
+	await render(Harness, {})
 
 	// Check formatted amounts appear
 	expect(document.body.textContent).toContain('$20.00')
@@ -45,7 +45,7 @@ test('renders formatted amounts and labels for Subtotal, Tax, Shipping, and Tota
 test('hides a row when the amount is null', async () => {
 	const cartWithNullGiftCard = { ...CART, gift_card_total: null } as any
 	h.getCart.mockReturnValue({ current: cartWithNullGiftCard })
-	render(Harness, {})
+	await render(Harness, {})
 
 	// Gift card total is null, so row should not appear
 	const giftCardRows = document.querySelectorAll('[data-checkout-summary-gift-card]')

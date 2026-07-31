@@ -32,7 +32,7 @@ beforeEach(() => {
 })
 
 test('after mount, renders a radio per option and auto-selects the first when cart has none', async () => {
-	render(Harness, {})
+	await render(Harness, {})
 
 	// Wait a bit for onMount to run
 	await new Promise(r => setTimeout(r, 100))
@@ -48,7 +48,7 @@ test('after mount, renders a radio per option and auto-selects the first when ca
 })
 
 test('changing radio selection calls selectShippingOption with the new option id', async () => {
-	render(Harness, {})
+	await render(Harness, {})
 
 	// Wait for onMount to run
 	await new Promise(r => setTimeout(r, 100))
@@ -71,7 +71,7 @@ test('re-fetches shipping options when the address changes later (options depend
 	// set, options appear. Delivery must re-fetch on the address-change signal, not stay empty.
 	h.getShippingOptions.mockReset().mockResolvedValueOnce([]).mockResolvedValueOnce(FAKE_OPTIONS)
 
-	render(Harness, { cart: CART })
+	await render(Harness, { cart: CART })
 
 	await new Promise(r => setTimeout(r, 100))
 	expect(document.querySelectorAll('input[type=radio]')).toHaveLength(0)

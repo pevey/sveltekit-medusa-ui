@@ -37,7 +37,7 @@ beforeEach(() => {
 })
 
 test('renders the token as a hidden field under the form field name', async () => {
-	render(Harness, { token: 'tok_123' })
+	await render(Harness, { token: 'tok_123' })
 	const input = document.querySelector('input[type=hidden]') as HTMLInputElement
 	expect(input?.name).toBe('token')
 	expect(input?.value).toBe('tok_123')
@@ -49,7 +49,7 @@ test('successful reset fires onsuccess', async () => {
 		return true
 	})
 	const onsuccess = vi.fn()
-	render(Harness, { token: 'tok_123', onsuccess })
+	await render(Harness, { token: 'tok_123', onsuccess })
 	await h.reset.cb({ submit: h.reset.submit })
 	expect(h.reset.submit).toHaveBeenCalled()
 	expect(onsuccess).toHaveBeenCalled()

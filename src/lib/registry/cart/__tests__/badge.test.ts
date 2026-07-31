@@ -29,13 +29,13 @@ const empty = { current: { id: 'c', items: [] } } as any
 
 test('badge shows total quantity by default', async () => {
 	h.getCart.mockReturnValue(withItems)
-	render(Harness, {})
+	await render(Harness, {})
 	await expect.element(vpage.getByText('5')).toBeInTheDocument()
 })
 
 test('badge mode=lines shows distinct line count', async () => {
 	h.getCart.mockReturnValue(withItems)
-	render(Harness, { mode: 'lines' })
+	await render(Harness, { mode: 'lines' })
 	await expect.element(vpage.getByText('2')).toBeInTheDocument()
 })
 
