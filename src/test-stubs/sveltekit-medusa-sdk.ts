@@ -64,7 +64,7 @@ export const initiateBraintreePaymentSession = async (args: { provider_id?: stri
 	}
 })
 export const formatBraintreeAddress = (_t: string, _c: unknown) => ({})
-export const braintreeCheckoutForm = { fields: {} }
+export const checkoutForm = { fields: {} }
 // Generic payment remotes. `initiatePaymentSession` returns null so the Stripe Elements boundary
 // shows its loading state in tests (no live gateway); DI defaults only.
 export const initiatePaymentSession = async (_args: { provider_id: string }) => null
