@@ -211,5 +211,5 @@ pattern applies to every compound component in the registry.
 
 ## Credits
 
-`image-zoom` is vendored from **[more-shadcn-svelte](https://github.com/kevwpl/more-shadcn-svelte)**
+`image-zoom` is from **[more-shadcn-svelte](https://github.com/kevwpl/more-shadcn-svelte)**
 by kevwpl, used under the MIT License.
