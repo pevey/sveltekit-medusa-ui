@@ -1,8 +1,6 @@
 <script lang="ts">
-	// Mirrors `signed-in.svelte`: `$derived(await getMyReviews(...))` inside a `<svelte:boundary>`,
-	// so this Root suspends on its own while the customer's reviews load — no external boundary
-	// needed. Unlike `Reviews.Root`'s per-product fetch, "my reviews" spans products, so there's no single
-	// per-product aggregate to expose — this context is populated `summary`-free.
+	// Mirrors `signed-in.svelte`: `$derived(await getMyReviews(...))` inside a `<svelte:boundary>`
+	// Root suspends on its own while the customer's reviews load — no external boundary needed
 	//
 	// The `{#if result}` below isn't just a null-guard: the Svelte compiler only ties a
 	// `<svelte:boundary>`'s pending state to an async `$derived` when the derived is read
@@ -23,23 +21,14 @@
 		children: Snippet
 	} = $props()
 
-	// Star-rating filtering isn't wired for "my reviews" (a customer's own list is short and
-	// spans products, so filtering by rating adds little) — `rating`/`setRating` are kept as
-	// inert state so the shared `ReviewsListContext` shape is fully satisfied.
+	// Kept as inert state so the shared `ReviewsListContext` shape is fully satisfied.
 	let rating = $state<number | null>(null)
 	let order = $state('-created_at')
 	let page = $state(0)
 
-	// `setReviewsContext` MUST run synchronously during Root's own initialization — Svelte
-	// forbids `setContext` after an `await` (`set_context_after_init`), and any code textually
-	// after the `$derived(await ...)` below is compiled into a task deferred until that promise
-	// settles. So this is declared *before* `result`, closing over it by reference; the getters
-	// aren't actually called until `<Reviews.List>` renders, which (per the `{#if result}` gate
-	// below) only happens once `result` is assigned.
+	// `setReviewsContext` must run synchronously during Root's own initialization since `setContext` cannot run after await
 	setReviewsContext({
-		// No single per-product aggregate spans "my reviews" across products, so `summary` is
-		// always null and `productId` is empty — same inert-satisfy-the-shape rationale as
-		// `rating`/`pushReview` below.
+		// No single per-product aggregate spans "my reviews" across products, so `summary` is always null and `productId` is empty
 		get productId() {
 			return ''
 		},

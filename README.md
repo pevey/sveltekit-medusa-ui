@@ -32,13 +32,12 @@ Adding `gallery`, for example, also pulls its registry dependencies (`carousel`,
 | `review`                     | Presentational atom for a single review: default-exported `Review` compound (Title/Rating/Author/Date/Body), `Item`, and `Star`. Renders from a `review` prop or item context — no SDK, no fetching.                                                                                                 | —                                                                                                                  |
 | `reviews`                    | Compound review collection: `Root` (headless over a `reviews` array, or fetches + sorts + paginates for a product), `Summary` (+ `Histogram`), `Sort`, `List`, `Pagination`, `Carousel`, plus a submission `Form`.                                                                                   | `review`, `product`, `carousel`, `button`, `input-text`                                                            |
 | `cta`                        | Add-to-cart button + toggle; resolves variant/quantity from `Product` context, pending/success states, optional redirect. Plus `StripeExpressCheckout` — a standalone Apple Pay / Google Pay / Link wallet button.                                                                                   | `product`, `button`                                                                                                |
-| `cart`                       | Compound cart with a `CartDrawer` preset; reactive, currency-aware, per-part styling.                                                                                                                                                                                                                | `button`, `sheet`                                                                                                  |
+| `cart`                       | Compound cart — drawer or inline page; reactive, currency-aware, per-part styling.                                                                                                                                                                                                                   | `button`, `sheet`                                                                                                  |
 | `address`                    | Compound address form (`AddressForm` / `AddressFormCollapsed` presets) that owns cart writes; region switching + optional Google Places autocomplete.                                                                                                                                                | `field`, `input-text`, `input-select-country`, `input-postal-code`, `input-province`, `google-places-autocomplete` |
 | `checkout`                   | Compound checkout (address + summary + payment + place order) with three presets: `CheckoutBraintree` (hosted fields), `CheckoutStripe` (Payment Element / card fields), and `CheckoutAuto` (picks the provider from the cart's region).                                                             | `address`, `button`                                                                                                |
 | `auth`                       | Login / register / forgot / reset forms + an `Auth.Dialog` (`?auth=` modal).                                                                                                                                                                                                                         | `dialog`, `button`, `field`, `label`                                                                               |
 | `customer`                   | Shopper identity: `SignedIn`/`SignedOut` gates, account menu, sign-in / sign-out, plus `Customer.Reviews` — the shopper's own reviews across products, with edit + delete.                                                                                                                           | `dropdown-menu`, `button`, `reviews`, `review`, `textarea`, `label`                                                |
 | `search`                     | Compound storefront search (Root/Icon/Input/Results/Hit); products-first results, dropdown or full page.                                                                                                                                                                                             | —                                                                                                                  |
-| `search-box`                 | Drop-in navbar search box that assembles the search primitives.                                                                                                                                                                                                                                      | `search`                                                                                                           |
 | `search-dialog`              | Command-palette (⌘/Ctrl-K) search modal.                                                                                                                                                                                                                                                             | `search`, `dialog`                                                                                                 |
 | `gallery`                    | Product image gallery/lightbox on embla; optional thumbnail rail + click-to-zoom (`thumbnails`/`zoom` props).                                                                                                                                                                                        | `carousel`, `image-zoom`                                                                                           |
 | `image-zoom`                 | Standalone click-to-zoom full-screen image overlay with navigation.                                                                                                                                                                                                                                  | `button`                                                                                                           |
@@ -171,9 +170,45 @@ Components ship as shadcn-style **compound primitives** — an `X.Root` that pro
 
 Here `zoom` and `thumbnails="left"` are behavior/layout props on `Root`, while `class` on `Gallery.Thumbnails`, `Gallery.Image`, and `Gallery.Dots` restyles each part in place. The same pattern applies to every compound component in the registry.
 
+`class` lands on the part's **own** element. To restyle something a part renders _inside_ itself — an icon, most often — use a descendant variant, which outranks the class the component sets:
+
+```svelte
+<!-- The bag ships at size-8; this renders it at size-6. -->
+<Cart.Trigger class="[&_svg]:size-6" />
+```
+
+Put that on a wrapper and it retunes a whole cluster at once, which is the usual way to size a navbar's icons together:
+
+```svelte
+<div class="flex items-center gap-1 [&_svg]:size-7">
+	<ThemeButton />
+	<Customer.MenuTrigger><UserIcon /></Customer.MenuTrigger>
+	<Cart.Trigger />
+</div>
+```
+
+## Search in a navbar
+
+Compose the parts. A navbar typically wants two states — a full input on wide viewports, and an icon linking to the search route on narrow ones — which is plain Tailwind around the same primitives:
+
+```svelte
+<script lang="ts">
+	import * as Search from '$lib/components/ui/search'
+</script>
+
+<Search.Root class="relative mx-auto hidden w-full max-w-xl md:block">
+	<Search.Input />
+	<Search.Results />
+</Search.Root>
+
+<a href="/search" class="flex justify-end md:hidden">
+	<Search.Icon />
+</a>
+```
+
 ## Search on a dedicated route
 
-`SearchBox` is self-contained for a navbar. A full-page `/search` route additionally needs the term to come from the URL, so `Search.Root` takes a `query` prop: it runs the search on mount and again whenever the value changes (client-side navigation to a different term). It is one-way — nothing is written back to the URL, and the dropdown is never forced open. Leave it undefined to opt out; pass `''` to clear.
+A full-page `/search` route needs the term to come from the URL, so `Search.Root` takes a `query` prop: it runs the search on mount and again whenever the value changes (client-side navigation to a different term). It is one-way — nothing is written back to the URL, and the dropdown is never forced open. Leave it undefined to opt out; pass `''` to clear.
 
 ```svelte
 <script lang="ts">
@@ -189,7 +224,7 @@ Here `zoom` and `thumbnails="left"` are behavior/layout props on `Root`, while `
 </Search.Root>
 ```
 
-`Search.Results static` lays results out in flow instead of as the floating dropdown. `SearchBox` accepts the same `query` prop, so a navbar box can show the term the results page is displaying.
+`Search.Results static` lays results out in flow instead of as the floating dropdown.
 
 ## Checkout and payment sessions
 

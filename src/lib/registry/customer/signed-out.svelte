@@ -1,5 +1,4 @@
 <script lang="ts">
-	// Same as SignedIn but inverted: renders children only when there is no signed-in customer.
 	import { getCustomer } from 'sveltekit-medusa-sdk/customer'
 	import type { Snippet } from 'svelte'
 

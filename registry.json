@@ -164,23 +164,6 @@
 			]
 		},
 		{
-			"name": "search-box",
-			"type": "registry:ui",
-			"title": "Search Box",
-			"description": "Drop-in navbar search box: full input + live-results dropdown above a configurable breakpoint, collapsing to an icon that links to a search page below it. Assembles the search primitives.",
-			"dependencies": [],
-			"registryDependencies": [
-				"search"
-			],
-			"files": [
-				{
-					"path": "src/lib/registry/search/search-box.svelte",
-					"type": "registry:ui",
-					"target": "search/search-box.svelte"
-				}
-			]
-		},
-		{
 			"name": "search-dialog",
 			"type": "registry:ui",
 			"title": "Search Dialog",
@@ -687,7 +670,7 @@
 			"name": "cart",
 			"type": "registry:ui",
 			"title": "Cart",
-			"description": "Compound Cart primitives (Root, Trigger, Badge, Sheet, Items, Item, Image, Title, Price, Quantity, Remove, ItemSubtotal, Subtotal, Empty, Checkout) plus a CartDrawer preset, wired to the sveltekit-medusa-sdk cart remotes. Reactive re-render on cart changes with onupdate/onremove/onerror callbacks and pending-state disabling; per-part class override; self-contained currency-aware format-price. No $effect (SSR-safe). Badge shows total quantity and hides at 0.",
+			"description": "Compound Cart primitives (Root, Trigger, Badge, Sheet, Content, Header, Items, Item, Image, Title, Price, Quantity, Remove, ItemSubtotal, Subtotal, Empty, Checkout) wired to the sveltekit-medusa-sdk cart remotes. Fully composable: Sheet/Trigger/Content/Header build the drawer, or drop them for an inline /cart page. Root also hands the whole cart to its children snippet for freeform layouts. Reactive re-render on cart changes with onupdate/onremove/onerror callbacks and pending-state disabling; per-part class override; self-contained currency-aware format-price. No $effect (SSR-safe). Badge shows total quantity and hides at 0.",
 			"dependencies": [
 				"sveltekit-medusa-sdk",
 				"@lucide/svelte"
@@ -716,6 +699,16 @@
 					"path": "src/lib/registry/cart/cart-sheet.svelte",
 					"type": "registry:ui",
 					"target": "cart/cart-sheet.svelte"
+				},
+				{
+					"path": "src/lib/registry/cart/cart-content.svelte",
+					"type": "registry:ui",
+					"target": "cart/cart-content.svelte"
+				},
+				{
+					"path": "src/lib/registry/cart/cart-header.svelte",
+					"type": "registry:ui",
+					"target": "cart/cart-header.svelte"
 				},
 				{
 					"path": "src/lib/registry/cart/cart-items.svelte",
@@ -771,11 +764,6 @@
 					"path": "src/lib/registry/cart/cart-checkout.svelte",
 					"type": "registry:ui",
 					"target": "cart/cart-checkout.svelte"
-				},
-				{
-					"path": "src/lib/registry/cart/cart-drawer.svelte",
-					"type": "registry:ui",
-					"target": "cart/cart-drawer.svelte"
 				},
 				{
 					"path": "src/lib/registry/cart/ctx.svelte.ts",
@@ -1322,9 +1310,9 @@
 					"target": "customer/signed-out.svelte"
 				},
 				{
-					"path": "src/lib/registry/customer/sign-in-button.svelte",
+					"path": "src/lib/registry/customer/sign-in.svelte",
 					"type": "registry:ui",
-					"target": "customer/sign-in-button.svelte"
+					"target": "customer/sign-in.svelte"
 				},
 				{
 					"path": "src/lib/registry/customer/sign-out.svelte",
