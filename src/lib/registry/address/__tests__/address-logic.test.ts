@@ -1,12 +1,13 @@
 import { expect, test } from 'vitest'
 import { readAddress, buildUpdatePayload, ADDRESS_KEYS } from '../address-logic'
+import { TEST_EMAIL } from '$test-fixtures'
 
 function getterFrom(values: Record<string, string>) {
 	return (name: string) => values[name] ?? ''
 }
 
 const SHIP = {
-	email: 'a@b.com',
+	email: TEST_EMAIL,
 	first_name: 'Ada',
 	last_name: 'Lovelace',
 	address_1: '1 St',
@@ -42,7 +43,7 @@ test('readAddress honors a prefix', () => {
 
 test('buildUpdatePayload mirrors shipping into billing when showBilling is false', () => {
 	const p = buildUpdatePayload(getterFrom(SHIP), false)
-	expect(p.email).toBe('a@b.com')
+	expect(p.email).toBe(TEST_EMAIL)
 	expect(p.billing_address).toEqual(p.shipping_address)
 })
 

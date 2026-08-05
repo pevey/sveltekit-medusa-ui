@@ -16,6 +16,7 @@ vi.mock('sveltekit-medusa-sdk', async orig => ({
 }))
 
 import Harness from './root-harness.svelte'
+import { TEST_EMAIL } from '$test-fixtures'
 
 function field(initial = '') {
 	let v = initial
@@ -106,11 +107,11 @@ test('setRegionForCountry calls updateCart with the matched region_id', async ()
 test('save builds a payload from field values (billing mirrors shipping by default)', async () => {
 	const updateCart = vi.fn(async (_args: any) => ({ id: 'cart_1' }) as any)
 	h.updateCart.mockImplementation(updateCart)
-	await render(Harness, { form: makeForm({ email: 'a@b.com', first_name: 'Ada', country_code: 'us' }) })
+	await render(Harness, { form: makeForm({ email: TEST_EMAIL, first_name: 'Ada', country_code: 'us' }) })
 	;(document.querySelector('[data-testid=save]') as HTMLButtonElement).click()
 	await vi.waitFor(() => expect(updateCart).toHaveBeenCalled())
 	const arg = updateCart.mock.calls.at(-1)![0]
-	expect(arg.email).toBe('a@b.com')
+	expect(arg.email).toBe(TEST_EMAIL)
 	expect(arg.shipping_address.first_name).toBe('Ada')
 	expect(arg.billing_address).toEqual(arg.shipping_address)
 })

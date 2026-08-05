@@ -40,6 +40,7 @@
 			"$lib/components/ui/categories/*": ["./src/lib/registry/categories/*"],
 			"$lib/components/ui/collections": ["./src/lib/registry/collections"],
 			"$lib/components/ui/collections/*": ["./src/lib/registry/collections/*"],
+			"$test-fixtures": ["./src/test-fixtures.ts"],
 			"$lib": ["./src/lib"],
 			"$lib/*": ["./src/lib/*"]
 		}

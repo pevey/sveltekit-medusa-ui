@@ -14,6 +14,7 @@ vi.mock('sveltekit-medusa-sdk', async orig => ({
 }))
 
 import Harness from './submit-harness.svelte'
+import { TEST_EMAIL } from '$test-fixtures'
 
 const CART_WITH_SHIPPING = {
 	id: 'c',
@@ -45,7 +46,7 @@ test('Confirmation renders nothing until an order is placed, then shows the orde
 	h.completeCart.mockResolvedValue({
 		id: 'order_1',
 		display_id: 5,
-		email: 'a@b.com',
+		email: TEST_EMAIL,
 		items: [],
 		total: 10,
 		currency_code: 'usd'

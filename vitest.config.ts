@@ -6,6 +6,10 @@ import { fileURLToPath } from 'node:url'
 
 export default defineConfig({
 	plugins: [tailwindcss(), svelte()],
+	// Vitest runs in `test` mode, so Vite loads the monorepo-root `.env.test`. `RECIPIENT_EMAIL`
+	// from there feeds `$test-fixtures`, keeping fixture addresses off domains that bounce.
+	envDir: fileURLToPath(new URL('../../', import.meta.url)),
+	envPrefix: ['VITE_', 'RECIPIENT_'],
 	resolve: {
 		// Specific aliases MUST precede the broad `$lib` prefix (Vite matches first-to-last).
 		alias: [
@@ -98,6 +102,10 @@ export default defineConfig({
 			{
 				find: '$lib/components/ui/collections',
 				replacement: fileURLToPath(new URL('./src/lib/registry/collections', import.meta.url))
+			},
+			{
+				find: '$test-fixtures',
+				replacement: fileURLToPath(new URL('./src/test-fixtures.ts', import.meta.url))
 			},
 			{ find: '$lib', replacement: fileURLToPath(new URL('./src/lib', import.meta.url)) }
 		]
